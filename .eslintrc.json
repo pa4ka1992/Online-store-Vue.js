@@ -1,0 +1,28 @@
+{
+    "parser": "vue-eslint-parser",
+    "plugins": ["prettier", "@typescript-eslint"],
+    "extends": [
+        "plugin:vue/vue3-strongly-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended",
+        "@vue/eslint-config-typescript",
+        "@vue/eslint-config-prettier",
+        "prettier"
+    ],
+    "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "ecmaVersion": 2020,
+        "sourceType": "module"
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true
+    },
+    "rules": {
+        "no-debugger": "off",
+        "no-console": 0,
+        "class-methods-use-this": "off",
+        "@typescript-eslint/no-explicit-any": 2
+    }
+}

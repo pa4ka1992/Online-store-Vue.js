@@ -14,5 +14,5 @@ export type FilterOptions<Key extends keyof Product> = {
 }
 
 export interface FilterItem {
-  <Key extends keyof Product>(item: Product, options: FilterOptions<Key>): boolean;
+  <Key extends keyof Product>(item: Product, key: Key, options: FilterOptions<Key>): boolean;
 }

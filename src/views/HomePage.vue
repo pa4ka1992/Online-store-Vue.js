@@ -10,7 +10,7 @@ const increment = ref(0);
 
 <div> 
   <h1> Counter is {{increment}}</h1>
-  <button>Click me!</button>
+  <button @click="increment++">Click me!</button>
 </div>
 
 </template>

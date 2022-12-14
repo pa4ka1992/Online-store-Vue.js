@@ -36,11 +36,6 @@ const baseConfig = {
                 },
                 exclude: /node_modules/,
             },
-            // {
-            //     test: /\.(ts?|js?)$/i,
-            //     exclude: /node_modules/,
-            //     use: 'babel-loader',
-            //   },
             {
                 test: /\.(png|jpe?g|gif|svg|webp|ico)$/i,
                 type: 'asset',

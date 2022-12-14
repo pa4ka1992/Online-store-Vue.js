@@ -1,28 +1,36 @@
 {
-    "parser": "vue-eslint-parser",
-    "plugins": ["prettier", "@typescript-eslint"],
+    "env": {
+        "es2021": true,
+        "browser": true
+    },
     "extends": [
         "plugin:vue/vue3-strongly-recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended",
+        // "plugin:prettier/recommended",
         "@vue/eslint-config-typescript",
-        "@vue/eslint-config-prettier",
+        // "@vue/eslint-config-prettier",
         "prettier"
     ],
+    "parser": "vue-eslint-parser",
     "parserOptions": {
+        "project": ["./tsconfig.json"],
         "parser": "@typescript-eslint/parser",
-        "ecmaVersion": 2020,
-        "sourceType": "module"
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "modules": true,
+            "experimentalObjectRestSpread": true
+          }
     },
-    "env": {
-        "es6": true,
-        "browser": true,
-        "node": true
-    },
+    "plugins": ["prettier", "@typescript-eslint"],
+
     "rules": {
         "no-debugger": "off",
         "no-console": 0,
         "class-methods-use-this": "off",
-        "@typescript-eslint/no-explicit-any": 2
+        "global-require": "off",
+        "import/prefer-default-export": 0,
+        "import/no-extraneous-dependencies": "off",
+        "@typescript-eslint/no-explicit-any": "error"
     }
 }

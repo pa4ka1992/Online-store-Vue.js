@@ -1,45 +1,32 @@
-const devMode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
-
+const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const path = require('path');
+const { merge } = require('webpack-merge');
 
-module.exports = {
-    mode: devMode,
-    entry: {
-        main: './src/main.ts',
-    },
-    devServer: {
-        open: true,
-        port: 8000,
-        hot: false,
-        client: {
-            overlay: true,
-            progress: true,
-        },
-        liveReload: true,
-        watchFiles: ['src/*.html'],
-    },
+const baseConfig = {
+    mode: 'development',
+    entry: path.resolve(__dirname, './src/main'),
     output: {
-        clean: devMode === 'production',
-        path: path.resolve(__dirname, '/dist'),
+        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].[contenthash].js',
+        assetModuleFilename: 'assets/[hash][ext]',
+        clean: true,
+    },
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.esm-bundler.js',
+        },
+        plugins: [new TsConfigPathsPlugin({ extensions: ['.ts', '.vue'] })],
+        extensions: ['.ts', '.js', '.vue', '.json', 'scss'],
     },
     module: {
         rules: [
             {
                 test: /\.vue$/i,
                 loader: 'vue-loader',
-            },
-            {
-                test: /\.(png|jpe?g|gif|webm|mp4|svg)$/,
-                loader: 'file-loader',
-                options: {
-                    outputPath: 'assets',
-                    esModule: false,
-                },
             },
             {
                 test: /\.ts$/,
@@ -49,35 +36,73 @@ module.exports = {
                 },
                 exclude: /node_modules/,
             },
+            // {
+            //     test: /\.(ts?|js?)$/i,
+            //     exclude: /node_modules/,
+            //     use: 'babel-loader',
+            //   },
             {
-                test: /\.s?css$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: () => [autoprefixer()],
-                        },
+                test: /\.(png|jpe?g|gif|svg|webp|ico)$/i,
+                type: 'asset',
+                generator: {
+                    filename: 'assets/img/[name][hash][ext][query]',
+                },
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 10 * 1024,
                     },
-                    'sass-loader',
-                ],
+                },
+            },
+            {
+                test: /\.(avif|mp3|wav)$/i,
+                type: 'asset',
+                generator: {
+                    filename: 'assets/sound/[name][hash][ext][query]',
+                },
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 10 * 1024,
+                    },
+                },
+            },
+            {
+                test: /\.(woff2?|eot|ttf|otf)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/fonts/[name][hash][ext][query]',
+                },
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 10 * 1024,
+                    },
+                },
             },
         ],
     },
     plugins: [
-        new VueLoaderPlugin(),
-        new ESLintPlugin({ extensions: 'ts' }),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'src/public', 'index.html'),
+            template: path.resolve(__dirname, './src/public/index.html'),
+            filename: 'index.html',
+            inject: 'head',
+            minify: {
+                html5: true,
+                collapseWhitespace: true,
+                removeComments: true,
+                removeTagWhitespace: true,
+            },
+        }),
+        new VueLoaderPlugin(),
+        new ESLintPlugin({
+            extensions: ['.ts', '.js'],
+            failOnError: false,
+            exclude: 'node_modules',
         }),
         new CleanWebpackPlugin(),
     ],
-    resolve: {
-        alias: {
-            vue: 'vue/dist/vue.esm-bundler.js',
-        },
-        plugins: [new TsConfigPathsPlugin({ extensions: ['.ts', '.tsx', '.vue'] })],
-        extensions: ['.ts', '.js', '.vue', '.json'],
-    },
 };
+
+module.exports = ({mode}) => {
+    const isProductionMode = mode === 'prod';
+    const envConfig = isProductionMode ? require('./webpack.prod.config') : require('./webpack.dev.config');
+    return merge(baseConfig, envConfig);
+  };

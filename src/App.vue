@@ -1,13 +1,12 @@
+<script lang="ts" setup>
+</script>
+
 <template> 
-  <h1 class="header">11111</h1>
-  <div> 
+  <div>
     <RouterView/>
   </div>
   
-  </template>
-
-<script lang="ts" setup>
-</script>
+</template>
 
 <style scoped lang="scss">
   .header {

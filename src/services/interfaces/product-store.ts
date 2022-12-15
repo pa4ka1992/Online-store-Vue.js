@@ -4,6 +4,6 @@ import { Observable } from '@/common/observable';
 
 export interface IProductStore {
   products: Observable<IProduct[]>;
-  applyFilter(filters: Filter[]): void;
+  applyFilters(filters: Filter[]): void;
   getProductById(id: IProduct['id']): IProduct;
 }

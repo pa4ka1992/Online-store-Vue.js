@@ -5,7 +5,7 @@ import { IProduct } from './interfaces/product';
 import { ProductRepository } from '@/services/product.repository';
 
 
-export const productsStore = defineStore('products', () => {
+export const useProductsStore = defineStore('products', () => {
   const _products: Ref<IProduct[]> = ref([]);
   const repo = ProductRepository.getInstance();
 

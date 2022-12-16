@@ -8,7 +8,10 @@ export class LocalStorageApi {
   }
 
   static getInstance(): LocalStorageApi {
-    if (LocalStorageApi.instance === null) LocalStorageApi.instance = new LocalStorageApi();
+    if (LocalStorageApi.instance === null) { 
+      LocalStorageApi.instance = new LocalStorageApi();
+      LocalStorageApi.instance.init(); 
+    }
     return LocalStorageApi.instance;
   }
 

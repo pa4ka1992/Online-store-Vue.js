@@ -32,6 +32,7 @@ export const useProductsStore = defineStore('products', () => {
 
   return {
     products,
+    fetchData,
     getProductById
   };
 });

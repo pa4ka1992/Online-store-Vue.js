@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 import { ref, type Ref, computed } from 'vue';
 
-import { Filter } from './interfaces/filter';
-import { IProduct } from './interfaces/product';
+import { IFilter } from '@/services/model/filter';
+import { IProduct } from '@/services/model/product';
 import { ProductRepository } from '@/services/product.repository';
 
 
@@ -28,7 +28,7 @@ export const useProductsStore = defineStore('products', () => {
     return _productMap.value[id];
   }
 
-  const filters: Ref<Filter[]> = ref([]);
+  const filters: Ref<IFilter[]> = ref([]);
 
   return {
     products,

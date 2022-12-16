@@ -1,16 +1,16 @@
 <script lang="ts" setup>
 
-import { ref } from 'vue';
+import { useTestStore } from '../store';
 
-const increment = ref(0);
+const store = useTestStore();
 
 </script>
 
 <template> 
 
 <div> 
-  <h1> Counter is {{increment}}</h1>
-  <button @click="increment++">Click me!</button>
+  <h1> Counter is {{store.count}}</h1>
+  <button @click="store.increment()">Click me!</button>
 </div>
 
 </template>

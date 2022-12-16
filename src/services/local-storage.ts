@@ -4,7 +4,7 @@ export class LocalStorageApi {
   private static instance: LocalStorageApi | null = null;
 
   private constructor() {
-    // It has to be private
+    // It has to be private (see singleton)
   }
 
   static getInstance(): LocalStorageApi {

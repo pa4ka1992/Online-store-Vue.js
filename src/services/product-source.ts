@@ -1,4 +1,4 @@
-import { IProduct } from '@/store';
+import { IProduct } from './model/product';
 
 export interface IProductSource {
   fetchProducts(): Promise<IProduct[]>;

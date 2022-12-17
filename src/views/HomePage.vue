@@ -10,7 +10,7 @@ const store = useTestStore();
 
 <div> 
   <h1> Counter is {{store.count}}</h1>
-  <button @click="store.increment()">Click me!</button>
+  <button class="btn btn-primary" @click="store.increment()">Click me!</button>
 </div>
 
 </template>

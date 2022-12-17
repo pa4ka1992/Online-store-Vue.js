@@ -1,4 +1,4 @@
-import { IProduct } from '@/store';
+import { IProduct } from './model/product';
 import { IProductSource } from './product-source';
 
 const apiUrl = 'https://dummyjson.com/products?limit=100';

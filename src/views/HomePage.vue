@@ -6,9 +6,9 @@ const store = useTestStore();
 
 </script>
 
-<template> 
-
-<div> 
+<template>
+<div>
+  <router-link to="/cart">cart</router-link>
   <h1> Counter is {{store.count}}</h1>
   <button @click="store.increment()">Click me!</button>
 </div>

@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import { IProduct } from '@/store/interfaces/product';
 import { ICartProduct } from '@/store/interfaces/product';
+import { Promos } from '@/store/constants/cart';
 
 type productFunc = (product: ICartProduct) => void;
 type findFunc = (product: ICartProduct) => ICartProduct | undefined;
@@ -64,7 +65,21 @@ export const useCartStore = defineStore('cartStore', () => {
   const promo = ref('');
   const page = ref(1);
   const limit = ref(10);
-  const isDiscounted = ref(false);
+  const isDiscounted = ref(true);
+
+  const getPromoPrice = computed((): number => {
+    const keys = <(keyof typeof Promos)[]>Object.keys(Promos);
+    const isMatch: keyof typeof Promos | undefined = keys.find((key) => {
+      return key === promo.value;
+    });
+    if (isMatch) {
+      isDiscounted.value = true;
+      return totalPrice.value * Promos[isMatch];
+    } else {
+      isDiscounted.value = false;
+      return totalPrice.value;
+    }
+  })
 
   const totalPrice = computed((): number => {
     return cart.value.reduce((totalSum, product) => {
@@ -141,5 +156,6 @@ export const useCartStore = defineStore('cartStore', () => {
     addRemoveProduct,
     incrementCount,
     decrementCount,
+    getPromoPrice,
   };
 });

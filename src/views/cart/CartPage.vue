@@ -19,10 +19,10 @@
       <div class="total-price">
         <span class="total-header">Total</span>
         <span class="total-money">{{ cartStore.totalPrice }}</span>
-        <span
-        class="total-money"
-        v-if="cartStore.isDiscounted"
-        >discount</span>
+        <div class="total-discount" v-if="cartStore.isDiscounted">
+          <span class="discount-header">Total with discount</span>
+          <span class="total-discount">{{ cartStore.getPromoPrice }} </span>
+        </div>
       </div>
       <input type="text" class="promo" v-model="cartStore.promo" />
       <button class="buy">Buy now</button>

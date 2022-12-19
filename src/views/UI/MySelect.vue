@@ -1,5 +1,5 @@
 <template>
-  <select class="form-select form-select-sm" :value="modelValue" @change="changeOption">
+  <select class="form-select" :value="modelValue" @change="changeOption">
     <option disabled value="">Выберите количество</option>
     <option v-for="option in options" :key="option" :value="option">{{ option }}</option>
   </select>
@@ -25,4 +25,6 @@ const changeOption = ({ target }: Event): void => {
   emit('update', (target as HTMLOptionElement).value);
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+@import '@/assets/scss/index.scss';
+</style>

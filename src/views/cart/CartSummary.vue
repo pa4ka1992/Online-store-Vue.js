@@ -13,7 +13,7 @@
           <span class="total-discount" >{{ cartStore.getPromoPrice }} </span>
         </div>
       </div>
-      <input type="text" class="promo" v-model="cartStore.promo" />
+      <input type="text" class="promo form-control" v-model="cartStore.promo" />
       <my-button class="buy">Buy now</my-button>
     </form>
 </template>

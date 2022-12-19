@@ -156,7 +156,7 @@ const fillBar: Ref<HTMLElement | null> = ref(null);
 
 const fillBarStyle = computed(() => {
   return {
-    left: `${leftPos.value}px`, 
+    left: `${leftPos.value + (thumbLeft.value?.offsetWidth ?? 0) / 2}px`, 
     width: `${fillBarWidth.value}px` 
   };
 });
@@ -210,7 +210,8 @@ $fill-bar-width: 6px;
     background-color: $primary;
     border-radius: 50%;
 
-    &:hover {
+    &:hover,
+    &:active {
       filter: saturate(50%);
     }
   }

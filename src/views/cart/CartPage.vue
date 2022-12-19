@@ -3,7 +3,10 @@
     <cart-pagination />
     <div class="products-in-cart">
       <div class="products">
-        <cart-product v-for="product in cartStore.pageProducts" :product="product" :key="product.id" />
+        <cart-product
+        v-for="product in cartStore.pageProducts"
+        :product="product"
+        :key="product.id" />
       </div>
     </div>
     <cart-summary />
@@ -12,10 +15,10 @@
 </template>
 
 <script lang="ts" setup>
-import { useCartStore } from '../../store';
-import CartPagination from './CartPagination.vue';
-import CartProduct from './CartProduct.vue';
-import CartSummary from './CartSummary.vue';
+import { useCartStore } from '@/store';
+import CartPagination from '@/views/cart/CartPagination.vue';
+import CartProduct from '@/views/cart//CartProduct.vue';
+import CartSummary from '@/views/cart//CartSummary.vue';
 
 const cartStore = useCartStore();
 </script>

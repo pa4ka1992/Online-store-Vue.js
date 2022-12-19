@@ -1,6 +1,6 @@
 <template>
   <div class="product">
-    <img class="img" :src="product['images'][0]" alt="product" />
+    <img class="img-fluid" :src="product['images'][0]" alt="product" />
     <div class="info">
       <div class="ttile">{{ product['title'] }}</div>
       <div class="description">{{ product['description'] }}</div>
@@ -29,7 +29,7 @@
 
 <script lang="ts" setup>
 import { defineProps } from 'vue';
-import { useCartStore } from '../../store';
+import { useCartStore } from '@/store';
 import { ICartProduct } from '@/services//model/product';
 
 const props = defineProps({

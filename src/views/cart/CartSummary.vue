@@ -14,12 +14,12 @@
         </div>
       </div>
       <input type="text" class="promo" v-model="cartStore.promo" />
-      <button class="buy">Buy now</button>
+      <my-button class="buy">Buy now</my-button>
     </form>
 </template>
 
 <script lang="ts" setup>
-import { useCartStore } from '../../store';
+import { useCartStore } from '@/store';
 
 const cartStore = useCartStore();
 </script>

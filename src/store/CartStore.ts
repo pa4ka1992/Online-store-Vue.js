@@ -68,8 +68,7 @@ export const useCartStore = defineStore('cartStore', () => {
   const isDiscounted = ref(false);
 
   const getPromoPrice = computed((): number => {
-    console.log(true);
-    const keys = <(keyof typeof Promos)[]>Object.keys(Promos);
+    const keys = <(keyof typeof Promos)[]>Object.keys(Promos)
     const isMatch: keyof typeof Promos | undefined = keys.find((key) => {
       return key === promo.value;
     });
@@ -80,7 +79,7 @@ export const useCartStore = defineStore('cartStore', () => {
       isDiscounted.value = false;
       return totalPrice.value;
     }
-  })
+  });
 
   const totalPrice = computed((): number => {
     return cart.value.reduce((totalSum, product) => {
@@ -96,16 +95,11 @@ export const useCartStore = defineStore('cartStore', () => {
 
   const totalPage = computed((): number => {
     if (!limit.value) return 1;
-    if (
-      !cart.value ||
-      Number.isNaN(cart.value.length) ||
-      Number.isNaN(limit.value) ||
-      limit.value <= 0
-    ) {
+    if (!cart.value || Number.isNaN(cart.value.length) || Number.isNaN(limit.value) || limit.value <= 0) {
       return 1;
     }
     const pages: number = Math.ceil(cart.value.length / limit.value);
-    return pages > 1 ? pages : 1
+    return pages > 1 ? pages : 1;
   });
 
   const pageProducts = computed((): ICartProduct[] => {

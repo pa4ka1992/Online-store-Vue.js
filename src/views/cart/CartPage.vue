@@ -3,7 +3,10 @@
     <div class="products-in-cart">
       <div class="pagination">
         <h3 class="header">Products in cart</h3>
-        <input class="limit" type="text" v-model="cartStore.limit" />
+        <select v-model="cartStore.limit">
+          <option disabled value="">Выберите количество</option>
+          <option v-for="lim in cartStore.maxLimit" :key="lim" :value="lim">{{ lim }}</option>
+        </select>
         <div class="pages" v-for="page in cartStore.totalPage" :key="page" @click="changePage(page)">{{ page }}</div>
       </div>
       <div class="products">

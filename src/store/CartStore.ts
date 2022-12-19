@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import { IProduct } from '@/store/interfaces/product';
-import { ICartProduct } from '@/store/interfaces/product';
-import { Promos } from '@/store/constants/cart';
+import { IProduct, ICartProduct } from '@/services//model/product';
+import { Promos } from '@/services/model/constants/cart';
 
 type productFunc = (product: ICartProduct) => void;
 type findFunc = (product: ICartProduct) => ICartProduct | undefined;
@@ -65,6 +64,7 @@ export const useCartStore = defineStore('cartStore', () => {
   const promo = ref('');
   const page = ref(1);
   const limit = ref(10);
+  const maxLimit = 10;
   const isDiscounted = ref(true);
 
   const getPromoPrice = computed((): number => {
@@ -94,7 +94,17 @@ export const useCartStore = defineStore('cartStore', () => {
   });
 
   const totalPage = computed((): number => {
-    return Math.ceil(cart.value.length / limit.value);
+    if (!limit.value) return 1;
+    if (
+      !cart.value ||
+      Number.isNaN(cart.value.length) ||
+      Number.isNaN(limit.value) ||
+      limit.value <= 0
+    ) {
+      return 1;
+    }
+    const pages: number = Math.ceil(cart.value.length / limit.value);
+    return pages > 1 ? pages : 1
   });
 
   const pageProducts = computed((): ICartProduct[] => {
@@ -153,6 +163,7 @@ export const useCartStore = defineStore('cartStore', () => {
     page,
     totalPage,
     limit,
+    maxLimit,
     addRemoveProduct,
     incrementCount,
     decrementCount,

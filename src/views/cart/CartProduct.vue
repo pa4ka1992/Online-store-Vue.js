@@ -30,7 +30,7 @@
 <script lang="ts" setup>
 import { defineProps } from 'vue';
 import { useCartStore } from '../../store';
-import { ICartProduct } from '@/store/interfaces/product';
+import { ICartProduct } from '@/services//model/product';
 
 const props = defineProps({
   product: {

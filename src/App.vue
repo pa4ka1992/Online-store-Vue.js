@@ -2,14 +2,22 @@
 </script>
 
 <template> 
-  <div>
+  <main class="app-body">
+    <i class="demo-icon icon-cart-no"></i>
+    <i class="demo-icon icon-cart-ok"></i>
+    <i class="demo-icon icon-cart-plus"></i>
+    <i class="demo-icon icon-cart"></i>
     <RouterView/>
-  </div>
-  
+  </main>  
 </template>
 
-<style scoped lang="scss">
-  .header {
-    color: red;
-  }
+<style scoped>
+
+.demo-icon {
+  font-size: 50px;
+}
+
+.app-body {
+  min-height: 100vh;
+}
 </style>

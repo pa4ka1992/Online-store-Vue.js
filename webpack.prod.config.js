@@ -9,7 +9,7 @@ module.exports = {
     rules: [
       {
         test: /\.(s[ac]|c)ss$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader', 'postcss-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
       },
     ],
   },
@@ -29,7 +29,7 @@ module.exports = {
         minify: TerserWebpackPlugin.swcMinify,
         extractComments: false,
         terserOptions: {
-          compress: {drop_console: true, drop_debugger: true},
+          compress: { drop_console: true, drop_debugger: true },
         },
       }),
     ],

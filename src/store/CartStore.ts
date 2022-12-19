@@ -65,9 +65,10 @@ export const useCartStore = defineStore('cartStore', () => {
   const page = ref(1);
   const limit = ref(10);
   const maxLimit = 10;
-  const isDiscounted = ref(true);
+  const isDiscounted = ref(false);
 
   const getPromoPrice = computed((): number => {
+    console.log(true);
     const keys = <(keyof typeof Promos)[]>Object.keys(Promos);
     const isMatch: keyof typeof Promos | undefined = keys.find((key) => {
       return key === promo.value;

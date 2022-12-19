@@ -1,25 +1,21 @@
 <template>
-    <div class="pagination">
-      <h3 class="pagination__header">Products in cart</h3>
-      <div class="select-group">
-        <h4 class="select-group__header">Product per page:</h4>
-        <my-select 
+  <div class="pagination">
+    <h3 class="pagination__header">Products in cart</h3>
+    <div class="select-group">
+      <h4 class="select-group__header">Product per page:</h4>
+      <my-select
         class="select-group__select"
         :value="cartStore.limit"
         :options="cartStore.maxLimit"
         @update="updateSelect"
-        ></my-select>
+      ></my-select>
+    </div>
+    <div class="pages">
+      <div class="pages__page btn btn-light" v-for="page in cartStore.totalPage" :key="page" @click="changePage(page)">
+        {{ page }}
       </div>
-        <div class="pages">
-          <div 
-          class="pages__page btn btn-light"
-          v-for="page in cartStore.totalPage"
-          :key="page"
-          @click="changePage(page)">
-          {{ page }}
-        </div>
-        </div>
-      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -30,13 +26,11 @@ const changePage = (currPage: number): void => {
   cartStore.page = currPage;
 };
 const updateSelect = (value: number) => {
-  cartStore.limit = value
-}
+  cartStore.limit = value;
+};
 </script>
 <style lang="scss" scoped>
-
-@import "@/assets/scss/index.scss";
-
+@import '@/assets/scss/index.scss';
 .pagination {
   display: flex;
   align-items: center;
@@ -60,12 +54,14 @@ const updateSelect = (value: number) => {
     }
 
     &__select {
-      max-width: 5rem;
+      max-width: 3rem;
       font-size: 1rem;
     }
   }
 
   .pages {
+    display: flex;
+
     &__page {
       border: 1px solid $secondary;
     }

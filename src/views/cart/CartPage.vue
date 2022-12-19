@@ -1,7 +1,6 @@
 <template>
-  <section class="cart container text-center" v-if="cartStore.cart.length > 0">
-    <div class="row">
-      <section class="cart-info col-9">
+  <section class="cart container" v-if="cartStore.cart.length > 0">
+      <section class="cart-info">
         <cart-pagination />
         <div class="products-in-cart">
           <div class="products">
@@ -9,8 +8,7 @@
           </div>
         </div>
       </section>
-      <cart-summary class="col-3" />
-    </div>
+      <cart-summary />
   </section>
   <h3 class="empty" v-else>Cart is empty</h3>
 </template>
@@ -25,6 +23,8 @@ const cartStore = useCartStore();
 </script>
 <style lang="scss" scoped>
 .cart {
+  display: flex;
+  gap: 1rem;
   .products {
     display: flex;
     flex-direction: column;

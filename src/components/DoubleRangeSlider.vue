@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-import { defineProps, defineEmits, type Ref, ref, computed } from 'vue';
+import { type Ref, ref, computed } from 'vue';
 
 // Props
 // ===============

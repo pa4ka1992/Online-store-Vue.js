@@ -183,7 +183,7 @@ $thumb-width: 20px;
 $bar-width: 4px;
 $fill-bar-width: 6px;
 
-@import "@/assets/scss/index.scss";
+@import "@/assets/scss/bootstrap.scss";
 .double-slider {
   margin: 10px;
   padding: $inner-padding; 

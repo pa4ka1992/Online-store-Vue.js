@@ -7,6 +7,7 @@ module.exports = {
     static: {
       directory: path.resolve(__dirname, 'dist'),
     },
+    historyApiFallback: true,
     port: 3000,
     open: true,
     hot: true,
@@ -20,7 +21,7 @@ module.exports = {
     rules: [
       {
         test: /\.(s[ac]|c)ss$/i,
-        use: ['style-loader', 'css-loader','postcss-loader', 'sass-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
     ],
   },

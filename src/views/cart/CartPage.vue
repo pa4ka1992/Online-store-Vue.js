@@ -31,6 +31,7 @@ const cartStore = useCartStore();
 .container {
   max-width: $xxl;
   margin: 0 auto;
+  padding: 0 10px;
   font-family: 'medium', sans-serif;
 }
 .cart {

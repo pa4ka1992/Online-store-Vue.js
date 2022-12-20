@@ -33,6 +33,7 @@ const { discountPercentage, countPrice, fixPrice } = toRefs(props.product);
 
   &--discount {
     font-weight: 600;
+    color: $success;
   }
 
   &--final {
@@ -42,6 +43,7 @@ const { discountPercentage, countPrice, fixPrice } = toRefs(props.product);
   .crossed {
     text-decoration: line-through;
     font-weight: 400;
+    color: $secondary;
   }
 }
 </style>

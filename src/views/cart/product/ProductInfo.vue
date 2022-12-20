@@ -36,12 +36,12 @@ const { title, brand, description, rating } = toRefs(props.product);
     display: flex;
 
     .fa-star {
-      color: $gold;
+      color: $warning;
     }
     .header__rating {
       margin-left: 0.2rem;
       font-weight: 600;
-      color: $gold;
+      color: $warning;
     }
 
     .header__title {

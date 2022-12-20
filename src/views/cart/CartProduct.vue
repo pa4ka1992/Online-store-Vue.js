@@ -36,6 +36,7 @@ const { images } = toRefs(props.product);
   &__image {
     display: block;
     max-width: 15rem;
+    border-radius: 5px;
   }
 }
 </style>

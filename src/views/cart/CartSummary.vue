@@ -14,7 +14,7 @@
           <span class="discount__header">Total with discount: </span>
           <span class="discount__total">{{ cartStore.getPromoPrice }}$</span>
         </div>
-      <input type="text" class="summary__promo" v-model="cartStore.promo" />
+      <input type="text" placeholder="Enter promocode" class="summary__promo" v-model="cartStore.promo" />
       <my-button class="summary__buy">Buy now</my-button>
     </div>
   </form>
@@ -31,6 +31,7 @@ const cartStore = useCartStore();
 
 
 .summary-form {
+  padding-top: 3.5rem;
   .summary {
     display: flex;
     flex-direction: column;

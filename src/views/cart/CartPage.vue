@@ -40,11 +40,16 @@ const cartStore = useCartStore();
   gap: 1rem;
   position: relative;
 
+  .cart-info {
+    position: relative;
+  }
+
   .products {
     display: grid;
     flex-direction: column;
     align-self: center;
     gap: 0.5rem;
+    padding-top: 3.5rem;
   }
 }
 </style>

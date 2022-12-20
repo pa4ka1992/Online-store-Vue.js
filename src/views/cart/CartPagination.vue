@@ -35,6 +35,7 @@ const updateSelect = (value: number) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: absolute;
 
   padding: 0.5rem 0;
   width: 100%;

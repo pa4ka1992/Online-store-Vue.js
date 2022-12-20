@@ -38,7 +38,7 @@
       <div v-if="discountPercentage" class="product__price--discount">
         Discount: {{ discountPercentage }}%
       </div>
-      <div v-if="discountPercentage" class="product__price--final">{{}}</div>
+      <div v-if="discountPercentage" class="product__price--final">{{fixPrice}}$</div>
     </div>
   </div>
 </template>
@@ -61,7 +61,8 @@ const { images,
   rating,
   stock,
   count,
-  countPrice
+  countPrice,
+  fixPrice,
  } = toRefs(props.product);
 
 const cartStore = useCartStore();

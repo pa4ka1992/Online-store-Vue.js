@@ -15,4 +15,5 @@ export interface IProduct {
 export interface ICartProduct extends IProduct {
   count: number;
   get countPrice(): number;
+  get fixPrice(): number;
 }

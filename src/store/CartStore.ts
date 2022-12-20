@@ -26,13 +26,16 @@ export const useCartStore = defineStore('cartStore', () => {
       get countPrice() {
         return this.count * this.price;
       },
+      get fixPrice() {
+        return this.countPrice * (1 - this.discountPercentage / 100)
+      }
     },
     {
       id: '2',
       title: 'iphone 10',
       category: 'phones',
       brand: 'iphone',
-      discountPercentage: 15,
+      discountPercentage: 0,
       description: '123123123',
       price: 1000,
       rating: 4.5,
@@ -43,6 +46,9 @@ export const useCartStore = defineStore('cartStore', () => {
       get countPrice() {
         return this.count * this.price;
       },
+      get fixPrice() {
+        return this.countPrice * (1 - this.discountPercentage / 100)
+      }
     },
     {
       id: '3',
@@ -60,6 +66,9 @@ export const useCartStore = defineStore('cartStore', () => {
       get countPrice() {
         return this.count * this.price;
       },
+      get fixPrice() {
+        return this.countPrice * (1 - this.discountPercentage / 100)
+      }
     },
   ]);
   const promo = ref('');
@@ -120,6 +129,9 @@ export const useCartStore = defineStore('cartStore', () => {
       get countPrice() {
         return this.count * this.price;
       },
+      get fixPrice() {
+        return this.countPrice * (1 - this.discountPercentage / 100)
+      }
     };
     cart.value.push(cartProduct);
   };

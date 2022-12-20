@@ -58,7 +58,6 @@
         "webpack-merge": "^5.8.0"
     },
     "dependencies": {
-        "bootstrap": "^5.2.3",
         "pinia": "^2.0.28",
         "vue": "^3.2.45",
         "vue-router": "^4.1.6"

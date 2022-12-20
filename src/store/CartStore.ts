@@ -148,6 +148,22 @@ export const useCartStore = defineStore('cartStore', () => {
     }
   };
 
+  const updateCount = (val: string,  incomeProduct: ICartProduct) => {
+    const currProduct: currProd = findProduct(incomeProduct);
+    const valNumber = Number(val);
+    if (currProduct) {
+      if (valNumber > currProduct.stock) {
+        currProduct.count = currProduct.stock;
+        return 
+      }
+      if (valNumber === 0) {
+        currProduct.count = 0
+        return 
+      }
+      currProduct.count = valNumber
+    }
+  }
+
   return {
     cart,
     totalPrice,
@@ -162,6 +178,7 @@ export const useCartStore = defineStore('cartStore', () => {
     addRemoveProduct,
     incrementCount,
     decrementCount,
+    updateCount,
     getPromoPrice,
   };
 });

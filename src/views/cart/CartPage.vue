@@ -4,7 +4,11 @@
         <cart-pagination />
         <div class="products-in-cart">
           <div class="products">
-            <cart-product v-for="product in cartStore.pageProducts" :product="product" :key="product.id" />
+            <cart-product
+            v-for="product in cartStore.pageProducts"
+            :product="product"
+            :key="product.id"
+             />
           </div>
         </div>
       </section>

@@ -6,22 +6,36 @@
         <div class="header__rating">{{ product['rating'] }}</div>
         <div class="header__title">{{ product['title'] }}</div>
       </div>
-
       <div class="product__info--description">{{ product['description'] }}</div>
     </div>
     <div class="product__count-info">
-      <div class="stock">{{ product['stock'] }}</div>
-      <div class="count-control">
-        <button class="increment" @click="cartStore.incrementCount(product as ICartProduct)">+</button>
-        <span class="count">{{ product['count'] }}</span>
-        <button class="decrement" @click="cartStore.decrementCount(product as ICartProduct)">-</button>
+      <div class="product__count-info--stock">Stock:{{ product['stock'] }}</div>
+      <div class="product__count-info--control">
+        <button
+          :disabled="product['count'] === 1"
+          class="decrement"
+          @click="cartStore.decrementCount(product as ICartProduct)"
+        >
+          -
+        </button>
+        <input type="number" class="count" :value="product['count']" @input="updateCount" />
+        <button
+          :disabled="product['count'] === product['stock']"
+          class="increment"
+          @click="cartStore.incrementCount(product as ICartProduct)"
+        >
+          +
+        </button>
       </div>
-      <div class="single-price">{{ product['price'] }}$/pc.</div>
+      <div class="product__count-info--single-price">{{ product['price'] }}$/pc.</div>
+      <button @click="deleteProduct" class="delete">del</button>
     </div>
     <div class="product__price">
       <div class="product__price--full">{{ product['countPrice'] }}$</div>
-      <div v-if="product['discountPercentage']" class="product__price--discount">Discount: {{ product['discountPercentage'] }}%</div>
-      <div v-if="product['discountPercentage']" class="product__price--final">{{ }}</div>
+      <div v-if="product['discountPercentage']" class="product__price--discount">
+        Discount: {{ product['discountPercentage'] }}%
+      </div>
+      <div v-if="product['discountPercentage']" class="product__price--final">{{}}</div>
     </div>
   </div>
 </template>
@@ -38,9 +52,22 @@ const props = defineProps({
   },
 });
 const cartStore = useCartStore();
+
+const updateCount = (e: Event): void => {
+  const target = e.target as HTMLOptionElement;
+  const valNumber = Number(target.value);
+  if (valNumber === 0) {
+    target.value = '1';
+  } else if (valNumber > props.product['stock']) {
+    target.value = props.product['stock'];
+  }
+  cartStore.updateCount(target.value, props.product as ICartProduct);
+};
 </script>
+
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
+
 .product {
   display: flex;
   flex-basis: 100%;
@@ -83,12 +110,15 @@ const cartStore = useCartStore();
     }
   }
 
-  .count-info {
+  &__count-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     flex-shrink: 0;
-  }
 
-  &__price {
-    flex-shrink: 0;
+    .count {
+      max-width: 3rem;
+    }
   }
 }
 </style>

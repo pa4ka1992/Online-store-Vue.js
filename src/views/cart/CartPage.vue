@@ -20,8 +20,8 @@
 <script lang="ts" setup>
 import { useCartStore } from '@/store';
 import CartPagination from '@/views/cart/CartPagination.vue';
-import CartProduct from '@/views/cart//CartProduct.vue';
-import CartSummary from '@/views/cart//CartSummary.vue';
+import CartProduct from '@/views/cart/CartProduct.vue';
+import CartSummary from '@/views/cart/CartSummary.vue';
 
 const cartStore = useCartStore();
 </script>

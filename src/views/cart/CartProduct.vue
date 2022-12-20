@@ -3,6 +3,7 @@
     <img class="product__image" :src="images[0]" alt="product" />
     <div class="product__info">
       <div class="product__info--header">
+        <font-awesome-icon icon="fa-solid fa-star" />
         <div class="header__rating">{{ rating }}</div>
         <div class="header__title">{{ title }}</div>
       </div>
@@ -81,7 +82,6 @@ const updateCount = (e: Event): void => {
 
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
-
 .product {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr 1fr;
@@ -123,9 +123,6 @@ const updateCount = (e: Event): void => {
         color: $primary;
       }
     }
-  }
-
-  &__brand {
   }
 
   &__count-info {

@@ -1,56 +1,69 @@
 <template>
   <div class="product">
-    <img class="product__image" :src="product['images'][0]" alt="product" />
+    <img class="product__image" :src="images[0]" alt="product" />
     <div class="product__info">
       <div class="product__info--header">
-        <div class="header__rating">{{ product['rating'] }}</div>
-        <div class="header__title">{{ product['title'] }}</div>
+        <div class="header__rating">{{ rating }}</div>
+        <div class="header__title">{{ title }}</div>
       </div>
-      <div class="product__info--description">{{ product['description'] }}</div>
+      <div class="product__brand">Brand:{{ brand }}</div>
+      <div class="product__info--description">{{ description }}</div>
     </div>
     <div class="product__count-info">
-      <div class="product__count-info--stock">Stock:{{ product['stock'] }}</div>
+      <div class="product__count-info--stock">Stock:{{ stock }}</div>
       <div class="product__count-info--control">
         <button
-          :disabled="product['count'] === 1"
+          :disabled="count === 1"
           class="decrement"
-          @click="cartStore.decrementCount(product as ICartProduct)"
+          @click="cartStore.decrementCount(product)"
         >
           -
         </button>
-        <input type="number" class="count" :value="product['count']" @input="updateCount" />
+        <input type="number" class="count" :value="count" @input="updateCount" />
         <button
-          :disabled="product['count'] === product['stock']"
+          :disabled="count === stock"
           class="increment"
-          @click="cartStore.incrementCount(product as ICartProduct)"
+          @click="cartStore.incrementCount(product)"
         >
           +
         </button>
       </div>
-      <div class="product__count-info--single-price">{{ product['price'] }}$/pc.</div>
-      <button @click="cartStore.deleteProduct(product as ICartProduct)" class="delete">del</button>
+      <div class="product__count-info--single-price">{{ price }}$/pc.</div>
+      <button @click="cartStore.deleteProduct(product)" class="delete">del</button>
     </div>
     <div class="product__price">
-      <div class="product__price--full">{{ product['countPrice'] }}$</div>
-      <div v-if="product['discountPercentage']" class="product__price--discount">
-        Discount: {{ product['discountPercentage'] }}%
+      <div class="product__price--full" :class="{ crossed: product['discountPercentage'] }">
+        {{ countPrice }}$
       </div>
-      <div v-if="product['discountPercentage']" class="product__price--final">{{}}</div>
+      <div v-if="discountPercentage" class="product__price--discount">
+        Discount: {{ discountPercentage }}%
+      </div>
+      <div v-if="discountPercentage" class="product__price--final">{{}}</div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { defineProps } from 'vue';
+import { defineProps, toRefs } from 'vue';
 import { useCartStore } from '@/store';
 import { ICartProduct } from '@/services//model/product';
 
-const props = defineProps({
-  product: {
-    type: Object,
-    required: true,
-  },
-});
+const props = defineProps<{
+  product: Required<ICartProduct>;
+}>();
+
+const { images,
+  title,
+  brand,
+  discountPercentage,
+  description,
+  price,
+  rating,
+  stock,
+  count,
+  countPrice
+ } = toRefs(props.product);
+
 const cartStore = useCartStore();
 
 const updateCount = (e: Event): void => {
@@ -59,11 +72,10 @@ const updateCount = (e: Event): void => {
   if (valNumber === 0) {
     target.value = '1';
   } else if (valNumber > props.product['stock']) {
-    target.value = props.product['stock'];
+    target.value = String(props.product['stock']);
   }
   cartStore.updateCount(target.value, props.product as ICartProduct);
 };
-
 </script>
 
 <style lang="scss" scoped>
@@ -119,6 +131,12 @@ const updateCount = (e: Event): void => {
 
     .count {
       max-width: 3rem;
+    }
+  }
+
+  &__price {
+    .crossed {
+      text-decoration: line-through;
     }
   }
 }

@@ -10,16 +10,10 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-const props = defineProps({
-  modelValue: {
-    type: Number,
-    requared: true,
-  },
-  options: {
-    type: Number,
-    requared: true,
-  },
-});
+const props = defineProps<{
+  modelValue: Required<number>
+  options: Required<number>
+}>();
 const emit = defineEmits(['update']);
 const changeOption = ({ target }: Event): void => {
   emit('update', (target as HTMLOptionElement).value);

@@ -28,7 +28,7 @@
         </button>
       </div>
       <div class="product__count-info--single-price">{{ product['price'] }}$/pc.</div>
-      <button @click="deleteProduct" class="delete">del</button>
+      <button @click="cartStore.deleteProduct(product as ICartProduct)" class="delete">del</button>
     </div>
     <div class="product__price">
       <div class="product__price--full">{{ product['countPrice'] }}$</div>
@@ -63,6 +63,7 @@ const updateCount = (e: Event): void => {
   }
   cartStore.updateCount(target.value, props.product as ICartProduct);
 };
+
 </script>
 
 <style lang="scss" scoped>

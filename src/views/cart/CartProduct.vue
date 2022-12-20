@@ -83,13 +83,11 @@ const updateCount = (e: Event): void => {
 @import '@/assets/scss/index.scss';
 
 .product {
-  display: flex;
-  flex-basis: 100%;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr 1fr;
+  place-items: center center;
   gap: 0.5rem;
-
-  padding: 0.5rem;
+  padding: 1rem;
 
   border: 1px solid $secondary {
     radius: 5px;
@@ -101,14 +99,17 @@ const updateCount = (e: Event): void => {
   }
 
   &__info {
-    flex-basis: 50%;
+    justify-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-left: 1rem;
 
     text-align: left;
 
     &--header {
       display: flex;
       gap: 1rem;
-      margin-bottom: 1rem;
 
       .header__rating {
         font-weight: 600;
@@ -124,11 +125,13 @@ const updateCount = (e: Event): void => {
     }
   }
 
+  &__brand {
+  }
+
   &__count-info {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-shrink: 0;
 
     .count {
       max-width: 3rem;
@@ -136,6 +139,10 @@ const updateCount = (e: Event): void => {
   }
 
   &__price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
     .crossed {
       text-decoration: line-through;
     }

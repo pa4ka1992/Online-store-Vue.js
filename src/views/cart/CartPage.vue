@@ -26,11 +26,21 @@ import CartSummary from '@/views/cart//CartSummary.vue';
 const cartStore = useCartStore();
 </script>
 <style lang="scss" scoped>
+@import '@/assets/scss/index.scss';
+
+.container {
+  max-width: $xxl;
+  margin: 0 auto;
+  font-family: 'medium', sans-serif;
+}
 .cart {
-  display: flex;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
   gap: 1rem;
+  position: relative;
+
   .products {
-    display: flex;
+    display: grid;
     flex-direction: column;
     align-self: center;
     gap: 0.5rem;

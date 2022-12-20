@@ -1,9 +1,30 @@
-// $fa-font-path: 'awesome/webfonts';
+$fa-font-path: '@/assets/scss/awesome/webfonts';
 
-// @import "./awesome/scss/fontawesome";
-// @import "./awesome/scss/solid";
+@import "./awesome/scss/fontawesome";
+@import "./awesome/scss/solid";
 
 $primary: rgb(89, 161, 255);
 $secondary: rgb(228, 228, 228);
-$gold: rgb(255, 204, 65)
+$gold: rgb(255, 204, 65);
 
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1440px;
+
+@font-face {
+  font-family: "light";
+  src: "@/assets/fonts/Poppins-Light.ttf";
+  font-weight: normal;
+}
+@font-face {
+  font-family: "medium";
+  src: "@/assets/fonts/Poppins-Medium.ttf";
+  font-weight: normal;
+}
+@font-face {
+  font-family: "bold";
+  src: "@/assets/fonts/Poppins-Bold.ttf";
+  font-weight: normal;
+}

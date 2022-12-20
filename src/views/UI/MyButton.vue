@@ -12,6 +12,8 @@ export default {
 @import "@/assets/scss/index.scss";
 
 .btn {
+  flex-grow: 0;
+  display: inline-block;
   padding: 0.5rem 1rem;
 
   background-color: $primary;

@@ -4,6 +4,8 @@ $warning: rgb(255, 204, 65);
 $danger: rgb(255, 78, 78);
 $success: rgb(37, 214, 2);
 $mainBG: rgb(250, 250, 250);
+$dark: #000;
+$light: #fff;
 
 $sm: 576px;
 $md: 768px;
@@ -12,21 +14,23 @@ $xl: 1200px;
 $xxl: 1440px;
 
 @font-face {
-  font-family: "light";
-  src: "@/assets/fonts/Poppins-Light.ttf";
+  font-family: 'Poppins';
+  src: url('@/assets/fonts/Poppins-Medium.ttf');
   font-weight: normal;
 }
+
 @font-face {
-  font-family: "medium";
-  src: "@/assets/fonts/Poppins-Medium.ttf";
-  font-weight: normal;
-}
-@font-face {
-  font-family: "bold";
-  src: "@/assets/fonts/Poppins-Bold.ttf";
+  font-family: 'PTSans';
+  src: url('@/assets/fonts/Dosis-Medium.ttf');
   font-weight: normal;
 }
 
 body {
   background-color: $mainBG;
+}
+
+@mixin block-style {
+  background-color: $light;
+  box-shadow: 0 0 20px rgb(0 0 0 / 10%);
+  border-radius: 12px;
 }

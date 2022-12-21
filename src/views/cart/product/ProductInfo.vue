@@ -57,6 +57,7 @@ const { title, brand, description, rating } = toRefs(props.product);
   }
 
   &--description {
+    font-family: "PTSans", sans-serif;
     line-height: 1.3em;
   }
 }

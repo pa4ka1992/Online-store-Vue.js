@@ -31,17 +31,13 @@ const cartStore = useCartStore();
 
 
 .summary-form {
-  padding-top: 3.5rem;
   .summary {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: sticky;
-    top: 1rem;
-    padding: 1rem;
-    border: 1px solid $secondary {
-      radius: 5px;
-    }
+    bottom: 1rem;
+    border-radius: 12px;
 
     &__total-price {
       display: flex;

@@ -29,9 +29,6 @@ const { images } = toRefs(props.product);
   place-items: center center;
   gap: 0.5rem;
   padding: 1rem;
-  border: 1px solid $secondary {
-    radius: 5px;
-  }
 
   &__image {
     display: block;

@@ -11,8 +11,9 @@
              />
           </div>
         </div>
+        <cart-summary />
       </section>
-      <cart-summary />
+
   </section>
   <h3 class="empty" v-else>Cart is empty</h3>
 </template>
@@ -32,16 +33,15 @@ const cartStore = useCartStore();
   max-width: $xxl;
   margin: 0 auto;
   padding: 0 10px;
-  font-family: 'medium', sans-serif;
+  font-family: 'Poppins';
 }
 .cart {
-  display: grid;
-  grid-template-columns: 4fr 1fr;
-  gap: 1rem;
   position: relative;
 
   .cart-info {
     position: relative;
+    padding: 1rem;
+    @include block-style;
   }
 
   .products {
@@ -49,7 +49,7 @@ const cartStore = useCartStore();
     flex-direction: column;
     align-self: center;
     gap: 0.5rem;
-    padding-top: 3.5rem;
+    border-bottom: 1px solid $secondary;
   }
 }
 </style>

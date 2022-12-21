@@ -1,7 +1,6 @@
 <template>
-  <select class="form-select" :value="modelValue" @change="changeOption">
-    <option disabled value="">Выберите количество</option>
-    <option v-for="option in options" :key="option" :value="option">{{ option }}</option>
+  <select class="select" :value="modelValue" @change="changeOption">
+    <option class="option" v-for="option in options" :key="option" :value="option">{{ option }}</option>
   </select>
 </template>
 <script lang="ts">
@@ -11,8 +10,8 @@ export default {
 </script>
 <script lang="ts" setup>
 const props = defineProps<{
-  modelValue: Required<number>
-  options: Required<number>
+  modelValue: Required<number>;
+  options: Required<number>;
 }>();
 const emit = defineEmits(['update']);
 const changeOption = ({ target }: Event): void => {
@@ -21,4 +20,22 @@ const changeOption = ({ target }: Event): void => {
 </script>
 <style lang="scss">
 @import '@/assets/scss/index.scss';
+
+.select {
+  padding: 0.3em 0.6rem;
+  font: {
+    family: 'Poppins', sans-serif;
+    size: 1rem;
+    weight: 500;
+  }
+  border: none {
+    radius: 10px;
+  }
+  outline: 2px solid $secondary;
+  transition: all 0.2s;
+
+  &:focus-visible {
+    outline-color: $primary;
+  }
+}
 </style>

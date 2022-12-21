@@ -1,6 +1,11 @@
 <template>
   <div class="pagination">
-    <h3 class="pagination__header">Cart</h3>
+    <h3 class="pagination__header">
+      Cart
+      <span class="pagination__total-products">
+        {{ cartStore.totalProducts }}
+      </span>
+    </h3>
     <div class="select-group">
       <h4 class="select-group__header">Product per page:</h4>
       <my-select
@@ -11,9 +16,12 @@
       ></my-select>
     </div>
     <div class="pages">
-      <div class="pages__page btn btn-light" v-for="page in cartStore.totalPage" :key="page" @click="changePage(page)">
+      <my-button
+      :class="{pages__page: page !== cartStore.page}"
+      v-for="page in cartStore.totalPage"
+      :key="page" @click="changePage(page)">
         {{ page }}
-      </div>
+      </my-button>
     </div>
   </div>
 </template>
@@ -32,9 +40,8 @@ const updateSelect = (value: number) => {
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
 .pagination {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 4fr 2fr;
   padding: 0.5rem 0;
   width: 100%;
   border-bottom: 1px solid $secondary;
@@ -44,6 +51,7 @@ const updateSelect = (value: number) => {
     font-size: 1.3rem;
   }
   .select-group {
+    justify-self: end;
     display: flex;
     align-items: center;
 
@@ -54,15 +62,23 @@ const updateSelect = (value: number) => {
     }
 
     &__select {
-      max-width: 3rem;
-      font-size: 1rem;
+      max-width: 5rem;
     }
   }
 
+  &__total-products {
+    position: relative;
+    bottom: 0.5rem;
+    font-size: 0.7em;
+  }
+
   .pages {
+    justify-self: end;
     display: flex;
 
     &__page {
+      color: $dark;
+      background-color: $light;
       border: 1px solid $secondary;
     }
   }

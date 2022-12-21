@@ -25,10 +25,11 @@ const { images } = toRefs(props.product);
 @import '@/assets/scss/index.scss';
 .product {
   display: grid;
-  grid-template-columns: 1fr 3fr repeat(2, 1fr);
+  grid-template-columns: 1fr 3fr 1.5fr 0.8fr;
   place-items: center center;
   gap: 0.5rem;
-  padding: 1rem;
+  padding: 1rem 0;
+  font-family: "Nunito", sans-serif;
 
   &__image {
     display: block;

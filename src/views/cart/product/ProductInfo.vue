@@ -53,11 +53,9 @@ const { title, brand, description, rating } = toRefs(props.product);
 
   &--brand {
     color: $secondary;
-    font-style: italic;
   }
 
   &--description {
-    font-family: "PTSans", sans-serif;
     line-height: 1.3em;
   }
 }

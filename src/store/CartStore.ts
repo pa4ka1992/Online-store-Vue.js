@@ -70,6 +70,46 @@ export const useCartStore = defineStore('cartStore', () => {
         return this.countPrice * (1 - this.discountPercentage / 100)
       }
     },
+    {
+      id: '3',
+      title: 'iphone 11',
+      category: 'phones',
+      brand: 'iphone',
+      discountPercentage: 20,
+      description: '123123123',
+      price: 1000,
+      rating: 4.5,
+      thumbnail: '',
+      images: ['https://live.staticflickr.com//65535//49298804222_474cfe8682.jpg'],
+      stock: 23,
+      count: 2,
+      get countPrice() {
+        return this.count * this.price;
+      },
+      get fixPrice() {
+        return this.countPrice * (1 - this.discountPercentage / 100)
+      }
+    },
+    {
+      id: '3',
+      title: 'iphone 11',
+      category: 'phones',
+      brand: 'iphone',
+      discountPercentage: 20,
+      description: '123123123',
+      price: 1000,
+      rating: 4.5,
+      thumbnail: '',
+      images: ['https://live.staticflickr.com//65535//49298804222_474cfe8682.jpg'],
+      stock: 23,
+      count: 2,
+      get countPrice() {
+        return this.count * this.price;
+      },
+      get fixPrice() {
+        return this.countPrice * (1 - this.discountPercentage / 100)
+      }
+    },
   ]);
   const promo = ref('');
   const page = ref(1);

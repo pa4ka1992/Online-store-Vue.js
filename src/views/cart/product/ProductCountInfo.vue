@@ -10,7 +10,7 @@
       <font-awesome-icon v-else icon="fa-solid fa-trash" />
     </button>
     <div class="count-info__wrapper">
-      <div class="count-info__wrapper--stock">Stock:{{ stock }}pc.</div>
+      <div class="count-info__wrapper--stock">Stock: {{ stock }}pc.</div>
       <div class="count-info__wrapper--control">
         <button :disabled="count === 1" class="decrement" @click="cartStore.decrementCount(product)">
           <font-awesome-icon icon="fa-solid fa-minus" />
@@ -67,7 +67,7 @@ const updateCount = (e: Event): void => {
     cursor: pointer;
     .fa-trash {
       font-size: 1rem;
-      color: $danger;
+      // color: $danger;
     }
   }
   .count-info__wrapper {
@@ -75,9 +75,9 @@ const updateCount = (e: Event): void => {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 0.5rem;
 
     &--control {
-      margin: 1rem 0;
       border: 1px solid $secondary {
         radius: 5px;
       }
@@ -116,6 +116,10 @@ const updateCount = (e: Event): void => {
           -webkit-appearance: none;
         }
       }
+    }
+
+    &--single-price, &--stock {
+      color: $secondary;
     }
   }
 }

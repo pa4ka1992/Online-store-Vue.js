@@ -28,7 +28,8 @@ const { discountPercentage, countPrice, fixPrice } = toRefs(props.product);
 
   &--full {
     font-weight: 600;
-    font-style: italic;
+    font-size: 1.2rem;
+
   }
 
   &--discount {
@@ -37,12 +38,15 @@ const { discountPercentage, countPrice, fixPrice } = toRefs(props.product);
   }
 
   &--final {
+    font-size: 1.2rem;
     font-weight: 600;
   }
 
   .crossed {
     text-decoration: line-through;
     font-weight: 400;
+    font-size: 1rem;
+    font-style: italic;
     color: $secondary;
   }
 }

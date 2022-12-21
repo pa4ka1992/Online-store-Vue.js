@@ -36,8 +36,14 @@ const cartStore = useCartStore();
     flex-direction: column;
     align-items: center;
     position: sticky;
-    bottom: 1rem;
+    top: 1rem;
+    padding: 1rem;;
     border-radius: 12px;
+    @include block-style;
+
+    &__header {
+      margin: 0;
+    }
 
     &__total-price {
       display: flex;

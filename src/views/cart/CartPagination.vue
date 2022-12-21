@@ -1,6 +1,6 @@
 <template>
   <div class="pagination">
-    <h3 class="pagination__header">Products in cart</h3>
+    <h3 class="pagination__header">Cart</h3>
     <div class="select-group">
       <h4 class="select-group__header">Product per page:</h4>
       <my-select

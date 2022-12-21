@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref, computed } from 'vue';
+import { ref, computed, watch, onBeforeMount } from 'vue';
 import { IProduct, ICartProduct } from '@/services//model/product';
 import { Promos } from '@/services/model/constants/cart';
 
@@ -27,8 +27,8 @@ export const useCartStore = defineStore('cartStore', () => {
         return this.count * this.price;
       },
       get fixPrice() {
-        return this.countPrice * (1 - this.discountPercentage / 100)
-      }
+        return this.countPrice * (1 - this.discountPercentage / 100);
+      },
     },
     {
       id: '2',
@@ -47,8 +47,8 @@ export const useCartStore = defineStore('cartStore', () => {
         return this.count * this.price;
       },
       get fixPrice() {
-        return this.countPrice * (1 - this.discountPercentage / 100)
-      }
+        return this.countPrice * (1 - this.discountPercentage / 100);
+      },
     },
     {
       id: '3',
@@ -67,11 +67,11 @@ export const useCartStore = defineStore('cartStore', () => {
         return this.count * this.price;
       },
       get fixPrice() {
-        return this.countPrice * (1 - this.discountPercentage / 100)
-      }
+        return this.countPrice * (1 - this.discountPercentage / 100);
+      },
     },
     {
-      id: '3',
+      id: '4',
       title: 'iphone 11',
       category: 'phones',
       brand: 'iphone',
@@ -87,11 +87,11 @@ export const useCartStore = defineStore('cartStore', () => {
         return this.count * this.price;
       },
       get fixPrice() {
-        return this.countPrice * (1 - this.discountPercentage / 100)
-      }
+        return this.countPrice * (1 - this.discountPercentage / 100);
+      },
     },
     {
-      id: '3',
+      id: '5',
       title: 'iphone 11',
       category: 'phones',
       brand: 'iphone',
@@ -107,8 +107,8 @@ export const useCartStore = defineStore('cartStore', () => {
         return this.count * this.price;
       },
       get fixPrice() {
-        return this.countPrice * (1 - this.discountPercentage / 100)
-      }
+        return this.countPrice * (1 - this.discountPercentage / 100);
+      },
     },
   ]);
   const promo = ref('');
@@ -124,10 +124,10 @@ export const useCartStore = defineStore('cartStore', () => {
     });
     if (isMatch) {
       isDiscounted.value = true;
-      return (totalPrice.value * Promos[isMatch])
+      return totalPrice.value * Promos[isMatch];
     } else {
       isDiscounted.value = false;
-      return totalPrice.value
+      return totalPrice.value;
     }
   });
 
@@ -170,8 +170,8 @@ export const useCartStore = defineStore('cartStore', () => {
         return this.count * this.price;
       },
       get fixPrice() {
-        return this.countPrice * (1 - this.discountPercentage / 100)
-      }
+        return this.countPrice * (1 - this.discountPercentage / 100);
+      },
     };
     cart.value.push(cartProduct);
   };
@@ -211,6 +211,38 @@ export const useCartStore = defineStore('cartStore', () => {
       currProduct.count = valNumber;
     }
   };
+
+  watch(
+    () => cart,
+    (newCart) => {
+      const cartToLocal: string = JSON.stringify(newCart.value);
+      localStorage.setItem('RSOnlineStore-cart', cartToLocal);
+    },
+    { deep: true },
+  );
+
+  onBeforeMount(() => {
+    const cartLocalStorage: string | null = localStorage.getItem('RSOnlineStore-cart');
+    if (cartLocalStorage) {
+      cart.value = [];
+      const newCart: ICartProduct[] = JSON.parse(cartLocalStorage);
+      newCart.forEach((product) => {
+        Object.defineProperties(product, {
+          countPrice: {
+            get: function () {
+              return this.count * this.price;
+            },
+          },
+          fixPrice: {
+            get: function () {
+              return this.countPrice * (1 - this.discountPercentage / 100);
+            },
+          },
+        });
+      });
+      cart.value = newCart;
+    }
+  });
 
   return {
     cart,

@@ -10,15 +10,15 @@
       <h4 class="select-group__header">Product per page:</h4>
       <my-select
         class="select-group__select"
-        :limit="cartStore.limit"
-        :maxLimit="cartStore.maxLimit"
+        :limit="paginationStore.limit"
+        :maxLimit="paginationStore.maxLimit"
         @update="updateSelect"
       ></my-select>
     </div>
     <div class="pages">
       <my-button
-      :class="{pages__page: page !== cartStore.page}"
-      v-for="page in cartStore.totalPage"
+      :class="{pages__page: page !== paginationStore.page}"
+      v-for="page in paginationStore.totalPage"
       :key="page" @click="changePage(page)">
         {{ page }}
       </my-button>
@@ -27,14 +27,17 @@
 </template>
 
 <script lang="ts" setup>
+import { usePaginationStore } from '@/store';
 import { useCartStore } from '@/store';
 
+const paginationStore = usePaginationStore();
 const cartStore = useCartStore();
+
 const changePage = (currPage: number): void => {
-  cartStore.page = currPage;
+  paginationStore.page = currPage;
 };
 const updateSelect = (value: number) => {
-  cartStore.limit = value;
+  paginationStore.limit = value;
 };
 </script>
 <style lang="scss" scoped>

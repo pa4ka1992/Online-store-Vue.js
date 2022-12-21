@@ -15,9 +15,8 @@ import ProductCountInfo from '@/views/cart/product/ProductCountInfo.vue';
 import ProductPrice from '@/views/cart/product/ProductPrice.vue';
 
 const props = defineProps<{
-  product: Required<ICartProduct>;
+  product: ICartProduct;
 }>();
-
 const { images } = toRefs(props.product);
 </script>
 

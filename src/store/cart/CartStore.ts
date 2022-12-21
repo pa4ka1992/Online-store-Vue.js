@@ -30,91 +30,8 @@ export const useCartStore = defineStore('cartStore', () => {
         return this.countPrice * (1 - this.discountPercentage / 100);
       },
     },
-    {
-      id: '2',
-      title: 'iphone 10',
-      category: 'phones',
-      brand: 'iphone',
-      discountPercentage: 0,
-      description: '123123123',
-      price: 1000,
-      rating: 4.5,
-      thumbnail: '',
-      images: ['https://live.staticflickr.com//65535//49298804222_474cfe8682.jpg'],
-      stock: 23,
-      count: 2,
-      get countPrice() {
-        return this.count * this.price;
-      },
-      get fixPrice() {
-        return this.countPrice * (1 - this.discountPercentage / 100);
-      },
-    },
-    {
-      id: '3',
-      title: 'iphone 11',
-      category: 'phones',
-      brand: 'iphone',
-      discountPercentage: 20,
-      description: '123123123',
-      price: 1000,
-      rating: 4.5,
-      thumbnail: '',
-      images: ['https://live.staticflickr.com//65535//49298804222_474cfe8682.jpg'],
-      stock: 23,
-      count: 2,
-      get countPrice() {
-        return this.count * this.price;
-      },
-      get fixPrice() {
-        return this.countPrice * (1 - this.discountPercentage / 100);
-      },
-    },
-    {
-      id: '4',
-      title: 'iphone 11',
-      category: 'phones',
-      brand: 'iphone',
-      discountPercentage: 20,
-      description: '123123123',
-      price: 1000,
-      rating: 4.5,
-      thumbnail: '',
-      images: ['https://live.staticflickr.com//65535//49298804222_474cfe8682.jpg'],
-      stock: 23,
-      count: 2,
-      get countPrice() {
-        return this.count * this.price;
-      },
-      get fixPrice() {
-        return this.countPrice * (1 - this.discountPercentage / 100);
-      },
-    },
-    {
-      id: '5',
-      title: 'iphone 11',
-      category: 'phones',
-      brand: 'iphone',
-      discountPercentage: 20,
-      description: '123123123',
-      price: 1000,
-      rating: 4.5,
-      thumbnail: '',
-      images: ['https://live.staticflickr.com//65535//49298804222_474cfe8682.jpg'],
-      stock: 23,
-      count: 2,
-      get countPrice() {
-        return this.count * this.price;
-      },
-      get fixPrice() {
-        return this.countPrice * (1 - this.discountPercentage / 100);
-      },
-    },
   ]);
   const promo = ref('');
-  const page = ref(1);
-  const limit = ref(10);
-  const maxLimit = 10;
   const isDiscounted = ref(false);
 
   const getPromoPrice = computed((): number => {
@@ -141,19 +58,6 @@ export const useCartStore = defineStore('cartStore', () => {
     return cart.value.reduce((totalCount, product) => {
       return totalCount + product.count;
     }, 0);
-  });
-
-  const totalPage = computed((): number => {
-    if (!limit.value) return 1;
-    if (!cart.value || Number.isNaN(cart.value.length) || Number.isNaN(limit.value) || limit.value <= 0) {
-      return 1;
-    }
-    const pages: number = Math.ceil(cart.value.length / limit.value);
-    return pages > 1 ? pages : 1;
-  });
-
-  const pageProducts = computed((): ICartProduct[] => {
-    return cart.value.slice(limit.value * (page.value - 1), limit.value * page.value);
   });
 
   const findProduct: findFunc = (incomeProduct) => {
@@ -212,10 +116,6 @@ export const useCartStore = defineStore('cartStore', () => {
     }
   };
 
-  watch(totalPage, () => {
-    page.value = 1;
-  });
-
   watch(
     () => cart,
     (newCart) => {
@@ -252,13 +152,8 @@ export const useCartStore = defineStore('cartStore', () => {
     cart,
     totalPrice,
     totalProducts,
-    pageProducts,
     promo,
     isDiscounted,
-    page,
-    totalPage,
-    limit,
-    maxLimit,
     addProduct,
     deleteProduct,
     incrementCount,

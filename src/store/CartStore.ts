@@ -212,6 +212,10 @@ export const useCartStore = defineStore('cartStore', () => {
     }
   };
 
+  watch(totalPage, () => {
+    page.value = 1;
+  });
+
   watch(
     () => cart,
     (newCart) => {

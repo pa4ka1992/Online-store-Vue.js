@@ -30,6 +30,7 @@
         "import/no-extraneous-dependencies": "off",
         "@typescript-eslint/no-explicit-any": "error",
         "vue/require-default-props": 0,
-        "vue/component-definition-name-casing": "off"
+        "vue/component-definition-name-casing": "off",
+        "vue/attribute-hyphenation": "off"
     }
 }

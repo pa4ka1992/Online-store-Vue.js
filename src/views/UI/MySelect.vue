@@ -1,6 +1,6 @@
 <template>
-  <select class="select" :value="modelValue" @change="changeOption">
-    <option class="option" v-for="option in options" :key="option" :value="option">{{ option }}</option>
+  <select class="select" :value="limit" @change="changeOption">
+    <option class="option" v-for="option in maxLimit" :key="option" :value="option">{{ option }}</option>
   </select>
 </template>
 <script lang="ts">
@@ -9,9 +9,11 @@ export default {
 };
 </script>
 <script lang="ts" setup>
+import { Ref } from 'vue';
+
 const props = defineProps<{
-  modelValue: Required<number>;
-  options: Required<number>;
+  limit: Ref<number>
+  maxLimit: number 
 }>();
 const emit = defineEmits(['update']);
 const changeOption = ({ target }: Event): void => {

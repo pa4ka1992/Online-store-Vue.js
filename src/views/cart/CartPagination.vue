@@ -10,8 +10,8 @@
       <h4 class="select-group__header">Product per page:</h4>
       <my-select
         class="select-group__select"
-        :value="cartStore.limit"
-        :options="cartStore.maxLimit"
+        :limit="cartStore.limit"
+        :maxLimit="cartStore.maxLimit"
         @update="updateSelect"
       ></my-select>
     </div>

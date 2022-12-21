@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref, computed, watch, onBeforeMount } from 'vue';
 import { IProduct, ICartProduct } from '@/services//model/product';
-import { Promos } from '@/services/model/constants/cart';
 
 type productFunc = (product: ICartProduct) => void;
 type findFunc = (product: ICartProduct) => ICartProduct | undefined;
@@ -31,28 +30,6 @@ export const useCartStore = defineStore('cartStore', () => {
       },
     },
   ]);
-  const promo = ref('');
-  const isDiscounted = ref(false);
-
-  const getPromoPrice = computed((): number => {
-    const keys = <(keyof typeof Promos)[]>Object.keys(Promos);
-    const isMatch: keyof typeof Promos | undefined = keys.find((key) => {
-      return key === promo.value;
-    });
-    if (isMatch) {
-      isDiscounted.value = true;
-      return totalPrice.value * Promos[isMatch];
-    } else {
-      isDiscounted.value = false;
-      return totalPrice.value;
-    }
-  });
-
-  const totalPrice = computed((): number => {
-    return cart.value.reduce((totalSum, product) => {
-      return totalSum + product.price * product.count;
-    }, 0);
-  });
 
   const totalProducts = computed((): number => {
     return cart.value.reduce((totalCount, product) => {
@@ -150,15 +127,11 @@ export const useCartStore = defineStore('cartStore', () => {
 
   return {
     cart,
-    totalPrice,
     totalProducts,
-    promo,
-    isDiscounted,
     addProduct,
     deleteProduct,
     incrementCount,
     decrementCount,
     updateCount,
-    getPromoPrice,
   };
 });

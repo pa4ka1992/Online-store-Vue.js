@@ -3,21 +3,21 @@
     <div class="summary">
       <div class="summary__total-price">
         <span class="summary__total-price--header">Total</span>
-        <span class="summary__total-price--total">{{ cartStore.getPromoPrice.toFixed(2) }} $</span>
+        <span class="summary__total-price--total">{{ promoStore.getPromoPrice.toFixed(2) }} $</span>
       </div>
       <div class="summary__total-products">
         <span class="summary__total-products--count">Products, {{ cartStore.totalProducts }}pc. </span>
-        <span class="summary__total-products--price">{{ cartStore.totalPrice.toFixed(2) }} $</span>
+        <span class="summary__total-products--price">{{ promoStore.totalPrice.toFixed(2) }} $</span>
       </div>
-      <div class="summary__discount" v-show="cartStore.isDiscounted">
+      <div class="summary__discount" v-show="promoStore.isDiscounted">
         <span class="summary__discount--header">Discount</span>
         <span class="summary__discount--value"
-          >{{ -(cartStore.totalPrice - cartStore.getPromoPrice).toFixed(2) }} $</span
+          >{{ -(promoStore.totalPrice - promoStore.getPromoPrice).toFixed(2) }} $</span
         >
       </div>
       <div class="summary__promo">
         <h4 class="summary__promo--header">Enter your promocode:</h4>
-        <input type="text" placeholder="promocode" class="summary__promo--input" v-model="cartStore.promo" />
+        <input type="text" placeholder="promocode" class="summary__promo--input" v-model="promoStore.promo" />
       </div>
       <my-button class="summary__buy">Buy now</my-button>
     </div>
@@ -25,9 +25,11 @@
 </template>
 
 <script lang="ts" setup>
+import { usePromoStore } from '@/store';
 import { useCartStore } from '@/store';
 
 const cartStore = useCartStore();
+const promoStore = usePromoStore();
 </script>
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';

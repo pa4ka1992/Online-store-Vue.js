@@ -124,10 +124,10 @@ export const useCartStore = defineStore('cartStore', () => {
     });
     if (isMatch) {
       isDiscounted.value = true;
-      return totalPrice.value * Promos[isMatch];
+      return (totalPrice.value * Promos[isMatch])
     } else {
       isDiscounted.value = false;
-      return totalPrice.value;
+      return totalPrice.value
     }
   });
 

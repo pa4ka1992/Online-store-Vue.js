@@ -15,10 +15,22 @@ export default {
   flex-grow: 0;
   display: inline-block;
   padding: 0.5rem 1rem;
-
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: $light;
   background-color: $primary;
   border: none {
     radius: 5px;
+  }
+  cursor: pointer;
+  transition: transform .3s, background-color .2s;
+
+  &:hover {
+    background-color: $primary-darker;
+  }
+
+  &:active {
+    transform: scale(0.99);
   }
 }
 </style>

@@ -1,11 +1,10 @@
-import { defineStore } from 'pinia';
+import { defineStore, storeToRefs } from 'pinia';
 import { useCartStore } from './CartStore';
 import { ref, computed, watch } from 'vue';
 import { ICartProduct } from '@/services//model/product';
 
 export const usePaginationStore = defineStore('paginationStore', () => {
-  const cartStore = useCartStore();
-  const cart = ref(cartStore.cart);
+  const { cart } = storeToRefs(useCartStore())
   const page = ref(1);
   const limit = ref(10);
   const maxLimit = 10;

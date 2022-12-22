@@ -1,12 +1,10 @@
-import { defineStore } from 'pinia';
+import { defineStore, storeToRefs } from 'pinia';
 import { useCartStore } from './CartStore';
 import { ref, computed } from 'vue';
 import { Promos } from '@/services/model/constants/cart';
 
 export const usePromoStore = defineStore('promoStore', () => {
-  const cartStore = useCartStore();
-  const cart = ref(cartStore.cart);
-
+  const { cart } = storeToRefs(useCartStore())
   const promo = ref('');
   const isDiscounted = ref(false);
 

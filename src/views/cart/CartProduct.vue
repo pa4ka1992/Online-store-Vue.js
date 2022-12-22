@@ -1,10 +1,11 @@
 <template>
-  <div class="product">
+  <li class="product">
+    <slot></slot>
     <img class="product__image" :src="images[0]" alt="product" />
     <product-info :product="product" />
     <product-count-info :product="product" />
     <product-price :product="product" />
-  </div>
+  </li>
 </template>
 
 <script lang="ts" setup>
@@ -24,7 +25,7 @@ const { images } = toRefs(props.product);
 @import '@/assets/scss/index.scss';
 .product {
   display: grid;
-  grid-template-columns: 1fr 3fr 1.5fr 0.8fr;
+  grid-template-columns: 0.2fr 1fr 3fr 1.5fr 0.8fr;
   place-items: center center;
   gap: 0.5rem;
   padding: 1rem 0;

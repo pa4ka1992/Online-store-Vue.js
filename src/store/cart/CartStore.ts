@@ -29,6 +29,90 @@ export const useCartStore = defineStore('cartStore', () => {
         return this.countPrice * (1 - this.discountPercentage / 100);
       },
     },
+    {
+      id: '2',
+      title: 'iphone 9',
+      category: 'phones',
+      brand: 'iphone',
+      discountPercentage: 12,
+      description:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Loralso the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+      price: 1200,
+      rating: 4.5,
+      thumbnail: '',
+      images: ['https://live.staticflickr.com//65535//49298804222_474cfe8682.jpg'],
+      stock: 23,
+      count: 2,
+      get countPrice() {
+        return this.count * this.price;
+      },
+      get fixPrice() {
+        return this.countPrice * (1 - this.discountPercentage / 100);
+      },
+    },
+    {
+      id: '3',
+      title: 'iphone 9',
+      category: 'phones',
+      brand: 'iphone',
+      discountPercentage: 12,
+      description:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Loralso the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+      price: 1200,
+      rating: 4.5,
+      thumbnail: '',
+      images: ['https://live.staticflickr.com//65535//49298804222_474cfe8682.jpg'],
+      stock: 23,
+      count: 2,
+      get countPrice() {
+        return this.count * this.price;
+      },
+      get fixPrice() {
+        return this.countPrice * (1 - this.discountPercentage / 100);
+      },
+    },
+    {
+      id: '4',
+      title: 'iphone 9',
+      category: 'phones',
+      brand: 'iphone',
+      discountPercentage: 12,
+      description:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Loralso the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+      price: 1200,
+      rating: 4.5,
+      thumbnail: '',
+      images: ['https://live.staticflickr.com//65535//49298804222_474cfe8682.jpg'],
+      stock: 23,
+      count: 2,
+      get countPrice() {
+        return this.count * this.price;
+      },
+      get fixPrice() {
+        return this.countPrice * (1 - this.discountPercentage / 100);
+      },
+    },
+    {
+      id: '5',
+      title: 'iphone 9',
+      category: 'phones',
+      brand: 'iphone',
+      discountPercentage: 12,
+      description:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Loralso the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+      price: 1200,
+      rating: 4.5,
+      thumbnail: '',
+      images: ['https://live.staticflickr.com//65535//49298804222_474cfe8682.jpg'],
+      stock: 23,
+      count: 2,
+      get countPrice() {
+        return this.count * this.price;
+      },
+      get fixPrice() {
+        return this.countPrice * (1 - this.discountPercentage / 100);
+      },
+    },
   ]);
 
   const totalProducts = computed((): number => {

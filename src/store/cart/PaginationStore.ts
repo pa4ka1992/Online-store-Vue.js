@@ -19,9 +19,14 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     return pages > 1 ? pages : 1;
   });
 
+  const startIndex = computed((): number => {
+    return (limit.value * (page.value - 1)) + 1;
+  })
+
   const pageProducts = computed((): ICartProduct[] => {
     return cart.value.slice(limit.value * (page.value - 1), limit.value * page.value);
   });
+
  
   watch(totalPage, () => {
     page.value = 1;
@@ -33,5 +38,6 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     totalPage,
     limit,
     maxLimit,
+    startIndex,
   };
 });

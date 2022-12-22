@@ -1,5 +1,5 @@
 <template>
-  <div class="pagination">
+  <section class="pagination">
     <h3 class="pagination__header">
       Cart
       <span class="pagination__total-products">
@@ -17,13 +17,13 @@
     </div>
     <div class="pages">
       <my-button
-      :class="{pages__page: page !== page}"
+      :class="{pages__page: cyclePage !== page}"
       v-for="cyclePage in paginationStore.totalPage"
       :key="cyclePage" @click="changePage(cyclePage)">
         {{ cyclePage }}
       </my-button>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts" setup>

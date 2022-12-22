@@ -1,7 +1,7 @@
 <template>
   <div class="product__price">
     <div class="product__price--full" :class="{ crossed: product['discountPercentage'] }">{{ countPrice }} $</div>
-    <div v-if="discountPercentage" class="product__price--discount">Discount: {{ discountPercentage }}%</div>
+    <div v-if="discountPercentage" class="product__price--discount">Sale: {{ discountPercentage }}%</div>
     <div v-if="discountPercentage" class="product__price--final">{{ fixPrice }} $</div>
   </div>
 </template>

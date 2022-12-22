@@ -3,14 +3,13 @@
       <section class="cart-info">
         <cart-pagination />
         <div class="products-in-cart">
-          <ul class="products">
+          <div class="products">
             <cart-product
-            v-for="(product, index) in paginationStore.pageProducts"
+            v-for="product in paginationStore.pageProducts"
             :product="product"
-            :index="index"
             :key="product.id"
-             ><span>{{ index + paginationStore.startIndex }}</span></cart-product>
-          </ul>
+             />
+          </div>
         </div>
       </section>
       <cart-summary />
@@ -21,9 +20,9 @@
 <script lang="ts" setup>
 import { useCartStore } from '@/store';
 import { usePaginationStore } from '@/store';
-import CartPagination from '@/views/cart/CartPagination.vue';
-import CartProduct from '@/views/cart/CartProduct.vue';
-import CartSummary from '@/views/cart/CartSummary.vue';
+import CartPagination from '@/components/cart/CartPagination.vue';
+import CartProduct from '@/components/cart/CartProduct.vue';
+import CartSummary from '@/components/cart/CartSummary.vue';
 
 const cartStore = useCartStore();
 const paginationStore = usePaginationStore();
@@ -53,8 +52,6 @@ const paginationStore = usePaginationStore();
     flex-direction: column;
     align-self: center;
     gap: 0.5rem;
-    padding-left: 0;
-    list-style-type: none;
   }
 }
 </style>

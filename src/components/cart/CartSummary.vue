@@ -9,7 +9,7 @@
         <span class="summary__total-products--count">Products, {{ cartStore.totalProducts }}pc. </span>
         <span class="summary__total-products--price">{{ promoStore.totalPrice.toFixed(2) }} $</span>
       </div>
-      <div class="summary__discount" v-show="isDiscounted">
+      <div class="summary__discount" v-show="promoStore.isDiscounted">
         <span class="summary__discount--header">Discount</span>
         <span class="summary__discount--value"
           >{{ -(promoStore.totalPrice - promoStore.getPromoPrice).toFixed(2) }} $</span
@@ -17,7 +17,7 @@
       </div>
       <div class="summary__promo">
         <h4 class="summary__promo--header">Enter your promocode:</h4>
-        <input type="text" placeholder="promocode" class="summary__promo--input" v-model="promo" />
+        <input type="text" placeholder="promocode" class="summary__promo--input" v-model="promoStore.promo" />
       </div>
       <my-button class="summary__buy">Buy now</my-button>
     </div>
@@ -27,14 +27,9 @@
 <script lang="ts" setup>
 import { usePromoStore } from '@/store';
 import { useCartStore } from '@/store';
-import { storeToRefs } from 'pinia';
 
-  const cartStore = useCartStore();
-  const promoStore = usePromoStore();
-  const { isDiscounted, promo } = storeToRefs(promoStore)
-
-// const cartStore = useCartStore();
-// const promoStore = usePromoStore();
+const cartStore = useCartStore();
+const promoStore = usePromoStore();
 </script>
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';

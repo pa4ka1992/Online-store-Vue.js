@@ -8,7 +8,7 @@
 
 <script lang="ts" setup>
 import { toRefs } from 'vue';
-import { ICartProduct } from '@/services/model/product';
+import { ICartProduct } from '@/services/model/types/cart';
 
 const props = defineProps<{
   product: Required<ICartProduct>;

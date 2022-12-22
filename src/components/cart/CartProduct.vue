@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 import { toRefs } from 'vue';
-import { ICartProduct } from '@/services/model/product';
+import { ICartProduct } from '@/services/model/types/cart';
 import ProductInfo from '@/components/cart/product/ProductInfo.vue';
 import ProductCountInfo from '@/components/cart/product/ProductCountInfo.vue';
 import ProductPrice from '@/components/cart/product/ProductPrice.vue';

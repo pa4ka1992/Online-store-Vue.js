@@ -28,7 +28,7 @@
 <script lang="ts" setup>
 import { ref, toRefs } from 'vue';
 import { useCartStore } from '@/store';
-import { ICartProduct } from '@/services/model/product';
+import { ICartProduct } from '@/services/model/types/cart';
 
 const props = defineProps<{
   product: Required<ICartProduct>;

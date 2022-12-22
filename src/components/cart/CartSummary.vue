@@ -6,7 +6,7 @@
         <span class="summary__total-price--total">{{ promoStore.getPromoPrice.toFixed(2) }} $</span>
       </div>
       <div class="summary__promo-list">
-
+        <span></span>
 
       </div>
       <div class="summary__total-products">

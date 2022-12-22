@@ -11,9 +11,3 @@ export interface IProduct {
   images: string[];
   stock: number;
 }
-
-export interface ICartProduct extends IProduct {
-  count: number;
-  get countPrice(): number;
-  get fixPrice(): number;
-}

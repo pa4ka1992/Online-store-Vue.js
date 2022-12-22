@@ -1,7 +1,7 @@
 import { defineStore, storeToRefs } from 'pinia';
 import { useCartStore } from './CartStore';
 import { ref, computed, watch } from 'vue';
-import { ICartProduct } from '@/services//model/product';
+import { ICartProduct } from '@/services/model/types/cart';
 
 export const usePaginationStore = defineStore('paginationStore', () => {
   const { cart } = storeToRefs(useCartStore())

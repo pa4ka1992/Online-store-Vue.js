@@ -1,10 +1,9 @@
 import { defineStore } from 'pinia';
 import { ref, computed, watch, onBeforeMount } from 'vue';
-import { IProduct, ICartProduct } from '@/services//model/product';
+import { IProduct } from '@/services//model/product';
+import { ICartProduct } from '@/services//model/types/cart';
+import {TProductFunc, TFindFunc, TCurrProd} from '@/services/model/types/cart'
 
-type productFunc = (product: ICartProduct) => void;
-type findFunc = (product: ICartProduct) => ICartProduct | undefined;
-type currProd = ReturnType<findFunc>;
 
 export const useCartStore = defineStore('cartStore', () => {
   const cart = ref<ICartProduct[]>([
@@ -121,7 +120,7 @@ export const useCartStore = defineStore('cartStore', () => {
     }, 0);
   });
 
-  const findProduct: findFunc = (incomeProduct) => {
+  const findProduct: TFindFunc = (incomeProduct) => {
     return cart.value.find((product) => {
       return product.id === incomeProduct.id;
     });
@@ -145,13 +144,13 @@ export const useCartStore = defineStore('cartStore', () => {
     cart.value = cart.value.filter((prod) => incomeProduct.id !== prod.id);
   };
 
-  const incrementCount: productFunc = (incomeProduct) => {
-    const currProduct: currProd = findProduct(incomeProduct);
+  const incrementCount: TProductFunc = (incomeProduct) => {
+    const currProduct: TCurrProd = findProduct(incomeProduct);
     if (currProduct) currProduct.count += 1;
   };
 
-  const decrementCount: productFunc = (incomeProduct) => {
-    const currProduct: currProd = findProduct(incomeProduct);
+  const decrementCount: TProductFunc = (incomeProduct) => {
+    const currProduct: TCurrProd = findProduct(incomeProduct);
     if (currProduct) {
       if (currProduct.count < 2) {
         cart.value = cart.value.filter((prod) => incomeProduct.id !== prod.id);
@@ -162,7 +161,7 @@ export const useCartStore = defineStore('cartStore', () => {
   };
 
   const updateCount = (val: string, incomeProduct: ICartProduct) => {
-    const currProduct: currProd = findProduct(incomeProduct);
+    const currProduct: TCurrProd = findProduct(incomeProduct);
     const valNumber = Number(val);
     if (currProduct) {
       if (valNumber > currProduct.stock) {

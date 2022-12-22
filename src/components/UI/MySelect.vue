@@ -37,6 +37,7 @@ const changeOption = ({ target }: Event): void => {
   transition: all 0.2s;
 
   &:focus-visible {
+    transform: scale(1.05);
     outline-color: $primary;
   }
 }

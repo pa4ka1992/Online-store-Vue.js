@@ -1,5 +1,5 @@
 <template>
-  <div class="pagination">
+  <section class="pagination">
     <h3 class="pagination__header">
       Cart
       <span class="pagination__total-products">
@@ -10,28 +10,31 @@
       <h4 class="select-group__header">Product per page:</h4>
       <my-select
         class="select-group__select"
-        :limit="paginationStore.limit"
-        :maxLimit="paginationStore.maxLimit"
+        :limit="limit"
+        :maxLimit="maxLimit"
         @update="updateSelect"
       ></my-select>
     </div>
     <div class="pages">
       <my-button
-      :class="{pages__page: page !== paginationStore.page}"
-      v-for="page in paginationStore.totalPage"
-      :key="page" @click="changePage(page)">
-        {{ page }}
+      :class="{pages__page: cyclePage !== page}"
+      v-for="cyclePage in paginationStore.totalPage"
+      :key="cyclePage" @click="changePage(cyclePage)">
+        {{ cyclePage }}
       </my-button>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts" setup>
 import { usePaginationStore } from '@/store';
 import { useCartStore } from '@/store';
+import { storeToRefs } from 'pinia';
 
 const paginationStore = usePaginationStore();
 const cartStore = useCartStore();
+const { limit, page } = storeToRefs(paginationStore)
+const {  maxLimit } = paginationStore;
 
 const changePage = (currPage: number): void => {
   paginationStore.page = currPage;

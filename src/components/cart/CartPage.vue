@@ -1,18 +1,20 @@
 <template>
   <section class="cart container" v-if="cartStore.cart.length > 0">
-      <section class="cart-info">
-        <cart-pagination />
-        <div class="products-in-cart">
-          <div class="products">
-            <cart-product
-            v-for="product in paginationStore.pageProducts"
+    <section class="cart-info">
+      <cart-pagination />
+      <div class="products-in-cart">
+        <ul class="products">
+          <cart-product
+            v-for="(product, index) in paginationStore.pageProducts"
             :product="product"
+            :index="index"
             :key="product.id"
-             />
-          </div>
-        </div>
-      </section>
-      <cart-summary />
+            ><span>{{ index + paginationStore.startIndex }}</span>
+          </cart-product>
+        </ul>
+      </div>
+    </section>
+    <cart-summary />
   </section>
   <h3 class="empty" v-else>Cart is empty</h3>
 </template>
@@ -52,6 +54,8 @@ const paginationStore = usePaginationStore();
     flex-direction: column;
     align-self: center;
     gap: 0.5rem;
+    padding-left: 0;
+    list-style-type: none;
   }
 }
 </style>

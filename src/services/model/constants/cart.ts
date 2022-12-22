@@ -1,5 +1,5 @@
 export const Promos = [
-  { value: 0.2, name: 'RS-school', promo: 'rs-school' },
-  { value: 0.3, name: 'Gachi', promo: 'gachi' },
-  { value: 0.1, name: 'Billy', promo: '300bucks' },
+  { id: 1, value: 0.2, title: 'RS-school', name: 'rs-school' },
+  { id: 2, value: 0.3, title: 'Gachi', name: 'gachi' },
+  { id: 3, value: 0.1, title: 'Billy', name: '300bucks' },
 ]

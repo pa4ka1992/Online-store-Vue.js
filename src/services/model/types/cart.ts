@@ -7,12 +7,13 @@ export interface ICartProduct extends IProduct {
   get fixPrice(): number;
 }
 
+export type TFindFunc<T> = (product: T) => T | undefined;
 export type TProductFunc = (product: ICartProduct) => void;
-export type TFindFunc = (product: ICartProduct) => ICartProduct | undefined;
-export type TCurrProd = ReturnType<TFindFunc>;
+export type TCurrProd = ReturnType<TFindFunc<ICartProduct>>;
 
 export type TPromo = {
+  id: number
   value: number
   name: string
-  promo: string
+  title: string
 }

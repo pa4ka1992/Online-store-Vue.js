@@ -1,10 +1,10 @@
 import { defineStore, storeToRefs } from 'pinia';
 import { useCartStore } from './CartStore';
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onBeforeMount } from 'vue';
 import { ICartProduct } from '@/services/model/types/cart';
 
 export const usePaginationStore = defineStore('paginationStore', () => {
-  const { cart } = storeToRefs(useCartStore())
+  const { cart } = storeToRefs(useCartStore());
   const page = ref(1);
   const limit = ref(10);
   const maxLimit = 10;
@@ -20,16 +20,27 @@ export const usePaginationStore = defineStore('paginationStore', () => {
   });
 
   const startIndex = computed((): number => {
-    return (limit.value * (page.value - 1)) + 1;
-  })
+    return limit.value * (page.value - 1) + 1;
+  });
 
   const pageProducts = computed((): ICartProduct[] => {
     return cart.value.slice(limit.value * (page.value - 1), limit.value * page.value);
   });
 
- 
-  watch(totalPage, () => {
-    page.value = 1;
+  // watch(totalPage, () => {
+  //   page.value = 1;
+  // });
+
+  watch([page, limit], ([newPage, newLimit]) => {
+    localStorage.setItem('RSOnlineStore-cart-page', `${newPage}`);
+    localStorage.setItem('RSOnlineStore-cart-limit', `${newLimit}`);
+  });
+
+  onBeforeMount(() => {
+    const pageLocalStorage: string | null = localStorage.getItem('RSOnlineStore-cart-page');
+    const limitLocalStorage: string | null = localStorage.getItem('RSOnlineStore-cart-limit');
+    if (pageLocalStorage) page.value = Number(pageLocalStorage);
+    if (limitLocalStorage) limit.value = Number(limitLocalStorage);
   });
 
   return {

@@ -81,6 +81,7 @@ const updateSelect = (value: number) => {
   .pages {
     justify-self: end;
     display: flex;
+    gap: 0.1rem;
 
     &__page {
       color: $dark;

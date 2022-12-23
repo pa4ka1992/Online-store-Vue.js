@@ -17,7 +17,7 @@ const props = defineProps<{
 }>();
 const emit = defineEmits(['update']);
 const changeOption = ({ target }: Event): void => {
-  emit('update', (target as HTMLOptionElement).value);
+  emit('update', Number((target as HTMLOptionElement).value));
 };
 </script>
 <style lang="scss">

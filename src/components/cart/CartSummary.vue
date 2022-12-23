@@ -3,15 +3,21 @@
     <div class="summary">
       <div class="summary__total-price">
         <span class="summary__total-price--header">Total</span>
-        <span class="summary__total-price--total">{{ promoStore.getPromoPrice.toFixed(2) }} $</span>
+        <span class="summary__total-price--total" :class="{ crossed: promoStore.isDiscounted }"
+          >{{ promoStore.totalPrice.toFixed(2) }} $</span
+        >
+        <span v-if="promoStore.isDiscounted" class="summary__total-price--fixed"
+          >{{ promoStore.getPromoPrice.toFixed(2) }} $</span
+        >
       </div>
       <div v-if="promoStore.isDiscounted" class="summary__promo-list">
-        <div v-for="promoCode in appliedPromos" :key="promoCode.id">
-          <span>{{ promoCode.title }}</span>
-          <span>{{ promoCode.value * 100 }}%</span>
-          <span>
-            <font-awesome-icon 
-            icon="fa-solid fa-xmark" 
+        <h4 class="summary__promo-list--header">Applied promos:</h4>
+        <div class="summary__promo-list--code" v-for="promoCode in appliedPromos" :key="promoCode.id">
+          <span class="promo__title">{{ promoCode.title }}</span>
+          <span class="promo__value">Discount: {{ promoCode.value * 100 }}%</span>
+          <span class="promo__delete">
+            <font-awesome-icon
+            icon="fa-solid fa-xmark"
             @click="promoStore.removePromo(promoCode.id)" />
           </span>
         </div>
@@ -30,7 +36,12 @@
         <h4 class="summary__promo--header">Enter your promocode:</h4>
         <div class="promo__group">
           <input type="text" placeholder="promocode" class="promo__group--input" v-model="promo" />
-          <my-button class="promo__group--apply" @click="promoStore.applyPromo">Apply</my-button>
+          <my-button 
+          :class="{ disabled: !promoStore.isMatch || promoStore.isAlreadyApplied }" 
+          class="promo__group--apply" 
+          @click="promoStore.applyPromo"
+            >Apply</my-button
+          >
         </div>
       </div>
       <my-button class="summary__buy">Buy now</my-button>
@@ -62,7 +73,39 @@ const { promo, appliedPromos } = storeToRefs(promoStore);
     border-radius: 12px;
     @include block-style;
 
-    &__total-price,
+    &__promo-list {
+      padding: 0.5rem;
+      width: 100%;
+      @include block-style;
+
+      &--header {
+        margin: 0;
+        padding-bottom: 0.5rem;
+      }
+
+      &--code {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.3rem 0;
+        border-top: 1px solid $secondary;
+
+        .promo__value {
+          color: $success;
+        }
+        .promo__delete {
+          padding: 0.1rem 0.5rem;
+          transition: all .2s;
+          
+          &:hover {
+            color: $danger;
+            cursor: pointer;
+          }
+
+        }
+      }
+    }
+
     &__total-products,
     &__discount {
       display: flex;
@@ -71,7 +114,26 @@ const { promo, appliedPromos } = storeToRefs(promoStore);
     }
 
     &__total-price {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: repeat(2, 1fr);
+      width: 100%;
       font-size: 1.3rem;
+
+      &--fixed,
+      &--total {
+        justify-self: end;
+      }
+
+      &--fixed {
+        grid-column: 2 / 3;
+      }
+
+      .crossed {
+        font-size: 1.1rem;
+        color: $danger;
+        text-decoration: line-through;
+      }
     }
 
     &__total-products,
@@ -106,6 +168,14 @@ const { promo, appliedPromos } = storeToRefs(promoStore);
             transform: scale(0.96);
             outline-color: $primary;
           }
+        }
+
+        &--apply {
+          background-color: $success;
+        }
+
+        .disabled {
+          background-color: $secondary;
         }
       }
     }

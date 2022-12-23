@@ -33,7 +33,7 @@ export default {
   }
 
   &:active {
-    transform: scale(0.99);
+    transform: scale(0.96);
   }
 }
 </style>

@@ -1,13 +1,7 @@
 <template>
   <div class="product__count-info">
-    <button
-      @click="cartStore.deleteProduct(product)"
-      @mouseover="anime = true"
-      @mouseout="anime = false"
-      class="delete"
-    >
-      <font-awesome-icon v-if="anime" icon="fa-solid fa-trash" bounce />
-      <font-awesome-icon v-else icon="fa-solid fa-trash" />
+    <button @click="cartStore.deleteProduct(product)" class="delete">
+      <font-awesome-icon icon="fa-solid fa-trash" />
     </button>
     <div class="count-info__wrapper">
       <div class="count-info__wrapper--stock">Stock: {{ stock }}pc.</div>
@@ -37,8 +31,6 @@ const props = defineProps<{
 const { price, stock, count } = toRefs(props.product);
 const cartStore = useCartStore();
 
-const anime = ref(false);
-
 const updateCount = (e: Event): void => {
   const target = e.target as HTMLOptionElement;
   const valNumber = Number(target.value);
@@ -65,6 +57,12 @@ const updateCount = (e: Event): void => {
     background-color: transparent;
     border: none;
     cursor: pointer;
+    transition: all .2s;
+
+    &:hover {
+      color: $danger;
+      transform: scale(1.2);
+    }
     .fa-trash {
       font-size: 1rem;
       // color: $danger;
@@ -118,7 +116,8 @@ const updateCount = (e: Event): void => {
       }
     }
 
-    &--single-price, &--stock {
+    &--single-price,
+    &--stock {
       color: $secondary;
     }
   }

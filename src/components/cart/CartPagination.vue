@@ -8,20 +8,32 @@
     </h3>
     <div class="select-group">
       <h4 class="select-group__header">Product per page:</h4>
-      <my-select
-        class="select-group__select"
-        :limit="limit"
-        :maxLimit="maxLimit"
-        @update="updateSelect"
-      ></my-select>
+      <my-select class="select-group__select" :limit="limit" :maxLimit="maxLimit" @update="updateSelect"></my-select>
     </div>
     <div class="pages">
-      <my-button
-      :class="{pages__page: cyclePage !== page}"
-      v-for="cyclePage in paginationStore.totalPage"
-      :key="cyclePage" @click="changePage(cyclePage)">
+      <button
+      :class="{disabled: page === 1}"
+      class="pages__arrow"
+      @click="incDecPage('dec')"
+      >
+        <font-awesome-icon icon="fa-solid fa-arrow-left" />
+      </button>
+      <button
+        class="pages__page"
+        :class="{ current: cyclePage === page }"
+        v-for="cyclePage in paginationStore.totalPage"
+        :key="cyclePage"
+        @click="changePage(cyclePage)"
+      >
         {{ cyclePage }}
-      </my-button>
+      </button>
+      <button 
+      :class="{disabled: page === paginationStore.totalPage}"
+      class="pages__arrow"
+      @click="incDecPage('inc')"
+      >
+        <font-awesome-icon icon="fa-solid fa-arrow-right" />
+      </button>
     </div>
   </section>
 </template>
@@ -33,15 +45,23 @@ import { storeToRefs } from 'pinia';
 
 const paginationStore = usePaginationStore();
 const cartStore = useCartStore();
-const { limit, page } = storeToRefs(paginationStore)
-const {  maxLimit } = paginationStore;
+const { limit, page } = storeToRefs(paginationStore);
+const { maxLimit } = paginationStore;
 
 const changePage = (currPage: number): void => {
   paginationStore.page = currPage;
 };
-const updateSelect = (value: number) => {
+const updateSelect = (value: number): void => {
   paginationStore.limit = value;
 };
+
+const incDecPage = (action: string): void => {
+  if (action === 'inc') {
+    if (page.value < paginationStore.totalPage) page.value += 1;
+  } else {
+    if (page.value > 1) page.value -= 1;
+  }
+}
 </script>
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
@@ -83,10 +103,30 @@ const updateSelect = (value: number) => {
     display: flex;
     gap: 0.1rem;
 
-    &__page {
-      color: $dark;
+    .disabled {
+      color: $secondary;
+    }
+
+    &__page, &__arrow {
+      min-width: 2rem;
+      font-size: 1.1rem;
       background-color: $light;
-      border: 1px solid $secondary;
+      border: 1px solid $secondary {
+        radius: 5px;
+      }
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        color: $light;
+        background-color: $primary;
+      }
+    }
+    .current {
+      font-weight: 600;
+      color: $light;
+      background-color: $primary-darker;
+      border: none;
     }
   }
 }

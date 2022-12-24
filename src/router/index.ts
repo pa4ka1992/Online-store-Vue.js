@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '@/views/HomePage.vue';
+import CartPage from '@/views/CartPage.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -8,6 +9,10 @@ const router = createRouter({
       path: '/',
       name: 'overview',
       component: HomePage,
+    },
+    {
+      path: '/cart',
+      component: CartPage,
     },
   ],
   strict: true,

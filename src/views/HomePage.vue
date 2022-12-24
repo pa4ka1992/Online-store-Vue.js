@@ -11,9 +11,9 @@ const right = ref(50);
 
 </script>
 
-<template> 
-
-<div> 
+<template>
+<div>
+  <router-link to="/cart">cart</router-link>
   <h1> Counter is {{store.count}}</h1>
   <button class="btn btn-primary" @click="store.increment()">Click me!</button>
   <double-range-slider :step=10 v-model:left="left" v-model:right="right"></double-range-slider>

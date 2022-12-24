@@ -1,6 +1,3 @@
-<script lang="ts" setup>
-</script>
-
 <template> 
   <main class="app-body">
     <i class="demo-icon icon-cart-no"></i>
@@ -10,6 +7,9 @@
     <RouterView/>
   </main>  
 </template>
+
+<script lang="ts" setup>
+</script>
 
 <style scoped>
 

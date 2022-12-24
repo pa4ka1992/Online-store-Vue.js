@@ -3,10 +3,11 @@ export interface IProduct {
   title: string;
   category: string;
   brand: string;
-  discountPercentage: string;
+  discountPercentage: number;
   description: string;
   price: number; // Probably can be changed in future
   thumbnail: string;
+  rating: number;
   images: string[];
   stock: number;
 }

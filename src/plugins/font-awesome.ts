@@ -15,6 +15,6 @@ import { App } from 'vue';
 export const fontAwesomePlugin = {
   install: (app: App) => {
     library.add(faStar, faMinus, faPlus, faTrash, faSpinner, faXmark, faArrowRight, faArrowLeft);
-    app.component('font-awesome-icon', FontAwesomeIcon);
+    app.component('FontAwesomeIcon', FontAwesomeIcon);
   },
 };

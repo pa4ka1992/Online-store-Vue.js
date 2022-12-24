@@ -3,11 +3,13 @@
     <option class="option" v-for="option in maxLimit" :key="option" :value="option">{{ option }}</option>
   </select>
 </template>
+
 <script lang="ts">
 export default {
-  name: 'my-select',
+  name: 'MySelect',
 };
 </script>
+
 <script lang="ts" setup>
 import { Ref } from 'vue';
 
@@ -20,6 +22,7 @@ const changeOption = ({ target }: Event): void => {
   emit('update', Number((target as HTMLOptionElement).value));
 };
 </script>
+
 <style lang="scss">
 @import '@/assets/scss/index.scss';
 

@@ -3,11 +3,13 @@
     <slot></slot>
   </button>
 </template>
+
 <script lang="ts">
 export default {
-  name: 'my-button',
+  name: 'MyButton',
 };
 </script>
+
 <style lang="scss">
 @import '@/assets/scss/index.scss';
 

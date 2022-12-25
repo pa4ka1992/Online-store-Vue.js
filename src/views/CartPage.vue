@@ -4,11 +4,7 @@
       <cart-pagination />
       <div class="products-in-cart">
         <ul class="products">
-          <cart-product
-            v-for="(product, index) in pageProducts"
-            :product="product"
-            :index="index"
-            :key="product.id"
+          <cart-product v-for="(product, index) in pageProducts" :product="product" :index="index" :key="product.id"
             ><span> {{ index + startIndex }} </span>
           </cart-product>
         </ul>
@@ -16,20 +12,25 @@
     </section>
     <cart-summary />
   </section>
-  <h3 class="empty" v-else>Cart is empty</h3>
+  <section class="empty container" v-else>
+    <h3 class="empty__header">Cart is empty</h3>
+    <p class="empty__info">Look at the main page to select products or find what you need in the search</p>
+    <my-button class="empty__go-main" @click="router.push('/')">Main</my-button>
+  </section>
   <buy-modal v-if="modalIsShow" />
 </template>
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
+import router from '@/router';
 import { useCartStore, usePaginationStore, useModalStore } from '@/store';
 import CartPagination from '@/components/cart/CartPagination.vue';
 import CartProduct from '@/components/cart/CartProduct.vue';
 import CartSummary from '@/components/cart/CartSummary.vue';
 import BuyModal from '@/components/modal/BuyModal.vue';
 
-const { pageProducts, startIndex } = storeToRefs(usePaginationStore())
-const { cart } = storeToRefs(useCartStore())
+const { pageProducts, startIndex } = storeToRefs(usePaginationStore());
+const { cart } = storeToRefs(useCartStore());
 const { modalIsShow } = storeToRefs(useModalStore());
 </script>
 
@@ -60,6 +61,13 @@ const { modalIsShow } = storeToRefs(useModalStore());
     gap: 0.5rem;
     padding-left: 0;
     list-style-type: none;
+  }
+}
+
+.empty {
+  &__info {
+    width: 30%;
+    color: $secondary;
   }
 }
 </style>

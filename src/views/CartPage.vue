@@ -1,14 +1,18 @@
 <template>
   <section class="cart container" v-if="cart.length > 0">
-    <section class="cart-info">
+    <section class="cart__info">
       <cart-pagination />
-      <div class="products-in-cart">
-        <ul class="products">
-          <cart-product v-for="(product, index) in pageProducts" :product="product" :index="index" :key="product.id"
-            ><span> {{ index + startIndex }} </span>
-          </cart-product>
-        </ul>
-      </div>
+      <transition-group class="products" name="products-anime" tag="ul">
+        <cart-product
+          class="product-anime"
+          v-for="(product, index) in pageProducts"
+          :product="product"
+          :index="index"
+          :key="product.id"
+        >
+          <span> {{ index + startIndex }} </span>
+        </cart-product>
+      </transition-group>
     </section>
     <cart-summary />
   </section>
@@ -49,7 +53,7 @@ const { modalIsShow } = storeToRefs(useModalStore());
   column-gap: 1rem;
   position: relative;
 
-  .cart-info {
+  &__info {
     padding: 1rem;
     @include block-style;
   }
@@ -59,8 +63,8 @@ const { modalIsShow } = storeToRefs(useModalStore());
     flex-direction: column;
     align-self: center;
     gap: 0.5rem;
+    position: relative;
     padding-left: 0;
-    list-style-type: none;
   }
 }
 
@@ -69,5 +73,19 @@ const { modalIsShow } = storeToRefs(useModalStore());
     width: 30%;
     color: $secondary;
   }
+}
+
+.product-anime {
+  transition: all 0.7s ease;
+}
+
+.products-anime-enter-from,
+.products-anime-leave-to {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.products-anime-leave-active {
+  position: absolute;
 }
 </style>

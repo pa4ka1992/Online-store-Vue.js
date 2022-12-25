@@ -9,7 +9,7 @@
         <button :disabled="count === 1" class="decrement" @click="cartStore.decrementCount(product)">
           <font-awesome-icon icon="fa-solid fa-minus" />
         </button>
-        <input type="number" class="count" :value="count" @input="updateCount" />
+        <input type="number" class="count" :value="count" @change="updateCount" />
         <button :disabled="count === stock" class="increment" @click="cartStore.incrementCount(product)">
           <font-awesome-icon icon="fa-solid fa-plus" />
         </button>
@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, toRefs } from 'vue';
+import { toRefs } from 'vue';
 import { useCartStore } from '@/store';
 import { ICartProduct } from '@/services/model/types/cart';
 

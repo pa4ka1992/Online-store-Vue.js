@@ -18,6 +18,7 @@ import ProductPrice from '@/components/cart/product/ProductPrice.vue';
 const props = defineProps<{
   product: ICartProduct;
 }>();
+
 const { images } = toRefs(props.product);
 </script>
 

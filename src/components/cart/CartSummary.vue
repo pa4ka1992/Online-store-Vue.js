@@ -3,43 +3,37 @@
     <div class="summary">
       <div class="summary__total-price">
         <span class="summary__total-price--header">Total</span>
-        <span class="summary__total-price--total" :class="{ crossed: promoStore.isDiscounted }"
-          >{{ promoStore.totalPrice.toFixed(2) }} $</span
+        <span class="summary__total-price--total" :class="{ crossed: isDiscounted }"
+          >{{ totalPrice.toFixed(2) }} $</span
         >
-        <span v-if="promoStore.isDiscounted" class="summary__total-price--fixed"
-          >{{ promoStore.getPromoPrice.toFixed(2) }} $</span
-        >
+        <span v-if="isDiscounted" class="summary__total-price--fixed">{{ getPromoPrice.toFixed(2) }} $</span>
       </div>
-      <div v-if="promoStore.isDiscounted" class="summary__promo-list">
+      <div v-if="isDiscounted" class="summary__promo-list">
         <h4 class="summary__promo-list--header">Applied promos:</h4>
         <div class="summary__promo-list--code" v-for="promoCode in appliedPromos" :key="promoCode.id">
           <span class="promo__title">{{ promoCode.title }}</span>
           <span class="promo__value">Discount: {{ promoCode.value * 100 }}%</span>
           <span class="promo__delete">
-            <font-awesome-icon
-            icon="fa-solid fa-xmark"
-            @click="promoStore.removePromo(promoCode.id)" />
+            <font-awesome-icon icon="fa-solid fa-xmark" @click="removePromo(promoCode.id)" />
           </span>
         </div>
       </div>
       <div class="summary__total-products">
-        <span class="summary__total-products--count">Products, {{ cartStore.totalProducts }}pc. </span>
-        <span class="summary__total-products--price">{{ promoStore.totalPrice.toFixed(2) }} $</span>
+        <span class="summary__total-products--count">Products, {{ totalProducts }}pc. </span>
+        <span class="summary__total-products--price">{{ totalPrice.toFixed(2) }} $</span>
       </div>
-      <div class="summary__discount" v-show="promoStore.isDiscounted">
+      <div class="summary__discount" v-show="isDiscounted">
         <span class="summary__discount--header">Discount</span>
-        <span class="summary__discount--value"
-          >{{ -(promoStore.totalPrice - promoStore.getPromoPrice).toFixed(2) }} $</span
-        >
+        <span class="summary__discount--value">{{ -(totalPrice - getPromoPrice).toFixed(2) }} $</span>
       </div>
       <div class="summary__promo">
         <h4 class="summary__promo--header">Enter your promocode:</h4>
         <div class="promo__group">
           <input type="text" placeholder="promocode" class="promo__group--input" v-model="promo" />
           <my-button
-          :class="{ disabled: !promoStore.isMatch || promoStore.isAlreadyApplied }"
-          class="promo__group--apply"
-          @click="promoStore.applyPromo"
+            :class="{ disabled: !isMatch || isAlreadyApplied }"
+            class="promo__group--apply"
+            @click="applyPromo"
             >Apply</my-button
           >
         </div>
@@ -53,11 +47,18 @@
 import { usePromoStore, useCartStore, useModalStore } from '@/store';
 import { storeToRefs } from 'pinia';
 
-const cartStore = useCartStore();
-const promoStore = usePromoStore();
-const modalStore = useModalStore();
-const { promo, appliedPromos } = storeToRefs(promoStore);
-const { modalIsShow } = storeToRefs(modalStore);
+const { totalProducts } = storeToRefs(useCartStore());
+const {
+    promo,
+    appliedPromos,
+    totalPrice,
+    isDiscounted,
+    getPromoPrice,
+    isMatch,
+    isAlreadyApplied
+  } = storeToRefs(usePromoStore());
+const { applyPromo, removePromo } = usePromoStore();
+const { modalIsShow } = storeToRefs(useModalStore());
 </script>
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
@@ -96,13 +97,12 @@ const { modalIsShow } = storeToRefs(modalStore);
         }
         .promo__delete {
           padding: 0.1rem 0.5rem;
-          transition: all .2s;
+          transition: all 0.2s;
 
           &:hover {
             color: $danger;
             cursor: pointer;
           }
-
         }
       }
     }

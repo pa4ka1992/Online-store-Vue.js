@@ -16,7 +16,6 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     if (!cart.value || Number.isNaN(cartLength) || Number.isNaN(limit.value) || limit.value <= 0) {
       return 1;
     }
-
     const pages: number = Math.ceil(cartLength / limit.value);
     return pages > 1 ? pages : 1;
   });
@@ -31,6 +30,10 @@ export const usePaginationStore = defineStore('paginationStore', () => {
 
   const addQueries = (): void => {
     router.replace({ query: { limit: `${limit.value}`, page: `${page.value}` } });
+  };
+
+  const updateLimit = (value: number): void => {
+    limit.value = value;
   };
 
   watch(totalPage, (newTotalPage) => {
@@ -58,5 +61,6 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     limit,
     maxLimit,
     startIndex,
+    updateLimit,
   };
 });

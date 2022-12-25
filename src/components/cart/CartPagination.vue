@@ -3,16 +3,20 @@
     <h3 class="pagination__header">
       Cart
       <span class="pagination__total-products">
-        {{ cartStore.totalProducts }}
+        {{ totalProducts }}
       </span>
     </h3>
     <div class="select-group">
       <h4 class="select-group__header">Product per page:</h4>
-      <my-select class="select-group__select" :limit="limit" :maxLimit="maxLimit" @update="updateSelect"></my-select>
+      <my-select
+      class="select-group__select"
+      :limit="limit"
+      :maxLimit="maxLimit"
+      @update="updateLimit"></my-select>
     </div>
     <my-paginate
       v-model="page"
-      :page-count="paginationStore.totalPage"
+      :page-count="totalPage"
       :prev-text="'Prev'"
       :next-text="'Next'"
       :container-class="'pages'"
@@ -30,17 +34,12 @@ import { useCartStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import Paginate from 'vuejs-paginate-next';
 
-const paginationStore = usePaginationStore();
-const cartStore = useCartStore();
-const { limit, page } = storeToRefs(paginationStore);
-const { maxLimit } = paginationStore;
+const { totalProducts } = storeToRefs(useCartStore())
+const { limit, page, totalPage } = storeToRefs(usePaginationStore());
+const { maxLimit, updateLimit } = usePaginationStore();
 const MyPaginate = Paginate;
-
-const updateSelect = (value: number): void => {
-  paginationStore.limit = value;
-};
-
 </script>
+
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
 .pagination {

@@ -1,22 +1,23 @@
 <template>
-  <section class="cart container" v-if="cartStore.cart.length > 0">
-      <section class="cart-info">
-        <cart-pagination />
-        <div class="products-in-cart">
-          <ul class="products">
-            <cart-product
-            v-for="(product, index) in paginationStore.pageProducts"
+  <section class="cart container" v-if="cart.length > 0">
+    <section class="cart-info">
+      <cart-pagination />
+      <div class="products-in-cart">
+        <ul class="products">
+          <cart-product
+            v-for="(product, index) in pageProducts"
             :product="product"
             :index="index"
             :key="product.id"
-             ><span>{{ index + paginationStore.startIndex }}</span></cart-product>
-          </ul>
-        </div>
-      </section>
-      <cart-summary />
+            ><span> {{ index + startIndex }} </span>
+          </cart-product>
+        </ul>
+      </div>
+    </section>
+    <cart-summary />
   </section>
   <h3 class="empty" v-else>Cart is empty</h3>
-  <buy-modal v-if="modalIsShow"/>
+  <buy-modal v-if="modalIsShow" />
 </template>
 
 <script lang="ts" setup>
@@ -27,11 +28,11 @@ import CartProduct from '@/components/cart/CartProduct.vue';
 import CartSummary from '@/components/cart/CartSummary.vue';
 import BuyModal from '@/components/modal/BuyModal.vue';
 
-const cartStore = useCartStore();
-const paginationStore = usePaginationStore();
-const modalStore = useModalStore();
-const { modalIsShow } = storeToRefs(modalStore);
+const { pageProducts, startIndex } = storeToRefs(usePaginationStore())
+const { cart } = storeToRefs(useCartStore())
+const { modalIsShow } = storeToRefs(useModalStore());
 </script>
+
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
 

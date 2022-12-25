@@ -8,37 +8,19 @@
     </h3>
     <div class="select-group">
       <h4 class="select-group__header">Product per page:</h4>
-      <my-select
-      class="select-group__select"
-      :limit="limit"
-      :maxLimit="maxLimit"
-      @update="updateSelect"></my-select>
+      <my-select class="select-group__select" :limit="limit" :maxLimit="maxLimit" @update="updateSelect"></my-select>
     </div>
-    <nav class="pages">
-      <button
-      :class="{disabled: page === 1}"
-      class="pages__arrow"
-      @click="incDecPage('dec')"
-      >
-        <font-awesome-icon icon="fa-solid fa-arrow-left" />
-      </button>
-      <button
-        class="pages__page"
-        :class="{ current: cyclePage === page }"
-        v-for="cyclePage in paginationStore.totalPage"
-        :key="cyclePage"
-        @click="changePage(cyclePage)"
-      >
-        {{ cyclePage }}
-      </button>
-      <button
-      :class="{disabled: page === paginationStore.totalPage}"
-      class="pages__arrow"
-      @click="incDecPage('inc')"
-      >
-        <font-awesome-icon icon="fa-solid fa-arrow-right" />
-      </button>
-    </nav>
+    <my-paginate
+      v-model="page"
+      :page-count="paginationStore.totalPage"
+      :prev-text="'Prev'"
+      :next-text="'Next'"
+      :container-class="'pages'"
+      :page-class="'page'"
+      :next-class="'page arrow'"
+      :prev-class="'page arrow'"
+      :break-view-class="'break'"
+    />
   </section>
 </template>
 
@@ -46,27 +28,18 @@
 import { usePaginationStore } from '@/store';
 import { useCartStore } from '@/store';
 import { storeToRefs } from 'pinia';
+import Paginate from 'vuejs-paginate-next';
 
 const paginationStore = usePaginationStore();
 const cartStore = useCartStore();
 const { limit, page } = storeToRefs(paginationStore);
 const { maxLimit } = paginationStore;
-
-const changePage = (currPage: number): void => {
-  paginationStore.page = currPage;
-};
+const MyPaginate = Paginate;
 
 const updateSelect = (value: number): void => {
   paginationStore.limit = value;
 };
 
-const incDecPage = (action: string): void => {
-  if (action === 'inc') {
-    if (page.value < paginationStore.totalPage) page.value += 1;
-  } else {
-    if (page.value > 1) page.value -= 1;
-  }
-}
 </script>
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
@@ -107,31 +80,54 @@ const incDecPage = (action: string): void => {
     justify-self: end;
     display: flex;
     gap: 0.1rem;
+    list-style: none;
 
-    .disabled {
-      color: $secondary;
-    }
-
-    &__page, &__arrow {
+    :deep(.page) {
+      padding: 0.3rem 0.2rem;
       min-width: 2rem;
-      font-size: 1.1rem;
       background-color: $light;
       border: 1px solid $secondary {
-        radius: 5px;
+        radius: 10px;
       }
       cursor: pointer;
       transition: all 0.2s;
+      user-select: none;
 
       &:hover {
         color: $light;
         background-color: $primary;
       }
     }
-    .current {
-      font-weight: 600;
-      color: $light;
+
+    :deep(.page-link) {
+      display: block;
+      text-align: center;
+    }
+
+    :deep(.disabled) {
+      color: $secondary;
+      border-color: $secondary;
+
+      &:hover {
+        color: $secondary;
+        background-color: $light;
+      }
+    }
+
+    :deep(.active) {
       background-color: $primary-darker;
-      border: none;
+    }
+
+    :deep(.break) {
+      color: $dark;
+
+      &:hover {
+        background-color: $primary-darker;
+      }
+    }
+
+    :deep(.arrow) {
+      padding: 0.3rem 0.5rem;
     }
   }
 }

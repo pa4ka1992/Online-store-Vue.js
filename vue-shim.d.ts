@@ -11,6 +11,8 @@ declare module 'vue/types/vue' {
     }
 }
 
+declare module 'vuejs-paginate-next';
+
 declare module '*.scss';
 
 declare module '*.svg' {

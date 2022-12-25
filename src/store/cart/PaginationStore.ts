@@ -2,6 +2,7 @@ import { defineStore, storeToRefs } from 'pinia';
 import { useCartStore } from './CartStore';
 import { ref, computed, watch, onBeforeMount } from 'vue';
 import { ICartProduct } from '@/services/model/types/cart';
+import router from '@/router';
 
 export const usePaginationStore = defineStore('paginationStore', () => {
   const { cart } = storeToRefs(useCartStore());
@@ -15,6 +16,7 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     if (!cart.value || Number.isNaN(cartLength) || Number.isNaN(limit.value) || limit.value <= 0) {
       return 1;
     }
+
     const pages: number = Math.ceil(cartLength / limit.value);
     return pages > 1 ? pages : 1;
   });
@@ -27,6 +29,10 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     return cart.value.slice(limit.value * (page.value - 1), limit.value * page.value);
   });
 
+  const addQueries = (): void => {
+    router.replace({ query: { limit: `${limit.value}`, page: `${page.value}` } });
+  };
+
   watch(totalPage, (newTotalPage) => {
     if (page.value > newTotalPage) page.value = newTotalPage;
   });
@@ -34,6 +40,7 @@ export const usePaginationStore = defineStore('paginationStore', () => {
   watch([page, limit], ([newPage, newLimit]) => {
     localStorage.setItem('RSOnlineStore-cart-page', `${newPage}`);
     localStorage.setItem('RSOnlineStore-cart-limit', `${newLimit}`);
+    addQueries();
   });
 
   onBeforeMount(() => {
@@ -41,6 +48,7 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     const limitLocalStorage: string | null = localStorage.getItem('RSOnlineStore-cart-limit');
     if (pageLocalStorage) page.value = Number(pageLocalStorage);
     if (limitLocalStorage) limit.value = Number(limitLocalStorage);
+    addQueries();
   });
 
   return {

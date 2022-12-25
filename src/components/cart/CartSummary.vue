@@ -36,27 +36,28 @@
         <h4 class="summary__promo--header">Enter your promocode:</h4>
         <div class="promo__group">
           <input type="text" placeholder="promocode" class="promo__group--input" v-model="promo" />
-          <my-button 
-          :class="{ disabled: !promoStore.isMatch || promoStore.isAlreadyApplied }" 
-          class="promo__group--apply" 
+          <my-button
+          :class="{ disabled: !promoStore.isMatch || promoStore.isAlreadyApplied }"
+          class="promo__group--apply"
           @click="promoStore.applyPromo"
             >Apply</my-button
           >
         </div>
       </div>
-      <my-button class="summary__buy">Buy now</my-button>
+      <my-button @click="modalIsShow = true" class="summary__buy">Buy now</my-button>
     </div>
   </form>
 </template>
 
 <script lang="ts" setup>
-import { usePromoStore } from '@/store';
-import { useCartStore } from '@/store';
+import { usePromoStore, useCartStore, useModalStore } from '@/store';
 import { storeToRefs } from 'pinia';
 
 const cartStore = useCartStore();
 const promoStore = usePromoStore();
+const modalStore = useModalStore();
 const { promo, appliedPromos } = storeToRefs(promoStore);
+const { modalIsShow } = storeToRefs(modalStore);
 </script>
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
@@ -96,7 +97,7 @@ const { promo, appliedPromos } = storeToRefs(promoStore);
         .promo__delete {
           padding: 0.1rem 0.5rem;
           transition: all .2s;
-          
+
           &:hover {
             color: $danger;
             cursor: pointer;

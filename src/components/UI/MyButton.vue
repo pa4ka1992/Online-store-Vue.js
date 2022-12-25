@@ -8,7 +8,7 @@ export default {
   name: 'my-button',
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
 
 .btn {

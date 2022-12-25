@@ -16,17 +16,21 @@
       <cart-summary />
   </section>
   <h3 class="empty" v-else>Cart is empty</h3>
+  <buy-modal v-if="modalIsShow"/>
 </template>
 
 <script lang="ts" setup>
-import { useCartStore } from '@/store';
-import { usePaginationStore } from '@/store';
+import { storeToRefs } from 'pinia';
+import { useCartStore, usePaginationStore, useModalStore } from '@/store';
 import CartPagination from '@/components/cart/CartPagination.vue';
 import CartProduct from '@/components/cart/CartProduct.vue';
 import CartSummary from '@/components/cart/CartSummary.vue';
+import BuyModal from '@/components/modal/BuyModal.vue';
 
 const cartStore = useCartStore();
 const paginationStore = usePaginationStore();
+const modalStore = useModalStore();
+const { modalIsShow } = storeToRefs(modalStore);
 </script>
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';

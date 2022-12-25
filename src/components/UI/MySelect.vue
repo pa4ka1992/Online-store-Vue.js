@@ -13,14 +13,14 @@ import { Ref } from 'vue';
 
 const props = defineProps<{
   limit: Ref<number>
-  maxLimit: number 
+  maxLimit: number
 }>();
 const emit = defineEmits(['update']);
 const changeOption = ({ target }: Event): void => {
   emit('update', Number((target as HTMLOptionElement).value));
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
 
 .select {

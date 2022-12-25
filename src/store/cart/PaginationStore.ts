@@ -27,9 +27,9 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     return cart.value.slice(limit.value * (page.value - 1), limit.value * page.value);
   });
 
-  // watch(totalPage, () => {
-  //   page.value = 1;
-  // });
+  watch(totalPage, (newTotalPage) => {
+    if (page.value > newTotalPage) page.value = newTotalPage;
+  });
 
   watch([page, limit], ([newPage, newLimit]) => {
     localStorage.setItem('RSOnlineStore-cart-page', `${newPage}`);

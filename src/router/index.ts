@@ -14,6 +14,11 @@ const router = createRouter({
       path: '/cart',
       component: CartPage,
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'notfound',
+      component: HomePage,
+    },
   ],
   strict: true,
 });

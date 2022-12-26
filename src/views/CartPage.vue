@@ -76,13 +76,13 @@ const { modalIsShow } = storeToRefs(useModalStore());
 }
 
 .product-anime {
-  transition: all 0.7s ease;
+  transition: all 0.3s ease;
 }
 
 .products-anime-enter-from,
 .products-anime-leave-to {
   opacity: 0;
-  transform: scale(0);
+  transform: scale(0.9);
 }
 
 .products-anime-leave-active {

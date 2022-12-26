@@ -1,10 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, type Ref, computed } from 'vue';
 
-import { IFilter } from '@/services/model/filter';
-import { IProduct } from '@/services/model/product';
-import { ProductRepository } from '@/services/product.repository';
-
+import { IFilter, ISort, IProduct, ProductRepository, useStringSort } from '@/services';
 
 export const useProductsStore = defineStore('products', () => {
   const _products: Ref<IProduct[]> = ref([]);
@@ -19,9 +16,11 @@ export const useProductsStore = defineStore('products', () => {
   fetchData();
 
   const products = computed(() => {
-    return _products.value.filter((product) => {
-      return filters.value.reduce((acc, item) => acc && item(product), true);
-    });
+    return _products.value
+      .filter((product) => {
+        return filters.value.reduce((acc, item) => acc && item(product), true);
+      })
+      .sort(sortType.value);
   });
 
   function getProductById(id: string) {
@@ -29,9 +28,12 @@ export const useProductsStore = defineStore('products', () => {
   }
 
   const filters: Ref<IFilter[]> = ref([]);
+  const sortType: Ref<ISort> = ref(useStringSort('title'));
 
   return {
     products,
+    filters,
+    sortType,
     fetchData,
     getProductById
   };

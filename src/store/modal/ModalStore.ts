@@ -1,31 +1,27 @@
 import { defineStore } from 'pinia';
 import { ref, reactive } from 'vue';
+import { IValidation, TValidationField } from './types';
+import { validationInfo } from './constants';
 
 export const useModalStore = defineStore('ModalStore', () => {
   const modalIsShow = ref(false);
-  const validation = reactive({
-    fullName: { val: '', isValid: false },
-    phone: { val: '', isValid: false },
-    adress: { val: '', isValid: false },
-    email: { val: '', isValid: false },
-    card: { val: '', isValid: false },
-    date: { val: '', isValid: false },
-    CVV: { val: '', isValid: false },
-  });
+  const validation: IValidation<TValidationField> = reactive(validationInfo);
 
-  const validateName = (): void => {
-    const valid: number = validation.fullName.val.search(/[a-z]{3,} [a-z]{3,}/i);
-    console.log(valid);
-    if (valid >= 0) {
-      validation.fullName.isValid = true;
+  const validate = (key: keyof IValidation<TValidationField>): void => {
+    const regex = new RegExp(validation[key].regex, 'i');
+    const isValid: boolean = regex.test(validation[key].val);
+    console.log(isValid);
+
+    if (isValid) {
+      validation[key].isValid = true;
     } else {
-      validation.fullName.isValid = false;
+      validation[key].isValid = false;
     }
   };
 
   return {
     modalIsShow,
     validation,
-    validateName,
+    validate,
   };
 });

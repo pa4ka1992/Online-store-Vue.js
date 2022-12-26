@@ -1,22 +1,52 @@
 <template>
-  <div class="buy">
-    <form @submit.prevent class="buy__form">
-      <input v-model="validation.fullName.val" @blur="modalStore.validateName" type="text" placeholder="Full name" />
-      <input v-model="validation.phone.val" type="tel" placeholder="Phone number" />
-      <input v-model="validation.adress.val" type="text" placeholder="Delivery adress" />
-      <input v-model="validation.email.val" type="email" placeholder="E-mail" />
-      <input v-model="validation.card.val" type="number" placeholder="Cart number" />
-      <input v-model="validation.date.val" type="number" placeholder="Date" />
-      <input v-model="validation.CVV.val" type="number" placeholder="Code" />
+  <div class="buy" @click="modalIsShow = false" >
+    <form 
+    @click.stop
+    @submit.prevent 
+    class="buy__form">
+      <input 
+      v-model="fullName.val"
+      @blur="validate('fullName')"
+      type="text" placeholder="Full name" />
+      <input
+      v-model="phone.val"
+      @blur="validate('phone')"
+      type="number"
+      placeholder="Phone number" />
+      <input
+      v-model="adress.val"
+      @blur="validate('adress')"
+      type="text"
+      placeholder="Delivery adress" />
+      <input
+      v-model="email.val"
+      @blur="validate('email')"
+      type="email"
+      placeholder="E-mail" />
+      <input
+      v-model="card.val"
+      type="number"
+      placeholder="Cart number" />
+      <input
+      v-model="date.val"
+      type="number"
+      placeholder="Date" />
+      <input
+      v-model="CVV.val"
+      type="number"
+      placeholder="Code" />
     </form>
   </div>
 </template>
 <script lang="ts" setup>
 import { useModalStore } from '@/store';
+import { toRefs } from 'vue';
 import { storeToRefs } from 'pinia';
 
 const modalStore = useModalStore();
-const { validation } = storeToRefs(modalStore);
+const { validation, modalIsShow } = storeToRefs(modalStore);
+const { fullName, phone, adress, email, card, date, CVV } = toRefs(validation.value);
+const { validate } = modalStore;
 </script>
 <style lang="scss" scoped>
 .buy {

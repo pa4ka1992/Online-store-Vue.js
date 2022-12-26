@@ -6,10 +6,18 @@ const header: Ref<HTMLElement | null> = ref(null);
 
 const footer: Ref<HTMLElement | null> = ref(null);
 
+const top = computed(() => {
+  return header.value?.offsetHeight ?? 0;
+});
+
+const bottom = computed(() => {
+  return footer.value?.offsetHeight ?? 0;
+});
+
 const mainStyles = computed(() => {
   return {
-    paddingTop: `${ header.value?.offsetHeight ?? 0}px`,
-    paddingBottom: `${ footer.value?.offsetHeight ?? 0}px`,
+    paddingTop: `${ top.value }px`,
+    paddingBottom: `${ bottom.value }px`,
   }
 })
 
@@ -17,13 +25,13 @@ const mainStyles = computed(() => {
 
 <template>
   <div class="app-body"> 
-    <div class="app-header-wrap" ref="header"> 
+    <div class="app-body__wrap"  :style="{ marginBottom: `-${top}px` }" ref="header"> 
       <slot name="header"></slot>
     </div>
     <main class="app-main" :style="mainStyles">
       <slot name="main"></slot>
     </main>
-    <div class="app-footer-wrap" ref="footer"> 
+    <div class="app-body__wrap" :style="{ marginTop: `-${bottom}px` }" ref="footer"> 
       <slot name="footer"></slot>
     </div>
   </div>
@@ -34,16 +42,12 @@ const mainStyles = computed(() => {
 @import '@/assets/scss/variables.scss';
 
 .app-body {
-  position: relative;
   background-color: $light;
 }
 
-.app-header-wrap {
+.app-body__wrap {
   padding: 0;
   margin: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
 }
 
@@ -53,10 +57,6 @@ const mainStyles = computed(() => {
   justify-content: center;
   flex-direction: column;
   align-items: stretch;
-}
-
-.app-footer-wrap {
-
 }
 
 </style>

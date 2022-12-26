@@ -1,23 +1,20 @@
-<template> 
-  <main class="app-body">
-    <i class="demo-icon icon-cart-no"></i>
-    <i class="demo-icon icon-cart-ok"></i>
-    <i class="demo-icon icon-cart-plus"></i>
-    <i class="demo-icon icon-cart"></i>
-    <RouterView/>
-  </main>  
-</template>
-
 <script lang="ts" setup>
+
+import AppLayout from '@/components/AppLayout.vue';
+
+
 </script>
 
-<style scoped>
-
-.demo-icon {
-  font-size: 50px;
-}
-
-.app-body {
-  min-height: 100vh;
-}
-</style>
+<template>
+  <AppLayout> 
+    <template #header> 
+      
+    </template>
+    <template #main> 
+      <RouterView/>
+    </template>
+    <template #footer> 
+      
+    </template>
+  </AppLayout>
+</template>

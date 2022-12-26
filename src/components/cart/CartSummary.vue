@@ -3,16 +3,21 @@
     <div class="summary">
       <div class="summary__total-price">
         <span class="summary__total-price--header">Total</span>
-        <span class="summary__total-price--total" :class="{ crossed: isDiscounted }"
-          >{{ totalPrice.toFixed(2) }} $</span
-        >
-        <span v-if="isDiscounted" class="summary__total-price--fixed">{{ getPromoPrice.toFixed(2) }} $</span>
+        <span class="summary__total-price--total" :class="{ crossed: isDiscounted }">
+          <my-number :input="totalPrice" :fixed="2"/> $
+        </span>
+        <span v-if="isDiscounted" class="summary__total-price--fixed">
+          <my-number :input="getPromoPrice" :fixed="2"/> $
+        </span>
       </div>
       <div v-if="isDiscounted" class="summary__promo-list">
         <h4 class="summary__promo-list--header">Applied promos:</h4>
         <div class="summary__promo-list--code" v-for="promoCode in appliedPromos" :key="promoCode.id">
           <span class="promo__title">{{ promoCode.title }}</span>
-          <span class="promo__value">Discount: {{ promoCode.value * 100 }}%</span>
+          <span class="promo__value">
+            Discount:
+            <my-number :input="promoCode.value * 100" :fixed="0"/>%
+          </span>
           <span class="promo__delete">
             <font-awesome-icon icon="fa-solid fa-xmark" @click="removePromo(promoCode.id)" />
           </span>
@@ -20,11 +25,15 @@
       </div>
       <div class="summary__total-products">
         <span class="summary__total-products--count">Products, {{ totalProducts }}pc. </span>
-        <span class="summary__total-products--price">{{ totalPrice.toFixed(2) }} $</span>
+        <span class="summary__total-products--price">
+          <my-number :input="totalPrice" :fixed="2"/> $
+        </span>
       </div>
       <div class="summary__discount" v-show="isDiscounted">
         <span class="summary__discount--header">Discount</span>
-        <span class="summary__discount--value">{{ -(totalPrice - getPromoPrice).toFixed(2) }} $</span>
+        <span class="summary__discount--value">
+          <my-number :input="-(totalPrice - getPromoPrice)" :fixed="2"/> $
+        </span>
       </div>
       <div class="summary__promo">
         <h4 class="summary__promo--header">Enter your promocode:</h4>

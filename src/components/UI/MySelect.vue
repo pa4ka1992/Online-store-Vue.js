@@ -3,11 +3,13 @@
     <option class="option" v-for="option in maxLimit" :key="option" :value="option">{{ option }}</option>
   </select>
 </template>
+
 <script lang="ts">
 export default {
   name: 'my-select',
 };
 </script>
+
 <script lang="ts" setup>
 import { Ref } from 'vue';
 

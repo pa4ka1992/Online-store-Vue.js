@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 
-import { useCartStore } from '@/store';
+import { useCartStore, usePromoStore } from '@/store';
 
 const cart = useCartStore();
+const promo = usePromoStore();
 
 </script>
 
@@ -15,7 +16,7 @@ const cart = useCartStore();
       {{cart.cart.length}}
     </span>
     <span v-if="cart.cart.length !== 0" class="cart-info__total">
-      ${{cart.totalProducts}}
+      ${{promo.totalPrice}}
     </span>
   </div>
 </template>
@@ -74,6 +75,7 @@ $total-color: #FB4A9B;
     bottom: 0;
     left: 0;
     position: absolute;
+    pointer-events: none;
   }
 
   &:hover {

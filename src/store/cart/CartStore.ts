@@ -1,9 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed, watch, onBeforeMount } from 'vue';
 import { IProduct } from '@/services//model/product';
-import { ICartProduct } from '@/services//model/types/cart';
-import {TProductFunc, TFindFunc, TCurrProd} from '@/services/model/types/cart'
-
+import { ICartProduct, TProductFunc, TFindFunc, TCurrProd } from './types';
 
 export const useCartStore = defineStore('cartStore', () => {
   const cart = ref<ICartProduct[]>([

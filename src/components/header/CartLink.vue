@@ -32,7 +32,6 @@ $total-color: #FB4A9B;
   width: 60px;
   height: 60px;
   font-size: 1rem;
-  transition: scale 0.5s;
 
   &__link {
     color: $black;
@@ -44,6 +43,7 @@ $total-color: #FB4A9B;
     align-items: center;
     width: 100%;
     height: 100%;
+    transition: background-color 0.5s;
 
     font-size: 2rem;
 
@@ -61,6 +61,7 @@ $total-color: #FB4A9B;
     right: 0;
     top: 0;
     position: absolute;
+    transition: translate 0.5s;
   }
 
   &__total {
@@ -69,17 +70,27 @@ $total-color: #FB4A9B;
     border-radius: 100px;
     translate: -50% 30%;
     rotate: 10deg;
+    transition: scale 0.2s, rotate 0.2s;
     bottom: 0;
     left: 0;
     position: absolute;
   }
 
   &:hover {
-    scale: 1.2;
+    .cart-info__link { 
+      background-color: $primary2-light;
+    }
+
+    .cart-info__total { 
+      rotate: 370deg;
+      scale: 1.2;
+    } 
   }
 
   &:active {
-    scale: 0.9;
+    .cart-info__link { 
+      background-color: $primary2-dark;
+    } 
   }
 }
 

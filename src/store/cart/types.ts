@@ -1,5 +1,4 @@
-
-import { IProduct } from "../product";
+import { IProduct } from "@/services/model/product";
 
 export interface ICartProduct extends IProduct {
   count: number;

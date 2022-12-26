@@ -1,7 +1,7 @@
 import { defineStore, storeToRefs } from 'pinia';
 import { useCartStore } from './CartStore';
 import { ref, computed, watch, onBeforeMount } from 'vue';
-import { ICartProduct } from '@/services/model/types/cart';
+import { ICartProduct } from './types';
 import router from '@/router';
 
 export const usePaginationStore = defineStore('paginationStore', () => {

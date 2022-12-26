@@ -1,3 +1,15 @@
+@font-face {
+  font-family: 'Poppins';
+  src: url('@/assets/fonts/Poppins-Medium.ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('@/assets/fonts/Nunito-Medium.ttf');
+  font-weight: normal;
+}
+
 * {
   box-sizing: border-box;
 }

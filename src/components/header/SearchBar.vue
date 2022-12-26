@@ -93,11 +93,11 @@ $border-radius: 100px;
     background-color: transparent;
 
     &:hover {
-      background-color: $secondary;
+      background-color: $primary2;
     }
 
     &:active {
-      background-color: $secondary-dark;
+      background-color: $primary2-dark;
     }
   }
 }

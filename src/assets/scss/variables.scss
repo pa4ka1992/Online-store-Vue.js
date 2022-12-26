@@ -18,8 +18,11 @@ $black:    #000 !default;
 $primary-light:  #acedf8;
 $primary:        #A1DBE5;
 $primary-dark:   #00B7AF;
-$secondary:      #F8CD4F;
-$secondary-dark: #dbb543;
+$primary2:       #F8CD4F;
+$primary2-dark:  #dbb543;
+
+$secondary: $gray-500;
+
 $success:        #198754 !default;
 $info:           #0dcaf0 !default;
 $warning:        #ffc107 !default;

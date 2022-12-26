@@ -36,7 +36,7 @@ $total-color: #FB4A9B;
 
   &__link {
     color: $black;
-    background-color: $secondary;
+    background-color: $primary2;
     border-radius: 50%;
     @include apply-shadow;
     display: flex;

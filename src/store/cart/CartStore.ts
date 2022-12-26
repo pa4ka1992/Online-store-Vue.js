@@ -118,6 +118,8 @@ export const useCartStore = defineStore('cartStore', () => {
     }, 0);
   });
 
+  const getCart = ():ICartProduct[] => [...cart.value];
+
   const findProduct: TFindFunc<ICartProduct> = (incomeProduct) => {
     return cart.value.find((product) => {
       return product.id === incomeProduct.id;
@@ -208,6 +210,7 @@ export const useCartStore = defineStore('cartStore', () => {
 
   return {
     cart,
+    getCart,
     totalProducts,
     addProduct,
     deleteProduct,

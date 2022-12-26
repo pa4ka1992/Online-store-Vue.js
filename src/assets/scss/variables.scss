@@ -15,15 +15,17 @@ $black:    #000 !default;
 
 // Main palette
 
-$primary:       #A1DBE5;
-$primary-dark:  #00B7AF;
-$secondary:     #F8CD4F;
-$success:       #198754 !default;
-$info:          #0dcaf0 !default;
-$warning:       #ffc107 !default;
-$danger:        #dc3545 !default;
-$light:         $gray-100 !default;
-$dark:          $gray-900 !default;
+$primary-light:  #acedf8;
+$primary:        #A1DBE5;
+$primary-dark:   #00B7AF;
+$secondary:      #F8CD4F;
+$secondary-dark: #dbb543;
+$success:        #198754 !default;
+$info:           #0dcaf0 !default;
+$warning:        #ffc107 !default;
+$danger:         #dc3545 !default;
+$light:            $gray-100 !default;
+$dark:             $gray-900 !default;
 
 // BREAKPOINTS
 // ==================================

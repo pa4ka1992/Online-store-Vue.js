@@ -6,5 +6,5 @@ export type TNumberFields = {
 };
 
 export type TStringFields = {
-  [Key in TProductKeys as IProduct[Key] extends string ? Key : never]: number;
+  [Key in TProductKeys as IProduct[Key] extends string ? Key : never]: string;
 }; 

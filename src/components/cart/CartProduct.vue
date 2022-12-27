@@ -26,7 +26,7 @@ const { images } = toRefs(props.product);
 @import '@/assets/scss/index.scss';
 .product {
   display: grid;
-  grid-template-columns: 0.2fr 1fr 3fr 1.5fr 0.8fr;
+  grid-template-columns: 0.2fr 10rem 3fr 1.5fr 0.8fr;
   place-items: center center;
   gap: 0.5rem;
   padding: 1rem 0;
@@ -34,7 +34,8 @@ const { images } = toRefs(props.product);
 
   &__image {
     display: block;
-    max-width: 15rem;
+    max-width: 10rem;
+    max-height: 10rem;
     border-radius: 5px;
   }
 }

@@ -41,8 +41,9 @@ const { modalIsShow } = storeToRefs(modalStore);
   &__form {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     padding: 3rem;
+    width: 30%;
     background-color: $light;
     @include block-style;
   }

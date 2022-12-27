@@ -8,15 +8,21 @@ export const useModalStore = defineStore('ModalStore', () => {
   const validation: IValidation<TValidationField> = reactive(validationInfo);
 
   const validate = (key: keyof IValidation<TValidationField>): void => {
+    if (!validation[key].val) {
+      validation[key].isValid = false;
+      validation[key].isAlert = false;
+      return;
+    }
     const regex = new RegExp(validation[key].regex, 'i');
-    console.log(regex);
     const isValid: boolean = regex.test(validation[key].val);
     console.log(isValid);
 
     if (isValid) {
       validation[key].isValid = true;
+      validation[key].isAlert = false;
     } else {
       validation[key].isValid = false;
+      validation[key].isAlert = true;
     }
   };
 

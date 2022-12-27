@@ -8,8 +8,7 @@
           v-for="(product, index) in pageProducts"
           :product="product"
           :index="index"
-          :key="product.id"
-        >
+          :key="product.id">
           <span> {{ index + startIndex }} </span>
         </cart-product>
       </transition-group>
@@ -75,17 +74,15 @@ const { modalIsShow } = storeToRefs(useModalStore());
   }
 }
 
-.product-anime {
-  transition: all 0.3s ease;
+.products-anime-move,
+.products-anime-enter-active,
+.products-anime-leave-active {
+  transition: all 0.5s ease;
 }
 
 .products-anime-enter-from,
 .products-anime-leave-to {
   opacity: 0;
-  transform: scale(0.9);
-}
-
-.products-anime-leave-active {
-  position: absolute;
+  transform: translateX(-50px);
 }
 </style>

@@ -4,7 +4,7 @@
       <font-awesome-icon icon="fa-solid fa-trash" />
     </button>
     <div class="count-info__wrapper">
-      <div class="count-info__wrapper--stock">Stock: {{ stock }}pc.</div>
+      <span class="count-info__wrapper--stock">Stock: {{ stock }}pc.</span>
       <div class="count-info__wrapper--control">
         <button :disabled="count === 1" class="decrement" @click="cartStore.decrementCount(product)">
           <font-awesome-icon icon="fa-solid fa-minus" />
@@ -14,7 +14,7 @@
           <font-awesome-icon icon="fa-solid fa-plus" />
         </button>
       </div>
-      <div class="count-info__wrapper--single-price">{{ price }}$/pc.</div>
+      <span class="count-info__wrapper--single-price">{{ price }}$/pc.</span>
     </div>
   </div>
 </template>

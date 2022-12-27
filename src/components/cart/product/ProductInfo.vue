@@ -2,11 +2,11 @@
   <div class="product__info">
     <div class="product__info--header">
       <font-awesome-icon icon="fa-solid fa-star" />
-      <div class="header__rating">{{ rating }}</div>
-      <div class="header__title">{{ title }}</div>
+      <span class="header__rating">{{ rating }}</span>
+      <span class="header__title">{{ title }}</span>
     </div>
-    <div class="product__info--brand">Brand: {{ brand }}</div>
-    <div class="product__info--description">{{ description }}</div>
+    <span class="product__info--brand">Brand: {{ brand }}</span>
+    <span class="product__info--description">{{ description }}</span>
   </div>
 </template>
 
@@ -34,6 +34,7 @@ const { title, brand, description, rating } = toRefs(props.product);
 
   &--header {
     display: flex;
+    align-items: center;
 
     .fa-star {
       color: $warning;

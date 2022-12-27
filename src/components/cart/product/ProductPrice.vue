@@ -5,11 +5,11 @@
       :class="{ crossed: product['discountPercentage'] }">
       <my-number :input="countPrice" :fixed="0"/> $
     </div>
-    <div
+    <span
       v-if="discountPercentage"
       class="product__price--discount">
       Sale: {{ discountPercentage }}%
-    </div>
+    </span>
     <div
       v-if="discountPercentage"
       class="product__price--final">

@@ -1,9 +1,12 @@
 <template>
-  <div class="buy" @mousedown="modalIsShow = false" >
+  <div class="buy" @mousedown="closeModal" >
     <form 
     @mousedown.stop
     @submit.prevent 
     class="buy__form">
+      <span class="buy__form--close" @click="closeModal">
+        <font-awesome-icon icon="fa-solid fa-xmark" />
+      </span>
       <h2 class="buy__form--header">Ordering</h2>
       <my-input :field="'fullName'" />
       <my-input :field="'phone'" />
@@ -16,20 +19,32 @@
     </form>
   </div>
 </template>
+
 <script lang="ts" setup>
-import { useModalStore } from '@/store';
+import { useCartStore, useModalStore, usePaginationStore, usePromoStore } from '@/store';
+import {  } from '@/store';
 import { storeToRefs } from 'pinia';
 import MyInput from '@/components/UI/MyInput.vue';
 import MyButton from '@/components/UI/MyButton.vue';
 
 const modalStore = useModalStore();
+const paginationStore = usePaginationStore();
+const promoStore = usePromoStore();
+const cartStore = useCartStore();
 const { modalIsShow } = storeToRefs(modalStore);
 
-const buy = (): void => {
-  modalStore.$reset();
+const closeModal = (): void => {
+  modalIsShow.value = false;
 }
 
+const buy = (): void => {
+  closeModal();
+  cartStore.$reset();
+  paginationStore.$reset();
+  promoStore.$reset();
+}
 </script>
+
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
 
@@ -50,10 +65,25 @@ const buy = (): void => {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    position: relative;
     padding: 3rem;
     width: 30%;
     background-color: $light;
     @include block-style;
+
+    &--close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      padding: 0.3rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        color: $danger;
+      }
+    }
 
     &--header {
       margin: 0;

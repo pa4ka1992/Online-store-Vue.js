@@ -1,7 +1,7 @@
 <template>
-  <div class="buy" @click="modalIsShow = false" >
+  <div class="buy" @mousedown="modalIsShow = false" >
     <form 
-    @click.stop
+    @mousedown.stop
     @submit.prevent 
     class="buy__form">
       <my-input :field="'fullName'" />
@@ -41,8 +41,10 @@ const { modalIsShow } = storeToRefs(modalStore);
   &__form {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    gap: 2rem;
+    padding: 3rem;
     background-color: $light;
+    @include block-style;
   }
 }
 </style>

@@ -9,6 +9,7 @@ export const useModalStore = defineStore('ModalStore', () => {
 
   const validate = (key: keyof IValidation<TValidationField>): void => {
     const regex = new RegExp(validation[key].regex, 'i');
+    console.log(regex);
     const isValid: boolean = regex.test(validation[key].val);
     console.log(isValid);
 

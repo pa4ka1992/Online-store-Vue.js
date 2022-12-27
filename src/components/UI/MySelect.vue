@@ -1,5 +1,5 @@
 <template>
-  <select class="select" :value="limit" @change="changeOption">
+  <select class="my-select" :value="limit" @change="changeOption">
     <option class="option" v-for="option in maxLimit" :key="option" :value="option">{{ option }}</option>
   </select>
 </template>
@@ -18,14 +18,16 @@ const props = defineProps<{
   maxLimit: number
 }>();
 const emit = defineEmits(['update']);
+
 const changeOption = ({ target }: Event): void => {
   emit('update', Number((target as HTMLOptionElement).value));
 };
 </script>
+
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
 
-.select {
+.my-select {
   padding: 0.3em 0.6rem;
   font: {
     family: 'Poppins', sans-serif;

@@ -1,5 +1,5 @@
 <template>
-  <button class="btn">
+  <button class="my-button">
     <slot></slot>
   </button>
 </template>
@@ -11,7 +11,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
 
-.btn {
+.my-button {
   flex-grow: 0;
   display: inline-block;
   padding: 0.5rem 1rem;

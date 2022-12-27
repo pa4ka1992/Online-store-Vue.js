@@ -52,6 +52,7 @@ const collapsed = ref(false);
   &__title {
     margin: 0;
     font-size: 1.5em;
+    font-weight: 400;
   }
 
   &__button {

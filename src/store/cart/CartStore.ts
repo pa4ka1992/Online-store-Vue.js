@@ -20,6 +20,7 @@ export const useCartStore = defineStore('cartStore', () => {
     const products:  IProduct[] = parse.products;
 
     products.map((product) => {
+      console.log('api');
       addProduct(product);
     })
   };
@@ -108,21 +109,9 @@ export const useCartStore = defineStore('cartStore', () => {
       const newCart: ICartProduct[] = JSON.parse(cartLocalStorage);
 
       newCart.forEach((product) => {
-        Object.defineProperties(product, {
-          countPrice: {
-            get: function () {
-              return this.count * this.price;
-            },
-          },
-          fixPrice: {
-            get: function () {
-              return this.countPrice * (1 - this.discountPercentage / 100);
-            },
-          },
-        });
+        addProduct(product);
+        console.log('onmounted');
       });
-
-      _cart.value = newCart;
     }
   });
 

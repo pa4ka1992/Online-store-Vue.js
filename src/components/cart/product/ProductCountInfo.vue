@@ -1,16 +1,16 @@
 <template>
   <div class="product__count-info">
-    <button @click="cartStore.deleteProduct(product)" class="delete">
+    <button @click="deleteProduct(product)" class="delete">
       <font-awesome-icon icon="fa-solid fa-trash" />
     </button>
     <div class="count-info__wrapper">
       <span class="count-info__wrapper--stock">Stock: {{ stock }}pc.</span>
       <div class="count-info__wrapper--control">
-        <button :disabled="count === 1" class="decrement" @click="cartStore.decrementCount(product)">
+        <button :disabled="count === 1" class="decrement" @click="decrementCount(product)">
           <font-awesome-icon icon="fa-solid fa-minus" />
         </button>
-        <input type="number" class="count" :value="count" @change="updateCount" />
-        <button :disabled="count === stock" class="increment" @click="cartStore.incrementCount(product)">
+        <input type="number" class="count" :value="count" @change="updateInput" />
+        <button :disabled="count === stock" class="increment" @click="incrementCount(product)">
           <font-awesome-icon icon="fa-solid fa-plus" />
         </button>
       </div>
@@ -29,17 +29,19 @@ const props = defineProps<{
 }>();
 
 const { price, stock, count } = toRefs(props.product);
-const cartStore = useCartStore();
+const { decrementCount, incrementCount, deleteProduct, updateCount } = useCartStore();
 
-const updateCount = (e: Event): void => {
+const updateInput = (e: Event): void => {
   const target = e.target as HTMLOptionElement;
   const valNumber = Number(target.value);
+
   if (valNumber === 0) {
     target.value = '1';
   } else if (valNumber > props.product['stock']) {
     target.value = String(props.product['stock']);
   }
-  cartStore.updateCount(target.value, props.product as ICartProduct);
+
+  updateCount(target.value, props.product as ICartProduct);
 };
 </script>
 

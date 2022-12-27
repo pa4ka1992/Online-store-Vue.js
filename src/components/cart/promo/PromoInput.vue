@@ -2,7 +2,7 @@
   <div class="summary__promo">
     <h4 class="summary__promo--header">Enter your promocode:</h4>
     <div class="promo__group">
-      <input type="text" placeholder="promocode" class="promo__group--input" v-model="promo" />
+      <input type="text" placeholder="promocode" tooltip="Promocodes for test: gachi, 300bucks, rs-school" class="promo__group--input" v-model="promo" />
       <my-button :class="{ disabled: !isMatch || isAlreadyApplied }" class="promo__group--apply" @click="applyPromo"
         >Apply</my-button
       >

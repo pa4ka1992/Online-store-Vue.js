@@ -5,9 +5,6 @@ import router from './router';
 import App from './App.vue';
 import { commonPlugin, fontAwesomePlugin } from './plugins';
 import { usePinia } from './store';
-import components from '@/components/UI';
-import { apllyAwesome } from '@/services/awesome';
-
 
 export const app = createApp(App);
 

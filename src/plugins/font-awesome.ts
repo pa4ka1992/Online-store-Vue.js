@@ -13,8 +13,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { App } from 'vue';
 
-export const apllyAwesome = (app: App): void => {
+export const fontAwesomePlugin = (app: App): void => {
   library.add(faStar, faMinus, faPlus, faTrash, faSpinner, faXmark, faArrowRight, faArrowLeft, faCheck);
-  app.component('font-awesome-icon', FontAwesomeIcon);
+  app.component('FontAwesomeIcon', FontAwesomeIcon);
 };
 

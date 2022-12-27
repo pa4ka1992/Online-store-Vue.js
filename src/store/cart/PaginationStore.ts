@@ -36,6 +36,11 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     limit.value = value;
   };
 
+  const clearStore = (): void => {
+    localStorage.removeItem('RSOnlineStore-cart-page');
+    localStorage.removeItem('RSOnlineStore-cart-limit');
+  }
+
   watch(totalPage, (newTotalPage) => {
     if (page.value > newTotalPage) page.value = newTotalPage;
   });
@@ -62,5 +67,6 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     maxLimit,
     startIndex,
     updateLimit,
+    clearStore
   };
 });

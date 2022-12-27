@@ -13,6 +13,8 @@ declare module 'vue/types/vue' {
 
 declare module 'vuejs-paginate-next';
 
+declare module 'lodash.clonedeep';
+
 declare module '*.scss';
 
 declare module '*.svg' {

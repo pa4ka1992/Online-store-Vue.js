@@ -48,7 +48,6 @@ const { validate } = modalStore;
 .my-input {
   display: flex;
   flex-direction: column;
-  font-family: 'Poppins', sans-serif;
 
   &__header {
     margin-top: 0;

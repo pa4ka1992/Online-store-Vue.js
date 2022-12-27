@@ -18,6 +18,7 @@ export const useCartStore = defineStore('cartStore', () => {
     const res: Response = await fetch('https://dummyjson.com/products?limit=100', { method: 'GET' })
     const parse: { products: IProduct[] } = await res.json();
     const products:  IProduct[] = parse.products;
+
     products.map((product) => {
       addProduct(product);
     })
@@ -40,6 +41,7 @@ export const useCartStore = defineStore('cartStore', () => {
         return this.countPrice * (1 - this.discountPercentage / 100);
       },
     };
+
     _cart.value.push(cartProduct);
   };
 
@@ -49,11 +51,13 @@ export const useCartStore = defineStore('cartStore', () => {
 
   const incrementCount: TProductFunc = (incomeProduct) => {
     const currProduct: TCurrProd = findProduct(incomeProduct);
+
     if (currProduct) currProduct.count += 1;
   };
 
   const decrementCount: TProductFunc = (incomeProduct) => {
     const currProduct: TCurrProd = findProduct(incomeProduct);
+
     if (currProduct) {
       if (currProduct.count < 2) {
         _cart.value = _cart.value.filter((prod) => incomeProduct.id !== prod.id);
@@ -66,6 +70,7 @@ export const useCartStore = defineStore('cartStore', () => {
   const updateCount = (val: string, incomeProduct: ICartProduct) => {
     const currProduct: TCurrProd = findProduct(incomeProduct);
     const valNumber = Number(val);
+
     if (currProduct) {
       if (valNumber > currProduct.stock) {
         currProduct.count = currProduct.stock;
@@ -79,10 +84,15 @@ export const useCartStore = defineStore('cartStore', () => {
     }
   };
 
+  const clearStore = (): void => {
+    localStorage.removeItem('RSOnlineStore-cart');
+  }
+
   watch(
     () => _cart,
     (newCart) => {
       const cartToLocal: string = JSON.stringify(newCart.value);
+
       localStorage.setItem('RSOnlineStore-cart', cartToLocal);
     },
     { deep: true },
@@ -90,10 +100,13 @@ export const useCartStore = defineStore('cartStore', () => {
 
   onBeforeMount(async () => {
     await getProducts();
+
     const cartLocalStorage: string | null = localStorage.getItem('RSOnlineStore-cart');
+
     if (cartLocalStorage) {
       _cart.value = [];
       const newCart: ICartProduct[] = JSON.parse(cartLocalStorage);
+
       newCart.forEach((product) => {
         Object.defineProperties(product, {
           countPrice: {
@@ -108,6 +121,7 @@ export const useCartStore = defineStore('cartStore', () => {
           },
         });
       });
+
       _cart.value = newCart;
     }
   });
@@ -120,5 +134,6 @@ export const useCartStore = defineStore('cartStore', () => {
     incrementCount,
     decrementCount,
     updateCount,
+    clearStore,
   };
 });

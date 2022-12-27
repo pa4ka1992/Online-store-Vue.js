@@ -38,10 +38,12 @@ const closeModal = (): void => {
 }
 
 const buy = (): void => {
-  closeModal();
+  cartStore.clearStore();
+  paginationStore.clearStore();
   cartStore.$reset();
   paginationStore.$reset();
   promoStore.$reset();
+  closeModal();
 }
 </script>
 

@@ -25,7 +25,6 @@ export const usePaginationStore = defineStore('paginationStore', () => {
   });
 
   const pageProducts = computed((): ICartProduct[] => {
-    console.log('pageProd');
     return cart.value.slice(limit.value * (page.value - 1), limit.value * page.value);
   });
 

@@ -20,7 +20,6 @@ export const useCartStore = defineStore('cartStore', () => {
     const products:  IProduct[] = parse.products;
 
     products.map((product) => {
-      console.log('api');
       addProduct(product);
     })
   };
@@ -31,10 +30,10 @@ export const useCartStore = defineStore('cartStore', () => {
     });
   };
 
-  const addProduct = (incomeProduct: IProduct): void => {
+  const addProduct = (incomeProduct: IProduct, incomeCount = 1): void => {
     const cartProduct: ICartProduct = {
       ...incomeProduct,
-      count: 1,
+      count: incomeCount,
       get countPrice() {
         return this.count * this.price;
       },
@@ -99,19 +98,18 @@ export const useCartStore = defineStore('cartStore', () => {
     { deep: true },
   );
 
-  onBeforeMount(async () => {
-    await getProducts();
-
+  onBeforeMount(() => {
     const cartLocalStorage: string | null = localStorage.getItem('RSOnlineStore-cart');
 
     if (cartLocalStorage) {
-      _cart.value = [];
+        _cart.value = [];
       const newCart: ICartProduct[] = JSON.parse(cartLocalStorage);
 
       newCart.forEach((product) => {
-        addProduct(product);
-        console.log('onmounted');
+        addProduct(product, product.count);
       });
+    } else {
+      getProducts();
     }
   });
 

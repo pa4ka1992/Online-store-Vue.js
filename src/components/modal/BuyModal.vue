@@ -1,6 +1,6 @@
 <template>
   <div class="buy" @mousedown="closeModal" >
-    <form 
+    <section 
     @mousedown.stop
     @submit.prevent 
     class="buy__form">
@@ -16,7 +16,7 @@
       <my-input :field="'date'" />
       <my-input :field="'CVV'" />
       <my-button @click="buy">Confirm</my-button>
-    </form>
+    </section>
   </div>
 </template>
 
@@ -66,7 +66,7 @@ const buy = (): void => {
   &__form {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.5rem;
     position: relative;
     padding: 3rem;
     width: 30%;

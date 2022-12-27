@@ -1,17 +1,19 @@
 <template>
   <div class="my-input">
-    <h4 class="my-input__header"> {{ fieldObj.header }} </h4>
+    <h4 class="my-input__header">{{ fieldObj.header }}</h4>
     <div class="my-input__group">
-      <input 
+      <input
         class="my-input__group--input"
         v-model="fieldObj.val"
         @blur="validate(field)"
+        @change="validate(field)"
         :type="fieldObj.type"
-        :placeholder="fieldObj.placeholder" />
-      <span  v-if="fieldObj.isAlert" class="my-input__alert">
-          {{ fieldObj.alert }}
+        :placeholder="fieldObj.placeholder"
+      />
+      <span v-if="fieldObj.isAlert" class="my-input__alert">
+        {{ fieldObj.alert }}
       </span>
-      <span  class="my-input__group--check">
+      <span class="my-input__group--check">
         <font-awesome-icon v-if="fieldObj.isValid" icon="fa-solid fa-check" />
         <font-awesome-icon v-if="fieldObj.isAlert" icon="fa-solid fa-xmark" />
       </span>
@@ -39,7 +41,6 @@ const modalStore = useModalStore();
 const { validation } = storeToRefs(modalStore);
 const fieldObj = ref(validation.value[props.field]);
 const { validate } = modalStore;
-
 </script>
 
 <style lang="scss" scoped>
@@ -52,6 +53,7 @@ const { validate } = modalStore;
   &__header {
     margin-top: 0;
     margin-bottom: 0.3rem;
+    font-size: 0.9em;
     text-transform: uppercase;
   }
 
@@ -62,7 +64,7 @@ const { validate } = modalStore;
 
     &--input {
       padding: 0.3em 0.6rem;
-      font-size: 1.1em;
+      font-size: 1em;
       border: none {
         radius: 10px;
       }
@@ -97,7 +99,7 @@ const { validate } = modalStore;
 
   &__alert {
     margin-top: 0.3em;
-    font-size: 0.9em;
+    font-size: 0.8em;
     color: $danger;
   }
 }

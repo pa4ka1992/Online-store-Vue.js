@@ -12,4 +12,6 @@ export type TValidationField = Required<{
   val: string
   isValid: boolean
   regex: string
+  type: string
+  placeholder: string
 }>

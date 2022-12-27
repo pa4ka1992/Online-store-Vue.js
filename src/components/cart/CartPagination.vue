@@ -42,6 +42,7 @@ const MyPaginate = Paginate;
 
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
+
 .pagination {
   display: grid;
   grid-template-columns: 1fr 4fr 2fr;

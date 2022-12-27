@@ -11,8 +11,9 @@
       <span  v-if="fieldObj.isAlert" class="my-input__alert">
           {{ fieldObj.alert }}
       </span>
-      <span v-if="fieldObj.isValid" class="my-input__group--check">
-        <font-awesome-icon icon="fa-solid fa-check" />
+      <span  class="my-input__group--check">
+        <font-awesome-icon v-if="fieldObj.isValid" icon="fa-solid fa-check" />
+        <font-awesome-icon v-if="fieldObj.isAlert" icon="fa-solid fa-xmark" />
       </span>
     </div>
   </div>
@@ -82,8 +83,16 @@ const { validate } = modalStore;
 
     &--check {
       position: absolute;
-      right: -20px;
-      color: $success;
+      right: -25px;
+      top: 3px;
+
+      .fa-check {
+        color: $success;
+      }
+
+      .fa-xmark {
+        color: $danger;
+      }
     }
   }
 

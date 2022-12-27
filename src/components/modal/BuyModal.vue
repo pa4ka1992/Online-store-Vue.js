@@ -4,13 +4,15 @@
     @mousedown.stop
     @submit.prevent 
     class="buy__form">
+      <h2 class="buy__form--header">Ordering</h2>
       <my-input :field="'fullName'" />
       <my-input :field="'phone'" />
       <my-input :field="'adress'" />
       <my-input :field="'email'" />
       <my-input :field="'card'" />
       <my-input :field="'date'" />
-      <my-input :field="'CVV'" />   
+      <my-input :field="'CVV'" />
+      <my-button @click="buy">Confirm</my-button>
     </form>
   </div>
 </template>
@@ -18,9 +20,14 @@
 import { useModalStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import MyInput from '@/components/UI/MyInput.vue';
+import MyButton from '@/components/UI/MyButton.vue';
 
 const modalStore = useModalStore();
 const { modalIsShow } = storeToRefs(modalStore);
+
+const buy = (): void => {
+  modalStore.$reset();
+}
 
 </script>
 <style lang="scss" scoped>
@@ -35,6 +42,7 @@ const { modalIsShow } = storeToRefs(modalStore);
   bottom: 0;
   right: 0;
   left: 0;
+  font-family: 'Poppins', sans-serif;
   background-color: rgba(0, 0, 0, 0.5);
   overflow: hidden;
 
@@ -46,6 +54,10 @@ const { modalIsShow } = storeToRefs(modalStore);
     width: 30%;
     background-color: $light;
     @include block-style;
+
+    &--header {
+      margin: 0;
+    }
   }
 }
 </style>

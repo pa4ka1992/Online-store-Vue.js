@@ -11,12 +11,11 @@ const collapsed = ref(false);
 
 <template>
   <section class="filter-dropdown">
-    <div class="filter-dropdown__head">
+    <div class="filter-dropdown__head" @click="collapsed = !collapsed">
       <h4 class="filter-dropdown__title">{{ title }}</h4>
       <button
         class="btn filter-dropdown__button"
         :class="!collapsed ? 'filter-dropdown__button_active' : ''"
-        @click="collapsed = !collapsed"
       >
         <i class="icon-next"></i>
       </button>
@@ -37,8 +36,8 @@ const collapsed = ref(false);
 .filter-dropdown {
   background-color: $primary-dark;
   color: $white;
-  border-radius: 20px;
-  max-width: 300px;
+  border-radius: 40px;
+  width: 270px;
   padding: 10px;
 
   font-size: 0.9rem;
@@ -49,6 +48,8 @@ const collapsed = ref(false);
     justify-content: center;
     align-items: center;
     margin: 10px 0;
+    cursor: pointer;
+    user-select: none;
   }
 
   &__title {
@@ -90,7 +91,7 @@ const collapsed = ref(false);
 
   &__content-wrap {
     max-height: 100%;
-    padding: 10px 20px;
+    padding: 15px 20px;
   }
 
   &__divider {

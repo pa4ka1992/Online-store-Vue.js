@@ -1,4 +1,4 @@
-import { ref, watch, watchEffect, computed, type Ref } from 'vue';
+import { ref, watch, computed, type Ref } from 'vue';
 import { useProductsStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import {
@@ -46,17 +46,19 @@ export function useFilterByCategory<Key extends keyof TStringFields>(key: Key) {
     updateFilters();
   });
 
-  watchEffect(() => {
-    param.value;
+  watch(param, () => {
     updateFilters();
   });
 
   function setFilters(categories: string[]) {
+    for (const pair of map.value)
+      pair[1].checked = false;
     const filters = categories.map((category) => {
         const obj = map.value.get(category);
         if (obj) obj.checked = true;
         return useEqualFilter(key, category);
     });
+
     productStore.filters.set(
       key,
       (product: IProduct) => filters.length !== 0 ? filters.reduce((acc, value) => acc || value(product), false) : true,

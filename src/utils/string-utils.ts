@@ -1,5 +1,5 @@
 export function capitaliseLetter(str: string) {
-  return str[0] ? str[0].toUpperCase() : '' + str.substring(1);
+  return (str[0] ? str[0].toUpperCase() : '') + str.substring(1);
 }
 
 export function parseCamelCase(str: string) {

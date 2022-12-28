@@ -3,6 +3,4 @@ import { IProduct } from '../product';
 
 export type TValuesCount = { count: number; total: number };
 
-export type TCategoryValuesCount = { name: string } & TValuesCount;
-
 export type TValuesCountMap<Key extends TProductKeys> = Map<IProduct[Key], TValuesCount>;

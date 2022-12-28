@@ -1,31 +1,31 @@
 <template>
-  <div class="buy" @mousedown="closeModal" >
-    <section 
-    @mousedown.stop
-    @submit.prevent 
-    class="buy__form">
+  <div class="buy" @mousedown="closeModal">
+    <section @mousedown.stop @submit.prevent class="buy__form">
       <span class="buy__form--close" @click="closeModal">
         <font-awesome-icon icon="fa-solid fa-xmark" />
       </span>
       <h2 class="buy__form--header">Ordering</h2>
-      <my-input :field="'fullName'" />
-      <my-input :field="'phone'" />
-      <my-input :field="'adress'" />
-      <my-input :field="'email'" />
-      <my-input :field="'card'" />
-      <my-input :field="'date'" />
-      <my-input :field="'CVV'" />
-      <my-button @click="buy">Confirm</my-button>
+      <section class="buy__form--info">
+        <div class="personal-info">
+          <my-input :field="'fullName'" />
+          <my-input :field="'phone'" />
+          <my-input :field="'adress'" />
+          <my-input :field="'email'" />
+        </div>
+        <pay-card />
+      </section>
+      <my-button class="buy__form--button" @click="buy">Confirm</my-button>
     </section>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useCartStore, useModalStore, usePaginationStore, usePromoStore } from '@/store';
-import {  } from '@/store';
+import {} from '@/store';
 import { storeToRefs } from 'pinia';
 import MyInput from '@/components/UI/MyInput.vue';
 import MyButton from '@/components/UI/MyButton.vue';
+import PayCard from '@/components/modal/PayCard.vue';
 
 const modalStore = useModalStore();
 const paginationStore = usePaginationStore();
@@ -34,8 +34,9 @@ const cartStore = useCartStore();
 const { modalIsShow } = storeToRefs(modalStore);
 
 const closeModal = (): void => {
+  modalStore.$reset();
   modalIsShow.value = false;
-}
+};
 
 const buy = (): void => {
   cartStore.clearStore();
@@ -44,7 +45,7 @@ const buy = (): void => {
   paginationStore.$reset();
   promoStore.$reset();
   closeModal();
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -68,8 +69,7 @@ const buy = (): void => {
     flex-direction: column;
     gap: 0.5rem;
     position: relative;
-    padding: 3rem;
-    width: 30%;
+    padding: 1.5rem 3rem;
     background-color: $light;
     @include block-style;
 
@@ -89,6 +89,21 @@ const buy = (): void => {
 
     &--header {
       margin: 0;
+    }
+
+    &--info {
+      display: flex;
+      gap: 4rem;
+
+      .personal-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    &--button {
+      margin-top: 2rem;
     }
   }
 }

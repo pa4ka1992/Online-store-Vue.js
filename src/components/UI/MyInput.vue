@@ -51,8 +51,7 @@ const { validate } = modalStore;
   flex-direction: column;
 
   &__header {
-    margin-top: 0;
-    margin-bottom: 0.3rem;
+    margin: 0;
     font-size: 0.9em;
     text-transform: uppercase;
   }
@@ -98,8 +97,8 @@ const { validate } = modalStore;
   }
 
   &__alert {
-    margin-top: 0.3em;
-    font-size: 0.8em;
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
     color: $danger;
   }
 }

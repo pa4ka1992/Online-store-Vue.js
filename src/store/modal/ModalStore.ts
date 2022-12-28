@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref, reactive } from 'vue';
+import { ref, reactive, watch } from 'vue';
 import { IValidation, TValidationField } from './types';
 import { validationInfo } from './constants';
 
@@ -29,6 +29,14 @@ export const useModalStore = defineStore('ModalStore', () => {
       setValidState(false, true);
     }
   };
+
+  watch(modalIsShow, (newModalIsShow) => {
+    if (newModalIsShow) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  });
 
   return {
     modalIsShow,

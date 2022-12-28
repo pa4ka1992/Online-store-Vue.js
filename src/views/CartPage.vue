@@ -1,5 +1,8 @@
 <template>
-  <section class="cart container" v-if="cart.length > 0">
+  <section
+  v-scroll-lock="modalIsShow"
+  class="cart container"
+  v-if="cart.length > 0">
     <section class="cart__info">
       <cart-pagination />
       <transition-group class="products" name="products-anime" tag="ul">
@@ -20,7 +23,9 @@
     <p class="empty__info">Look at the main page to select products or find what you need in the search</p>
     <my-button class="empty__go-main" @click="router.push('/')">Main</my-button>
   </section>
-  <buy-modal v-if="modalIsShow" />
+  <transition-group name="modal-anime">
+    <buy-modal v-if="modalIsShow" />
+  </transition-group>
 </template>
 
 <script lang="ts" setup>
@@ -46,6 +51,11 @@ const { modalIsShow } = storeToRefs(useModalStore());
   padding: 0 10px;
   font-family: 'Poppins', sans-serif;
 }
+
+body {
+  overflow: hidden;
+}
+
 .cart {
   display: grid;
   grid-template-columns: 4fr 1fr;
@@ -92,4 +102,18 @@ const { modalIsShow } = storeToRefs(useModalStore());
   transform: translateY(-50%);
 }
 
+.modal-anime-enter-active,
+.modal-anime-leave-active {
+  transition: all 0.3s ease;
+}
+
+.modal-anime-enter-from,
+.modal-anime-leave-to {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.modal-anime-leave-active {
+  transform: scale(0);
+}
 </style>

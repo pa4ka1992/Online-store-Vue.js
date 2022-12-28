@@ -55,7 +55,7 @@ export const validationInfo = {
     isAlert: false,
     regex: '^(0[1-9]|1[0-2])/?([0-9]{2})$',
     type: 'number',
-    header: 'Expiration date',
+    header: 'VALID THRU',
     placeholder: 'ММ/YY',
     alert: 'Date is incorrect. Follow example: ММ/YY',
   },

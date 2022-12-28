@@ -12,9 +12,11 @@
           <my-input :field="'adress'" />
           <my-input :field="'email'" />
         </div>
-        <pay-card />
+        <div class="payment">
+          <pay-card class="payment__card" />
+          <my-button class="payment__button" @click="buy">Confirm</my-button>
+        </div>
       </section>
-      <my-button class="buy__form--button" @click="buy">Confirm</my-button>
     </section>
   </div>
 </template>
@@ -65,6 +67,7 @@ const buy = (): void => {
   overflow: hidden;
 
   &__form {
+    flex-basis: 45%;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -98,12 +101,20 @@ const buy = (): void => {
       .personal-info {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
       }
-    }
 
-    &--button {
-      margin-top: 2rem;
+      .payment {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &__card {
+        }
+
+        &__button {
+          margin-top: 2rem;
+        }
+      }
     }
   }
 }

@@ -34,8 +34,8 @@ import MyInput from '@/components/UI/MyInput.vue';
 
 .card {
   position: relative;
-  padding: 0.5rem 1.5rem;
-  min-width: 300px;
+  padding: 0.5rem 1.8rem;
+  min-width: 365px;
   background: {
     image: url(@/assets/img/card-bg.jpg);
     size: cover;
@@ -64,14 +64,8 @@ import MyInput from '@/components/UI/MyInput.vue';
     }
   }
 
-  &__chip,
-  &__number,
-  &__info {
-    padding: 0 1rem;
-  }
-
   &__chip {
-    margin: 0.5rem 0;
+    margin-left: 1rem;
 
     &--img {
       display: block;
@@ -80,13 +74,12 @@ import MyInput from '@/components/UI/MyInput.vue';
   }
 
   &__number {
-    :deep(.my-input__group--input) {
+    :deep(.form__group--input) {
       text-align: center;
     }
   }
 
   &__info {
-    margin-top: 0.5rem;
     width: 100%;
 
     &--owner {
@@ -96,21 +89,30 @@ import MyInput from '@/components/UI/MyInput.vue';
 
     &--inputs {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      gap: 1rem;
 
-      :deep(.my-input) {
-        flex-direction: row;
+      .date {
+        flex-basis: 50%;
+      }
+
+      .cvv {
+        flex-basis: 50%;
+      }
+
+      :deep(.my-input .form) {
+        display: flex;
         align-items: center;
+        justify-content: center;
         gap: 0.5em;
         font-size: 0.8em;
 
-        .my-input__header {
+        .form__header {
           font-weight: 400;
         }
 
-        .my-input__group--input {
-          max-width: 45px;
+        .form__group--input {
+          text-align: center;
+          max-width: 3.5em;
         }
       }
     }

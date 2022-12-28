@@ -1,6 +1,5 @@
 <template>
   <section
-  v-scroll-lock="modalIsShow"
   class="cart container"
   v-if="cart.length > 0">
     <section class="cart__info">

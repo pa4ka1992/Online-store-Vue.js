@@ -1,23 +1,25 @@
 <template>
   <div class="my-input">
-    <h4 class="my-input__header">{{ fieldObj.header }}</h4>
-    <div class="my-input__group">
-      <input
-        class="my-input__group--input"
-        v-model="fieldObj.val"
-        @blur="validate(field)"
-        @change="validate(field)"
-        :type="fieldObj.type"
-        :placeholder="fieldObj.placeholder"
-      />
-      <span v-if="fieldObj.isAlert" class="my-input__alert">
-        {{ fieldObj.alert }}
-      </span>
-      <span class="my-input__group--check">
-        <font-awesome-icon v-if="fieldObj.isValid" icon="fa-solid fa-check" />
-        <font-awesome-icon v-if="fieldObj.isAlert" icon="fa-solid fa-xmark" />
-      </span>
+    <div class="form">
+      <h4 class="form__header">{{ fieldObj.header }}</h4>
+      <div class="form__group">
+        <input
+          class="form__group--input"
+          v-model="fieldObj.val"
+          @blur="validate(field)"
+          @change="validate(field)"
+          :type="fieldObj.type"
+          :placeholder="fieldObj.placeholder"
+        />
+        <span class="form__group--check">
+          <font-awesome-icon v-if="fieldObj.isValid" icon="fa-solid fa-circle-check" />
+          <font-awesome-icon v-if="fieldObj.isAlert" icon="fa-solid fa-circle-xmark" />
+        </span>
+      </div>
     </div>
+    <span :class="{ visible: fieldObj.isAlert }" class="my-input__alert">
+      {{ fieldObj.alert }}
+    </span>
   </div>
 </template>
 
@@ -50,56 +52,71 @@ const { validate } = modalStore;
   display: flex;
   flex-direction: column;
 
-  &__header {
-    margin: 0;
-    font-size: 0.9em;
-    text-transform: uppercase;
-  }
-
-  &__group {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-
-    &--input {
-      padding: 0.3em 0.6rem;
-      font-size: 1em;
-      border: none {
-        radius: 10px;
-      }
-      outline: 2px solid $secondary;
-      transition: all 0.2s;
-
-      &:focus-visible {
-        transform: scale(0.96);
-        outline-color: $primary;
-      }
-
-      &::-webkit-outer-spin-button,
-      &::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-      }
+  .form {
+    &__header {
+      margin: 0;
+      font-size: 0.9em;
+      text-transform: uppercase;
     }
 
-    &--check {
-      position: absolute;
-      right: -25px;
-      top: 3px;
+    &__group {
+      display: flex;
+      flex-direction: column;
+      position: relative;
 
-      .fa-check {
-        color: $success;
+      &--input {
+        font-family: 'Poppins', sans-serif;
+        flex-basis: 100%;
+        padding: 0.3em 0.6rem;
+        font-size: 1em;
+        border: none {
+          radius: 10px;
+        }
+        outline: 2px solid $secondary;
+        transition: all 0.2s;
+
+        &:focus-visible {
+          transform: scale(0.96);
+          outline-color: $primary;
+        }
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+        }
       }
 
-      .fa-xmark {
-        color: $danger;
+      &--check {
+        position: absolute;
+        right: -1.4em;
+        top: 2px;
+
+        .fa-circle-check,
+        .fa-circle-xmark {
+          background-color: $light;
+          border-radius: 50%;
+        }
+
+        .fa-circle-check {
+          color: $success;
+        }
+
+        .fa-circle-xmark {
+          color: $danger;
+        }
       }
     }
   }
 
   &__alert {
+    opacity: 0;
     margin-top: 0.3rem;
     font-size: 0.8rem;
     color: $danger;
+  }
+
+  .visible {
+    opacity: 1;
   }
 }
 </style>

@@ -24,7 +24,9 @@ const collapsed = ref(false);
 
     <section :class="!collapsed ? 'filter-dropdown__content_collapsed' : ''" class="filter-dropdown__content">
       <span class="filter-dropdown__divider"></span>
-      <slot></slot>
+      <div class="filter-dropdown__content-wrap">
+        <slot></slot>
+      </div>
     </section>
   </section>
 </template>
@@ -84,6 +86,11 @@ const collapsed = ref(false);
     &_collapsed {  
       height: 0;
     }
+  }
+
+  &__content-wrap {
+    max-height: 100%;
+    padding: 10px 20px;
   }
 
   &__divider {

@@ -8,23 +8,18 @@
     </h3>
     <div class="select-group">
       <h4 class="select-group__header">Product per page:</h4>
-      <my-select
-      class="select-group__select"
-      :limit="limit"
-      :maxLimit="maxLimit"
-      @update="updateLimit"></my-select>
+      <my-select class="select-group__select" :limit="limit" :maxLimit="maxLimit" @update="updateLimit"></my-select>
     </div>
     <my-paginate
       v-model="page"
       :page-count="totalPage"
-      :prev-text="'Prev'"
-      :next-text="'Next'"
+      :prev-text="'<'"
+      :next-text="'>'"
       :container-class="'pages'"
       :page-class="'page'"
       :next-class="'page arrow'"
       :prev-class="'page arrow'"
-      :break-view-class="'break'"
-    />
+      :break-view-class="'break'" />
   </section>
 </template>
 
@@ -34,7 +29,7 @@ import { useCartStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import Paginate from 'vuejs-paginate-next';
 
-const { totalProducts } = storeToRefs(useCartStore())
+const { totalProducts } = storeToRefs(useCartStore());
 const { limit, page, totalPage } = storeToRefs(usePaginationStore());
 const { maxLimit, updateLimit } = usePaginationStore();
 const MyPaginate = Paginate;
@@ -45,6 +40,7 @@ const MyPaginate = Paginate;
 
 .pagination {
   display: grid;
+  align-items: center;
   grid-template-columns: 1fr 4fr 2fr;
   padding: 0.5rem 0;
   width: 100%;
@@ -79,8 +75,10 @@ const MyPaginate = Paginate;
   .pages {
     justify-self: end;
     display: flex;
+    justify-content: flex-end;
     gap: 0.1rem;
     list-style: none;
+    min-width: 375px;
 
     :deep(.page) {
       padding: 0.3rem 0.2rem;
@@ -116,18 +114,6 @@ const MyPaginate = Paginate;
 
     :deep(.active) {
       background-color: $primary-darker;
-    }
-
-    :deep(.break) {
-      color: $dark;
-
-      &:hover {
-        background-color: $primary-darker;
-      }
-    }
-
-    :deep(.arrow) {
-      padding: 0.3rem 0.5rem;
     }
   }
 }

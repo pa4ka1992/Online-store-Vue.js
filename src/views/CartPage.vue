@@ -77,12 +77,19 @@ const { modalIsShow } = storeToRefs(useModalStore());
 .products-anime-move,
 .products-anime-enter-active,
 .products-anime-leave-active {
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 
 .products-anime-enter-from,
 .products-anime-leave-to {
   opacity: 0;
-  transform: translateX(-50px);
+  transform: scale(0.9);
 }
+
+.products-anime-leave-active {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 </style>

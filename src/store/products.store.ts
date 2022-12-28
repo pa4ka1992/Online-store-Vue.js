@@ -1,7 +1,16 @@
 import { defineStore } from 'pinia';
 import { ref, type Ref, computed } from 'vue';
 
-import { IFilter, ISort, IProduct, ProductRepository, useStringSort, TProductKeys, TValuesCountMap } from '@/services';
+import {
+  IFilter,
+  ISort,
+  IProduct,
+  ProductRepository,
+  useStringSort,
+  TProductKeys,
+  TValuesCount,
+  TValuesCountMap,
+} from '@/services';
 
 export const useProductsStore = defineStore('products', () => {
   const _products: Ref<IProduct[]> = ref([]);
@@ -20,7 +29,10 @@ export const useProductsStore = defineStore('products', () => {
       .filter((product) => {
         let result = true;
         for (const value of filters.value) {
-          result = value[1].reduce((acc, item) => acc && item(product), result);
+          result = 
+            Array.isArray(value[1]) ? 
+            value[1].reduce((acc, item) => acc && item(product), result) 
+            : value[1](product);
           if (!result) return false;
         }
         return result;
@@ -30,7 +42,7 @@ export const useProductsStore = defineStore('products', () => {
 
   const productsRaw = computed(() => {
     return [..._products.value];
-  })
+  });
 
   function getProductById(id: string) {
     return _productMap.value[id];
@@ -42,10 +54,11 @@ export const useProductsStore = defineStore('products', () => {
       const value = map.get(product[key]);
       value ? value.count++ : null;
     }
-  };
+    return map;
+  }
 
   function getValuesCountMap<Key extends TProductKeys>(key: Key): TValuesCountMap<Key> {
-    const result = new Map<IProduct[Key], { count: number; total: number }>();
+    const result = new Map<IProduct[Key], TValuesCount>();
     for (const product of _products.value) {
       const value = result.get(product[key]);
       if (!value) result.set(product[key], { count: 0, total: 1 });
@@ -54,9 +67,9 @@ export const useProductsStore = defineStore('products', () => {
 
     countValues(key, result);
     return result;
-  };
+  }
 
-  const filters: Ref<Map<string, IFilter[]>> = ref(new Map());
+  const filters: Ref<Map<string, IFilter[] | IFilter>> = ref(new Map());
   const sortType: Ref<ISort> = ref(useStringSort('title'));
 
   return {

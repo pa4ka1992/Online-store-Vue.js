@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, type Ref, computed } from 'vue';
 
-import { IFilter, ISort, IProduct, ProductRepository, useStringSort, TProductKeys, TValuesCount } from '@/services';
+import { IFilter, ISort, IProduct, ProductRepository, useStringSort, TProductKeys, TValuesCountMap } from '@/services';
 
 export const useProductsStore = defineStore('products', () => {
   const _products: Ref<IProduct[]> = ref([]);
@@ -36,19 +36,19 @@ export const useProductsStore = defineStore('products', () => {
     return _productMap.value[id];
   }
 
-  function countValues<Key extends TProductKeys>(key: Key, map: TValuesCount<Key>) {
-    map.forEach((value) => value.count = 0);
+  function countValues<Key extends TProductKeys>(key: Key, map: TValuesCountMap<Key>) {
+    map.forEach((value) => (value.count = 0));
     for (const product of products.value) {
       const value = map.get(product[key]);
       value ? value.count++ : null;
     }
   };
 
-  function getValuesCountMap<Key extends TProductKeys>(key: Key): TValuesCount<Key> {
-    const result = new Map<IProduct[Key], { count: number, total: number }>();
+  function getValuesCountMap<Key extends TProductKeys>(key: Key): TValuesCountMap<Key> {
+    const result = new Map<IProduct[Key], { count: number; total: number }>();
     for (const product of _products.value) {
       const value = result.get(product[key]);
-      if (!value) result.set(product[key], {count: 0, total: 1} );
+      if (!value) result.set(product[key], { count: 0, total: 1 });
       else value.total++;
     }
 

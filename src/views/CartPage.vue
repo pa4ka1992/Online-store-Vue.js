@@ -27,7 +27,7 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
 import router from '@/router';
-import { useCartStore, usePaginationStore, useModalStore } from '@/store';
+import { useCartStore, usePaginationStore } from '@/store';
 import CartPagination from '@/components/cart/CartPagination.vue';
 import CartProduct from '@/components/cart/CartProduct.vue';
 import CartSummary from '@/components/cart/CartSummary.vue';
@@ -35,7 +35,6 @@ import BuyModal from '@/components/modal/BuyModal.vue';
 
 const { pageProducts, startIndex } = storeToRefs(usePaginationStore());
 const { cart } = storeToRefs(useCartStore());
-const { modalIsShow } = storeToRefs(useModalStore());
 </script>
 
 <style lang="scss" scoped>

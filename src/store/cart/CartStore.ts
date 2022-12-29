@@ -15,13 +15,13 @@ export const useCartStore = defineStore('cartStore', () => {
   const cart = computed((): ICartProduct[] => [..._cart.value]);
 
   const getProducts = async () => {
-    const res: Response = await fetch('https://dummyjson.com/products?limit=100', { method: 'GET' })
+    const res: Response = await fetch('https://dummyjson.com/products?limit=100', { method: 'GET' });
     const parse: { products: IProduct[] } = await res.json();
-    const products:  IProduct[] = parse.products;
+    const products: IProduct[] = parse.products;
 
     products.map((product) => {
       addProduct(product);
-    })
+    });
   };
 
   const findProduct: TFindFunc<ICartProduct> = (incomeProduct) => {
@@ -86,7 +86,7 @@ export const useCartStore = defineStore('cartStore', () => {
 
   const clearStore = (): void => {
     localStorage.removeItem('RSOnlineStore-cart');
-  }
+  };
 
   watch(
     () => _cart,
@@ -102,7 +102,7 @@ export const useCartStore = defineStore('cartStore', () => {
     const cartLocalStorage: string | null = localStorage.getItem('RSOnlineStore-cart');
 
     if (cartLocalStorage) {
-        _cart.value = [];
+      _cart.value = [];
       const newCart: ICartProduct[] = JSON.parse(cartLocalStorage);
 
       newCart.forEach((product) => {

@@ -3,12 +3,14 @@ import { useCartStore } from './CartStore';
 import { ref, computed, watch, onBeforeMount } from 'vue';
 import { ICartProduct } from './types';
 import router from '@/router';
+// import { useRoute } from 'vue-router';
 
 export const usePaginationStore = defineStore('paginationStore', () => {
   const { cart } = storeToRefs(useCartStore());
   const page = ref(1);
   const limit = ref(10);
   const maxLimit = 10;
+  // const route = useRoute()
 
   const totalPage = computed((): number => {
     if (!limit.value) return 1;
@@ -40,6 +42,14 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     localStorage.removeItem('RSOnlineStore-cart-page');
     localStorage.removeItem('RSOnlineStore-cart-limit');
   }
+
+  // watch(
+  //   () => route.query,
+  //   (_, toParams) => {
+  //     limit.value = Number(toParams['limit']);
+  //     page.value = Number(toParams['page']);
+  //   },
+  // );
 
   watch(totalPage, (newTotalPage) => {
     if (page.value > newTotalPage) page.value = newTotalPage;

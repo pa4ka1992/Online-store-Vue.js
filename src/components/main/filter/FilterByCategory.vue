@@ -17,7 +17,7 @@ const { categories, toggleCategory } = useFilterByCategory(props.keyOfProduct);
     <section class="filter-categories-list">
       <div v-for="category in categories" class="filter-categories-list__item" :key="category.name">
         <FilterCheckbox :model-value="category.checked" @update:model-value="toggleCategory(category.name)">
-          {{category.name}} ({{category.count}})
+          <span class="category-name">{{category.name}} </span> ({{category.count}})
         </FilterCheckbox>
       </div>
     </section>
@@ -49,6 +49,13 @@ const { categories, toggleCategory } = useFilterByCategory(props.keyOfProduct);
   &__item {
     margin: 8px 0;
   }
+}
+
+.category-name {
+  width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 </style>

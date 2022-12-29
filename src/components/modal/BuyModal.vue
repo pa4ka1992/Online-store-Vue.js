@@ -16,10 +16,12 @@
             </div>
             <div class="payment">
               <pay-card class="payment__card" />
-              <my-button class="payment__button" @click="buy">Confirm</my-button>
-              <span class="payment__alert" :class="{ visible: !isAllValid }">
-                Please make sure all fields are filled in correctly
-              </span>
+              <div class="payment__buy-group">
+                <my-button class="payment__buy-group--button" @click="buy">Confirm</my-button>
+                <span class="payment__buy-group--alert" :class="{ visible: buyAttemt }">
+                  Please make sure all fields are filled in correctly
+                </span>
+              </div>
             </div>
           </section>
         </section>
@@ -30,7 +32,7 @@
 
 <script lang="ts" setup>
 import { useCartStore, useModalStore, usePaginationStore, usePromoStore } from '@/store';
-import { watch } from 'vue';
+import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import MyInput from '@/components/UI/MyInput.vue';
 import MyButton from '@/components/UI/MyButton.vue';
@@ -41,28 +43,35 @@ const paginationStore = usePaginationStore();
 const promoStore = usePromoStore();
 const cartStore = useCartStore();
 const { modalIsShow, isAllValid } = storeToRefs(modalStore);
+const buyAttemt = ref(false);
 
 const closeModal = (): void => {
   modalStore.$reset();
   modalIsShow.value = false;
+  buyAttemt.value = false;
 };
 
 const buy = (): void => {
-  cartStore.clearStore();
-  paginationStore.clearStore();
-  cartStore.$reset();
-  paginationStore.$reset();
-  promoStore.$reset();
-  closeModal();
+  if (isAllValid.value) {
+    cartStore.clearStore();
+    paginationStore.clearStore();
+    cartStore.$reset();
+    paginationStore.$reset();
+    promoStore.$reset();
+    closeModal();
+    buyAttemt.value = false;
+    return;
+  }
+  buyAttemt.value = true;
 };
 
 watch(modalIsShow, (newModalIsShow) => {
-    if (newModalIsShow) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  });
+  if (newModalIsShow) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = 'auto';
+  }
+});
 </script>
 
 <style lang="scss" scoped>
@@ -123,16 +132,24 @@ watch(modalIsShow, (newModalIsShow) => {
         flex-direction: column;
         justify-content: space-between;
 
-        &__button {
-          margin-top: 2rem;
-        }
+        &__buy-group {
+          display: flex;
+          flex-direction: column;
 
-        &__alert {
-          opacity: 0;
-        }
+          &--button {
+            margin-top: 2rem;
+          }
 
-        .visible {
-          opacity: 1;
+          &--alert {
+            margin-top: 0.3rem;
+            font-size: 0.8rem;
+            color: $danger;
+            opacity: 0;
+          }
+
+          .visible {
+            opacity: 1;
+          }
         }
       }
     }

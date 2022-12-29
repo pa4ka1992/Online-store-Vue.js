@@ -9,12 +9,12 @@ export interface IValidation<T> {
 }
 
 export type TValidationField = Required<{
-  val: string
+  readonly val: string
   isValid: boolean
   isAlert: boolean
-  regex: string
-  type: string
-  placeholder: string
-  header: string
-  alert: string
+  readonly regex: string
+  readonly type: string
+  readonly placeholder: string
+  readonly header: string
+  readonly alert: string
 }>

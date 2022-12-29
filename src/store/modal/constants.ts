@@ -44,7 +44,7 @@ export const validationInfo = {
     isValid: false,
     isAlert: false,
     regex: '^[0-9]{16}$',
-    type: 'number',
+    type: 'string',
     header: 'Card number',
     placeholder: 'XXXX XXXX XXXX XXXX',
     alert: 'Card number is incorrect. Number of digits must be 16',

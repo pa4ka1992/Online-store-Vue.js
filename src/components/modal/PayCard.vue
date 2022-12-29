@@ -3,7 +3,11 @@
     <div class="wrapper">
       <h3 class="card__bank-name">BANK</h3>
       <div class="card__pay-service">
-        <img src="@/assets/img/visa.png" alt="pay-service" class="card__pay-service--img" />
+        <img
+          v-show="cardServiceImg" 
+          :src="cardServiceImg"
+          alt="pay-service"
+          class="card__pay-service--img" />
       </div>
     </div>
     <div class="card__chip">
@@ -25,8 +29,11 @@
 </template>
 
 <script lang="ts" setup>
-import {} from '@/store';
+import { useModalStore } from '@/store';
 import MyInput from '@/components/UI/MyInput.vue';
+import { storeToRefs } from 'pinia';
+
+const { cardServiceImg } = storeToRefs(useModalStore());
 </script>
 
 <style lang="scss" scoped>

@@ -1,11 +1,16 @@
 import { defineStore } from 'pinia';
-import { ref, reactive, watch } from 'vue';
+import { ref, computed, reactive } from 'vue';
 import { IValidation, TValidationField } from './types';
 import { validationInfo } from './constants';
 
 export const useModalStore = defineStore('ModalStore', () => {
   const modalIsShow = ref(false);
   const validation: IValidation<TValidationField> = reactive(validationInfo);
+
+  const isAllValid = computed((): boolean => {
+    const buyFieldKeys = <(keyof IValidation<TValidationField>)[]>Object.keys(validation);
+    return buyFieldKeys.every((field) => validation[field].isValid);
+  })
 
   const validate = (key: keyof IValidation<TValidationField>): void => {
 
@@ -30,17 +35,10 @@ export const useModalStore = defineStore('ModalStore', () => {
     }
   };
 
-  watch(modalIsShow, (newModalIsShow) => {
-    if (newModalIsShow) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  });
-
   return {
     modalIsShow,
     validation,
     validate,
+    isAllValid,
   };
 });

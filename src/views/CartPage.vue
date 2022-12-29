@@ -1,7 +1,5 @@
 <template>
-  <section
-  class="cart container"
-  v-if="cart.length > 0">
+  <section class="cart container" v-if="cart.length > 0">
     <section class="cart__info">
       <cart-pagination />
       <transition-group class="products" name="products-anime" tag="ul">
@@ -10,7 +8,8 @@
           v-for="(product, index) in pageProducts"
           :product="product"
           :index="index"
-          :key="product.id">
+          :key="product.id"
+        >
           <span> {{ index + startIndex }} </span>
         </cart-product>
       </transition-group>
@@ -22,9 +21,7 @@
     <p class="empty__info">Look at the main page to select products or find what you need in the search</p>
     <my-button class="empty__go-main" @click="router.push('/')">Main</my-button>
   </section>
-  <transition-group name="modal-anime">
-    <buy-modal v-if="modalIsShow" />
-  </transition-group>
+  <buy-modal />
 </template>
 
 <script lang="ts" setup>
@@ -99,20 +96,5 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-}
-
-.modal-anime-enter-active,
-.modal-anime-leave-active {
-  transition: all 0.3s ease;
-}
-
-.modal-anime-enter-from,
-.modal-anime-leave-to {
-  opacity: 0;
-  transform: scale(0);
-}
-
-.modal-anime-leave-active {
-  transform: scale(0);
 }
 </style>

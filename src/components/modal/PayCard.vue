@@ -4,14 +4,14 @@
       <h3 class="card__bank-name">BANK</h3>
       <div class="card__pay-service">
         <img
-          v-show="cardServiceImg" 
+          v-if="cardServiceImg"
           :src="cardServiceImg"
           alt="pay-service"
           class="card__pay-service--img" />
       </div>
     </div>
     <div class="card__chip">
-      <img src="@/assets/img/chip-logo-black-and-white.png" alt="card-chip" class="card__chip--img" />
+      <img src="@/assets/img/chipLogo.png" alt="card-chip" class="card__chip--img" />
     </div>
     <div class="card__number">
       <my-input :field="'card'" />
@@ -44,7 +44,7 @@ const { cardServiceImg } = storeToRefs(useModalStore());
   padding: 0.5rem 1.8rem;
   min-width: 365px;
   background: {
-    image: url(@/assets/img/card-bg.jpg);
+    image: url(@/assets/img/cardBG.jpg);
     size: cover;
     repeat: no-repeat;
   }

@@ -5,6 +5,8 @@ import { validationInfo } from './constants';
 import visa from '@/assets/img/visa.png';
 import mastercard from '@/assets/img/mastercard.png';
 import americanExpress from '@/assets/img/americanExpress.png';
+import payPal from '@/assets/img/payPal.png';
+import unionPay from '@/assets/img/unionPay.png';
 
 export const useModalStore = defineStore('ModalStore', () => {
   const modalIsShow = ref(false);
@@ -19,8 +21,11 @@ export const useModalStore = defineStore('ModalStore', () => {
     const cardNumber = validation.card.val[0];
 
     switch (cardNumber) {
+      case '1':
+        return payPal;
+
       case '3':
-        return americanExpress;
+        return unionPay;
 
       case '4':
         return visa;
@@ -29,7 +34,7 @@ export const useModalStore = defineStore('ModalStore', () => {
         return mastercard;
 
       default:
-        return undefined;
+        return americanExpress;
     }
   });
 

@@ -9,7 +9,7 @@ export const usePaginationStore = defineStore('paginationStore', () => {
   const { cart } = storeToRefs(useCartStore());
   const page = ref(1);
   const limit = ref(10);
-  const maxLimit = 10;
+  const maxLimit = [1, 2, 3, 4, 5, 10, 25, 50, 100];
   // const route = useRoute()
 
   const totalPage = computed((): number => {

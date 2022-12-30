@@ -5,7 +5,7 @@ import { type TNumberFields, type IProduct, useRangeFilter } from '@/services';
 import { useQueryParam } from './query-param';
 import { isNumberArray } from '@/utils';
 
-export function useFilterByCategory<Key extends keyof TNumberFields>(key: Key) {
+export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
   const productStore = useProductsStore();
   const { products, productsRaw } = storeToRefs(productStore);
   const { param } = useQueryParam(key);

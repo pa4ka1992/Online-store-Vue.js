@@ -33,6 +33,20 @@ const collapsed = ref(false);
 <style scoped lang="scss">
 @import '@/assets/scss/variables.scss';
 
+::-webkit-scrollbar {
+  width: 7px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $primary-light; 
+  border-radius: 10px;
+  
+  &:hover {
+    background-color: $primary; 
+  }
+}
+
 .filter-dropdown {
   background-color: $primary-dark;
   color: $white;
@@ -81,17 +95,21 @@ const collapsed = ref(false);
     align-items: stretch;
     flex-direction: column;
     overflow: hidden;
-    height: 200px;
-    transition: height 0.2s;
+    max-height: 200px;
+    transition: max-height 0.2s;
 
     &_collapsed {  
-      height: 0;
+      max-height: 0;
     }
   }
 
   &__content-wrap {
-    max-height: 100%;
-    padding: 15px 20px;
+    max-height: inherit;
+    border-width: 15px 20px;
+    border-color: $primary-dark;
+    border-radius: 20px;
+    overflow: hidden scroll;
+    border-style: solid;
   }
 
   &__divider {

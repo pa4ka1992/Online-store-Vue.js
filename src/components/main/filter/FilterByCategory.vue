@@ -28,23 +28,8 @@ const { categories, toggleCategory } = useFilterByCategory(props.keyOfProduct);
 
 @import '@/assets/scss/variables.scss';
 
-::-webkit-scrollbar {
-  width: 7px;
-  background-color: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: $primary-light; 
-  border-radius: 10px;
-  
-  &:hover {
-    background-color: $primary; 
-  }
-}
-
 .filter-categories-list {
   height: 100%;
-  overflow: hidden scroll;
 
   &__item {
     margin: 8px 0;

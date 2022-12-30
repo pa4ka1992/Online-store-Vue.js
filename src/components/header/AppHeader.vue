@@ -29,8 +29,6 @@ function click() {
 
 @import '@/assets/scss/variables.scss'; 
 
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-
 .page-header {
   display: flex;
   justify-content: space-between;

@@ -1,4 +1,4 @@
-import { computed, watch } from 'vue';
+import { computed, watchEffect } from 'vue';
 import { useProductsStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import { type TNumberFields, type IProduct, useRangeFilter } from '@/services';
@@ -15,7 +15,7 @@ export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
   }
 
   function findMax(array: IProduct[]) {
-    return array.reduce((acc, value) => (acc > value[key] ? value[key] : acc), Number.POSITIVE_INFINITY);
+    return array.reduce((acc, value) => (acc < value[key] ? value[key] : acc), Number.NEGATIVE_INFINITY);
   }
 
   const maxTotal = computed(() => {
@@ -55,9 +55,9 @@ export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
     }
   }
 
-  watch(param, () => {    
+  watchEffect(() => {    
     if (!isNumberArray(param.value)) productStore.filters.set(key, () => true);
-    else productStore.filters.set(key, useRangeFilter(key, ...param.value));
+    else productStore.filters.set(key, useRangeFilter(key, { lower: param.value[0], upper: param.value[1] }));
   });
 
   return { max, maxTotal, min, minTotal };

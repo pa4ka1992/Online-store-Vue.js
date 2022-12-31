@@ -17,7 +17,7 @@
         </span>
       </div>
     </div>
-    <span :class="{ visible: fieldObj.isAlert }" class="my-input__alert">
+    <span  v-if="fieldObj.isAlert" class="my-input__alert">
       {{ fieldObj.alert }}
     </span>
   </div>
@@ -109,14 +109,10 @@ const { validate } = modalStore;
   }
 
   &__alert {
-    opacity: 0;
+    opacity: 1;
     margin-top: 0.3rem;
     font-size: 0.8rem;
     color: $danger;
-  }
-
-  .visible {
-    opacity: 1;
   }
 }
 </style>

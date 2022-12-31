@@ -55,6 +55,7 @@ const { cardServiceImg } = storeToRefs(useModalStore());
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 1rem 0;
   }
 
   &__bank-name {

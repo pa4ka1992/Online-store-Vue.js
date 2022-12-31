@@ -2,7 +2,7 @@
   <Teleport to="body">
     <transition-group name="modal-anime">
       <div class="buy" v-if="modalIsShow" @mousedown="closeModal">
-        <section @mousedown.stop @submit.prevent class="buy__form">
+        <section v-show="!orderIsCompleted" @mousedown.stop @submit.prevent class="buy__form">
           <span class="buy__form--close" @click="closeModal">
             <font-awesome-icon icon="fa-solid fa-xmark" />
           </span>
@@ -25,6 +25,7 @@
             </div>
           </section>
         </section>
+        <span v-show="orderIsCompleted" class="buy__success">Order successfully completed!</span>
       </div>
     </transition-group>
   </Teleport>
@@ -37,6 +38,7 @@ import { storeToRefs } from 'pinia';
 import MyInput from '@/components/UI/MyInput.vue';
 import MyButton from '@/components/UI/MyButton.vue';
 import PayCard from '@/components/modal/PayCard.vue';
+import router from '@/router';
 
 const modalStore = useModalStore();
 const paginationStore = usePaginationStore();
@@ -44,6 +46,7 @@ const promoStore = usePromoStore();
 const cartStore = useCartStore();
 const { modalIsShow, isAllValid } = storeToRefs(modalStore);
 const buyAttemt = ref(false);
+const orderIsCompleted = ref(false);
 
 const closeModal = (): void => {
   modalStore.$reset();
@@ -53,13 +56,19 @@ const closeModal = (): void => {
 
 const buy = (): void => {
   if (isAllValid.value) {
+    orderIsCompleted.value = true;
     cartStore.clearStore();
     paginationStore.clearStore();
     cartStore.$reset();
     paginationStore.$reset();
     promoStore.$reset();
-    closeModal();
     buyAttemt.value = false;
+
+    setTimeout((): void => {
+      orderIsCompleted.value = false;
+      closeModal();
+      router.push({ path: '/' });
+    }, 3000);
     return;
   }
   buyAttemt.value = true;
@@ -123,8 +132,10 @@ watch(modalIsShow, (newModalIsShow) => {
       gap: 4rem;
 
       .personal-info {
+        flex-basis: 100%;
         display: flex;
         flex-direction: column;
+        gap: 1rem;
       }
 
       .payment {
@@ -153,6 +164,14 @@ watch(modalIsShow, (newModalIsShow) => {
         }
       }
     }
+  }
+
+  .buy__success {
+    padding: 1rem;
+    font-size: 1.5rem;
+    color: $primary;
+    border: 1px solid $secondary;
+    @include block-style;
   }
 }
 

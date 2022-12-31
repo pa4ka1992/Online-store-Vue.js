@@ -49,9 +49,9 @@ export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
       param.value = null;
     } else {
       const array = [];
-      array.push(bounds.lower ? bounds.lower : min.value); 
-      array.push(bounds.upper ? bounds.upper : max.value);
-      param.value = array;
+      array.push(bounds.lower && bounds.lower !== minTotal.value ? bounds.lower : min.value); 
+      array.push(bounds.upper && bounds.upper !== maxTotal.value ? bounds.upper : max.value);
+      param.value = array.length > 0 ? array : null;
     }
   }
 

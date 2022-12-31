@@ -5,10 +5,12 @@
       <div class="form__group">
         <input
           class="form__group--input"
-          v-model="fieldObj.val"
+          type="text"
+          :maxlength="fieldObj?.maxLength"
+          v-model.trim="fieldObj.val"
+          @input="fieldObj.modify()"
           @blur="validate(field)"
           @change="validate(field)"
-          :type="fieldObj.type"
           :placeholder="fieldObj.placeholder"
         />
         <span class="form__group--check">
@@ -17,7 +19,7 @@
         </span>
       </div>
     </div>
-    <span  v-if="fieldObj.isAlert" class="my-input__alert">
+    <span v-if="fieldObj.isAlert" class="my-input__alert">
       {{ fieldObj.alert }}
     </span>
   </div>

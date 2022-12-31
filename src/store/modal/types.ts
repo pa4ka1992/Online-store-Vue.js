@@ -8,13 +8,14 @@ export interface IValidation<T> {
   CVV: T
 }
 
-export type TValidationField = Required<{
-  readonly val: string
-  isValid: boolean
-  isAlert: boolean
-  readonly regex: string
-  readonly type: string
-  readonly placeholder: string
-  readonly header: string
-  readonly alert: string
-}>
+export type TValidationField = {
+  val: string;
+  isValid: boolean;
+  isAlert: boolean;
+  readonly regex: string;
+  readonly placeholder: string;
+  readonly header: string;
+  readonly alert: string;
+  modify: (this: TValidationField) => void;
+  maxLength?: string;
+};

@@ -17,6 +17,10 @@
             <div class="payment">
               <pay-card class="payment__card" />
               <div class="payment__buy-group">
+                <div class="payment__sum">
+                  <span class="payment__sum--header">Total price: </span>
+                  <span class="payment__sum--total"> <my-number :input="getPromoPrice" :fixed="2" /> $ </span>
+                </div>
                 <my-button class="payment__buy-group--button" @click="buy">Confirm</my-button>
                 <span class="payment__buy-group--alert" :class="{ visible: buyAttemt }">
                   Please make sure all fields are filled in correctly
@@ -44,6 +48,7 @@ const modalStore = useModalStore();
 const paginationStore = usePaginationStore();
 const promoStore = usePromoStore();
 const cartStore = useCartStore();
+const { getPromoPrice } = storeToRefs(promoStore);
 const { modalIsShow, isAllValid } = storeToRefs(modalStore);
 const buyAttemt = ref(false);
 const orderIsCompleted = ref(false);
@@ -147,8 +152,17 @@ watch(modalIsShow, (newModalIsShow) => {
           display: flex;
           flex-direction: column;
 
-          &--button {
-            margin-top: 2rem;
+          .payment__sum {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+
+            &--total {
+              color: $success;
+            }
           }
 
           &--alert {

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { type Ref, ref, computed } from 'vue';
+import { type Ref, ref, computed, watch } from 'vue';
 // Props
 // ===============
 const props = defineProps({
@@ -33,13 +33,19 @@ const emits = defineEmits<{
 
 // Slider and thumb logic
 
+// Slider bar
+// =========================
+
 const wrap: Ref<HTMLElement | null> = ref(null);
+
+const sliderBarElement: Ref<HTMLElement | null> = ref(null);
+
+const sliderbarWidth = computed(() => {
+  return sliderBarElement.value?.offsetWidth ?? 0;
+});
 
 // Common
 // ==========================
-
-const _leftPos = ref(0); 
-const _rightPos = ref(0);
 
 const stepLength = computed(() => {
   return (sliderbarWidth.value * props.step / (props.max - props.min));
@@ -50,21 +56,22 @@ function truncValue(value: number) {
 }
 
 function calcValue(value: number) {
-  return Math.floor((truncValue(value)) / stepLength.value) * props.step;
+  return Math.floor((truncValue(value)) / stepLength.value) * props.step + props.min;
 }
 
 function calcPos(value: number) {
   return value / props.step * stepLength.value;
 }
 
-// Slider bar
-// =========================
+const _leftPos = ref(calcPos(props.left)); 
+const _rightPos = ref(calcPos(props.right));
 
-const sliderBarElement: Ref<HTMLElement | null> = ref(null);
-
-const sliderbarWidth = computed(() => {
-  return sliderBarElement.value?.offsetWidth ?? 0;
-});
+watch(props, () => {
+  if (!active.value) { 
+    _leftPos.value = calcPos(props.left);
+    _rightPos.value = calcPos(props.right); 
+  }
+})
 
 // Thumbs
 // =========================

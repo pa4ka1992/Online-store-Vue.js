@@ -6,6 +6,7 @@ import { ref } from 'vue';
 
 const store = useTestStore();
 
+
 const left = ref(0);
 const right = ref(50);
 
@@ -14,6 +15,7 @@ const right = ref(50);
 <template>
 <div>
   <router-link to="/cart">cart</router-link>
+    <router-link to="/product">product</router-link>
   <h1> Counter is {{store.count}}</h1>
   <button class="btn btn-primary" @click="store.increment()">Click me!</button>
   <double-range-slider :step=10 v-model:left="left" v-model:right="right"></double-range-slider>

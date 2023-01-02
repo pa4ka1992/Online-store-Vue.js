@@ -24,6 +24,7 @@ const { images } = toRefs(props.product);
 
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
+
 .product {
   display: grid;
   grid-template-columns: 0.2fr 10rem 3fr 1.5fr 0.8fr;

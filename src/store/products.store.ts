@@ -1,22 +1,20 @@
 import { defineStore } from 'pinia';
-import { ref, type Ref, computed } from 'vue';
+import { ref, type Ref, computed, onBeforeMount } from 'vue';
 
 import { IFilter } from '@/services/model/filter';
 import { IProduct } from '@/services/model/product';
 import { ProductRepository } from '@/services/product.repository';
-
+import { IProductMap } from '@/services/product-source';
 
 export const useProductsStore = defineStore('products', () => {
   const _products: Ref<IProduct[]> = ref([]);
   const repo = ProductRepository.getInstance();
-  const _productMap: Ref<{[key: string]: IProduct}> = ref({});
+  const _productMap: Ref<IProductMap> = ref({});
 
   async function fetchData() {
     _products.value = await repo.fetchProducts();
-    _products.value.forEach((item) => _productMap.value[item.id] = item);
+    _products.value.forEach((item) => (_productMap.value[item.id] = item));
   }
-
-  fetchData();
 
   const products = computed(() => {
     return _products.value.filter((product) => {
@@ -24,15 +22,20 @@ export const useProductsStore = defineStore('products', () => {
     });
   });
 
-  function getProductById(id: string) {
+  function getProductById(id: keyof IProductMap) {
+    console.log(_productMap.value);
     return _productMap.value[id];
   }
 
   const filters: Ref<IFilter[]> = ref([]);
 
+  onBeforeMount(async () => {
+    await fetchData();
+  });
+
   return {
     products,
     fetchData,
-    getProductById
+    getProductById,
   };
 });

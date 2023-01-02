@@ -81,9 +81,9 @@ $border-radius: 100px;
   }
 
   &__btn {
-    font-size: 2rem;
+    font-size: 1.5rem;
     position: absolute;
-    padding-right: calc($side-padding / 2);
+    padding: 0 calc($side-padding / 2);
     right: -1px;
     top: 0;
     height: 100%;

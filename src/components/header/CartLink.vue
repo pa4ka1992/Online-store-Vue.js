@@ -46,7 +46,7 @@ $total-color: #FB4A9B;
     height: 100%;
     transition: background-color 0.5s;
 
-    font-size: 2rem;
+    font-size: 1.7rem;
 
     &:visited {
       color: $black;

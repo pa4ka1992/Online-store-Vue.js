@@ -2,14 +2,16 @@ import { defineStore } from 'pinia';
 import { ref, type Ref, computed } from 'vue';
 
 import {
-  IFilter,
-  ISort,
-  IProduct,
+  type IFilter,
+  type ISort,
+  type IProduct,
   ProductRepository,
   useStringSort,
-  TProductKeys,
-  TValuesCount,
-  TValuesCountMap,
+  type TProductKeys,
+  type TStringFields,
+  type TValuesCount,
+  type TValuesCountMap,
+  SortType
 } from '@/services';
 
 export const useProductsStore = defineStore('products', () => {
@@ -31,15 +33,14 @@ export const useProductsStore = defineStore('products', () => {
       .filter((product) => {
         let result = true;
         for (const value of filters.value) {
-          result = 
-            Array.isArray(value[1]) ? 
-            value[1].reduce((acc, item) => acc && item(product), result) 
+          result = Array.isArray(value[1])
+            ? value[1].reduce((acc, item) => acc && item(product), result)
             : value[1](product);
           if (!result) return false;
         }
         return result;
       })
-      .sort(sortType.value);
+      .sort(_sortType.value.cmpFunc);
   });
 
   const productsRaw = computed(() => {
@@ -72,12 +73,25 @@ export const useProductsStore = defineStore('products', () => {
   }
 
   const filters: Ref<Map<string, IFilter[] | IFilter>> = ref(new Map());
-  const sortType: Ref<ISort> = ref(useStringSort('title'));
+  
+  const defaultSort = useStringSort('title');
+  
+  const sortType: Ref<ISort | null> = ref(null);
+
+  const _sortType = computed({
+    get() {
+      return sortType.value ?? defaultSort;
+    },
+    set(value: ISort) {
+      sortType.value = value;
+    }
+  })
 
   return {
     products,
     filters,
     sortType,
+    defaultSort,
     productsRaw,
     loaded,
     countValues,

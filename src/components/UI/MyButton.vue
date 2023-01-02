@@ -26,7 +26,8 @@ export default {
   background-color: $primary;
   border: none {
     radius: 5px;
-  }
+  };
+  white-space: nowrap;
   cursor: pointer;
   transition: transform 0.3s, background-color 0.2s;
 

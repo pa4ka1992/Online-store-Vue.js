@@ -1,11 +1,18 @@
 <template>
-  <div class="wrapper">
-    <div class="product__prices">
-      <span class="product__price--full">{{ product.price }} $</span>
-      <span class="product__price--fix">{{ getFixPrice().toFixed(0) }} $</span>
-    </div>
-    <my-button>Add to cart</my-button>
-    <my-button>Buy</my-button>
+  <div class="price__wrapper">
+    <section class="product__price-info">
+      <div class="product__prices">
+        <span v-if="discountPercentage" class="product__price--fix"> {{ getFixPrice().toFixed(0) }} $ </span>
+        <span :class="{ crossed: discountPercentage }" class="product__price--full"> {{ price }} $ </span>
+      </div>
+      <div class="product__stock">
+        Left in stock: {{ stock }}pc.
+      </div>
+      <div class="product__buttons">
+        <my-button>Add to cart</my-button>
+        <my-button>Buy</my-button>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -18,20 +25,59 @@ const props = defineProps<{
 }>();
 
 const { product } = toRefs(props);
+const { discountPercentage, price, stock} = toRefs(product.value);
 
 const getFixPrice = () => {
-  return product.value.price * (1 - product.value.discountPercentage / 100);
+  return price.value * (1 - discountPercentage.value / 100);
 };
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
 
-.product__price {
+.price__wrapper {
   flex-basis: 20%;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  @include block-style;
+  font: {
+    size: 1.5rem;
+    weight: 600;
+  }
+
+  .product__price-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: sticky;
+    top: 1rem;
+    padding: 1rem;
+    @include block-style;
+
+    .product__prices {
+      display: flex;
+      align-items: flex-end;
+      gap: 1rem;
+
+      .crossed {
+        font: {
+          size: 1rem;
+          weight: 400;
+        }
+        color: $secondary;
+        text-decoration: line-through;
+      }
+    }
+
+    .product__stock {
+      font-size: 1rem;
+      font-weight: 400;
+      color: $secondary;
+    }
+
+    .product__buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+
+    }
+  }
 }
 </style>

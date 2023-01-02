@@ -1,6 +1,6 @@
 <template>
   <div class="product__header">
-    <h2 class="product__header--title">{{ product.title }}</h2>
+    <h2 class="product__header--title">{{ title }}</h2>
     <div class="product__header--info">
       <div class="header__info--stars">
         <font-awesome-icon
@@ -10,9 +10,15 @@
           icon="fa-solid fa-star"
         />
       </div>
-      <span class="header__info--rating">{{ product.rating }}</span>
-      <div class="header__info--feedback">{{ getRandom(150) }} feedbacks</div>
-      <span class="header__info--buy-count">Bought more than {{ getRandom(5) * 50 }} times</span>
+      <span class="header__info--rating">{{ rating }}</span>
+      <span
+      class="header__info--feedback">
+      {{ getRandom(150) }} feedbacks
+    </span>
+      <span
+        class="header__info--buy-count">
+        Bought more than {{ getRandom(5) * 50 }} times
+    </span>
     </div>
   </div>
 </template>
@@ -27,9 +33,10 @@ const props = defineProps<{
 }>();
 
 const { product } = toRefs(props);
+const { title, rating } = toRefs(product.value);
 
 const getStars = () => {
-  return Math.floor(product.value.rating);
+  return Math.floor(rating.value);
 };
 
 const getRandom = (max: number): number => {
@@ -44,9 +51,11 @@ const getRandom = (max: number): number => {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 1rem;
 
   &--title {
     margin: 0.5rem;
+    color: $primary;
   }
 
   &--info {
@@ -65,6 +74,7 @@ const getRandom = (max: number): number => {
     .header__info--feedback {
       border-bottom: 2px dashed $secondary;
       transition: all 0.2s;
+      cursor: pointer;
 
       &:hover {
         color: $dark;

@@ -2,8 +2,10 @@
   <section class="product container">
     <product-header :product="product" />
     <section class="product__content">
-      <product-images :product="product" />
-      <product-info :product="product" />
+      <div class="content__wrapper">
+        <product-images :product="product" />
+        <product-info :product="product" />
+      </div>
       <product-price :product="product" />
     </section>
   </section>
@@ -63,10 +65,16 @@ const product = ref({
   &__content {
     display: flex;
     justify-content: center;
-  }
+    gap: 1rem;
+    position: relative;
 
-  &__price {
-    @include block-style;
+    .content__wrapper {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem;
+      font-family: 'Nunito', sans-serif;
+      @include block-style;
+    }
   }
 }
 </style>

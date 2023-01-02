@@ -9,13 +9,14 @@ import {
   faArrowRight,
   faArrowLeft,
   faCircleCheck,
-  faCircleXmark
+  faCircleXmark,
+  faArrowsRotate
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { App } from 'vue';
 
 export const fontAwesomePlugin = (app: App): void => {
-  library.add(faStar, faMinus, faPlus, faTrash, faSpinner, faXmark, faArrowRight, faArrowLeft, faCircleCheck, faCircleXmark);
+  library.add(faStar, faMinus, faPlus, faTrash, faSpinner, faXmark, faArrowRight, faArrowLeft, faCircleCheck, faCircleXmark, faArrowsRotate);
   app.component('FontAwesomeIcon', FontAwesomeIcon);
 };
 

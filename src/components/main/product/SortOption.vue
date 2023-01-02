@@ -47,6 +47,12 @@ function toggleSort() {
   display: flex;
   align-items: center;
 
+  transition: background-color 0.5s;
+
+  &:hover {
+    background-color: $primary-light;
+  }
+
   &__icon {
     font-size: 1rem;
     margin-right: 5px;

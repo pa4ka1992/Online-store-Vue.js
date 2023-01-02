@@ -1,4 +1,4 @@
-import { computed, watchEffect, watch, ref, type Ref } from 'vue';
+import { computed, watch, ref, type Ref } from 'vue';
 import { useProductsStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import { type TNumberFields, type IProduct, useRangeFilter, TRangeBounds } from '@/services';
@@ -56,21 +56,26 @@ export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
     setBounds(bounds.value);
   }
 
-  watchEffect(() => {    
+  function syncWithQuery() {
     if (!isNumberArray(param.value)) {
       productStore.filters.set(key, () => true);
       bounds.value = {
         upper: findMax(products.value),
         lower: findMin(products.value),
       };
-    }
-    else { 
+    } else {
       productStore.filters.set(key, useRangeFilter(key, { lower: param.value[0], upper: param.value[1] }));
       bounds.value = {
         upper: param.value[1],
         lower: param.value[0],
-      }; 
-    };
+      };
+    }
+  }
+
+  syncWithQuery();
+
+  watch(param, () => {
+    syncWithQuery();
   });
 
   return { maxTotal, minTotal, bounds, applyBounds };

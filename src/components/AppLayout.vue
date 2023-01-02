@@ -2,7 +2,7 @@
 
 import { ref, type Ref, computed } from 'vue';
 
-const mainPadding = 20;
+const mainPadding = 30;
 
 const header: Ref<HTMLElement | null> = ref(null);
 

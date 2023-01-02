@@ -86,6 +86,7 @@ function toggleSort() {
   &__name {
     margin: 0;
     font-size: 1rem;
+    font-weight: 400;
   }
 }
 

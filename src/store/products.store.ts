@@ -8,10 +8,8 @@ import {
   ProductRepository,
   useStringSort,
   type TProductKeys,
-  type TStringFields,
   type TValuesCount,
   type TValuesCountMap,
-  SortType
 } from '@/services';
 
 export const useProductsStore = defineStore('products', () => {

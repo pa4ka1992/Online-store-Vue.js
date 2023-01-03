@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { RouteNames } from './names';
 import HomePage from '@/views/HomePage.vue';
 import ProductSearchPage from '@/views/ProductSearchPage.vue';
 import CartPage from '@/views/CartPage.vue';
@@ -8,20 +9,22 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: RouteNames.landing,
       redirect: { name: 'product-search' },
     },
     {
       path: '/product',
-      name: 'product-search',
+      name: RouteNames.productSearch,
       component: ProductSearchPage,
     },
     {
       path: '/cart',
+      name: RouteNames.cart,
       component: CartPage,
     },
     {
       path: '/:pathMatch(.*)*',
-      name: 'notfound',
+      name: RouteNames.notFound,
       component: HomePage,
     },
   ],
@@ -29,3 +32,7 @@ const router = createRouter({
 });
 
 export default router;
+
+export { 
+  RouteNames 
+};

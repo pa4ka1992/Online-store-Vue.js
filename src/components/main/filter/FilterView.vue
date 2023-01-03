@@ -4,11 +4,21 @@ import FilterByCategory from './FilterByCategory.vue';
 import FilterByRange from './FilterByRange.vue';
 
 import { useRouter } from 'vue-router';
+import { ref } from 'vue';
 
 const router = useRouter();
 
 function resetFilters() {
   router.push({ query: undefined });
+}
+
+const copied = ref(false);
+
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    copied.value = true;
+    setTimeout(() =>  copied.value = false, 1500);
+  });
 }
 
 </script>
@@ -17,6 +27,15 @@ function resetFilters() {
 
 <section class="filter-section">
   <h1 class="filter-section__heading">Filters</h1>
+  <button class="btn filter-section__btn filter-section__btn_type_copy" @click="copyLink">
+    <Transition name="fade" mode="out-in">
+      <span v-if="copied">Copied!</span>
+      <span v-else>Copy Link</span>
+    </Transition>
+  </button>
+  <button class="btn filter-section__btn filter-section__btn_type_reset" @click="resetFilters">
+    Reset filters
+  </button>
   <div class="filter-section__filter-option">
     <FilterByRange key-of-product="price"/>
   </div>
@@ -29,9 +48,6 @@ function resetFilters() {
   <div class="filter-section__filter-option">
     <FilterByCategory key-of-product="brand"/>
   </div>
-  <button class="btn filter-section__reset-btn" @click="resetFilters">
-    Reset filters
-  </button>
 </section>
 
 </template>
@@ -39,6 +55,16 @@ function resetFilters() {
 <style scoped lang="scss">
 
 @import '@/assets/scss/variables.scss';
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 
 .filter-section {
   background-color: $primary;
@@ -62,13 +88,11 @@ function resetFilters() {
     margin: 10px 0; 
   }
 
-  &__reset-btn {
-    background-color: $danger;
+  &__btn {
     border-radius: 20px;
-    margin: 20px 0;
+    margin: 15px 0;
     font-size: 1rem;
     padding: 5px;
-    color: $white;
     width: 100%;
     display: block;
     font-family: 'Poppins', sans-serif;
@@ -80,6 +104,16 @@ function resetFilters() {
 
     &:active {
       filter: saturate(70%);
+    }
+
+    &_type_reset {
+      background-color: $danger;
+      color: $white;
+    }
+
+    &_type_copy {
+      background-color: $success;
+      color: $white;
     }
   }
 }

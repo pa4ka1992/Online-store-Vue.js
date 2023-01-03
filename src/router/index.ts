@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { RouteNames } from './names';
-import HomePage from '@/views/HomePage.vue';
+import NotFoundPage from '@/views/NotFoundPage.vue';
 import ProductSearchPage from '@/views/ProductSearchPage.vue';
 import CartPage from '@/views/CartPage.vue';
 
@@ -25,7 +25,7 @@ const router = createRouter({
     {
       path: '/:pathMatch(.*)*',
       name: RouteNames.notFound,
-      component: HomePage,
+      component: NotFoundPage,
     },
   ],
   strict: true,

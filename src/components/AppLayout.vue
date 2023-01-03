@@ -71,9 +71,9 @@ const mainStyles = computed(() => {
 .app-main {
   min-height: 100vh;
   display: flex;
-  justify-content: stretch;
+  justify-content: center;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   position: relative;
 }
 

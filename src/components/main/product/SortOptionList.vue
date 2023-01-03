@@ -1,16 +1,14 @@
 <script setup lang="ts">
 
 import { TProductKeys } from '@/services';
-import { useSortOptionList } from '@/composables';
+import { useSortOptionList, sortQueryKey } from '@/composables';
 import SortOption from './SortOption.vue';
-import { ref } from 'vue';
 
 const props = defineProps<{
   sortKeys: TProductKeys[],
 }>();
 
-const value = useSortOptionList(props.sortKeys);
-const queryKey = ref(value);
+useSortOptionList(props.sortKeys);
 
 </script>
 
@@ -18,7 +16,7 @@ const queryKey = ref(value);
 <section class="sort-option-list">
   <h4 class="sort-option-list__heading">Sort by:</h4>
   <div v-for="sortKey in sortKeys" class="sort-option-list__item" :key="sortKey">
-    <SortOption :product-key="sortKey" :query-key="queryKey"/>
+    <SortOption :product-key="sortKey" :query-key="sortQueryKey"/>
   </div>
 </section>
 </template>

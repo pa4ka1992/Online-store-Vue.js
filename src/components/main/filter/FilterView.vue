@@ -3,15 +3,10 @@
 import FilterByCategory from './FilterByCategory.vue';
 import FilterByRange from './FilterByRange.vue';
 
-import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import { useResetFilters } from '@/composables';
 
-const router = useRouter();
-
-function resetFilters() {
-  router.push({ query: undefined });
-}
-
+const { resetFilters } = useResetFilters();
 const copied = ref(false);
 
 function copyLink() {

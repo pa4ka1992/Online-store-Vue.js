@@ -7,9 +7,10 @@ import {
 import { isStringArray, isString, isSortType } from '@/utils';
 import { useQueryParam } from './query-param';
 
+export const sortQueryKey = 'sortBy';
+
 export function useSortOptionList(keys: TProductKeys[]) {
-  const queryParamKey = 'sortBy';
-  const { param } = useQueryParam(queryParamKey);
+  const { param } = useQueryParam(sortQueryKey);
   const { sortType } = storeToRefs(useProductsStore());
 
   watchEffect(() => {
@@ -23,6 +24,4 @@ export function useSortOptionList(keys: TProductKeys[]) {
       sortType.value = null;
     }
   });
-
-  return queryParamKey;
 }

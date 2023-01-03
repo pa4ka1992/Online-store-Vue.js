@@ -7,12 +7,14 @@ export enum ViewType {
   List = 'list'
 }
 
+export const viewQueryKey = 'view';
+
 function isViewType(value: unknown): value is ViewType {
   return isString(value) && (Object.values(ViewType) as string[]).includes(value);
 }
 
 export function useProductView() {
-  const { param } = useQueryParam('view');
+  const { param } = useQueryParam(viewQueryKey);
 
   const _type = ref(ViewType.Grid);
 
@@ -33,6 +35,7 @@ export function useProductView() {
   });
 
   return {
-    type
-  }
+    type,
+    viewQueryKey,
+  };
 }

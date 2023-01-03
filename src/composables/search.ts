@@ -16,8 +16,9 @@ import { watch, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { RouteNames } from '@/router';
 
+export const searchParamKey = 'search';
+
 export function useSearch(keys: TProductKeys[]) {
-  const searchParamKey = 'search';
   const { push, currentRoute } = useRouter();
   const { param } = useQueryParam(searchParamKey);
 

@@ -4,7 +4,9 @@ import { useProductsStore } from '@/store';
 import { useProductView, ViewType } from '@/composables';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
+
 import SortOptionList from './SortOptionList.vue';
+import ProductCardItem from './ProductCardItem.vue';
 
 const { products } = storeToRefs(useProductsStore());
 const { type } = useProductView();
@@ -42,6 +44,14 @@ function toggleList() {
         <button class="btn view-options__btn" :class="listClass" @click="toggleList">
           <i class="icon-list-sqr"></i>
         </button>
+      </div>
+    </div>
+    <div v-if="products.length === 0" class="product-list product-list_not-found">
+      No products found 
+    </div>
+    <div v-else class="product-list">
+      <div class="product-list__item" v-for="product in products" :key="product.id">
+        <ProductCardItem :product="product"/>
       </div>
     </div>
   </section>
@@ -89,6 +99,23 @@ function toggleList() {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__item {
+    padding: 20px;
+  }
+
+  &_not-found {
+    min-height: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 700;
   }
 }
 

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '@/views/HomePage.vue';
+import ProductSearchPage from '@/views/ProductSearchPage.vue';
 import CartPage from '@/views/CartPage.vue';
 
 const router = createRouter({
@@ -7,8 +8,12 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'overview',
-      component: HomePage,
+      redirect: { name: 'product' }
+    },
+    {
+      path: '/product',
+      name: 'product',
+      component: ProductSearchPage,
     },
     {
       path: '/cart',

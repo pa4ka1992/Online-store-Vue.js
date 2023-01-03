@@ -10,7 +10,7 @@ const props = defineProps<{
 const { fixedPrice, inCart, toggleProduct } = useProductInfo(props.product);
 
 const cartBtnClass = computed(() => {
-  if (inCart.value) return 'product-card__cart-btn_in-cart';
+  if (inCart.value) return 'cart-btn_in-cart';
   else return '';
 });
 
@@ -43,7 +43,7 @@ function cartBtnClick(e: Event) {
           </span>
         </div>
       </div>
-      <button class="btn product-card__cart-btn" :class="cartBtnClass" @click="cartBtnClick"> 
+      <button class="btn cart-btn" :class="cartBtnClass" @click="cartBtnClick"> 
         <i v-if="!inCart" class="icon-cart-plus"></i>
         <i v-else class="icon-cart-ok"></i>
       </button>
@@ -99,8 +99,9 @@ function cartBtnClick(e: Event) {
     display: flex;
     justify-content: space-between;
   }
+}
 
-  &__cart-btn {
+.cart-btn {
     font-size: 1.7rem;
     width: 60px;
     height: 60px;
@@ -123,8 +124,6 @@ function cartBtnClick(e: Event) {
       }
     }
   }
-}
-
 .rating {
   color: $primary;
 

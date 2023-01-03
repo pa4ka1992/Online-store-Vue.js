@@ -10,7 +10,7 @@ export function useNumberSort<Key extends keyof TNumberFields>(key: Key, descend
       key: key,
       sortType: SortType.descending,
       cmpFunc: function (first: IProduct, second: IProduct) {
-        return numCmp(first[key], second[key]);
+        return numCmp(second[key], first[key]);
       },
     };
   else
@@ -18,7 +18,7 @@ export function useNumberSort<Key extends keyof TNumberFields>(key: Key, descend
       key: key,
       sortType: SortType.ascending,
       cmpFunc: function (first: IProduct, second: IProduct) {
-        return numCmp(second[key], first[key]);
+        return numCmp(first[key], second[key]);
       },
     };
 }

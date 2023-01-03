@@ -10,7 +10,7 @@ export function useStringSort<Key extends keyof TStringFields>(key: Key, descend
       key: key,
       sortType: SortType.descending,
       cmpFunc: function (first: IProduct, second: IProduct) {
-        return strCmp(first[key], second[key]);
+        return strCmp(second[key], first[key]);
       },
     }
   else
@@ -18,7 +18,7 @@ export function useStringSort<Key extends keyof TStringFields>(key: Key, descend
       key: key,
       sortType: SortType.ascending,
       cmpFunc: function (first: IProduct, second: IProduct) {
-        return strCmp(second[key], first[key]);
+        return strCmp(first[key], second[key]);
       },
     };
 }

@@ -20,7 +20,6 @@ const props = defineProps<{
 }>();
 
 const { product } = toRefs(props);
-// const { category, brand, title } = toRefs(product.value);
 
 const routeMain = (): void => {
   router.push({ path: '/' });

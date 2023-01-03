@@ -37,6 +37,7 @@ const getProduct = async () => {
   const currProduct = await getProductById(props.id);
   if (currProduct) product.value = currProduct;
 };
+
 getProduct();
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="product__header">
-    <h2 class="product__header--title">{{ product.title }}</h2>
+    <h2 class="product__header--title">{{ title }}</h2>
     <div class="product__header--info">
       <div class="header__info--stars">
         <font-awesome-icon
@@ -10,33 +10,27 @@
           icon="fa-solid fa-star"
         />
       </div>
-      <span class="header__info--rating">{{ product.rating }}</span>
-      <span
-      class="header__info--feedback">
-      {{ getRandom(150) }} feedbacks
-    </span>
-      <span
-        class="header__info--buy-count">
-        Bought more than {{ getRandom(5) * 50 }} times
-    </span>
+      <span class="header__info--rating">{{ rating }}</span>
+      <span class="header__info--feedback"> {{ getRandom(150) }} feedbacks </span>
+      <span class="header__info--buy-count"> Bought more than {{ getRandom(5) * 50 }} times </span>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { IProduct } from '@/services';
-import { toRefs } from 'vue';
+import { toRefs, reactive } from 'vue';
 import { allStars } from './constants';
 
 const props = defineProps<{
   product: IProduct;
 }>();
 
-const { product } = toRefs(props);
-// const { title, rating } = toRefs(product.value);
+const { product } = reactive(props);
+const { title, rating } = toRefs(product);
 
 const getStars = () => {
-  return Math.floor(product.value.rating);
+  return Math.floor(rating.value);
 };
 
 const getRandom = (max: number): number => {

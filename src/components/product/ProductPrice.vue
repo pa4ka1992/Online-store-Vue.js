@@ -2,15 +2,13 @@
   <div class="price__wrapper">
     <section class="product__price-info">
       <div class="product__prices">
-        <span v-if="product.discountPercentage" class="product__price--fix"> {{ getFixPrice().toFixed(0) }} $ </span>
-        <span :class="{ crossed: product.discountPercentage }" class="product__price--full"> {{ product.price }} $ </span>
+        <span v-if="discountPercentage" class="product__price--fix"> {{ getFixPrice }} $ </span>
+        <span :class="{ crossed: discountPercentage }" class="product__price--full"> {{ price }} $ </span>
       </div>
-      <div class="product__stock">
-        Left in stock: {{ product.stock }}pc.
-      </div>
+      <div class="product__stock">Left in stock: {{ stock }}pc.</div>
       <div class="product__buttons">
-        <my-button>Add to cart</my-button>
-        <my-button>Buy</my-button>
+        <my-button class="button__cart" @click="updateCart">{{ buttonStatus }}</my-button>
+        <my-button class="button__fast-buy" @click="fastBuy">Buy</my-button>
       </div>
     </section>
   </div>
@@ -18,17 +16,44 @@
 
 <script lang="ts" setup>
 import { IProduct } from '@/services';
-import { toRefs } from 'vue';
+import { toRefs, reactive, computed } from 'vue';
+import { useCartStore, useModalStore } from '@/store';
+import router from '@/router';
+import { storeToRefs } from 'pinia';
 
 const props = defineProps<{
   product: IProduct;
 }>();
 
-const { product } = toRefs(props);
-// const { discountPercentage, price, stock} = toRefs(product.value);
+const { product } = reactive(props);
+const { id, price, discountPercentage, stock } = toRefs(product);
+const { addProduct, dropProduct, findProduct } = useCartStore();
+const { modalIsShow } = storeToRefs(useModalStore());
 
-const getFixPrice = () => {
-  return product.value.price * (1 - product.value.discountPercentage / 100);
+const getFixPrice = computed((): string => {
+  return (price.value * (1 - discountPercentage.value / 100)).toFixed(0);
+});
+
+const buttonStatus = computed((): string => {
+  if (findProduct(id.value)) {
+    return 'Drop from cart';
+  } else {
+    return 'Add to cart';
+  }
+});
+
+const updateCart = (): void => {
+  if (findProduct(id.value)) {
+    dropProduct(product)
+  } else {
+    addProduct(product)
+  }
+};
+
+const fastBuy = (): void => {
+  router.push({ path: '/cart' });
+  addProduct(product);
+  modalIsShow.value = true;
 };
 </script>
 
@@ -77,6 +102,9 @@ const getFixPrice = () => {
       justify-content: center;
       gap: 1rem;
 
+      .button__cart {
+        min-width: 10.1em;
+      }
     }
   }
 }

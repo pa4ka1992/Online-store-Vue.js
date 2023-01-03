@@ -1,6 +1,6 @@
 <template>
   <div class="product__count-info">
-    <button @click="addRemProduct(product)" class="delete">
+    <button @click="dropProduct(product)" class="delete">
       <font-awesome-icon icon="fa-solid fa-trash" />
     </button>
     <div class="count-info__wrapper">
@@ -29,7 +29,7 @@ const props = defineProps<{
 }>();
 
 const { price, stock, count } = toRefs(props.product);
-const { decrementCount, incrementCount, addRemProduct, updateCount } = useCartStore();
+const { decrementCount, incrementCount, dropProduct, updateCount } = useCartStore();
 
 const updateInput = (e: Event): void => {
   const target = e.target as HTMLOptionElement;

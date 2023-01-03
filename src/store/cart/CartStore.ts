@@ -20,7 +20,7 @@ export const useCartStore = defineStore('cartStore', () => {
     const products: IProduct[] = parse.products;
 
     products.map((product) => {
-      addRemProduct(product);
+      addProduct(product);
     });
   };
 
@@ -30,11 +30,8 @@ export const useCartStore = defineStore('cartStore', () => {
     });
   };
 
-  const addRemProduct = (incomeProduct: IProduct, incomeCount = 1): boolean => {
-    if (findProduct(incomeProduct.id)) {
-      _cart.value = _cart.value.filter((prod) => incomeProduct.id !== prod.id);
-      return false;
-    } else {
+  const addProduct = (incomeProduct: IProduct, incomeCount = 1): void => {
+    if (!findProduct(incomeProduct.id)) {
       const cartProduct: ICartProduct = {
         ...incomeProduct,
         count: incomeCount,
@@ -47,7 +44,12 @@ export const useCartStore = defineStore('cartStore', () => {
       };
 
       _cart.value.push(cartProduct);
-      return true;
+    }
+  };
+
+  const dropProduct = (incomeProduct: IProduct): void => {
+    if (findProduct(incomeProduct.id)) {
+      _cart.value = _cart.value.filter((prod) => incomeProduct.id !== prod.id);
     }
   };
 
@@ -108,7 +110,7 @@ export const useCartStore = defineStore('cartStore', () => {
       const newCart: ICartProduct[] = JSON.parse(cartLocalStorage);
 
       newCart.forEach((product) => {
-        addRemProduct(product, product.count);
+        addProduct(product, product.count);
       });
     } else {
       getProducts();
@@ -118,7 +120,9 @@ export const useCartStore = defineStore('cartStore', () => {
   return {
     cart,
     totalProducts,
-    addRemProduct,
+    findProduct,
+    addProduct,
+    dropProduct,
     incrementCount,
     decrementCount,
     updateCount,

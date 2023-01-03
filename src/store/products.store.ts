@@ -45,7 +45,7 @@ export const useProductsStore = defineStore('products', () => {
     return [..._products.value];
   });
 
-  function getProductById(id: number) {
+  function getProductById(id: IProduct['id']) {
     return _productMap.value[id];
   }
 

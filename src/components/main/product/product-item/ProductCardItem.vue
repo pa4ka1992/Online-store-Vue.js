@@ -64,12 +64,14 @@ function cartBtnClick(e: Event) {
     align-items: center;
     flex-direction: column;
     margin-bottom: 20px;
+    max-width: 100%;
   }
 
   &__body {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   &__cart-btn {

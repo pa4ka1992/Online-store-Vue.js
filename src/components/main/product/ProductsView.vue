@@ -6,7 +6,7 @@ import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 
 import SortOptionList from './SortOptionList.vue';
-import ProductCardItem from './ProductCardItem.vue';
+import { ProductCardItem, ProductListItem } from './product-item';
 
 const { products } = storeToRefs(useProductsStore());
 const { type } = useProductView();
@@ -48,6 +48,11 @@ function toggleList() {
     </div>
     <div v-if="products.length === 0" class="product-list product-list_not-found">
       No products found 
+    </div>
+    <div v-else-if="type === ViewType.List" class="product-list">
+      <div class="product-list__item product-list__item_type_list" v-for="product in products" :key="product.id">
+        <ProductListItem :product="product"/>
+      </div>
     </div>
     <div v-else class="product-list">
       <div class="product-list__item" v-for="product in products" :key="product.id">
@@ -107,9 +112,14 @@ function toggleList() {
 .product-list {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
 
   &__item {
     padding: 20px;
+  }
+
+  &__item_type_list {
+    width: 100%;
   }
 
   &_not-found {

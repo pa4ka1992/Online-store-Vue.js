@@ -4,3 +4,4 @@ export * from './filter-range';
 export * from './product-view';
 export * from './sort-option';
 export * from './sort-option-list';
+export * from './product-info';

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref, type Ref, computed, onBeforeMount } from 'vue';
+import { ref, type Ref, computed } from 'vue';
 
 import { IFilter } from '@/services/model/filter';
 import { IProduct } from '@/services/model/product';
@@ -16,22 +16,22 @@ export const useProductsStore = defineStore('products', () => {
     _products.value.forEach((item) => (_productMap.value[item.id] = item));
   }
 
+  fetchData();
+
   const products = computed(() => {
     return _products.value.filter((product) => {
       return filters.value.reduce((acc, item) => acc && item(product), true);
     });
   });
 
-  function getProductById(id: keyof IProductMap) {
-    console.log(_productMap.value);
+  async function getProductById(id: keyof IProductMap) {
+    if (Object.keys(_productMap.value).length === 0) {
+      await fetchData();
+    }
     return _productMap.value[id];
   }
 
   const filters: Ref<IFilter[]> = ref([]);
-
-  onBeforeMount(async () => {
-    await fetchData();
-  });
 
   return {
     products,

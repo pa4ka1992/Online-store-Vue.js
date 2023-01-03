@@ -1,11 +1,11 @@
 <template>
   <section class="product__crumbs">
-    <font-awesome-icon icon="fa-solid fa-arrow-left" />
+    <font-awesome-icon @click="routeMain()" icon="fa-solid fa-arrow-left" />
     <ul class="crumbs__list">
-      <li class="crumbs__list--main crumbs">Main</li>
-      <li class="crumbs__list--category crumbs">{{ category }}</li>
-      <li class="crumbs__list--brand crumbs">{{ brand }}</li>
-      <li class="crumbs__list--title crumbs">{{ title }}</li>
+      <li class="crumbs__list--main crumbs" @click="routeMain()">Main</li>
+      <li class="crumbs__list--category crumbs">{{ product.category }}</li>
+      <li class="crumbs__list--brand crumbs">{{ product.brand }}</li>
+      <li class="crumbs__list--title crumbs">{{ product.title }}</li>
     </ul>
   </section>
 </template>
@@ -13,13 +13,18 @@
 <script lang="ts" setup>
 import { IProduct } from '@/services';
 import { toRefs } from 'vue';
+import router from '@/router';
 
 const props = defineProps<{
   product: IProduct;
 }>();
 
 const { product } = toRefs(props);
-const { category, brand, title } = toRefs(product.value);
+// const { category, brand, title } = toRefs(product.value);
+
+const routeMain = (): void => {
+  router.push({ path: '/' });
+}
 </script>
 
 <style lang="scss" scoped>

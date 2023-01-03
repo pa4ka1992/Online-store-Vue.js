@@ -2,11 +2,11 @@
   <div class="price__wrapper">
     <section class="product__price-info">
       <div class="product__prices">
-        <span v-if="discountPercentage" class="product__price--fix"> {{ getFixPrice().toFixed(0) }} $ </span>
-        <span :class="{ crossed: discountPercentage }" class="product__price--full"> {{ price }} $ </span>
+        <span v-if="product.discountPercentage" class="product__price--fix"> {{ getFixPrice().toFixed(0) }} $ </span>
+        <span :class="{ crossed: product.discountPercentage }" class="product__price--full"> {{ product.price }} $ </span>
       </div>
       <div class="product__stock">
-        Left in stock: {{ stock }}pc.
+        Left in stock: {{ product.stock }}pc.
       </div>
       <div class="product__buttons">
         <my-button>Add to cart</my-button>
@@ -25,10 +25,10 @@ const props = defineProps<{
 }>();
 
 const { product } = toRefs(props);
-const { discountPercentage, price, stock} = toRefs(product.value);
+// const { discountPercentage, price, stock} = toRefs(product.value);
 
 const getFixPrice = () => {
-  return price.value * (1 - discountPercentage.value / 100);
+  return product.value.price * (1 - product.value.discountPercentage / 100);
 };
 </script>
 

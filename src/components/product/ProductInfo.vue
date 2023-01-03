@@ -3,25 +3,25 @@
     <div class="product__info--header">
       <span class="header__category">
         <span class="header__category--title">Category: </span>
-        {{ category }}</span
+        {{ product.category }}</span
       >
       <span class="header__brand">
         <span class="header__brand--title">Brand: </span>
-        {{ brand }}</span
+        {{ product.brand }}</span
       >
     </div>
     <div class="product__info--description">
       <span class="description__text--title"> Description: </span>
       <p class="description__text">
-        {{ description }}
+        {{ product.description }}
       </p>
     </div>
     <div class="product__info--return">
       <font-awesome-icon icon="fa-solid fa-arrows-rotate" />
       <span class="return__text">14 days to return the goods</span>
     </div>
-    <span  v-if="discountPercentage" class="product__info--sale">
-      Sale {{ discountPercentage }}%
+    <span  v-if="product.discountPercentage" class="product__info--sale">
+      Sale {{ product.discountPercentage }}%
     </span>
   </section>
 </template>
@@ -35,7 +35,7 @@ const props = defineProps<{
 }>();
 
 const { product } = toRefs(props);
-const { brand, category, description, discountPercentage } = toRefs(product.value);
+// const { brand, category, description, discountPercentage } = toRefs(product.value);
 </script>
 
 <style lang="scss" scoped>

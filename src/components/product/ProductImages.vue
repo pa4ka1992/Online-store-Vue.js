@@ -17,36 +17,27 @@
         </Slide>
       </Carousel>
     </section>
-    <!-- <div class="product__img--slider">
-      <img class="slider__img" :src="img" v-for="img in images" :key="img" alt="product" />
-    </div>
-    <div class="product__img--view">
-      <img class="product__img" :src="images[0]" alt="product" />
-    </div> -->
   </div>
 </template>
 
 <script lang="ts" setup>
 import { IProduct } from '@/services';
-import { toRefs, ref } from 'vue';
+import { toRefs, ref, Ref, computed } from 'vue';
 import 'vue3-carousel/dist/carousel.css';
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
+import { Carousel, Slide } from 'vue3-carousel';
+import { TIndexedImages } from './types';
 
 const props = defineProps<{
   product: IProduct;
 }>();
 
 const { product } = toRefs(props);
-const { images } = toRefs(product.value);
 const currentSlide = ref(0);
 
-type TIndexedImages = {
-  id: number;
-  imgLink: string;
-};
-
-const indexedImages: TIndexedImages[] = images.value.map((image, ind) => {
-  return { id: ind, imgLink: image };
+const indexedImages = computed((): TIndexedImages[] => {
+  return product.value.images.map((image, ind) => {
+    return { id: ind, imgLink: image };
+  });
 });
 
 const slideTo = (val: number) => {

@@ -1,6 +1,6 @@
 <template>
   <div class="product__header">
-    <h2 class="product__header--title">{{ title }}</h2>
+    <h2 class="product__header--title">{{ product.title }}</h2>
     <div class="product__header--info">
       <div class="header__info--stars">
         <font-awesome-icon
@@ -10,7 +10,7 @@
           icon="fa-solid fa-star"
         />
       </div>
-      <span class="header__info--rating">{{ rating }}</span>
+      <span class="header__info--rating">{{ product.rating }}</span>
       <span
       class="header__info--feedback">
       {{ getRandom(150) }} feedbacks
@@ -33,10 +33,10 @@ const props = defineProps<{
 }>();
 
 const { product } = toRefs(props);
-const { title, rating } = toRefs(product.value);
+// const { title, rating } = toRefs(product.value);
 
 const getStars = () => {
-  return Math.floor(rating.value);
+  return Math.floor(product.value.rating);
 };
 
 const getRandom = (max: number): number => {

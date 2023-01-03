@@ -7,6 +7,8 @@ export class DummyApi implements IProductSource {
   fetchProducts(): Promise<IProduct[]> {
     return fetch(apiUrl, { method: 'GET' })
       .then((data) => data.json())
-      .then((item) => item.products);
+      .then((item) => {
+        return item.products
+      });
   }
 }

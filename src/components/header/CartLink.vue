@@ -16,7 +16,7 @@ const promo = usePromoStore();
       {{cart.cart.length}}
     </span>
     <span v-if="cart.cart.length !== 0" class="cart-info__total">
-      ${{promo.totalPrice}}
+      ${{promo.totalPrice.toFixed(2)}}
     </span>
   </div>
 </template>

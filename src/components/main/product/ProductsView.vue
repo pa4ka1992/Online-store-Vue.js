@@ -85,6 +85,8 @@ function toggleList() {
 .product-section {
   width: 100%;
   padding: 10px 40px;
+  display: flex;
+  flex-direction: column;
   
   &__heading {
     font-family: 'Pacifico', cursive;
@@ -111,7 +113,7 @@ function toggleList() {
   }
 
   &_not-found {
-    min-height: 100%;
+    min-height: 60%;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;

@@ -1,5 +1,6 @@
 <template>
   <section class="product container">
+    <product-crumbs :product="product"/>
     <product-header :product="product" />
     <section class="product__content">
       <div class="content__wrapper">
@@ -17,6 +18,7 @@ import ProductHeader from '@/components/product/ProductHeader.vue';
 import ProductImages from '@/components/product/ProductImages.vue';
 import ProductInfo from '@/components/product/ProductInfo.vue';
 import ProductPrice from '@/components/product/ProductPrice.vue';
+import ProductCrumbs from '@/components/product/ProductCrumbs.vue';
 
 const props = defineProps<{
   id: Required<number>;

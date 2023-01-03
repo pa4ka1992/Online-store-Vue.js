@@ -67,50 +67,25 @@ const slideTo = (val: number) => {
   flex-basis: 50%;
   flex-grow: 0;
   width: 400px;
-
-  // .carousel__item {
-  //   max-width: 100px;
-  //   max-height: 100px;
-  // }
-  // .carousel__item--main {
-  //   max-width: 500px;
-  //   max-height: 500px;
-  // }
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: $mainBG;
+  box-shadow: 0px 0px 16px 1px rgba(0, 0, 0, 0.49) inset;
 
   .slider__img {
     display: block;
     width: 100%;
-    max-height: 200px;
+    max-height: 100px;
+    border: 1px solid $secondary {
+      radius: 10px;
+    }
   }
   .slider__img--main {
     display: block;
     width: 100%;
     max-width: 400px;
-    max-height: 200px;
+    max-height: 300px;
+    border-radius: 10px;
   }
-  // &--slider {
-  //   display: flex;
-  //   flex-direction: column;
-  //   gap: 0.5rem;
-  //   max-width: 500px;
-
-  //   .slider__img {
-  //     display: block;
-  //     max-width: 150px;
-  //     @include border;
-  //   }
-  // }
-
-  // &--slide {
-  //   display: flex;
-  // }
-
-  // &--view {
-  //   .product__img {
-  //     display: block;
-  //     max-width: 400px;
-  //     @include border;
-  //   }
-  // }
 }
 </style>

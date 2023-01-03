@@ -72,7 +72,7 @@ const getRandom = (max: number): number => {
     }
 
     .header__info--feedback {
-      border-bottom: 2px dashed $secondary;
+      border-bottom: 1px dashed $secondary;
       transition: all 0.2s;
       cursor: pointer;
 

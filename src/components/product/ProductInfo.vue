@@ -1,14 +1,10 @@
 <template>
   <section class="product__info">
     <div class="product__info--header">
-      <span class="header__category">
-        <span class="header__category--title">Category: </span>
-        {{ category }}</span
-      >
-      <span class="header__brand">
-        <span class="header__brand--title">Brand: </span>
-        {{ brand }}</span
-      >
+      <span class="header__category--title">Category: </span>
+      <span class="header__category"> {{ category }}</span>
+      <span class="header__brand--title">Brand: </span>
+      <span class="header__brand"> {{ brand }}</span>
     </div>
     <div class="product__info--description">
       <span class="description__text--title"> Description: </span>
@@ -48,6 +44,10 @@ const { category, brand, description, discountPercentage } = toRefs(product);
     display: flex;
     flex-direction: column;
 
+    .header__category {
+      @include text-style;
+    }
+
     .header__category--title,
     .header__brand--title {
       color: $secondary;
@@ -64,6 +64,7 @@ const { category, brand, description, discountPercentage } = toRefs(product);
 
     .description__text {
       margin: 0;
+      @include text-style;
     }
   }
 

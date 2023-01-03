@@ -59,6 +59,10 @@ const routeMain = (): void => {
       cursor: pointer;
       transition: all 0.2s;
 
+      &::first-letter {
+        text-transform: uppercase;
+      }
+
       &:hover {
         color: $dark;
         border-bottom: 1px dashed $dark;
@@ -69,10 +73,10 @@ const routeMain = (): void => {
       }
     }
 
-    .crumbs:not(:first-child) {
-      &::before {
+    .crumbs:not(:last-child) {
+      &::after {
         content: '/';
-        margin-right: 0.5rem;
+        margin-left: 0.5rem;
         font-size: 0.9em;
         color: $secondary;
       }

@@ -60,6 +60,7 @@ getProduct();
 .product {
   display: flex;
   flex-direction: column;
+  user-select: none;
 
   &__content {
     display: flex;

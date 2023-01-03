@@ -13,10 +13,12 @@ const router = createRouter({
     },
     {
       path: '/cart',
+      name: 'cart',
       component: CartPage,
     },
     {
       path: '/product/:name/id/:id',
+      name: 'product',
       component: ProductPage,
       props: true,
     },

@@ -1,9 +1,11 @@
-  <template>
+<template>
   <div class="product__info">
     <div class="product__info--header">
       <font-awesome-icon icon="fa-solid fa-star" />
       <span class="header__rating">{{ rating }}</span>
-      <span class="header__title">{{ title }}</span>
+      <router-link :to="{ name: 'product', params: { name: `${title}`, id: `${id}` } }">
+        <span class="header__title">{{ title }}</span>
+      </router-link>
     </div>
     <span class="product__info--brand">Brand: {{ brand }}</span>
     <span class="product__info--description">{{ description }}</span>
@@ -18,7 +20,7 @@ const props = defineProps<{
   product: Required<ICartProduct>;
 }>();
 
-const { title, brand, description, rating } = toRefs(props.product);
+const { id, title, brand, description, rating } = toRefs(props.product);
 </script>
 
 <style lang="scss" scoped>
@@ -51,6 +53,7 @@ const { title, brand, description, rating } = toRefs(props.product);
       color: $primary;
       border-bottom: 1px solid transparent;
       transition: all 0.2s;
+      @include text-style;
 
       &:hover {
         color: $primary-darker;
@@ -65,6 +68,7 @@ const { title, brand, description, rating } = toRefs(props.product);
 
   &--description {
     line-height: 1.3em;
+    @include text-style;
   }
 }
 </style>

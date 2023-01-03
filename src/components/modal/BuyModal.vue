@@ -103,6 +103,8 @@ watch(modalIsShow, (newModalIsShow) => {
   font-family: 'Poppins', sans-serif;
   background-color: rgba(0, 0, 0, 0.5);
   overflow: hidden;
+  z-index: 15;
+  user-select: none;
 
   &__form {
     flex-basis: 45%;

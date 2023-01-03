@@ -2,7 +2,6 @@
   <div class="price__wrapper">
     <section class="product__price-info">
       <div class="product__prices">
-        <span class="product__prices">Price:</span>
         <span v-if="discountPercentage" class="product__price--fix">
           <my-number :input="getFixPrice" :fixed="2" /> $
         </span> 
@@ -68,7 +67,7 @@ const fastBuy = (): void => {
 .price__wrapper {
   flex-basis: 20%;
   font: {
-    size: 1.5rem;
+    size: 1.3rem;
     weight: 600;
   }
 
@@ -88,7 +87,7 @@ const fastBuy = (): void => {
 
       .crossed {
         font: {
-          size: 1rem;
+          size: 0.8em;
           weight: 400;
         }
         color: $danger;

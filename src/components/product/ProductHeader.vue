@@ -50,6 +50,7 @@ const getRandom = (max: number): number => {
   &--title {
     margin: 0.5rem;
     color: $primary;
+    @include text-style;
   }
 
   &--info {

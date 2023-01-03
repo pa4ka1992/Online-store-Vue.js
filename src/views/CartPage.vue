@@ -60,6 +60,7 @@ body {
   grid-template-rows: repeat(2, fit-content);
   column-gap: 1rem;
   position: relative;
+  user-select: none;
 
   &__crumbs {
     grid-column: 1 / 3;

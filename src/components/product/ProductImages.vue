@@ -22,7 +22,7 @@
 
 <script lang="ts" setup>
 import { IProduct } from '@/services';
-import { toRefs,reactive, ref, computed } from 'vue';
+import { toRefs, reactive, ref, computed } from 'vue';
 import 'vue3-carousel/dist/carousel.css';
 import { Carousel, Slide } from 'vue3-carousel';
 import { TIndexedImages } from './types';
@@ -32,7 +32,7 @@ const props = defineProps<{
 }>();
 
 const { product } = reactive(props);
-const { images } = toRefs(product)
+const { images } = toRefs(product);
 const currentSlide = ref(0);
 
 const indexedImages = computed((): TIndexedImages[] => {
@@ -49,10 +49,8 @@ const slideTo = (val: number) => {
 <style lang="scss" scoped>
 @import '@/assets/scss/index.scss';
 
-@mixin border {
-  border: 1px solid $secondary {
-    radius: 10px;
-  }
+#thumbnails {
+  margin-top: 1rem;
 }
 
 .product__img {
@@ -62,22 +60,23 @@ const slideTo = (val: number) => {
   padding: 1rem;
   border-radius: 10px;
   background-color: $mainBG;
-  box-shadow: 0px 0px 16px 1px rgba(0, 0, 0, 0.49) inset;
 
-  .slider__img {
-    display: block;
-    width: 100%;
-    max-height: 100px;
-    border: 1px solid $secondary {
-      radius: 10px;
-    }
-  }
+  .slider__img,
   .slider__img--main {
     display: block;
     width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .slider__img {
+    max-height: 100px;
+    border: 1px solid $secondary;
+  }
+
+  .slider__img--main {
     max-width: 400px;
     max-height: 300px;
-    border-radius: 10px;
   }
 }
 </style>

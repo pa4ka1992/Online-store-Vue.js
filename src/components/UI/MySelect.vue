@@ -39,6 +39,7 @@ const changeOption = ({ target }: Event): void => {
   }
   outline: 2px solid $secondary;
   transition: all 0.2s;
+  cursor: pointer;
 
   &:focus-visible {
     transform: scale(1.05);

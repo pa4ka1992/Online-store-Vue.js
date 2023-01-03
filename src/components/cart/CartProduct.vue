@@ -1,12 +1,12 @@
 <template>
-  <li
-    @mouseover="isHovered = true"
-    @mouseout="isHovered = false"
-    class="product">
+  <li @mouseover="isHovered = true" @mouseout="isHovered = false" class="product">
     <slot></slot>
-    <img class="product__image" :src="images[0]" alt="product" />
+
+    <router-link :to="{ name: 'product', params: { name: `${title}`, id: `${id}` } }">
+      <img class="product__image" :src="images[0]" alt="product" />
+    </router-link>
     <product-info :product="product" />
-    <product-count-info :product="product" :isHovered="isHovered"/>
+    <product-count-info :product="product" :isHovered="isHovered" />
     <product-price :product="product" />
   </li>
 </template>
@@ -22,7 +22,7 @@ const props = defineProps<{
   product: ICartProduct;
 }>();
 
-const { images } = toRefs(props.product);
+const { images, title, id } = toRefs(props.product);
 const isHovered = ref(false);
 </script>
 
@@ -35,14 +35,20 @@ const isHovered = ref(false);
   place-items: center center;
   gap: 0.5rem;
   padding: 1rem 0;
-  font-family: "Nunito", sans-serif;
-  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
 
   &__image {
     display: block;
     max-width: 10rem;
     max-height: 10rem;
     border-radius: 5px;
+    transition: all 0.3s;
+    filter: brightness(100%);
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(60%);
+    }
   }
 }
 </style>

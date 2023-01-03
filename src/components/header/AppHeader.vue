@@ -1,33 +1,32 @@
 <script lang="ts" setup>
-
 import SearchBar from './SearchBar.vue';
 import CartLink from './CartLink.vue';
 
-import { ref } from 'vue';
+import { useSearch } from '@/composables';
 
-const val = ref("");
+import { useRouter } from 'vue-router';
+
+const { searchField, startSearch } = useSearch(['title', 'description', 'brand', 'price', 'stock', 'category']);
+const { push } = useRouter();
 
 function click() {
-  console.log('Gotcha!', val.value);
+  push({ name: 'product-search' });
+  startSearch();
 }
-
 </script>
 
-<template> 
+<template>
   <header class="page-header">
-    <RouterLink class="a" to="/"> 
-      <div class="logo">
-        Online Store
-      </div> 
+    <RouterLink class="a" to="/">
+      <div class="logo">Online Store</div>
     </RouterLink>
-    <SearchBar @search="click" v-model="val"/>
-    <CartLink/>
+    <SearchBar @search="click" v-model="searchField" />
+    <CartLink />
   </header>
 </template>
 
 <style scoped lang="scss">
-
-@import '@/assets/scss/variables.scss'; 
+@import '@/assets/scss/variables.scss';
 
 .page-header {
   display: flex;
@@ -41,7 +40,7 @@ function click() {
 }
 
 .logo {
-  user-select: none;  
+  user-select: none;
   font-size: 2rem;
   font-family: 'Pacifico', cursive;
 
@@ -51,5 +50,4 @@ function click() {
     scale: 1.2;
   }
 }
-
 </style>

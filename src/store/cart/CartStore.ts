@@ -20,43 +20,45 @@ export const useCartStore = defineStore('cartStore', () => {
     const products: IProduct[] = parse.products;
 
     products.map((product) => {
-      addProduct(product);
+      addRemProduct(product);
     });
   };
 
-  const findProduct: TFindFunc<ICartProduct> = (incomeProduct) => {
+  const findProduct: TFindFunc<ICartProduct> = (id) => {
     return _cart.value.find((product) => {
-      return product.id === incomeProduct.id;
+      return product.id === id;
     });
   };
 
-  const addProduct = (incomeProduct: IProduct, incomeCount = 1): void => {
-    const cartProduct: ICartProduct = {
-      ...incomeProduct,
-      count: incomeCount,
-      get countPrice() {
-        return this.count * this.price;
-      },
-      get fixPrice() {
-        return this.countPrice * (1 - this.discountPercentage / 100);
-      },
-    };
+  const addRemProduct = (incomeProduct: IProduct, incomeCount = 1): boolean => {
+    if (findProduct(incomeProduct.id)) {
+      _cart.value = _cart.value.filter((prod) => incomeProduct.id !== prod.id);
+      return false;
+    } else {
+      const cartProduct: ICartProduct = {
+        ...incomeProduct,
+        count: incomeCount,
+        get countPrice() {
+          return this.count * this.price;
+        },
+        get fixPrice() {
+          return this.countPrice * (1 - this.discountPercentage / 100);
+        },
+      };
 
-    _cart.value.push(cartProduct);
-  };
-
-  const deleteProduct = (incomeProduct: ICartProduct): void => {
-    _cart.value = _cart.value.filter((prod) => incomeProduct.id !== prod.id);
+      _cart.value.push(cartProduct);
+      return true;
+    }
   };
 
   const incrementCount: TProductFunc = (incomeProduct) => {
-    const currProduct: TCurrProd = findProduct(incomeProduct);
+    const currProduct: TCurrProd = findProduct(incomeProduct.id);
 
     if (currProduct) currProduct.count += 1;
   };
 
   const decrementCount: TProductFunc = (incomeProduct) => {
-    const currProduct: TCurrProd = findProduct(incomeProduct);
+    const currProduct: TCurrProd = findProduct(incomeProduct.id);
 
     if (currProduct) {
       if (currProduct.count < 2) {
@@ -68,7 +70,7 @@ export const useCartStore = defineStore('cartStore', () => {
   };
 
   const updateCount = (val: string, incomeProduct: ICartProduct) => {
-    const currProduct: TCurrProd = findProduct(incomeProduct);
+    const currProduct: TCurrProd = findProduct(incomeProduct.id);
     const valNumber = Number(val);
 
     if (currProduct) {
@@ -106,7 +108,7 @@ export const useCartStore = defineStore('cartStore', () => {
       const newCart: ICartProduct[] = JSON.parse(cartLocalStorage);
 
       newCart.forEach((product) => {
-        addProduct(product, product.count);
+        addRemProduct(product, product.count);
       });
     } else {
       getProducts();
@@ -116,8 +118,7 @@ export const useCartStore = defineStore('cartStore', () => {
   return {
     cart,
     totalProducts,
-    addProduct,
-    deleteProduct,
+    addRemProduct,
     incrementCount,
     decrementCount,
     updateCount,

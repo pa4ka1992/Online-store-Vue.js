@@ -29,7 +29,7 @@ const cartStore = useCartStore();
 const paginationStore = usePaginationStore();
 </script>
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 
 .container {
   max-width: $xxl;

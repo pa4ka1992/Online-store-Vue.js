@@ -64,7 +64,7 @@ const incDecPage = (action: string): void => {
 }
 </script>
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 .pagination {
   display: grid;
   grid-template-columns: 1fr 4fr 2fr;
@@ -125,7 +125,7 @@ const incDecPage = (action: string): void => {
     .current {
       font-weight: 600;
       color: $light;
-      background-color: $primary-darker;
+      background-color: $primary-dark;
       border: none;
     }
   }

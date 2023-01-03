@@ -59,7 +59,7 @@ const promoStore = usePromoStore();
 const { promo, appliedPromos } = storeToRefs(promoStore);
 </script>
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 
 .summary-form {
   .summary {

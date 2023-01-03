@@ -13,9 +13,12 @@ import { useProductsStore } from '@/store';
 import { isString, isNumber, isNumberArray, isStringArray } from '@/utils';
 import { storeToRefs } from 'pinia';
 import { watch, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { RouteNames } from '@/router';
 
 export function useSearch(keys: TProductKeys[]) {
   const searchParamKey = 'search';
+  const { push, currentRoute } = useRouter();
   const { param } = useQueryParam(searchParamKey);
 
   const productStore = useProductsStore();
@@ -24,7 +27,9 @@ export function useSearch(keys: TProductKeys[]) {
 
   const searchField = ref('');
 
-  function startSearch() {
+  async function startSearch() {
+    if (currentRoute.value.name !== RouteNames.productSearch) 
+      await push({ name: RouteNames.productSearch });
     if (searchField.value === '') param.value = null;
     else param.value = [searchField.value];
   }

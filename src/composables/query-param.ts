@@ -19,13 +19,13 @@ export function useQueryParam(key: string) {
       }
       else return null;
     },
-    set(value) {
+    async set(value) {
       let setValue: number | string | undefined = undefined;
 
       if (isNumberArray(value)) setValue = value.join(urlSeparator);
       else if (isStringArray(value)) setValue = value.join(urlSeparator);
 
-      router.push({
+      await router.push({
         query: {
           ...router.currentRoute.value.query,
           [key]: setValue,

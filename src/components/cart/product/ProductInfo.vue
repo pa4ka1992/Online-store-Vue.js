@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div class="product__info">
     <div class="product__info--header">
       <font-awesome-icon icon="fa-solid fa-star" />
@@ -49,6 +49,13 @@ const { title, brand, description, rating } = toRefs(props.product);
       margin-left: 1rem;
       font-weight: 600;
       color: $primary;
+      border-bottom: 1px solid transparent;
+      transition: all 0.2s;
+
+      &:hover {
+        color: $primary-darker;
+        border-bottom: 1px solid $primary-darker;
+      }
     }
   }
 

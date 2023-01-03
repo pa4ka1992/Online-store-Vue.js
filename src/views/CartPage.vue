@@ -1,5 +1,6 @@
 <template>
   <section class="cart container" v-if="cart.length > 0">
+    <page-crumbs class="cart__crumbs" :crumbs="crumbs" />
     <section class="cart__info">
       <cart-pagination />
       <transition-group class="products" name="products-anime" tag="ul">
@@ -31,10 +32,12 @@ import { useCartStore, usePaginationStore } from '@/store';
 import CartPagination from '@/components/cart/CartPagination.vue';
 import CartProduct from '@/components/cart/CartProduct.vue';
 import CartSummary from '@/components/cart/CartSummary.vue';
+import PageCrumbs from '@/components/PageCrumbs.vue';
 import BuyModal from '@/components/modal/BuyModal.vue';
 
 const { pageProducts, startIndex } = storeToRefs(usePaginationStore());
 const { cart } = storeToRefs(useCartStore());
+const crumbs = [{ id: 1, way: 'Cart' }];
 </script>
 
 <style lang="scss" scoped>
@@ -54,8 +57,14 @@ body {
 .cart {
   display: grid;
   grid-template-columns: 4fr 1fr;
+  grid-template-rows: repeat(2, fit-content);
   column-gap: 1rem;
   position: relative;
+
+  &__crumbs {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+  }
 
   &__info {
     padding: 1rem;

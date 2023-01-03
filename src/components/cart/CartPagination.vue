@@ -44,7 +44,11 @@ const MyPaginate = Paginate;
   grid-template-columns: 1fr 4fr 2fr;
   padding: 0.5rem 0;
   width: 100%;
+  position: sticky;
+  top: 0;
   border-bottom: 1px solid $secondary;
+  background-color: $light;
+  z-index: 10;
 
   &__header {
     margin: 0;

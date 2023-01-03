@@ -35,8 +35,8 @@ const { id, price, discountPercentage, stock } = toRefs(product);
 const { addProduct, dropProduct, findProduct } = useCartStore();
 const { modalIsShow } = storeToRefs(useModalStore());
 
-const getFixPrice = computed((): string => {
-  return (price.value * (1 - discountPercentage.value / 100)).toFixed(0);
+const getFixPrice = computed((): number => {
+  return price.value * (1 - discountPercentage.value / 100);
 });
 
 const buttonStatus = computed((): string => {

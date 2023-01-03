@@ -31,11 +31,12 @@ const isHovered = ref(false);
 
 .product {
   display: grid;
-  grid-template-columns: 0.2fr 10rem 3fr 1.5fr 0.8fr;
+  grid-template-columns: 0.2fr 10rem 3fr 1.2fr 1fr;
   place-items: center center;
   gap: 0.5rem;
   padding: 1rem 0;
   font-family: "Nunito", sans-serif;
+  cursor: pointer;
 
   &__image {
     display: block;

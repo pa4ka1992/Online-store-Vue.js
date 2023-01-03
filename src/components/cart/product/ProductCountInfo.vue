@@ -50,8 +50,8 @@ const updateInput = (e: Event): void => {
 @import '@/assets/scss/index.scss';
 
 .product__count-info {
+  justify-self: start;
   display: flex;
-  gap: 1rem;
   align-items: center;
 
   .delete {
@@ -61,7 +61,7 @@ const updateInput = (e: Event): void => {
     border: none;
     cursor: pointer;
     opacity: 0;
-    transition: all 0.2s;
+    transition: all 0.3s;
 
     &:hover {
       color: $danger;

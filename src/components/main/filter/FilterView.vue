@@ -43,12 +43,11 @@ function resetFilters() {
 .filter-section {
   background-color: $primary;
   color: $white;
-  min-height: 100%;
   max-width: 380px;
   padding: 10px 40px;
-  display: table-cell;
   border-radius: 30px;
   margin: 0 20px;
+  height: fit-content;
 
   &__heading {
     font-family: 'Pacifico', cursive;

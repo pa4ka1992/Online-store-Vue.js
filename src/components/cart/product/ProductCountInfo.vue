@@ -1,6 +1,6 @@
 <template>
   <div class="product__count-info">
-    <button @click="dropProduct(product)" class="delete">
+    <button :class="{ active: props.isHovered }" @click="dropProduct(product)" class="delete">
       <font-awesome-icon icon="fa-solid fa-trash" />
     </button>
     <div class="count-info__wrapper">
@@ -26,6 +26,7 @@ import { ICartProduct } from '@/store/cart/types';
 
 const props = defineProps<{
   product: Required<ICartProduct>;
+  isHovered: boolean;
 }>();
 
 const { price, stock, count } = toRefs(props.product);
@@ -59,7 +60,8 @@ const updateInput = (e: Event): void => {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    transition: all .2s;
+    opacity: 0;
+    transition: all 0.2s;
 
     &:hover {
       color: $danger;
@@ -67,9 +69,13 @@ const updateInput = (e: Event): void => {
     }
     .fa-trash {
       font-size: 1rem;
-      // color: $danger;
     }
   }
+
+  .active {
+    opacity: 1;
+  }
+
   .count-info__wrapper {
     flex-shrink: 0;
     display: flex;

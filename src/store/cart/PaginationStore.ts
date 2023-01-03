@@ -31,7 +31,7 @@ export const usePaginationStore = defineStore('paginationStore', () => {
   });
 
   const addQueries = (): void => {
-    router.replace({ query: { limit: `${limit.value}`, page: `${page.value}` } });
+    router.push({ query: { limit: `${limit.value}`, page: `${page.value}` } });
   };
 
   const updateLimit = (value: number): void => {

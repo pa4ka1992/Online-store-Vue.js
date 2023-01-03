@@ -2,8 +2,13 @@
   <div class="price__wrapper">
     <section class="product__price-info">
       <div class="product__prices">
-        <span v-if="discountPercentage" class="product__price--fix"> {{ getFixPrice }} $ </span>
-        <span :class="{ crossed: discountPercentage }" class="product__price--full"> {{ price }} $ </span>
+        <span class="product__prices">Price:</span>
+        <span v-if="discountPercentage" class="product__price--fix">
+          <my-number :input="getFixPrice" :fixed="2" /> $
+        </span> 
+        <span :class="{ crossed: discountPercentage }" class="product__price--full">
+          <my-number :input="price" :fixed="2" /> $
+        </span>
       </div>
       <div class="product__stock">Left in stock: {{ stock }}pc.</div>
       <div class="product__buttons">
@@ -44,9 +49,9 @@ const buttonStatus = computed((): string => {
 
 const updateCart = (): void => {
   if (findProduct(id.value)) {
-    dropProduct(product)
+    dropProduct(product);
   } else {
-    addProduct(product)
+    addProduct(product);
   }
 };
 
@@ -86,7 +91,7 @@ const fastBuy = (): void => {
           size: 1rem;
           weight: 400;
         }
-        color: $secondary;
+        color: $danger;
         text-decoration: line-through;
       }
     }

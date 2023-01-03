@@ -1,15 +1,18 @@
 <template>
-  <li class="product">
+  <li
+    @mouseover="isHovered = true"
+    @mouseout="isHovered = false"
+    class="product">
     <slot></slot>
     <img class="product__image" :src="images[0]" alt="product" />
     <product-info :product="product" />
-    <product-count-info :product="product" />
+    <product-count-info :product="product" :isHovered="isHovered"/>
     <product-price :product="product" />
   </li>
 </template>
 
 <script lang="ts" setup>
-import { toRefs } from 'vue';
+import { toRefs, ref } from 'vue';
 import { ICartProduct } from '@/store/cart/types';
 import ProductInfo from '@/components/cart/product/ProductInfo.vue';
 import ProductCountInfo from '@/components/cart/product/ProductCountInfo.vue';
@@ -20,6 +23,7 @@ const props = defineProps<{
 }>();
 
 const { images } = toRefs(props.product);
+const isHovered = ref(false);
 </script>
 
 <style lang="scss" scoped>

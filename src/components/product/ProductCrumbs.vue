@@ -1,5 +1,5 @@
 <template>
-  <section class="product__crumbs">
+  <nav class="product__crumbs">
     <font-awesome-icon @click="routeMain()" icon="fa-solid fa-arrow-left" />
     <ul class="crumbs__list">
       <li class="crumbs__list--main crumbs" @click="routeMain()">Main</li>
@@ -7,7 +7,7 @@
       <li class="crumbs__list--brand crumbs">{{ product.brand }}</li>
       <li class="crumbs__list--title crumbs">{{ product.title }}</li>
     </ul>
-  </section>
+  </nav>
 </template>
 
 <script lang="ts" setup>

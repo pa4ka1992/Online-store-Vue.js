@@ -42,7 +42,7 @@ const { brand, category, description, discountPercentage } = toRefs(product.valu
 @import '@/assets/scss/index.scss';
 
 .product__info {
-  flex-basis: 40%;
+  flex-basis: 50%;
   margin-top: 1rem;
   font-weight: 200;
 

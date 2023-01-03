@@ -64,9 +64,9 @@ const slideTo = (val: number) => {
 }
 
 .product__img {
-  flex-basis: 40%;
+  flex-basis: 50%;
   flex-grow: 0;
-  width: 500px;
+  width: 400px;
 
   // .carousel__item {
   //   max-width: 100px;

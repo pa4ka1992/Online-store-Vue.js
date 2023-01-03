@@ -69,6 +69,7 @@ const product = ref({
     position: relative;
 
     .content__wrapper {
+      flex-basis: 80%;
       display: flex;
       gap: 1rem;
       padding: 1rem;

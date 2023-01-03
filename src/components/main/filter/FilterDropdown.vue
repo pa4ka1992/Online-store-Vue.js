@@ -61,7 +61,7 @@ const collapsed = ref(false);
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px 0;
+    margin: 5px 0;
     cursor: pointer;
     user-select: none;
   }
@@ -91,15 +91,17 @@ const collapsed = ref(false);
   }
 
   &__content {
+    margin-top: 10px;
     display: flex;
     align-items: stretch;
     flex-direction: column;
     overflow: hidden;
     max-height: 200px;
-    transition: max-height 0.2s;
+    transition: max-height 0.2s, margin-top 0.2s;
 
     &_collapsed {  
       max-height: 0;
+      margin-top: 0;
     }
   }
 

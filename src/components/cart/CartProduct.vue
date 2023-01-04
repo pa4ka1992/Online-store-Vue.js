@@ -22,7 +22,7 @@ const { images } = toRefs(props.product);
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 .product {
   display: grid;
   grid-template-columns: 0.2fr 1fr 3fr 1.5fr 0.8fr;

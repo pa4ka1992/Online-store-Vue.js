@@ -11,3 +11,21 @@ export interface IProduct {
   images: string[];
   stock: number;
 }
+
+export const mockProduct: IProduct = {
+  id: '',
+  title: '',
+  category: '',
+  brand: '',
+  discountPercentage: 20,
+  description: '',
+  price: 100,
+  thumbnail: '',
+  rating: 5,
+  images: [''],
+  stock: 32
+}
+
+export function getMockValueByKey(key: keyof IProduct) {
+  return mockProduct[key];
+}

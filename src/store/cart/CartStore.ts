@@ -140,7 +140,7 @@ export const useCartStore = defineStore('cartStore', () => {
     cart.value.push(cartProduct);
   };
 
-  const deleteProduct = (incomeProduct: ICartProduct): void => {
+  const deleteProduct = (incomeProduct: IProduct): void => {
     cart.value = cart.value.filter((prod) => incomeProduct.id !== prod.id);
   };
 

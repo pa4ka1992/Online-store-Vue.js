@@ -18,7 +18,7 @@ const { discountPercentage, countPrice, fixPrice } = toRefs(props.product);
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 
 .product__price {
   display: flex;

@@ -4,6 +4,7 @@ import { IProduct } from '@/services//model/product';
 import { ICartProduct, TProductFunc, TFindFunc, TCurrProd } from './types';
 import { LocalStorageApi } from '@/services/local-storage';
 import { CartProduct } from './types';
+import { CartDefaultVal, LSKey } from './constants';
 
 export const useCartStore = defineStore('cartStore', () => {
   const _cart = ref<ICartProduct[]>([]);
@@ -33,7 +34,7 @@ export const useCartStore = defineStore('cartStore', () => {
     });
   };
 
-  const addProduct = (incomeProduct: IProduct, incomeCount = 1): void => {
+  const addProduct = (incomeProduct: IProduct, incomeCount = CartDefaultVal.ProductCount): void => {
     if (!findProduct(incomeProduct.id)) {
       const cartProduct: ICartProduct = new CartProduct(incomeProduct, incomeCount);
 
@@ -57,7 +58,7 @@ export const useCartStore = defineStore('cartStore', () => {
     const currProduct: TCurrProd = findProduct(incomeProduct.id);
 
     if (currProduct) {
-      if (currProduct.count < 2) {
+      if (currProduct.count < CartDefaultVal.decrementLimit) {
         _cart.value = _cart.value.filter((prod) => incomeProduct.id !== prod.id);
       } else {
         currProduct.count -= 1;
@@ -75,7 +76,7 @@ export const useCartStore = defineStore('cartStore', () => {
         return;
       }
       if (valNumber === 0) {
-        currProduct.count = 1;
+        currProduct.count = CartDefaultVal.ProductCount;
         return;
       }
       currProduct.count = valNumber;
@@ -85,13 +86,13 @@ export const useCartStore = defineStore('cartStore', () => {
   watch(
     () => _cart,
     (newCart) => {
-      _LS.setProperty('cart', newCart.value);
+      _LS.setProperty(LSKey.cart, newCart.value);
     },
     { deep: true },
   );
 
   onBeforeMount(() => {
-    const cartLS = _LS.getProperty('cart');
+    const cartLS: unknown = _LS.getProperty(LSKey.cart);
 
     if (cartLS instanceof Array<ICartProduct>) {
       _cart.value = [];

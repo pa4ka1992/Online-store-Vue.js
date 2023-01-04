@@ -1,12 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed, reactive } from 'vue';
 import { IValidation, TValidationField } from './types';
-import { validationInfo } from './constants';
-import visa from '@/assets/img/visa.png';
-import mastercard from '@/assets/img/mastercard.png';
-import americanExpress from '@/assets/img/americanExpress.png';
-import payPal from '@/assets/img/payPal.png';
-import unionPay from '@/assets/img/unionPay.png';
+import { validationInfo, CardService, cardImages } from './constants';
 
 export const useModalStore = defineStore('ModalStore', () => {
   const modalIsShow = ref(false);
@@ -21,20 +16,20 @@ export const useModalStore = defineStore('ModalStore', () => {
     const cardNumber = validation.card.val[0];
 
     switch (cardNumber) {
-      case '1':
-        return payPal;
+      case CardService.payPal:
+        return cardImages.payPal;
 
-      case '3':
-        return unionPay;
+      case CardService.unionPay:
+        return cardImages.unionPay;
 
-      case '4':
-        return visa;
+      case CardService.visa:
+        return cardImages.visa;
 
-      case '5':
-        return mastercard;
+      case CardService.mastercard:
+        return cardImages.mastercard;
 
       default:
-        return americanExpress;
+        return cardImages.americanExpress;
     }
   });
 

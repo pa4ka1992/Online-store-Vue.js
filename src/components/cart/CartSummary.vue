@@ -12,10 +12,9 @@
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
-import { usePromoStore, useModalStore } from '@/store';
+import { useModalStore } from '@/store';
 import { PromoList, PromoInput, TotalPrices, AdditionalInfo } from '@/components/cart/promo/index';
 
-const { totalPrice } = storeToRefs(usePromoStore());
 const { modalIsShow } = storeToRefs(useModalStore());
 </script>
 

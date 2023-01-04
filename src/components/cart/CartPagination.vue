@@ -19,7 +19,8 @@
       :page-class="'page'"
       :next-class="'page arrow'"
       :prev-class="'page arrow'"
-      :break-view-class="'break'" />
+      :break-view-class="'break'"
+    />
   </section>
 </template>
 
@@ -28,10 +29,11 @@ import { usePaginationStore } from '@/store';
 import { useCartStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import Paginate from 'vuejs-paginate-next';
+import { maxLimit } from '@/store/cart/constants';
 
 const { totalProducts } = storeToRefs(useCartStore());
 const { limit, page, totalPage } = storeToRefs(usePaginationStore());
-const { maxLimit, updateLimit } = usePaginationStore();
+const { updateLimit } = usePaginationStore();
 const MyPaginate = Paginate;
 </script>
 

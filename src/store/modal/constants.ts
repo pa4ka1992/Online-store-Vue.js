@@ -1,4 +1,24 @@
 import { TModifyFunc } from './types';
+import visa from '@/assets/img/visa.png';
+import mastercard from '@/assets/img/mastercard.png';
+import americanExpress from '@/assets/img/americanExpress.png';
+import payPal from '@/assets/img/payPal.png';
+import unionPay from '@/assets/img/unionPay.png';
+
+export enum CardService {
+  payPal = '1',
+  unionPay = '3',
+  visa = '4',
+  mastercard = '5',
+}
+
+export const cardImages = {
+  visa: visa,
+  mastercard: mastercard,
+  americanExpress: americanExpress,
+  payPal: payPal,
+  unionPay: unionPay,
+};
 
 const modifyName: TModifyFunc = function (this) {
   this.val = this.val.replace(/\s{2,}/g, ' ');

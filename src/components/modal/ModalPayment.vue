@@ -20,6 +20,7 @@ import ModalPayCard from '@/components/modal/ModalPayCard.vue';
 import { useCartStore, useModalStore, usePaginationStore, usePromoStore } from '@/store';
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
+import { LSKey } from '@/store/cart/constants';
 
 import router from '@/router';
 
@@ -42,7 +43,7 @@ const closeModal = (): void => {
 const buy = (): void => {
   if (isAllValid.value) {
     orderIsCompleted.value = true;
-    _LS.removeProperties(['cart', 'cart-page', 'cart-limit']);
+    _LS.removeProperties([LSKey.cart, LSKey.page, LSKey.limit]);
     cartStore.$reset();
     paginationStore.$reset();
     promoStore.$reset();

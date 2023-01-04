@@ -3,14 +3,14 @@ import { useCartStore } from './CartStore';
 import { ref, computed, watch, onBeforeMount } from 'vue';
 import { ICartProduct } from './types';
 import router from '@/router';
-// import { useRoute } from 'vue-router';
+import { LocalStorageApi } from '@/services/local-storage';
 
 export const usePaginationStore = defineStore('paginationStore', () => {
   const { cart } = storeToRefs(useCartStore());
+  const _LS = LocalStorageApi.getInstance();
   const page = ref(1);
   const limit = ref(10);
   const maxLimit = [1, 2, 3, 4, 5, 10, 25, 50, 100];
-  // const route = useRoute()
 
   const totalPage = computed((): number => {
     if (!limit.value) return 1;
@@ -31,42 +31,29 @@ export const usePaginationStore = defineStore('paginationStore', () => {
   });
 
   const addQueries = (): void => {
-    router.push({ query: { limit: `${limit.value}`, page: `${page.value}` } });
+    router.replace({ name: 'cart', query: { limit: `${limit.value}`, page: `${page.value}` } });
   };
 
   const updateLimit = (value: number): void => {
     limit.value = value;
   };
 
-  const clearStore = (): void => {
-    localStorage.removeItem('RSOnlineStore-cart-page');
-    localStorage.removeItem('RSOnlineStore-cart-limit');
-  }
-
-  // watch(
-  //   () => route.query,
-  //   (_, toParams) => {
-  //     limit.value = Number(toParams['limit']);
-  //     page.value = Number(toParams['page']);
-  //   },
-  // );
-
   watch(totalPage, (newTotalPage) => {
     if (page.value > newTotalPage) page.value = newTotalPage;
   });
 
   watch([page, limit], ([newPage, newLimit]) => {
-    localStorage.setItem('RSOnlineStore-cart-page', `${newPage}`);
-    localStorage.setItem('RSOnlineStore-cart-limit', `${newLimit}`);
+    _LS.setProperty('cart-page', newPage)
+    _LS.setProperty('cart-limit', newLimit)
     addQueries();
   });
 
   onBeforeMount(() => {
-    const pageLocalStorage: string | null = localStorage.getItem('RSOnlineStore-cart-page');
-    const limitLocalStorage: string | null = localStorage.getItem('RSOnlineStore-cart-limit');
-    if (pageLocalStorage) page.value = Number(pageLocalStorage);
-    if (limitLocalStorage) limit.value = Number(limitLocalStorage);
-    addQueries();
+    const limitLS = _LS.getProperty('cart-limit');
+    const pageLS = _LS.getProperty('cart-page');
+
+    if (typeof limitLS === 'number') limit.value = limitLS;
+    if (typeof pageLS === 'number') page.value = pageLS;
   });
 
   return {
@@ -77,6 +64,5 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     maxLimit,
     startIndex,
     updateLimit,
-    clearStore
   };
 });

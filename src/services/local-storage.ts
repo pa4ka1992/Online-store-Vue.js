@@ -8,9 +8,9 @@ export class LocalStorageApi {
   }
 
   static getInstance(): LocalStorageApi {
-    if (LocalStorageApi.instance === null) { 
+    if (LocalStorageApi.instance === null) {
       LocalStorageApi.instance = new LocalStorageApi();
-      LocalStorageApi.instance.init(); 
+      LocalStorageApi.instance.init();
     }
     return LocalStorageApi.instance;
   }
@@ -39,5 +39,12 @@ export class LocalStorageApi {
   setProperty(name: string, value: unknown) {
     this.loadedData[name] = value;
     this.saveData();
+  }
+
+  removeProperties(keys: string[]) {
+    keys.forEach((key) => {
+      delete this.loadedData[key];
+      window.localStorage.removeItem(key);
+    });
   }
 }

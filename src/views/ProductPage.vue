@@ -13,7 +13,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, Ref } from 'vue';
+import { ref, Ref, watch, onBeforeMount } from 'vue';
+import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { useProductsStore } from '@/store';
 import ProductHeader from '@/components/product/ProductHeader.vue';
 import ProductImages from '@/components/product/ProductImages.vue';
@@ -29,6 +31,7 @@ const props = defineProps<{
   name: Required<string>;
 }>();
 
+const route = useRoute();
 const productsStore = useProductsStore();
 const { getProductById } = productsStore;
 const product = ref({} as IProduct);
@@ -45,6 +48,7 @@ const getProduct = async () => {
 };
 
 getProduct();
+
 </script>
 
 <style lang="scss" scoped>

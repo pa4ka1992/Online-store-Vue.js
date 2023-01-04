@@ -15,7 +15,7 @@ import { Ref } from 'vue';
 
 const props = defineProps<{
   limit: Ref<number>
-  maxLimit: number
+  maxLimit: number[]
 }>();
 const emit = defineEmits(['update']);
 

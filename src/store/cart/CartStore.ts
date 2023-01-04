@@ -2,9 +2,11 @@ import { defineStore } from 'pinia';
 import { ref, computed, watch, onBeforeMount } from 'vue';
 import { IProduct } from '@/services//model/product';
 import { ICartProduct, TProductFunc, TFindFunc, TCurrProd } from './types';
+import { LocalStorageApi } from '@/services/local-storage';
 
 export const useCartStore = defineStore('cartStore', () => {
   const _cart = ref<ICartProduct[]>([]);
+  const _LS = LocalStorageApi.getInstance();
 
   const totalProducts = computed((): number => {
     return _cart.value.reduce((totalCount, product) => {
@@ -15,7 +17,7 @@ export const useCartStore = defineStore('cartStore', () => {
   const cart = computed((): ICartProduct[] => [..._cart.value]);
 
   const getProducts = async () => {
-    const res: Response = await fetch('https://dummyjson.com/products?limit=100', { method: 'GET' });
+    const res: Response = await fetch('https://dummyjson.com/products?limit=5', { method: 'GET' });
     const parse: { products: IProduct[] } = await res.json();
     const products: IProduct[] = parse.products;
 
@@ -88,26 +90,20 @@ export const useCartStore = defineStore('cartStore', () => {
     }
   };
 
-  const clearStore = (): void => {
-    localStorage.removeItem('RSOnlineStore-cart');
-  };
-
   watch(
     () => _cart,
     (newCart) => {
-      const cartToLocal: string = JSON.stringify(newCart.value);
-
-      localStorage.setItem('RSOnlineStore-cart', cartToLocal);
+      _LS.setProperty('cart', newCart.value);
     },
     { deep: true },
   );
 
   onBeforeMount(() => {
-    const cartLocalStorage: string | null = localStorage.getItem('RSOnlineStore-cart');
+    const cartLS = _LS.getProperty('cart');
 
-    if (cartLocalStorage) {
+    if (cartLS instanceof Array<ICartProduct>) {
       _cart.value = [];
-      const newCart: ICartProduct[] = JSON.parse(cartLocalStorage);
+      const newCart: ICartProduct[] = cartLS;
 
       newCart.forEach((product) => {
         addProduct(product, product.count);
@@ -126,6 +122,5 @@ export const useCartStore = defineStore('cartStore', () => {
     incrementCount,
     decrementCount,
     updateCount,
-    clearStore,
   };
 });

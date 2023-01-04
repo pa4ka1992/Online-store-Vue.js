@@ -36,14 +36,15 @@
 </template>
 
 <script lang="ts" setup>
+import { LocalStorageApi } from '@/services/local-storage';
 import { useCartStore, useModalStore, usePaginationStore, usePromoStore } from '@/store';
 import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
-import MyInput from '@/components/UI/MyInput.vue';
-import MyButton from '@/components/UI/MyButton.vue';
+
 import PayCard from '@/components/modal/PayCard.vue';
 import router from '@/router';
 
+const _LS = LocalStorageApi.getInstance();
 const modalStore = useModalStore();
 const paginationStore = usePaginationStore();
 const promoStore = usePromoStore();
@@ -62,8 +63,7 @@ const closeModal = (): void => {
 const buy = (): void => {
   if (isAllValid.value) {
     orderIsCompleted.value = true;
-    cartStore.clearStore();
-    paginationStore.clearStore();
+    _LS.removeProperties(['cart', 'cart-page', 'cart-limit']);
     cartStore.$reset();
     paginationStore.$reset();
     promoStore.$reset();
@@ -72,7 +72,7 @@ const buy = (): void => {
     setTimeout((): void => {
       orderIsCompleted.value = false;
       closeModal();
-      router.push({ path: '/' });
+      router.push({ name: 'overview' });
     }, 3000);
     return;
   }

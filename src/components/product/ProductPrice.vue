@@ -55,7 +55,7 @@ const updateCart = (): void => {
 };
 
 const fastBuy = (): void => {
-  router.push({ path: '/cart' });
+  router.push({ name: 'cart' });
   addProduct(product);
   modalIsShow.value = true;
 };

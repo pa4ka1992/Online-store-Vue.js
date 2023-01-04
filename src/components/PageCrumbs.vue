@@ -20,7 +20,7 @@ const props = defineProps<{
 const { crumbs } = reactive(props);
 
 const routeMain = (): void => {
-  router.push({ path: '/' });
+  router.push({ name: 'overview' });
 };
 </script>
 

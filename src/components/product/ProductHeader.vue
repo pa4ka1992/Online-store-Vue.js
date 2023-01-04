@@ -62,18 +62,20 @@ const getRandom = (max: number): number => {
       color: $warning;
     }
 
-    .header__info--rating {
-      color: $warning;
-    }
+    .header__info {
+      &--rating {
+        color: $warning;
+      }
 
-    .header__info--feedback {
-      border-bottom: 1px dashed $secondary;
-      transition: all 0.2s;
-      cursor: pointer;
+      &--feedback {
+        border-bottom: 1px dashed $secondary;
+        transition: all 0.2s;
+        cursor: pointer;
 
-      &:hover {
-        color: $dark;
-        border-color: $dark;
+        &:hover {
+          color: $dark;
+          border-color: $dark;
+        }
       }
     }
   }

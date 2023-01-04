@@ -61,22 +61,24 @@ const slideTo = (val: number) => {
   border-radius: 10px;
   background-color: $mainBG;
 
-  .slider__img,
-  .slider__img--main {
-    display: block;
-    width: 100%;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-
   .slider__img {
-    max-height: 100px;
-    border: 1px solid $secondary;
-  }
+    &,
+    &--main {
+      display: block;
+      width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+    }
 
-  .slider__img--main {
-    max-width: 400px;
-    max-height: 300px;
+    & {
+      max-height: 100px;
+      border: 1px solid $secondary;
+    }
+
+    &--main {
+      max-width: 400px;
+      max-height: 300px;
+    }
   }
 }
 </style>

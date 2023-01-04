@@ -89,21 +89,23 @@ body {
   }
 }
 
-.products-anime-move,
-.products-anime-enter-active,
-.products-anime-leave-active {
-  transition: all 0.3s ease;
-}
+.products-anime {
+  &-move,
+  &-enter-active,
+  &-leave-active {
+    transition: all 0.3s ease;
+  }
 
-.products-anime-enter-from,
-.products-anime-leave-to {
-  opacity: 0;
-  transform: scale(0.9);
-}
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
 
-.products-anime-leave-active {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  &-leave-active {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 </style>

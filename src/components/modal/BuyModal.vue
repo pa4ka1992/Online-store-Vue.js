@@ -191,18 +191,20 @@ watch(modalIsShow, (newModalIsShow) => {
   }
 }
 
-.modal-anime-enter-active,
-.modal-anime-leave-active {
-  transition: all 0.3s ease;
-}
+.modal-anime {
+  &-enter-active,
+  &-leave-active {
+    transition: all 0.3s ease;
+  }
 
-.modal-anime-enter-from,
-.modal-anime-leave-to {
-  opacity: 0;
-  transform: scale(0);
-}
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    transform: scale(0);
+  }
 
-.modal-anime-leave-active {
-  transform: scale(0);
+  &-leave-active {
+    transform: scale(0);
+  }
 }
 </style>

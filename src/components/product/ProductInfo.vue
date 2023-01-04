@@ -48,23 +48,28 @@ const { category, brand, description, discountPercentage } = toRefs(product);
       @include text-style;
     }
 
-    .header__category--title,
-    .header__brand--title {
-      color: $secondary;
-      font-style: italic;
+    .header {
+      &__category--title,
+      &__brand--title {
+        color: $secondary;
+        font-style: italic;
+      }
     }
   }
 
   &--description {
     margin-top: 1rem;
-    .description__text--title {
-      color: $secondary;
-      font-style: italic;
-    }
 
-    .description__text {
-      margin: 0;
-      @include text-style;
+    .description {
+      &__text--title {
+        color: $secondary;
+        font-style: italic;
+      }
+
+      &__text {
+        margin: 0;
+        @include text-style;
+      }
     }
   }
 

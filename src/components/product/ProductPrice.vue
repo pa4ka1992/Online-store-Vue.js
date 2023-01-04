@@ -4,7 +4,7 @@
       <div class="product__prices">
         <span v-if="discountPercentage" class="product__price--fix">
           <my-number :input="getFixPrice" :fixed="2" /> $
-        </span> 
+        </span>
         <span :class="{ crossed: discountPercentage }" class="product__price--full">
           <my-number :input="price" :fixed="2" /> $
         </span>
@@ -80,34 +80,36 @@ const fastBuy = (): void => {
     padding: 1rem;
     @include block-style;
 
-    .product__prices {
-      display: flex;
-      align-items: flex-end;
-      gap: 1rem;
+    .product {
+      &__prices {
+        display: flex;
+        align-items: flex-end;
+        gap: 1rem;
 
-      .crossed {
-        font: {
-          size: 0.8em;
-          weight: 400;
+        .crossed {
+          font: {
+            size: 0.8em;
+            weight: 400;
+          }
+          color: $danger;
+          text-decoration: line-through;
         }
-        color: $danger;
-        text-decoration: line-through;
       }
-    }
 
-    .product__stock {
-      font-size: 1rem;
-      font-weight: 400;
-      color: $secondary;
-    }
+      &__stock {
+        font-size: 1rem;
+        font-weight: 400;
+        color: $secondary;
+      }
 
-    .product__buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
+      &__buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
 
-      .button__cart {
-        min-width: 10.1em;
+        .button__cart {
+          min-width: 10.1em;
+        }
       }
     }
   }

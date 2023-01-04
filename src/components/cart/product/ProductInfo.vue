@@ -41,23 +41,26 @@ const { id, title, brand, description, rating } = toRefs(props.product);
     .fa-star {
       color: $warning;
     }
-    .header__rating {
-      margin-left: 0.2rem;
-      font-weight: 600;
-      color: $warning;
-    }
 
-    .header__title {
-      margin-left: 1rem;
-      font-weight: 600;
-      color: $primary;
-      border-bottom: 1px solid transparent;
-      transition: all 0.2s;
-      @include text-style;
+    .header {
+      &__rating {
+        margin-left: 0.2rem;
+        font-weight: 600;
+        color: $warning;
+      }
 
-      &:hover {
-        color: $primary-darker;
-        border-bottom: 1px solid $primary-darker;
+      &__title {
+        margin-left: 1rem;
+        font-weight: 600;
+        color: $primary;
+        border-bottom: 1px solid transparent;
+        transition: all 0.2s;
+        @include text-style;
+
+        &:hover {
+          color: $primary-darker;
+          border-bottom: 1px solid $primary-darker;
+        }
       }
     }
   }

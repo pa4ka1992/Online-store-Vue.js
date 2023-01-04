@@ -7,7 +7,7 @@ import { isNumberArray } from '@/utils';
 
 export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
   const productStore = useProductsStore();
-  const { products, productsRaw, loaded } = storeToRefs(productStore);
+  const { productsRaw, loaded } = storeToRefs(productStore);
   const { param } = useQueryParam(key);
 
   function findMin(array: IProduct[]) {
@@ -30,13 +30,15 @@ export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
 
   const loaderWatch = watch(loaded, () => {
     if (loaded.value) {
-      bounds.value = !isNumberArray(param.value) ? {
-        upper: findMax(products.value),
-        lower: findMin(products.value),
-      }: {
-        upper: param.value[1],
-        lower: param.value[0]
-      };
+      bounds.value = !isNumberArray(param.value)
+        ? {
+            upper: maxTotal.value,
+            lower: minTotal.value,
+          }
+        : {
+            upper: param.value[1],
+            lower: param.value[0],
+          };
       loaderWatch();
     }
   })
@@ -60,8 +62,8 @@ export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
     if (!isNumberArray(param.value)) {
       productStore.filters.set(key, () => true);
       bounds.value = {
-        upper: findMax(products.value),
-        lower: findMin(products.value),
+        upper: maxTotal.value,
+        lower: minTotal.value,
       };
     } else {
       productStore.filters.set(key, useRangeFilter(key, { lower: param.value[0], upper: param.value[1] }));

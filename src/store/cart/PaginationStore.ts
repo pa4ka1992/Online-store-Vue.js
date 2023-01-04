@@ -1,6 +1,6 @@
 import { defineStore, storeToRefs } from 'pinia';
 import { useCartStore } from './CartStore';
-import { ref, computed, watch, onBeforeMount } from 'vue';
+import { ref, Ref, computed, watch, onBeforeMount } from 'vue';
 import { ICartProduct } from './types';
 import router from '@/router';
 import { LocalStorageApi } from '@/services/local-storage';
@@ -9,9 +9,8 @@ import { CartDefaultVal, LSKey } from './constants';
 export const usePaginationStore = defineStore('paginationStore', () => {
   const { cart } = storeToRefs(useCartStore());
   const _LS = LocalStorageApi.getInstance();
-  const page = ref(CartDefaultVal.page);
-  const limit = ref(CartDefaultVal.limit);
-  // const maxLimit = [1, 2, 3, 4, 5, 10, 25, 50, 100];
+  const page: Ref<number> = ref(NaN);
+  const limit: Ref<number> = ref(NaN);
 
   const totalPage = computed((): number => {
     if (!limit.value) return CartDefaultVal.page;
@@ -47,8 +46,16 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     const limitLS: unknown = _LS.getProperty(LSKey.limit);
     const pageLS: unknown = _LS.getProperty(LSKey.page);
 
-    if (typeof limitLS === 'number') limit.value = limitLS;
-    if (typeof pageLS === 'number') page.value = pageLS;
+    if (typeof limitLS === 'number') {
+      limit.value = limitLS;
+    } else {
+      limit.value = CartDefaultVal.limit;
+    }
+    if (typeof pageLS === 'number') {
+      page.value = pageLS;
+    } else {
+      page.value = CartDefaultVal.page;
+    }
   });
 
   return {

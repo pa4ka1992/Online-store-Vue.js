@@ -3,6 +3,7 @@ import { ref, computed, watch, onBeforeMount } from 'vue';
 import { IProduct } from '@/services//model/product';
 import { ICartProduct, TProductFunc, TFindFunc, TCurrProd } from './types';
 import { LocalStorageApi } from '@/services/local-storage';
+import { CartProduct } from './types';
 
 export const useCartStore = defineStore('cartStore', () => {
   const _cart = ref<ICartProduct[]>([]);
@@ -34,16 +35,7 @@ export const useCartStore = defineStore('cartStore', () => {
 
   const addProduct = (incomeProduct: IProduct, incomeCount = 1): void => {
     if (!findProduct(incomeProduct.id)) {
-      const cartProduct: ICartProduct = {
-        ...incomeProduct,
-        count: incomeCount,
-        get countPrice() {
-          return this.count * this.price;
-        },
-        get fixPrice() {
-          return this.countPrice * (1 - this.discountPercentage / 100);
-        },
-      };
+      const cartProduct: ICartProduct = new CartProduct(incomeProduct, incomeCount);
 
       _cart.value.push(cartProduct);
     }

@@ -1,13 +1,11 @@
 <template>
   <form @submit.prevent class="summary-form">
     <div class="summary">
-     <total-price />
+      <total-prices />
       <promo-list />
       <additional-info />
       <promo-input />
-      <my-button 
-      @click="modalIsShow = true" 
-      class="summary__buy">Buy now</my-button>
+      <my-button @click="modalIsShow = true" class="summary__buy">Buy now</my-button>
     </div>
   </form>
 </template>
@@ -15,10 +13,7 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
 import { usePromoStore, useModalStore } from '@/store';
-import PromoList from '@/components/cart/promo/PromoList.vue';
-import PromoInput from '@/components/cart/promo/PromoInput.vue';
-import TotalPrice from '@/components/cart/promo/TotalPrice.vue';
-import AdditionalInfo from '@/components/cart/promo/AdditionalInfo.vue';
+import { PromoList, PromoInput, TotalPrices, AdditionalInfo } from '@/components/cart/promo/index';
 
 const { totalPrice } = storeToRefs(usePromoStore());
 const { modalIsShow } = storeToRefs(useModalStore());

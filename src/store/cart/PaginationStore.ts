@@ -30,22 +30,16 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     return cart.value.slice(limit.value * (page.value - 1), limit.value * page.value);
   });
 
-  const addQueries = (): void => {
-    router.replace({ name: 'cart', query: { limit: `${limit.value}`, page: `${page.value}` } });
-  };
-
   const updateLimit = (value: number): void => {
     limit.value = value;
   };
 
-  watch(totalPage, (newTotalPage) => {
+  watch([page, limit, totalPage], ([newPage, newLimit, newTotalPage]) => {
     if (page.value > newTotalPage) page.value = newTotalPage;
-  });
 
-  watch([page, limit], ([newPage, newLimit]) => {
-    _LS.setProperty('cart-page', newPage)
-    _LS.setProperty('cart-limit', newLimit)
-    addQueries();
+    _LS.setProperty('cart-page', newPage);
+    _LS.setProperty('cart-limit', newLimit);
+    router.replace({ name: 'cart', query: { limit: `${limit.value}`, page: `${page.value}` } });
   });
 
   onBeforeMount(() => {

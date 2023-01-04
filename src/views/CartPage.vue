@@ -22,18 +22,16 @@
     <p class="empty__info">Look at the main page to select products or find what you need in the search</p>
     <my-button class="empty__go-main" @click="router.push({name: 'overview'})">Main</my-button>
   </section>
-  <buy-modal />
+  <modal-window />
 </template>
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
 import router from '@/router';
 import { useCartStore, usePaginationStore } from '@/store';
-import CartPagination from '@/components/cart/CartPagination.vue';
-import CartProduct from '@/components/cart/CartProduct.vue';
-import CartSummary from '@/components/cart/CartSummary.vue';
+import {CartPagination, CartProduct, CartSummary} from '@/components/cart/index'
 import PageCrumbs from '@/components/PageCrumbs.vue';
-import BuyModal from '@/components/modal/BuyModal.vue';
+import ModalWindow from '@/components/modal/ModalWindow.vue';
 
 const { pageProducts, startIndex } = storeToRefs(usePaginationStore());
 const { cart } = storeToRefs(useCartStore());

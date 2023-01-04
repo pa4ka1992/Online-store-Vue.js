@@ -19,3 +19,5 @@ export type TValidationField = {
   modify: (this: TValidationField) => void;
   maxLength?: string;
 };
+
+export type TModifyFunc = (this: TValidationField) => void

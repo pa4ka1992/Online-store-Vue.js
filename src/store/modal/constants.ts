@@ -1,4 +1,46 @@
-import { TValidationField } from './types';
+import { TModifyFunc } from './types';
+
+const modifyName: TModifyFunc = function (this) {
+  this.val = this.val.replace(/\s{2,}/g, ' ');
+  this.val = this.val.replace(/\d/g, '');
+};
+
+const modifyAdress: TModifyFunc = function (this) {
+  this.val = this.val.replace(/\s{2,}/g, ' ');
+};
+
+const modifyPhone: TModifyFunc = function (this) {
+  if (this.val.length > 0 && this.val[0] !== '+') {
+    this.val = '+'.concat(this.val);
+  }
+  this.val = this.val.replace(/[^0-9+\s()-]/g, '');
+  this.val = this.val.replace(/\s{2,}/g, ' ');
+};
+
+const modifyEmail: TModifyFunc = function (this) {
+  console.log(true);
+  this.val = this.val.replace(/\s/g, '');
+};
+
+const modifyCard: TModifyFunc = function (this) {
+  this.val = this.val.replace(/[^0-9]/g, '');
+  const separate: string[] | null = this.val.match(/[0-9]{1,4}/g);
+  if (separate) {
+    this.val = separate.join(' ');
+  }
+};
+
+const modifyDate: TModifyFunc = function (this) {
+  this.val = this.val.replace(/[^0-9]/g, '');
+  const separate: string[] | null = this.val.match(/[0-9]{1,2}/g);
+  if (separate) {
+    this.val = separate.join('/');
+  }
+};
+
+const modifyCVV: TModifyFunc = function (this) {
+  this.val = this.val.replace(/[^0-9]/g, '');
+};
 
 export const validationInfo = {
   fullName: {
@@ -76,45 +118,3 @@ export const validationInfo = {
     maxLength: '3',
   },
 };
-
-function modifyName(this: TValidationField): void {
-  this.val = this.val.replace(/\s{2,}/g, ' ');
-  this.val = this.val.replace(/\d/g, '');
-}
-
-function modifyAdress(this: TValidationField): void {
-  this.val = this.val.replace(/\s{2,}/g, ' ');
-}
-
-function modifyPhone(this: TValidationField): void {
-  if (this.val.length > 0 && this.val[0] !== '+') {
-    this.val = '+'.concat(this.val);
-  }
-  this.val = this.val.replace(/[^0-9+\s()-]/g, '');
-  this.val = this.val.replace(/\s{2,}/g, ' ');
-}
-
-function modifyEmail(this: TValidationField): void {
-  console.log(true);
-  this.val = this.val.replace(/\s/g, '');
-}
-
-function modifyCard(this: TValidationField): void {
-  this.val = this.val.replace(/[^0-9]/g, '');
-  const separate: string[] | null = this.val.match(/[0-9]{1,4}/g);
-  if (separate) {
-    this.val = separate.join(' ');
-  }
-}
-
-function modifyDate(this: TValidationField): void {
-  this.val = this.val.replace(/[^0-9]/g, '');
-  const separate: string[] | null = this.val.match(/[0-9]{1,2}/g);
-  if (separate) {
-    this.val = separate.join('/');
-  }
-}
-
-function modifyCVV(this: TValidationField): void {
-  this.val = this.val.replace(/[^0-9]/g, '');
-}

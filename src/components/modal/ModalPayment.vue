@@ -18,9 +18,9 @@
 import { LocalStorageApi } from '@/services/local-storage';
 import ModalPayCard from '@/components/modal/ModalPayCard.vue';
 import { useCartStore, useModalStore, usePaginationStore, usePromoStore } from '@/store';
-import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { LSKey } from '@/store/cart/constants';
+import { RouteNames } from '@/router/names';
 
 import router from '@/router';
 
@@ -30,9 +30,7 @@ const paginationStore = usePaginationStore();
 const promoStore = usePromoStore();
 const cartStore = useCartStore();
 const { getPromoPrice } = storeToRefs(promoStore);
-const { modalIsShow, isAllValid } = storeToRefs(modalStore);
-const buyAttemt = ref(false);
-const orderIsCompleted = ref(false);
+const { modalIsShow, isAllValid, orderIsCompleted, buyAttemt } = storeToRefs(modalStore);
 
 const closeModal = (): void => {
   modalStore.$reset();
@@ -44,15 +42,15 @@ const buy = (): void => {
   if (isAllValid.value) {
     orderIsCompleted.value = true;
     _LS.removeProperties([LSKey.cart, LSKey.page, LSKey.limit]);
-    cartStore.$reset();
     paginationStore.$reset();
     promoStore.$reset();
+    cartStore.$reset();
     buyAttemt.value = false;
 
     setTimeout((): void => {
       orderIsCompleted.value = false;
       closeModal();
-      router.push({ name: 'overview' });
+      router.push({ name: RouteNames.landing });
     }, 3000);
     return;
   }
@@ -80,6 +78,10 @@ const buy = (): void => {
       margin: 1rem 0;
       font-size: 1.1rem;
       text-transform: uppercase;
+
+      &--header {
+        font-weight: 600;
+      }
 
       &--total {
         color: $success;

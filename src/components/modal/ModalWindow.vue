@@ -25,14 +25,12 @@
 
 <script lang="ts" setup>
 import { useModalStore } from '@/store';
-import { ref, watch } from 'vue';
+import { watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import ModalPayment from '@/components/modal/ModalPayment.vue';
 
 const modalStore = useModalStore();
-const { modalIsShow } = storeToRefs(modalStore);
-const buyAttemt = ref(false);
-const orderIsCompleted = ref(false);
+const { modalIsShow, orderIsCompleted, buyAttemt } = storeToRefs(modalStore);
 
 const closeModal = (): void => {
   modalStore.$reset();
@@ -92,6 +90,10 @@ watch(modalIsShow, (newModalIsShow) => {
     }
 
     &--header {
+      font: {
+        family: 'Pacifico', cursive;
+        size: 1.6rem;
+      }
       margin: 0;
     }
 

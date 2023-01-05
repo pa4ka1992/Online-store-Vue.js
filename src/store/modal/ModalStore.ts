@@ -5,6 +5,9 @@ import { validationInfo, CardService, cardImages } from './constants';
 
 export const useModalStore = defineStore('ModalStore', () => {
   const modalIsShow = ref(false);
+  const buyAttemt = ref(false);
+  const orderIsCompleted = ref(false);
+
   const validation: IValidation<TValidationField> = reactive(validationInfo);
 
   const isAllValid = computed((): boolean => {
@@ -56,6 +59,8 @@ export const useModalStore = defineStore('ModalStore', () => {
 
   return {
     modalIsShow,
+    buyAttemt,
+    orderIsCompleted,
     validation,
     validate,
     isAllValid,

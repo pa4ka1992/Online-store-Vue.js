@@ -120,7 +120,7 @@ const { cardServiceImg } = storeToRefs(useModalStore());
 
         .form__group--input {
           text-align: center;
-          max-width: 3.5em;
+          max-width: 5em;
         }
       }
     }

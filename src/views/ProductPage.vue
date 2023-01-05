@@ -46,9 +46,8 @@ getProduct();
 @import '@/assets/scss/variables.scss';
 
 .container {
-  max-width: $xxl;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0 40px;
   font-family: 'Poppins', sans-serif;
 }
 

@@ -3,7 +3,7 @@
     <slot></slot>
 
     <router-link :to="{ name: 'product', params: { id: `${id}` } }">
-      <img class="product__image" :src="images[0]" alt="product" />
+      <img class="product__image" :src="thumbnail" alt="product" />
     </router-link>
     <product-info :product="product" />
     <product-count-info :product="product" :isHovered="isHovered" />
@@ -22,7 +22,7 @@ const props = defineProps<{
   product: ICartProduct;
 }>();
 
-const { images, title, id } = toRefs(props.product);
+const { id, thumbnail } = toRefs(props.product);
 const isHovered = ref(false);
 </script>
 

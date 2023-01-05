@@ -1,35 +1,37 @@
 <template>
-  <section class="cart container" v-if="cart.length > 0">
-    <page-crumbs class="cart__crumbs" :crumbs="crumbs" />
-    <section class="cart__info">
-      <cart-pagination />
-      <transition-group class="products" name="products-anime" tag="ul">
-        <cart-product
-          class="product-anime"
-          v-for="(product, index) in pageProducts"
-          :product="product"
-          :index="index"
-          :key="product.id"
-        >
-          <span> {{ index + startIndex }} </span>
-        </cart-product>
-      </transition-group>
+  <section class="container">
+    <section class="cart" v-if="cart.length > 0">
+      <page-crumbs class="cart__crumbs" :crumbs="crumbs" />
+      <section class="cart__info">
+        <cart-pagination />
+        <transition-group class="products" name="products-anime" tag="ul">
+          <cart-product
+            class="product-anime"
+            v-for="(product, index) in pageProducts"
+            :product="product"
+            :index="index"
+            :key="product.id"
+          >
+            <span> {{ index + startIndex }} </span>
+          </cart-product>
+        </transition-group>
+      </section>
+      <cart-summary />
     </section>
-    <cart-summary />
+    <section class="empty" v-else>
+      <h3 class="empty__header">Cart is empty</h3>
+      <p class="empty__info">Look at the main page to select products or find what you need in the search</p>
+      <my-button class="empty__go-main" @click="router.push({ name: 'overview' })">Main</my-button>
+    </section>
+    <modal-window />
   </section>
-  <section class="empty container" v-else>
-    <h3 class="empty__header">Cart is empty</h3>
-    <p class="empty__info">Look at the main page to select products or find what you need in the search</p>
-    <my-button class="empty__go-main" @click="router.push({name: 'overview'})">Main</my-button>
-  </section>
-  <modal-window />
 </template>
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
 import router from '@/router';
 import { useCartStore, usePaginationStore } from '@/store';
-import {CartPagination, CartProduct, CartSummary} from '@/components/cart/index'
+import { CartPagination, CartProduct, CartSummary } from '@/components/cart/index';
 import PageCrumbs from '@/components/PageCrumbs.vue';
 import ModalWindow from '@/components/modal/ModalWindow.vue';
 
@@ -42,9 +44,8 @@ const crumbs = [{ id: 1, way: 'Cart' }];
 @import '@/assets/scss/variables.scss';
 
 .container {
-  max-width: $xxl;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0 40px;
   font-family: 'Poppins', sans-serif;
 }
 

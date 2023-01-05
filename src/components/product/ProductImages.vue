@@ -53,17 +53,13 @@ const slideTo = (val: number) => {
   margin-top: 1rem;
 }
 
-.carousel__slide {
-  margin: 0 0.5rem;
-}
-
 .product__img {
   flex-basis: 50%;
   flex-grow: 0;
   width: 400px;
   padding: 1rem;
   border-radius: 10px;
-  background-color: $gray-400;
+  background-color: $primary;
 
   .slider__img {
     &,

@@ -19,15 +19,15 @@ const router = createRouter({
       component: ProductSearchPage,
     },
     {
+      path: '/product-details/:id',
+      name: RouteNames.product,
+      component: ProductPage,
+      props: (route) => ({ id: route.params['id']}),
+    },
+    {
       path: '/cart',
       name: RouteNames.cart,
       component: CartPage,
-    },
-    {
-      path: '/product/id/:id',
-      name: RouteNames.product,
-      component: ProductPage,
-      props: true,
     },
     {
       path: '/:pathMatch(.*)*',

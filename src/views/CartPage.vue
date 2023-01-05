@@ -83,7 +83,6 @@ body {
 
 .empty {
   &__info {
-    width: 30%;
     color: $secondary;
   }
 }

@@ -3,7 +3,7 @@
     <div
       class="product__price--full"
       :class="{ crossed: product['discountPercentage'] }">
-      <my-number :input="countPrice" :fixed="2"/> $
+      <my-number :input="product.countPrice" :fixed="2"/> $
     </div>
     <span
       v-if="discountPercentage"
@@ -13,20 +13,21 @@
     <div
       v-if="discountPercentage"
       class="product__price--final">
-      <my-number :input="fixPrice" :fixed="2"/> $
+      <my-number :input="product.fixPrice" :fixed="2"/> $
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { toRefs } from 'vue';
+import { toRefs, reactive } from 'vue';
 import { ICartProduct } from '@/store/cart/types';
 
 const props = defineProps<{
   product: Required<ICartProduct>;
 }>();
 
-const { discountPercentage, countPrice, fixPrice } = toRefs(props.product);
+const { product } = reactive(props);
+const { discountPercentage } = toRefs(product);
 </script>
 
 <style lang="scss" scoped>

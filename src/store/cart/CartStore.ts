@@ -27,7 +27,6 @@ export const useCartStore = defineStore('cartStore', () => {
   const addProduct = (incomeProduct: IProduct, incomeCount = CartDefaultVal.ProductCount): void => {
     if (!findProduct(incomeProduct.id)) {
       const cartProduct: ICartProduct = new CartProduct(incomeProduct, incomeCount);
-
       _cart.value.push(cartProduct);
     }
   };

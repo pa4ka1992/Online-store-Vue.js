@@ -12,6 +12,7 @@
 import { reactive } from 'vue';
 import router from '@/router';
 import { ICrumbs } from '@/components/types';
+import { RouteNames } from '@/router/names';
 
 const props = defineProps<{
   crumbs: ICrumbs[];
@@ -20,7 +21,7 @@ const props = defineProps<{
 const { crumbs } = reactive(props);
 
 const routeMain = (): void => {
-  router.push({ name: 'overview' });
+  router.push({ name: RouteNames.landing });
 };
 </script>
 

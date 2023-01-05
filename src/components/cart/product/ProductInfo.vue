@@ -3,7 +3,7 @@
     <div class="product__info--header">
       <font-awesome-icon icon="fa-solid fa-star" />
       <span class="header__rating">{{ rating }}</span>
-      <router-link :to="{ name: 'product', params: { id: `${id}` } }">
+      <router-link :to="{ name: RouteNames.product, params: { id: `${id}` } }">
         <span class="header__title">{{ title }}</span>
       </router-link>
     </div>
@@ -14,6 +14,7 @@
 
 <script lang="ts" setup>
 import { toRefs } from 'vue';
+import { RouteNames } from '@/router/names';
 import { ICartProduct } from '@/store/cart/types';
 
 const props = defineProps<{

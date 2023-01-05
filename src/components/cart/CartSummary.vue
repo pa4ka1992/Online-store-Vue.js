@@ -30,8 +30,9 @@ const { modalIsShow } = storeToRefs(useModalStore());
     position: sticky;
     top: 1rem;
     padding: 1rem;
+    background-color: $white;
     border-radius: 12px;
-    @include block-style;
+    @include apply-shadow;
 
     &__buy {
       margin-top: 1rem;

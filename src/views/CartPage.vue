@@ -68,7 +68,9 @@ body {
 
   &__info {
     padding: 1rem;
-    @include block-style;
+    background-color: $white;
+    border-radius: 10px;
+    @include apply-shadow;
   }
 
   .products {

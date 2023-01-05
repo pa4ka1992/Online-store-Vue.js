@@ -73,10 +73,10 @@ $border-radius: 10px;
     outline: none;
     transition: background-color 0.5s;
     width: 100%;
-    background-color: $primary-light;
+    background-color: $white;
 
     &:focus-visible {
-      background-color: $white;
+      background-color: $gray-200;
     }
   }
 

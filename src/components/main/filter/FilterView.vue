@@ -70,6 +70,7 @@ function copyLink() {
   margin: 0 20px;
   height: fit-content;
   border-radius: 20px;
+  @include apply-shadow;
 
   &__heading {
     font-family: 'Pacifico', cursive;
@@ -83,7 +84,7 @@ function copyLink() {
   }
 
   &__filter-option {
-    margin: 10px 0; 
+    margin: 10px 0;
   }
 
   &__btn {

@@ -25,7 +25,7 @@ export default {
   color: $light;
   background-color: $primary;
   border: none {
-    radius: 5px;
+    radius: 10px;
   };
   white-space: nowrap;
   cursor: pointer;

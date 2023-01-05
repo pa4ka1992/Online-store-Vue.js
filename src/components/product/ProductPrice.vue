@@ -79,7 +79,9 @@ const fastBuy = (): void => {
     position: sticky;
     top: 1rem;
     padding: 1rem;
-    @include block-style;
+    background-color: white;
+    border-radius: 10px;
+    @include apply-shadow;
 
     .product {
       &__prices {

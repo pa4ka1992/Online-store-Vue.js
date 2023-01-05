@@ -2,7 +2,7 @@
   <li @mouseover="isHovered = true" @mouseout="isHovered = false" class="product">
     <slot></slot>
 
-    <router-link :to="{ name: 'product', params: { id: `${id}` } }">
+    <router-link :to="{ name: RouteNames.product, params: { id: `${id}` } }">
       <img class="product__image" :src="thumbnail" alt="product" />
     </router-link>
     <product-info :product="product" />
@@ -13,6 +13,7 @@
 
 <script lang="ts" setup>
 import { toRefs, ref } from 'vue';
+import { RouteNames } from '@/router/names';
 import { ICartProduct } from '@/store/cart/types';
 import ProductInfo from '@/components/cart/product/ProductInfo.vue';
 import ProductCountInfo from '@/components/cart/product/ProductCountInfo.vue';

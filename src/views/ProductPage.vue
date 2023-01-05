@@ -68,7 +68,9 @@ getProduct();
       gap: 1rem;
       padding: 1rem;
       font-family: 'Nunito', sans-serif;
-      @include block-style;
+      border-radius: 10px;
+      background-color: $white;
+      @include apply-shadow;
     }
   }
 }

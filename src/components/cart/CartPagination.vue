@@ -54,7 +54,10 @@ const MyPaginate = Paginate;
 
   &__header {
     margin: 0;
-    font-size: 1.3rem;
+    font: {
+      family: 'Pacifico', cursive;
+      size: 2rem;
+    }
   }
   .select-group {
     justify-self: end;

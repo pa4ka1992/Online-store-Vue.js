@@ -30,8 +30,8 @@ $total-color: #fb4a9b;
   font-size: 1rem;
 
   &__link {
-    color: $white;
-    background-color: $success-light;
+    color: $gray-500;
+    background-color: $white;
     border-radius: 50%;
     @include apply-shadow;
     display: flex;
@@ -39,18 +39,18 @@ $total-color: #fb4a9b;
     align-items: center;
     width: 100%;
     height: 100%;
-    transition: background-color 0.5s, transform 0.3s;
+    transition: all 0.3s;
 
     font-size: 1.7rem;
 
     &:visited {
-      color: $black;
+      color: $dark;
     }
   }
 
   &__count {
     color: $black;
-    background-color: $primary2-light;
+    background-color: $danger-light;
     padding: 0 10px;
     border-radius: 100px;
     translate: 25% -25%;
@@ -76,7 +76,7 @@ $total-color: #fb4a9b;
 
   &:hover {
     .cart-info__link {
-      background-color: $white;
+      color: $primary-light;
     }
 
     .cart-info__total {

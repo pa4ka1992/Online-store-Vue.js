@@ -7,7 +7,6 @@
   padding: 20px;
 
   @include apply-shadow;
-  cursor: pointer;
 
   &:hover {
     box-shadow: 0px 7px 7px rgba(0, 0, 0, 0.6);
@@ -24,6 +23,7 @@
   }
 
   &__heading {
+    cursor: pointer;
     text-align: center;
     font-size: 0.9rem;
     font-weight: 600;

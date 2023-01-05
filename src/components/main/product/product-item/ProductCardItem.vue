@@ -21,10 +21,10 @@ function cartBtnClick(e: Event) {
 </script>
 
 <template>
-  <RouterLink class="a product product-card" :to="`/product/${product.id}`">
+  <div class="product product-card">
     <div class="product-card__head">
       <img class="product__image" :src="product.thumbnail" loading="lazy"/>
-      <span class="product__heading">{{ product.title }}</span>
+      <RouterLink class="a product__heading" :to="`/product/${product.id}`">{{ product.title }}</RouterLink>
     </div>
     <div class="product-card__body">
       <div class="product-card__info">
@@ -45,7 +45,7 @@ function cartBtnClick(e: Event) {
         <i v-else class="icon-cart-ok"></i>
       </button>
     </div>
-  </RouterLink>
+  </div>
 </template>
 
 <style lang="scss" scoped>

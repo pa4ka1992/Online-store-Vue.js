@@ -9,12 +9,18 @@
 .fade {
   &-leave-active,
   &-enter-active {
-    transition: opacity 0.25s ease;
+    translate: 0;
+    transition: opacity 0.5s ease, translate 0.5s ease;
   }
 
-  &-enter-from,
+  &-enter-from {
+    translate: 20px 0;
+    opacity: 0;
+  }
+
   &-leave-to {
     opacity: 0;
+    translate: -20px 0;
   }
 }
 

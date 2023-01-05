@@ -74,10 +74,10 @@ export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
     }
   }
 
-  syncWithQuery();
-
   watch(param, () => {
     syncWithQuery();
+  }, {
+    immediate: true
   });
 
   return { maxTotal, minTotal, bounds, applyBounds };

@@ -38,16 +38,17 @@ export function useSortOption(key: TProductKeys, queryParam: string) {
       _sortUsage.value = key === productStore.defaultSort.key ? productStore.defaultSort.sortType : null;
     }
   }
-
-  syncWithQuery();
-  syncLocal();
-
+  
   watch(param, () => {
     syncWithQuery();
+  }, {
+    immediate: true
   });
 
   watch(sortType, () => {
     syncLocal();
+  }, {
+    immediate: true
   });
 
   const sortUsage = computed({

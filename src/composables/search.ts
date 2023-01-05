@@ -64,6 +64,8 @@ export function useSearch(keys: TProductKeys[]) {
 
   watch(param, () => {
     syncWithQuery();
+  }, {
+    immediate: true,
   });
 
   return { searchField, startSearch }

@@ -2,6 +2,7 @@
 
 import FilterByCategory from './FilterByCategory.vue';
 import FilterByRange from './FilterByRange.vue';
+import { FadeTransition } from '@/components/common';
 
 import { ref } from 'vue';
 import { useResetFilters } from '@/composables';
@@ -23,10 +24,10 @@ function copyLink() {
 <section class="filter-section">
   <h1 class="filter-section__heading">Filters</h1>
   <button class="btn filter-section__btn filter-section__btn_type_copy" @click="copyLink">
-    <Transition name="fade" mode="out-in">
+    <FadeTransition>
       <span v-if="copied">Copied!</span>
       <span v-else>Copy Link</span>
-    </Transition>
+    </FadeTransition>
   </button>
   <button class="btn filter-section__btn filter-section__btn_type_reset" @click="resetFilters">
     Reset filters
@@ -50,16 +51,6 @@ function copyLink() {
 <style scoped lang="scss">
 
 @import '@/assets/scss/variables.scss';
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.25s ease-in-out;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
 
 .filter-section {
   background-color: $primary;

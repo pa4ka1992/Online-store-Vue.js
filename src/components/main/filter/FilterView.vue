@@ -5,9 +5,11 @@ import FilterByRange from './FilterByRange.vue';
 import { FadeTransition } from '@/components/common';
 
 import { ref } from 'vue';
-import { useResetFilters } from '@/composables';
+import { useResetQuery, viewQueryKey, sortQueryKey } from '@/composables';
 
-const { resetFilters } = useResetFilters();
+  const ignoreParams = [viewQueryKey, sortQueryKey];
+
+const { resetQuery } = useResetQuery(ignoreParams);
 const copied = ref(false);
 
 function copyLink() {
@@ -29,7 +31,7 @@ function copyLink() {
       <span v-else>Copy Link</span>
     </FadeTransition>
   </button>
-  <button class="btn filter-section__btn filter-section__btn_type_reset" @click="resetFilters">
+  <button class="btn filter-section__btn filter-section__btn_type_reset" @click="resetQuery">
     Reset filters
   </button>
   <div class="filter-section__filter-option">

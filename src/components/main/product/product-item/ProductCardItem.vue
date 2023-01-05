@@ -24,7 +24,7 @@ function cartBtnClick(e: Event) {
   <div class="product product-card">
     <div class="product-card__head">
       <img class="product__image" :src="product.thumbnail" loading="lazy"/>
-      <RouterLink class="a product__heading" :to="`/product/${product.id}`">{{ product.title }}</RouterLink>
+      <RouterLink class="a product__heading" :to="`/product/${product.id}`" target="_blank">{{ product.title }}</RouterLink>
     </div>
     <div class="product-card__body">
       <div class="product-card__info">

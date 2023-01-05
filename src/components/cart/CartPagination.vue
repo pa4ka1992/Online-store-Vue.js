@@ -119,7 +119,7 @@ const MyPaginate = Paginate;
     }
 
     :deep(.active) {
-      background-color: $primary-darker;
+      background-color: $primary-dark;
     }
   }
 }

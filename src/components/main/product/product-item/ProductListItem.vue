@@ -22,7 +22,7 @@ function cartBtnClick(e: Event) {
 </script>
 
 <template>
-  <RouterLink class="a product product-list-item" :to="`/product/${product.id}`">
+  <RouterLink class="a product product-list-item" :to="{ name: 'product', params: { id: `${product.id}` } }">
     <div class="product-list-item__image-wrap">
       <img class="product__image" :src="product.thumbnail"/>
     </div>

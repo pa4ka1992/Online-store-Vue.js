@@ -2,7 +2,7 @@
   <li @mouseover="isHovered = true" @mouseout="isHovered = false" class="product">
     <slot></slot>
 
-    <router-link :to="{ name: 'product', params: { name: `${title}`, id: `${id}` } }">
+    <router-link :to="{ name: 'product', params: { id: `${id}` } }">
       <img class="product__image" :src="images[0]" alt="product" />
     </router-link>
     <product-info :product="product" />

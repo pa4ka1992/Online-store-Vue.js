@@ -15,7 +15,7 @@ export function useProductInfo(product: IProduct) {
 
   function toggleProduct() {
     if (!inCart.value) cartStore.addProduct(product);
-    else cartStore.deleteProduct(product);
+    else cartStore.dropProduct(product);
   };
 
   return {

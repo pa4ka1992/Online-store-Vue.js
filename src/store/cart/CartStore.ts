@@ -18,16 +18,6 @@ export const useCartStore = defineStore('cartStore', () => {
 
   const cart = computed((): ICartProduct[] => [..._cart.value]);
 
-  const getProducts = async () => {
-    const res: Response = await fetch('https://dummyjson.com/products?limit=5', { method: 'GET' });
-    const parse: { products: IProduct[] } = await res.json();
-    const products: IProduct[] = parse.products;
-
-    products.map((product) => {
-      addProduct(product);
-    });
-  };
-
   const findProduct: TFindFunc<ICartProduct> = (id) => {
     return _cart.value.find((product) => {
       return product.id === id;
@@ -101,8 +91,6 @@ export const useCartStore = defineStore('cartStore', () => {
       newCart.forEach((product) => {
         addProduct(product, product.count);
       });
-    } else {
-      getProducts();
     }
   });
 

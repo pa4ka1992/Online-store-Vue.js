@@ -47,7 +47,7 @@ const slideTo = (val: number) => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 
 #thumbnails {
   margin-top: 1rem;
@@ -63,7 +63,7 @@ const slideTo = (val: number) => {
   width: 400px;
   padding: 1rem;
   border-radius: 10px;
-  background-color: $mainBG;
+  background-color: $gray-400;
 
   .slider__img {
     &,

@@ -7,7 +7,7 @@ import { isNumberArray } from '@/utils';
 
 export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
   const productStore = useProductsStore();
-  const { products, productsRaw, loaded } = storeToRefs(productStore);
+  const { products, productsRaw, isLoaded } = storeToRefs(productStore);
   const { param } = useQueryParam(key);
 
   function findMin(array: IProduct[]) {
@@ -28,8 +28,8 @@ export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
 
   const bounds: Ref<TRangeBounds> = ref({});
 
-  const loaderWatch = watch(loaded, () => {
-    if (loaded.value) {
+  const loaderWatch = watch(isLoaded, () => {
+    if (isLoaded.value) {
       bounds.value = !isNumberArray(param.value) ? {
         upper: findMax(products.value),
         lower: findMin(products.value),

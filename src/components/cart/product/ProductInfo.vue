@@ -3,7 +3,7 @@
     <div class="product__info--header">
       <font-awesome-icon icon="fa-solid fa-star" />
       <span class="header__rating">{{ rating }}</span>
-      <router-link :to="{ name: 'product', params: { name: `${title}`, id: `${id}` } }">
+      <router-link :to="{ name: 'product', params: { id: `${id}` } }">
         <span class="header__title">{{ title }}</span>
       </router-link>
     </div>
@@ -58,8 +58,8 @@ const { id, title, brand, description, rating } = toRefs(props.product);
         @include text-style;
 
         &:hover {
-          color: $primary-darker;
-          border-bottom: 1px solid $primary-darker;
+          color: $primary-dark;
+          border-bottom: 1px solid $primary-dark;
         }
       }
     }

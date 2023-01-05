@@ -23,7 +23,8 @@ const { removePromo } = usePromoStore();
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
+
 .summary__promo-list {
   padding: 0.5rem;
   width: 100%;

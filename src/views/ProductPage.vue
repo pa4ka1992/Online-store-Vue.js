@@ -1,5 +1,5 @@
 <template>
-  <section v-if="product" class="product container">
+  <section v-if="isLoaded" class="product container">
     <page-crumbs :crumbs="crumbs" />
     <product-header :product="product" />
     <section class="product__content">
@@ -17,22 +17,20 @@ import { ref, Ref } from 'vue';
 import { useProductsStore } from '@/store';
 import { ProductHeader, ProductImages, ProductInfo, ProductPrice } from '@/components/product/index';
 import PageCrumbs from '@/components/PageCrumbs.vue';
-import { IProductMap } from '@/services/product-source';
 import { IProduct } from '@/services';
 import { ICrumbs } from '@/components/types';
 
 const props = defineProps<{
-  id: Required<keyof IProductMap>;
-  name: Required<string>;
+  id: Required<IProduct['id']>;
 }>();
 
 const productsStore = useProductsStore();
-const { getProductById } = productsStore;
+const { getProductById, isLoaded } = productsStore;
 const product = ref({} as IProduct);
 const crumbs: Ref<ICrumbs[]> = ref([]);
 
-const getProduct = async () => {
-  const currProduct = await getProductById(props.id);
+const getProduct = () => {
+  const currProduct = getProductById(props.id);
   if (currProduct) product.value = currProduct;
   crumbs.value = [
     { id: 1, way: product.value.category },
@@ -45,7 +43,7 @@ getProduct();
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 
 .container {
   max-width: $xxl;

@@ -37,7 +37,7 @@ const { cardServiceImg } = storeToRefs(useModalStore());
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 
 .card {
   position: relative;

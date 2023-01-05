@@ -48,7 +48,7 @@ const { validate } = modalStore;
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 
 .my-input {
   display: flex;

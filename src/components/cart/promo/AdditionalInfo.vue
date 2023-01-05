@@ -23,7 +23,7 @@ const { totalPrice, isDiscounted, getPromoPrice } = storeToRefs(usePromoStore())
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 
 .summary__total-products,
 .summary__discount {

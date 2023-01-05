@@ -39,7 +39,7 @@ const getRandom = (max: number): number => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 
 .product__header {
   display: flex;

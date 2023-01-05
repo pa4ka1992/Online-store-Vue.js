@@ -10,7 +10,7 @@
       </Carousel>
 
       <Carousel id="thumbnails" :items-to-show="4" :wrap-around="true" v-model="currentSlide" ref="carousel">
-        <Slide v-for="img in indexedImages" :key="img.id">
+        <Slide class="slide" v-for="img in indexedImages" :key="img.id">
           <div class="carousel__item" @click="slideTo(img.id)">
             <img class="slider__img" :src="img.imgLink" alt="product" />
           </div>
@@ -51,6 +51,10 @@ const slideTo = (val: number) => {
 
 #thumbnails {
   margin-top: 1rem;
+}
+
+.carousel__slide {
+  margin: 0 0.5rem;
 }
 
 .product__img {

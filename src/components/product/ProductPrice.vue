@@ -57,6 +57,7 @@ const updateCart = (): void => {
 const fastBuy = (): void => {
   router.push({ name: 'cart' });
   addProduct(product);
+  document.body.style.overflow = 'hidden';
   modalIsShow.value = true;
 };
 </script>

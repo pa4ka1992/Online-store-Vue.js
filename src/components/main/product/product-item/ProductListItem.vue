@@ -78,6 +78,7 @@ function cartBtnClick(e: Event) {
 .product-list-item {
   display: flex;
   width: 100%;
+  justify-content: space-between;
 
   &__image-wrap {
     padding: 20px;
@@ -102,7 +103,6 @@ function cartBtnClick(e: Event) {
   }
 
   &__actions {
-    width: 100%;
     padding: 20px;
     display: flex;
     flex-direction: column;

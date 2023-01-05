@@ -112,6 +112,7 @@ function toggleList() {
 .product-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
   width: 100%;
 
   &__item {

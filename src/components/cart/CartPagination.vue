@@ -49,7 +49,7 @@ const MyPaginate = Paginate;
   position: sticky;
   top: 0;
   border-bottom: 1px solid $secondary;
-  background-color: $light;
+  background-color: $white;
   z-index: 10;
 
   &__header {
@@ -89,7 +89,7 @@ const MyPaginate = Paginate;
     :deep(.page) {
       padding: 0.3rem 0.2rem;
       min-width: 2rem;
-      background-color: $light;
+      background-color: $white;
       border: 1px solid $secondary {
         radius: 10px;
       }
@@ -99,7 +99,7 @@ const MyPaginate = Paginate;
 
       &:hover {
         color: $light;
-        background-color: $primary;
+        background-color: $primary-dark;
       }
     }
 
@@ -119,7 +119,8 @@ const MyPaginate = Paginate;
     }
 
     :deep(.active) {
-      background-color: $primary-dark;
+      color: $white;
+      background-color: $primary;
     }
   }
 }

@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-
 import { useProductsStore } from '@/store';
 import { useProductView, ViewType } from '@/composables';
 import { storeToRefs } from 'pinia';
@@ -26,17 +25,16 @@ const listClass = computed(() => {
 function toggleList() {
   type.value = ViewType.List;
 }
-
 </script>
 
 <template>
   <section class="product-section">
     <h1 class="product-section__heading">
-      Products 
+      Products
       <span class="product-count">found {{ products.length }} products</span>
     </h1>
-    <div class="product-section__options"> 
-      <SortOptionList :sort-keys="['title', 'rating', 'price', 'stock']"/>
+    <div class="product-section__options">
+      <SortOptionList :sort-keys="['title', 'rating', 'price', 'stock']" />
       <div class="view-options">
         <button class="btn view-options__btn" :class="gridClass" @click="toggleGrid">
           <i class="icon-apps-sqr"></i>
@@ -46,24 +44,21 @@ function toggleList() {
         </button>
       </div>
     </div>
-    <div v-if="products.length === 0" class="product-list product-list_not-found">
-      No products found 
-    </div>
+    <div v-if="products.length === 0" class="product-list product-list_not-found">No products found</div>
     <div v-else-if="type === ViewType.List" class="product-list">
       <div class="product-list__item product-list__item_type_list" v-for="product in products" :key="product.id">
-        <ProductListItem :product="product"/>
+        <ProductListItem :product="product" />
       </div>
     </div>
     <div v-else class="product-list">
       <div class="product-list__item" v-for="product in products" :key="product.id">
-        <ProductCardItem :product="product"/>
+        <ProductCardItem :product="product" />
       </div>
     </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
-
 @import '@/assets/scss/variables.scss';
 
 .product-count {
@@ -75,14 +70,15 @@ function toggleList() {
 .view-options {
   &__btn {
     font-size: 2.5rem;
-    transition: color 0.25s;
+    transition: color 0.25s, transform 0.2s;
 
     &_active {
       color: $primary;
     }
 
     &:hover {
-      color: $primary-light;
+      color: $primary-dark;
+      transform: scale(1.05);
     }
   }
 }
@@ -92,7 +88,7 @@ function toggleList() {
   padding: 10px 40px;
   display: flex;
   flex-direction: column;
-  
+
   &__heading {
     font-family: 'Pacifico', cursive;
     font-size: 2rem;
@@ -111,6 +107,7 @@ function toggleList() {
 
 .product-list {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   width: 100%;
 
@@ -130,5 +127,4 @@ function toggleList() {
     font-weight: 700;
   }
 }
-
 </style>

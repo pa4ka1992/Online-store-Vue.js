@@ -39,7 +39,7 @@ const collapsed = ref(false);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $primary-light; 
+  background-color: $primary; 
   border-radius: 10px;
   
   &:hover {
@@ -48,11 +48,11 @@ const collapsed = ref(false);
 }
 
 .filter-dropdown {
-  background-color: $primary-dark;
+  background-color: $primary;
   color: $white;
-  border-radius: 40px;
+  border-radius: 20px;
   width: 270px;
-  padding: 10px;
+  padding: 5px;
 
   font-size: 0.9rem;
 
@@ -68,7 +68,7 @@ const collapsed = ref(false);
 
   &__title {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: 400;
   }
 
@@ -82,7 +82,7 @@ const collapsed = ref(false);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2em;
+    font-size: 1.5em;
     transition: rotate 0.2s ease;
 
     &_active {
@@ -108,7 +108,7 @@ const collapsed = ref(false);
   &__content-wrap {
     max-height: inherit;
     border-width: 15px 20px;
-    border-color: $primary-dark;
+    border-color: $primary;
     border-radius: 20px;
     overflow: hidden scroll;
     border-style: solid;

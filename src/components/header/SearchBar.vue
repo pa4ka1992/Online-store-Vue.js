@@ -58,7 +58,7 @@ function enterPress(e: KeyboardEvent) {
 @import '@/assets/scss/variables.scss';
 
 $side-padding: 25px;
-$border-radius: 100px;
+$border-radius: 10px;
 
 .search {
   margin: 10px;
@@ -73,10 +73,10 @@ $border-radius: 100px;
     outline: none;
     transition: background-color 0.5s;
     width: 100%;
-    background-color: $primary;
+    background-color: $primary-light;
 
-    &:focus {
-      background-color: $primary-light;
+    &:focus-visible {
+      background-color: $white;
     }
   }
 
@@ -93,7 +93,7 @@ $border-radius: 100px;
     background-color: transparent;
 
     &:hover {
-      background-color: $primary2;
+      background-color: $primary2-light;
     }
 
     &:active {

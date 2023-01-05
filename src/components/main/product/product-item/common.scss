@@ -52,7 +52,7 @@
 
 .rating {
   margin: 10px 0;
-  color: $primary;
+  color: $warning;
   font-weight: 600;
 
   &__title {
@@ -75,7 +75,7 @@
 
 .cart-btn {
   font-size: 1.7rem;
-  background-color: $primary;
+  background-color: $gray-200;
   transition: background-color 0.25s;
   padding: 5px;
   display: flex;
@@ -96,11 +96,11 @@
   }
 
   &_in-cart {
-    background-color: $success;
+    background-color: $success-light;
     color: $white;
 
     &:hover {
-      background-color: $success-light;
+      background-color: $success;
     }
   }
 }

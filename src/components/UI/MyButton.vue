@@ -23,7 +23,7 @@ export default {
     weight: 500;
   }
   color: $light;
-  background-color: $primary-dark;
+  background-color: $primary;
   border: none {
     radius: 5px;
   };
@@ -32,7 +32,7 @@ export default {
   transition: transform 0.3s, background-color 0.2s;
 
   &:hover {
-    background-color: $primary;
+    background-color: $primary-dark;
   }
 
   &:active {

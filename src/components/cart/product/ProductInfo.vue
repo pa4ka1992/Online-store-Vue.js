@@ -52,7 +52,7 @@ const { id, title, brand, description, rating } = toRefs(props.product);
       &__title {
         margin-left: 1rem;
         font-weight: 600;
-        color: $primary;
+        color: $primary-dark;
         border-bottom: 1px solid transparent;
         transition: all 0.2s;
         @include text-style;

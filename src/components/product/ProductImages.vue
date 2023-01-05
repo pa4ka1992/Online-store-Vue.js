@@ -59,7 +59,7 @@ const slideTo = (val: number) => {
   width: 400px;
   padding: 1rem;
   border-radius: 10px;
-  background-color: $primary;
+  background-color: $light;
 
   .slider__img {
     &,

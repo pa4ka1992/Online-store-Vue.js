@@ -1,10 +1,8 @@
 <script lang="ts" setup>
-
 import { useCartStore, usePromoStore } from '@/store';
 
 const cart = useCartStore();
 const promo = usePromoStore();
-
 </script>
 
 <template>
@@ -13,20 +11,17 @@ const promo = usePromoStore();
       <i class="icon-cart"></i>
     </RouterLink>
     <span v-if="cart.cart.length !== 0" class="cart-info__count">
-      {{cart.cart.length}}
+      {{ cart.cart.length }}
     </span>
-    <span v-if="cart.cart.length !== 0" class="cart-info__total">
-      ${{promo.totalPrice.toFixed(2)}}
-    </span>
+    <span v-if="cart.cart.length !== 0" class="cart-info__total"> ${{ promo.totalPrice.toFixed(2) }} </span>
   </div>
 </template>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/variables.scss';
 
-@import '@/assets/scss/variables.scss'; 
-
-$count-color: #FF8A8A;
-$total-color: #FB4A9B;
+$count-color: #ff8a8a;
+$total-color: #fb4a9b;
 
 .cart-info {
   position: relative;
@@ -35,8 +30,8 @@ $total-color: #FB4A9B;
   font-size: 1rem;
 
   &__link {
-    color: $black;
-    background-color: $primary2;
+    color: $white;
+    background-color: $success-light;
     border-radius: 50%;
     @include apply-shadow;
     display: flex;
@@ -44,7 +39,7 @@ $total-color: #FB4A9B;
     align-items: center;
     width: 100%;
     height: 100%;
-    transition: background-color 0.5s;
+    transition: background-color 0.5s, transform 0.3s;
 
     font-size: 1.7rem;
 
@@ -55,7 +50,7 @@ $total-color: #FB4A9B;
 
   &__count {
     color: $black;
-    background-color: $count-color;
+    background-color: $primary2-light;
     padding: 0 10px;
     border-radius: 100px;
     translate: 25% -25%;
@@ -66,7 +61,8 @@ $total-color: #FB4A9B;
   }
 
   &__total {
-    background-color: $total-color;
+    color: $dark;
+    background-color: $primary2-light;
     padding: 0 10px;
     border-radius: 100px;
     translate: -50% 30%;
@@ -79,21 +75,20 @@ $total-color: #FB4A9B;
   }
 
   &:hover {
-    .cart-info__link { 
-      background-color: $primary2-light;
+    .cart-info__link {
+      background-color: $white;
     }
 
-    .cart-info__total { 
+    .cart-info__total {
       rotate: 370deg;
       scale: 1.2;
-    } 
+    }
   }
 
   &:active {
-    .cart-info__link { 
-      background-color: $primary2-dark;
-    } 
+    .cart-info__link {
+      transform: scale(0.95);
+    }
   }
 }
-
 </style>

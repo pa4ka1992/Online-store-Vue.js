@@ -49,7 +49,7 @@ const getRandom = (max: number): number => {
 
   &--title {
     margin: 0.5rem;
-    color: $primary;
+    color: $primary-dark;
     @include text-style;
   }
 

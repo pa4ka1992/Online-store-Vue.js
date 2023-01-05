@@ -9,7 +9,7 @@
         <button :disabled="count === 1" class="decrement" @click="decrementCount(product)">
           <font-awesome-icon icon="fa-solid fa-minus" />
         </button>
-        <input type="number" class="count" :value="count" @change="updateInput" />
+        <input type="number" class="count" :value="count" @input="updateInput" />
         <button :disabled="count === stock" class="increment" @click="incrementCount(product)">
           <font-awesome-icon icon="fa-solid fa-plus" />
         </button>
@@ -33,11 +33,12 @@ const { price, stock, count } = toRefs(props.product);
 const { decrementCount, incrementCount, dropProduct, updateCount } = useCartStore();
 
 const updateInput = (e: Event): void => {
+  console.log(true);
   const target = e.target as HTMLOptionElement;
   const valNumber = Number(target.value);
 
   if (valNumber === 0) {
-    target.value = '1';
+    target.value = '';
   } else if (valNumber > props.product['stock']) {
     target.value = String(props.product['stock']);
   }
@@ -84,6 +85,7 @@ const updateInput = (e: Event): void => {
     gap: 0.5rem;
 
     &--control {
+      background-color: $white;
       border: 1px solid $secondary {
         radius: 5px;
       }
@@ -108,6 +110,7 @@ const updateInput = (e: Event): void => {
       .count {
         font-size: 1rem;
         max-width: 3rem;
+        background-color: transparent;
         border: none;
         text-align: center;
         -webkit-appearance: none;

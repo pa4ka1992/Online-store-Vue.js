@@ -25,7 +25,7 @@ const changeOption = ({ target }: Event): void => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 
 .my-select {
   padding: 0.3em 0.6rem;

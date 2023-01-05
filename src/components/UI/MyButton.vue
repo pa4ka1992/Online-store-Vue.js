@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 
 .my-button {
   flex-grow: 0;
@@ -32,7 +32,7 @@ export default {
   transition: transform 0.3s, background-color 0.2s;
 
   &:hover {
-    background-color: $primary-darker;
+    background-color: $primary-dark;
   }
 
   &:active {

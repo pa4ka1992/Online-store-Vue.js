@@ -39,7 +39,7 @@ const crumbs = [{ id: 1, way: 'Cart' }];
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 
 .container {
   max-width: $xxl;

@@ -47,7 +47,7 @@ const updateInput = (e: Event): void => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 
 .product__count-info {
   justify-self: start;

@@ -24,7 +24,7 @@ const { id, title, brand, description, rating } = toRefs(props.product);
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 
 .product__info {
   justify-self: start;

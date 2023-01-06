@@ -33,9 +33,11 @@ export const useProductsRepo = defineStore('products-repo', () => {
   });
 
   async function updateAll() {
-    isLoading.value = true;
-    productsFiltered.value = await sort(await filter(products.value));
-    isLoading.value = false;
+    if (loaded.value) {
+      isLoading.value = true;
+      productsFiltered.value = await sort(await filter(products.value));
+      isLoading.value = false; 
+    }
   }
 
   // Sort
@@ -50,9 +52,11 @@ export const useProductsRepo = defineStore('products-repo', () => {
   });
 
   watch(sortType, async () => {
-    isLoading.value = true;
-    productsFiltered.value = await sort(productsFiltered.value);
-    isLoading.value = false;
+    if (loaded.value) {
+      isLoading.value = true;
+      productsFiltered.value = await sort(productsFiltered.value);
+      isLoading.value = false;
+    }
   });
 
   function sort(items: IProduct[]): Promise<IProduct[]> {

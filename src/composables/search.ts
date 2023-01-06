@@ -9,7 +9,7 @@ import {
   IFilter,
 } from '@/services';
 import { useQueryParam } from './query-param';
-import { useProductsStore } from '@/store';
+import { useProductsRepo } from '@/store';
 import { isString, isNumber, isNumberArray, isStringArray } from '@/utils';
 import { storeToRefs } from 'pinia';
 import { watch, ref } from 'vue';
@@ -22,7 +22,7 @@ export function useSearch(keys: TProductKeys[]) {
   const { push, currentRoute } = useRouter();
   const { param } = useQueryParam(searchParamKey);
 
-  const productStore = useProductsStore();
+  const productStore = useProductsRepo();
 
   const { filters } = storeToRefs(productStore);
 

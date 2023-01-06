@@ -1,5 +1,5 @@
 import { ref, computed, type Ref, watch } from 'vue';
-import { useProductsStore } from '@/store';
+import { useProductsRepo } from '@/store';
 import { storeToRefs } from 'pinia';
 import {
   useStringSort,
@@ -15,7 +15,7 @@ import { useQueryParam } from './query-param';
 
 export function useSortOption(key: TProductKeys, queryParam: string) {
   const { param } = useQueryParam(queryParam);
-  const productStore = useProductsStore();
+  const productStore = useProductsRepo();
   const { sortType } = storeToRefs(productStore);
 
   const _sortUsage: Ref<SortType | null> = ref(null);

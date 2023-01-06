@@ -2,7 +2,6 @@
 
 import FilterByCategory from './FilterByCategory.vue';
 import FilterByRange from './FilterByRange.vue';
-import { FadeTransition } from '@/components/common';
 
 import { ref } from 'vue';
 import { useResetQuery, viewQueryKey, sortQueryKey } from '@/composables';

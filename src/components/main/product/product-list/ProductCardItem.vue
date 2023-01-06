@@ -55,7 +55,7 @@ function cartBtnClick(e: Event) {
   width: 250px;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: fit-content;
   align-items: center;
   justify-content: space-between;
 

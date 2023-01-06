@@ -12,6 +12,8 @@ import {
   faCircleXmark,
   faArrowsRotate,
   faArrowsLeftRight,
+  faAnglesUp,
+  faAnglesDown,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { App } from 'vue';
@@ -30,6 +32,8 @@ export const fontAwesomePlugin = (app: App): void => {
     faCircleXmark,
     faArrowsRotate,
     faArrowsLeftRight,
+    faAnglesUp,
+    faAnglesDown,
   );
   app.component('FontAwesomeIcon', FontAwesomeIcon);
 };

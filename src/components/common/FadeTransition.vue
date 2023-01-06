@@ -1,3 +1,9 @@
+<script lang="ts">
+export default {
+  name: 'FadeTransition',
+};
+</script>
+
 <template>
 <Transition name="fade" mode="out-in">
   <slot></slot>

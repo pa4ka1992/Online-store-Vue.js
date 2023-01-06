@@ -1,3 +1,9 @@
+<script lang="ts">
+export default {
+  name: 'AppSpinner',
+};
+</script>
+
 <template>
 <div class="spinner-wrap">
   <i class="icon-spinner spinner"></i>

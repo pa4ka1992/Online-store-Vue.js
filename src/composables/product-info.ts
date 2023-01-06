@@ -10,7 +10,7 @@ export function useProductInfo(product: IProduct) {
   const cartStore = useCartStore();
 
   const inCart = computed(() => {
-    return cartStore.cart.findIndex((value) => product.id === value.id) !== -1;
+    return cartStore.findProduct(product.id);
   });
 
   function toggleProduct() {

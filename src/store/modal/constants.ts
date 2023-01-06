@@ -38,7 +38,6 @@ const modifyPhone: TModifyFunc = function (this) {
 };
 
 const modifyEmail: TModifyFunc = function (this) {
-  console.log(true);
   this.val = this.val.replace(/\s/g, '');
 };
 

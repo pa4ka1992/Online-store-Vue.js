@@ -10,10 +10,12 @@ export const useModalStore = defineStore('ModalStore', () => {
 
   const validation: IValidation<TValidationField> = reactive(validationInfo);
 
-  const isAllValid = computed((): boolean => {
-    const buyFieldKeys = <(keyof IValidation<TValidationField>)[]>Object.keys(validation);
-    return buyFieldKeys.every((field) => validation[field].isValid);
-  });
+  const isAllValid = ref(true);
+  
+  // computed((): boolean => {
+  //   const buyFieldKeys = <(keyof IValidation<TValidationField>)[]>Object.keys(validation);
+  //   return buyFieldKeys.every((field) => validation[field].isValid);
+  // });
 
   const cardServiceImg = computed((): string | undefined => {
     const cardNumber = validation.card.val[0];

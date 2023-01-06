@@ -2,9 +2,9 @@ import { defineStore, storeToRefs } from 'pinia';
 import { useCartStore } from './CartStore';
 import { ref, Ref, computed, watch, onBeforeMount } from 'vue';
 import { ICartProduct } from './types';
-import router from '@/router';
 import { LocalStorageApi } from '@/services/local-storage';
 import { CartDefaultVal, LSKey } from './constants';
+import { useQueryCart } from '@/composables/query-cart';
 
 export const usePaginationStore = defineStore('paginationStore', () => {
   const { cart } = storeToRefs(useCartStore());
@@ -39,7 +39,7 @@ export const usePaginationStore = defineStore('paginationStore', () => {
 
     _LS.setProperty(LSKey.page, newPage);
     _LS.setProperty(LSKey.limit, newLimit);
-    router.replace({ name: 'cart', query: { limit: `${limit.value}`, page: `${page.value}` } });
+    useQueryCart(limit.value, page.value);
   });
 
   onBeforeMount(() => {

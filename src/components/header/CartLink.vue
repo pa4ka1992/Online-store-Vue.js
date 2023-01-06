@@ -1,19 +1,25 @@
 <script lang="ts" setup>
-import { useCartStore, usePromoStore } from '@/store';
+import { RouteNames } from '@/router';
+import { useCartStore, usePromoStore, usePaginationStore } from '@/store';
+import { storeToRefs } from 'pinia';
 
-const cart = useCartStore();
-const promo = usePromoStore();
+const { cart } = storeToRefs(useCartStore());
+const { totalPrice } = storeToRefs(usePromoStore());
+const { page, limit } = storeToRefs(usePaginationStore());
 </script>
 
 <template>
   <div class="cart-info">
-    <RouterLink class="a cart-info__link" to="/cart">
+    <RouterLink
+      class="a cart-info__link"
+      :to="{ name: RouteNames.cart, query: { limit: `${limit}`, page: `${page}` } }"
+    >
       <i class="icon-cart"></i>
     </RouterLink>
-    <span v-if="cart.cart.length !== 0" class="cart-info__count">
-      {{ cart.cart.length }}
+    <span v-if="cart.length !== 0" class="cart-info__count">
+      {{ cart.length }}
     </span>
-    <span v-if="cart.cart.length !== 0" class="cart-info__total"> ${{ promo.totalPrice.toFixed(2) }} </span>
+    <span v-if="cart.length !== 0" class="cart-info__total"> ${{ totalPrice.toFixed(2) }} </span>
   </div>
 </template>
 

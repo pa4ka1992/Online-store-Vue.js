@@ -38,6 +38,7 @@ import ModalWindow from '@/components/modal/ModalWindow.vue';
 const { pageProducts, startIndex } = storeToRefs(usePaginationStore());
 const { cart } = storeToRefs(useCartStore());
 const crumbs = [{ id: 1, way: 'Cart' }];
+
 </script>
 
 <style lang="scss" scoped>

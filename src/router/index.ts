@@ -22,7 +22,7 @@ const router = createRouter({
       path: '/product-details/:id',
       name: RouteNames.product,
       component: ProductPage,
-      props: (route) => ({ id: route.params['id']}),
+      props: (route) => ({ id: route.params['id'] }),
     },
     {
       path: '/cart',

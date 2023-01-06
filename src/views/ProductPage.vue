@@ -1,31 +1,37 @@
 <template>
-  <section v-if="isLoaded" class="product container">
-    <page-crumbs :crumbs="crumbs" />
-    <product-header :product="product" />
-    <section class="product__content">
-      <div class="content__wrapper">
-        <product-images :product="product" />
-        <product-info :product="product" />
-      </div>
-      <product-price :product="product" />
+  <section class="product__wrapper">
+    <section v-if="isLoaded" class="product container">
+      <page-crumbs :crumbs="crumbs" />
+      <product-header :product="product" />
+      <section class="product__content">
+        <div class="content__wrapper">
+          <product-images :product="product" />
+          <product-info :product="product" />
+        </div>
+        <product-price :product="product" />
+      </section>
     </section>
   </section>
 </template>
 
 <script lang="ts" setup>
-import { ref, Ref } from 'vue';
+import { ref, type Ref, watch, onBeforeMount } from 'vue';
 import { useProductsStore } from '@/store';
 import { ProductHeader, ProductImages, ProductInfo, ProductPrice } from '@/components/product/index';
 import PageCrumbs from '@/components/PageCrumbs.vue';
 import { IProduct } from '@/services';
 import { ICrumbs } from '@/components/types';
+import { storeToRefs } from 'pinia';
 
-const props = defineProps<{
-  id: Required<IProduct['id']>;
-}>();
+const props = defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
+});
 
-const productsStore = useProductsStore();
-const { getProductById, isLoaded } = productsStore;
+const { isLoaded } = storeToRefs(useProductsStore());
+const { getProductById } = useProductsStore();
 const product = ref({} as IProduct);
 const crumbs: Ref<ICrumbs[]> = ref([]);
 
@@ -39,7 +45,17 @@ const getProduct = () => {
   ];
 };
 
-getProduct();
+watch(isLoaded, (newIsLoaded) => {
+  if (newIsLoaded) {
+    getProduct();
+  }
+});
+
+onBeforeMount(() => {
+  if (isLoaded) {
+    getProduct();
+  }
+});
 </script>
 
 <style lang="scss" scoped>

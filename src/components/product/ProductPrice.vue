@@ -12,7 +12,7 @@
       <div class="product__stock">Left in stock: {{ stock }}pc.</div>
       <div class="product__buttons">
         <my-button class="button__cart" @click="updateCart">{{ buttonStatus }}</my-button>
-        <my-button class="button__fast-buy" @click="fastBuy">Buy</my-button>
+        <my-button class="button__fast-buy" @click.passive="fastBuy">Buy</my-button>
       </div>
     </section>
   </div>
@@ -56,9 +56,9 @@ const updateCart = (): void => {
 
 const fastBuy = (): void => {
   router.push({ name: 'cart' });
+  modalIsShow.value = true;
   addProduct(product);
   document.body.style.overflow = 'hidden';
-  modalIsShow.value = true;
 };
 </script>
 

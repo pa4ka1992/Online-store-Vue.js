@@ -10,6 +10,7 @@ const baseConfig = {
     mode: 'development',
     entry: path.resolve(__dirname, './src/main'),
     output: {
+        publicPath: '/',
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[contenthash].js',
         assetModuleFilename: 'assets/[hash][ext]',

@@ -34,8 +34,7 @@ export const useProductsRepo = defineStore('products-repo', () => {
 
   async function updateAll() {
     isLoading.value = true;
-    await filter();
-    await sort();
+    productsFiltered.value = await sort(await filter(products.value));
     isLoading.value = false;
   }
 
@@ -52,14 +51,13 @@ export const useProductsRepo = defineStore('products-repo', () => {
 
   watch(sortType, async () => {
     isLoading.value = true;
-    await sort();
+    productsFiltered.value = await sort(productsFiltered.value);
     isLoading.value = false;
   });
 
-  function sort(): Promise<void> {
-    return new Promise(resolve => {
-      productsFiltered.value = productsFiltered.value.slice().sort(_sortType.value.cmpFunc);
-      resolve();
+  function sort(items: IProduct[]): Promise<IProduct[]> {
+    return new Promise((resolve) => {
+      resolve(items.slice().sort(_sortType.value.cmpFunc));
     });
   }
 
@@ -72,19 +70,20 @@ export const useProductsRepo = defineStore('products-repo', () => {
 
   const productsFiltered: Ref<IProduct[]> = ref([]);
 
-  async function filter(): Promise<void> {
+  async function filter(items: IProduct[]): Promise<IProduct[]> {
     return new Promise((resolve) => {
-      productsFiltered.value = products.value.filter((product) => {
-        let result = true;
-        for (const value of filters.value) {
-          result = Array.isArray(value[1])
-            ? value[1].reduce((acc, item) => acc && item(product), result)
-            : value[1](product);
-          if (!result) return false;
-        }
-        return result;
-      });
-      resolve();
+      resolve(
+        items.filter((product) => {
+          let result = true;
+          for (const value of filters.value) {
+            result = Array.isArray(value[1])
+              ? value[1].reduce((acc, item) => acc && item(product), result)
+              : value[1](product);
+            if (!result) return false;
+          }
+          return result;
+        }),
+      );
     });
   }
 
@@ -93,7 +92,7 @@ export const useProductsRepo = defineStore('products-repo', () => {
 
   function countValues<Key extends TProductKeys>(key: Key, map: TValuesCountMap<Key>) {
     map.forEach((value) => (value.count = 0));
-    for (const product of products.value) {
+    for (const product of productsFiltered.value) {
       const value = map.get(product[key]);
       value ? value.count++ : null;
     }

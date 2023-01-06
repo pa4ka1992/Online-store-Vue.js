@@ -37,18 +37,30 @@ export function useFilterByCategory<Key extends keyof TStringFields>(key: Key) {
     } else setFilters([]);
   }
 
-  watch(products, () => {
-    map.value = productRepo.createValuesCountMap(key);
-    updateFilters();
-  });
+  watch(
+    products,
+    () => {
+      map.value = productRepo.createValuesCountMap(key);
+      updateFilters();
+    },
+    {
+      immediate: true,
+    },
+  );
 
-  watch(productsFiltered, () => {
-    map.value = productRepo.countValues(key, map.value);
-  });
+  watch(
+    productsFiltered,
+    () => {
+      map.value = productRepo.countValues(key, map.value);
+    },
+  );
 
-  watch(param, () => {
-    updateFilters();
-  });
+  watch(
+    param,
+    () => {
+      updateFilters();
+    },
+  );
 
   function setFilters(categories: string[]) {
     for (const pair of map.value)

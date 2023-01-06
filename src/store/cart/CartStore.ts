@@ -18,6 +18,10 @@ export const useCartStore = defineStore('cartStore', () => {
 
   const cart = computed((): ICartProduct[] => [..._cart.value]);
 
+  const clearCart = (): void => {
+    _cart.value = [];
+  }
+
   const findProduct: TFindFunc<ICartProduct> = (id) => {
     return _cart.value.find((product) => {
       return product.id === id;
@@ -75,7 +79,6 @@ export const useCartStore = defineStore('cartStore', () => {
   watch(
     () => _cart,
     (newCart) => {
-      console.log(newCart.value);
       _LS.setProperty(LSKey.cart, newCart.value);
     },
     { deep: true },
@@ -83,7 +86,6 @@ export const useCartStore = defineStore('cartStore', () => {
 
   onBeforeMount(() => {
     const cartLS: unknown = _LS.getProperty(LSKey.cart);
-
     if (cartLS instanceof Array<ICartProduct>) {
       const newCart: ICartProduct[] = cartLS;
       _cart.value = [];
@@ -95,6 +97,7 @@ export const useCartStore = defineStore('cartStore', () => {
 
   return {
     cart,
+    clearCart,
     totalProducts,
     findProduct,
     addProduct,

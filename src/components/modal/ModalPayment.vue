@@ -42,6 +42,7 @@ const buy = (): void => {
   if (isAllValid.value) {
     orderIsCompleted.value = true;
     _LS.removeProperties([LSKey.cart, LSKey.page, LSKey.limit]);
+    cartStore.clearCart();
     cartStore.$reset();
     paginationStore.$reset();
     promoStore.$reset();

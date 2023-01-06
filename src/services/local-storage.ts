@@ -44,6 +44,7 @@ export class LocalStorageApi {
   removeProperties(keys: string[]) {
     keys.forEach((key) => {
       delete this.loadedData[key];
+      console.log(this.loadedData);
       window.localStorage.removeItem(key);
     });
   }

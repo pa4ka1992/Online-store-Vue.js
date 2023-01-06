@@ -9,8 +9,8 @@ import { useQueryCart } from '@/composables/query-cart';
 export const usePaginationStore = defineStore('paginationStore', () => {
   const { cart } = storeToRefs(useCartStore());
   const _LS = LocalStorageApi.getInstance();
-  const page: Ref<number> = ref(NaN);
-  const limit: Ref<number> = ref(NaN);
+  const page: Ref<number> = ref(CartDefaultVal.page);
+  const limit: Ref<number> = ref(CartDefaultVal.limit);
 
   const totalPage = computed((): number => {
     if (!limit.value) return CartDefaultVal.page;

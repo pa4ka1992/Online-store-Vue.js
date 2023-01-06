@@ -2,9 +2,9 @@
   <li @mouseover="isHovered = true" @mouseout="isHovered = false" class="product">
     <slot></slot>
 
-    <router-link :to="{ name: RouteNames.product, params: { id: `${id}` } }">
+    <RouterLink :to="{ name: RouteNames.product, params: { id: `${id}` } }">
       <img class="product__image" :src="thumbnail" alt="product" />
-    </router-link>
+    </RouterLink>
     <product-info :product="product" />
     <product-count-info :product="product" :isHovered="isHovered" />
     <product-price :product="product" />

@@ -39,7 +39,7 @@ function toggleSort() {
 .sort-option {
   padding: 10px 20px;
   background-color: $primary;
-  color: $black;
+  color: $white;
   border-radius: 10px;
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
@@ -50,7 +50,7 @@ function toggleSort() {
   transition: background-color 0.5s;
 
   &:hover {
-    background-color: $primary-light;
+    background-color: $primary-dark;
   }
 
   &__icon {

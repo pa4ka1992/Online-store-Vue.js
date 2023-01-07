@@ -2,23 +2,26 @@
   <div class="product__info">
     <div class="product__info--header">
       <font-awesome-icon icon="fa-solid fa-star" />
-      <div class="header__rating">{{ rating }}</div>
-      <div class="header__title">{{ title }}</div>
+      <span class="header__rating">{{ rating }}</span>
+      <router-link :to="{ name: RouteNames.product, params: { id: `${id}` } }">
+        <span class="header__title">{{ title }}</span>
+      </router-link>
     </div>
-    <div class="product__info--brand">Brand: {{ brand }}</div>
-    <div class="product__info--description">{{ description }}</div>
+    <span class="product__info--brand">Brand: {{ brand }}</span>
+    <span class="product__info--description">{{ description }}</span>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { toRefs } from 'vue';
-import { ICartProduct } from '@/services/model/types/cart';
+import { RouteNames } from '@/router/names';
+import { ICartProduct } from '@/store/cart/types';
 
 const props = defineProps<{
   product: Required<ICartProduct>;
 }>();
 
-const { title, brand, description, rating } = toRefs(props.product);
+const { id, title, brand, description, rating } = toRefs(props.product);
 </script>
 
 <style lang="scss" scoped>
@@ -34,20 +37,32 @@ const { title, brand, description, rating } = toRefs(props.product);
 
   &--header {
     display: flex;
+    align-items: center;
 
     .fa-star {
       color: $warning;
     }
-    .header__rating {
-      margin-left: 0.2rem;
-      font-weight: 600;
-      color: $warning;
-    }
 
-    .header__title {
-      margin-left: 1rem;
-      font-weight: 600;
-      color: $primary;
+    .header {
+      &__rating {
+        margin-left: 0.2rem;
+        font-weight: 600;
+        color: $warning;
+      }
+
+      &__title {
+        margin-left: 1rem;
+        font-weight: 600;
+        color: $primary-dark;
+        border-bottom: 1px solid transparent;
+        transition: all 0.2s;
+        @include text-style;
+
+        &:hover {
+          color: $primary-dark;
+          border-bottom: 1px solid $primary-dark;
+        }
+      }
     }
   }
 
@@ -57,6 +72,7 @@ const { title, brand, description, rating } = toRefs(props.product);
 
   &--description {
     line-height: 1.3em;
+    @include text-style;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <button class="btn">
+  <button class="my-button">
     <slot></slot>
   </button>
 </template>
@@ -13,7 +13,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/scss/variables.scss';
 
-.btn {
+.my-button {
   flex-grow: 0;
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -25,8 +25,9 @@ export default {
   color: $light;
   background-color: $primary;
   border: none {
-    radius: 5px;
-  }
+    radius: 10px;
+  };
+  white-space: nowrap;
   cursor: pointer;
   transition: transform 0.3s, background-color 0.2s;
 

@@ -41,7 +41,7 @@ function enterPress(e: KeyboardEvent) {
 <template>
   <div class="search">
     <input
-      placeholder="what are you looking for?"
+      placeholder="What are you looking for?"
       class="search__bar"
       ref="inputBar"
       type="text"
@@ -58,7 +58,7 @@ function enterPress(e: KeyboardEvent) {
 @import '@/assets/scss/variables.scss';
 
 $side-padding: 25px;
-$border-radius: 100px;
+$border-radius: 10px;
 
 .search {
   margin: 10px;
@@ -66,17 +66,17 @@ $border-radius: 100px;
 
   &__bar {
     padding: 10px 60px 10px $side-padding;
-    font-size: 1rem;
+    font-size: 0.9rem;
     border: none;
     min-width: 480px;
     border-radius: $border-radius;
     outline: none;
     transition: background-color 0.5s;
     width: 100%;
-    background-color: $primary;
+    background-color: $white;
 
-    &:focus {
-      background-color: $primary-light;
+    &:focus-visible {
+      background-color: $gray-200;
     }
   }
 
@@ -93,7 +93,7 @@ $border-radius: 100px;
     background-color: transparent;
 
     &:hover {
-      background-color: $primary2;
+      background-color: $primary2-light;
     }
 
     &:active {

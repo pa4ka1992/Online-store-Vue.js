@@ -1,8 +1,8 @@
 import { defineStore, storeToRefs } from 'pinia';
 import { useCartStore } from './CartStore';
 import { ref, computed } from 'vue';
-import { Promos } from '@/services/model/constants/cart';
-import { TPromo } from '@/services/model/types/cart';
+import { Promos } from './constants';
+import { TPromo } from './types';
 
 export const usePromoStore = defineStore('promoStore', () => {
   const { cart } = storeToRefs(useCartStore());

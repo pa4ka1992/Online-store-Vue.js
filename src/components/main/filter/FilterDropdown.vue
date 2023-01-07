@@ -7,25 +7,46 @@ const props = defineProps<{
 }>();
 
 const collapsed = ref(false);
+const isOnTop = ref(false);
+const isOnBottom = ref(false);
+const scrollHide = props.title === 'Price' || props.title === 'Stock' ? false : true;
+
+const updateArrows = (e: Event) => {
+  const scrollEl = <HTMLDivElement>e.target;
+  const top: number = scrollEl.scrollTop;
+  const bottom = scrollEl.scrollHeight - scrollEl.clientHeight - top;
+
+  isOnTop.value = top === 0 ? true : false;
+  isOnBottom.value = bottom === 0 ? true : false;
+};
 </script>
 
 <template>
   <section class="filter-dropdown">
     <div class="filter-dropdown__head" @click="collapsed = !collapsed">
       <h4 class="filter-dropdown__title">{{ title }}</h4>
-      <button
-        class="btn filter-dropdown__button"
-        :class="!collapsed ? 'filter-dropdown__button_active' : ''"
-      >
+      <button class="btn filter-dropdown__button" :class="!collapsed ? 'filter-dropdown__button_active' : ''">
         <i class="icon-next"></i>
       </button>
     </div>
 
     <section :class="!collapsed ? 'filter-dropdown__content_collapsed' : ''" class="filter-dropdown__content">
       <span class="filter-dropdown__divider"></span>
-      <div class="filter-dropdown__content-wrap">
+      <font-awesome-icon
+        v-show="scrollHide"
+        class="icon-next icon-next__top"
+        :class="{ active: !isOnTop }"
+        icon="fa-solid fa-angles-up"
+      />
+      <div class="filter-dropdown__content-wrap" @scroll="updateArrows">
         <slot></slot>
       </div>
+      <font-awesome-icon
+        v-show="scrollHide"
+        class="icon-next icon-next__bottom"
+        :class="{ active: !isOnBottom }"
+        icon="fa-solid fa-angles-down"
+      />
     </section>
   </section>
 </template>
@@ -39,20 +60,20 @@ const collapsed = ref(false);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $primary-light; 
+  background-color: $primary-light;
   border-radius: 10px;
-  
+
   &:hover {
-    background-color: $primary; 
+    background-color: $primary-dark;
   }
 }
 
 .filter-dropdown {
-  background-color: $primary-dark;
+  background-color: $primary;
   color: $white;
-  border-radius: 40px;
+  border-radius: 20px;
   width: 270px;
-  padding: 10px;
+  padding: 5px;
 
   font-size: 0.9rem;
 
@@ -68,7 +89,7 @@ const collapsed = ref(false);
 
   &__title {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: 400;
   }
 
@@ -82,7 +103,7 @@ const collapsed = ref(false);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2em;
+    font-size: 1.5em;
     transition: rotate 0.2s ease;
 
     &_active {
@@ -96,19 +117,31 @@ const collapsed = ref(false);
     align-items: stretch;
     flex-direction: column;
     overflow: hidden;
-    max-height: 200px;
+    max-height: 400px;
     transition: max-height 0.2s, margin-top 0.2s;
 
-    &_collapsed {  
+    &_collapsed {
       max-height: 0;
       margin-top: 0;
+    }
+
+    .icon-next__top,
+    .icon-next__bottom {
+      align-self: center;
+      margin: 0.5em 0;
+      font-size: 1rem;
+      color: $gray-400;
+    }
+
+    .active {
+      color: $white;
     }
   }
 
   &__content-wrap {
     max-height: inherit;
-    border-width: 15px 20px;
-    border-color: $primary-dark;
+    border-width: 0 20px;
+    border-color: $primary;
     border-radius: 20px;
     overflow: hidden scroll;
     border-style: solid;

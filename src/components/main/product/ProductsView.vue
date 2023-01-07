@@ -32,11 +32,11 @@ const gridClass = computed(() => {
 <template>
   <section class="product-section">
     <h1 class="product-section__heading">
-      Products 
+      Products
       <span class="product-count">found {{ !isLoading ? productsFiltered.length : '--' }} products</span>
     </h1>
-    <div class="product-section__options"> 
-      <SortOptionList :sort-keys="['title', 'rating', 'price', 'stock']"/>
+    <div class="product-section__options">
+      <SortOptionList :sort-keys="['title', 'rating', 'price', 'stock']" />
       <div class="view-options">
         <button class="btn view-options__btn" :class="gridClass" @click="toggleGrid">
           <i class="icon-apps-sqr"></i>
@@ -51,7 +51,6 @@ const gridClass = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-
 @import '@/assets/scss/variables.scss';
 
 .product-count {
@@ -63,14 +62,15 @@ const gridClass = computed(() => {
 .view-options {
   &__btn {
     font-size: 2.5rem;
-    transition: color 0.25s;
+    transition: color 0.25s, transform 0.2s;
 
     &_active {
       color: $primary;
     }
 
     &:hover {
-      color: $primary-light;
+      color: $primary-dark;
+      transform: scale(1.05);
     }
   }
 }
@@ -80,7 +80,7 @@ const gridClass = computed(() => {
   padding: 10px 40px;
   display: flex;
   flex-direction: column;
-  
+
   &__heading {
     font-family: 'Pacifico', cursive;
     font-size: 2rem;

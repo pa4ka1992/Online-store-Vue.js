@@ -1,5 +1,5 @@
 <template>
-  <select class="select" :value="limit" @change="changeOption">
+  <select class="my-select" :value="limit" @change="changeOption">
     <option class="option" v-for="option in maxLimit" :key="option" :value="option">{{ option }}</option>
   </select>
 </template>
@@ -15,9 +15,10 @@ import { Ref } from 'vue';
 
 const props = defineProps<{
   limit: Ref<number>
-  maxLimit: number 
+  maxLimit: number[]
 }>();
 const emit = defineEmits(['update']);
+
 const changeOption = ({ target }: Event): void => {
   emit('update', Number((target as HTMLOptionElement).value));
 };
@@ -26,7 +27,7 @@ const changeOption = ({ target }: Event): void => {
 <style lang="scss" scoped>
 @import '@/assets/scss/variables.scss';
 
-.select {
+.my-select {
   padding: 0.3em 0.6rem;
   font: {
     family: 'Poppins', sans-serif;
@@ -38,6 +39,7 @@ const changeOption = ({ target }: Event): void => {
   }
   outline: 2px solid $secondary;
   transition: all 0.2s;
+  cursor: pointer;
 
   &:focus-visible {
     transform: scale(1.05);

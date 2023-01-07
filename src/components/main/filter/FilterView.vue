@@ -54,13 +54,15 @@ function copyLink() {
 @import '@/assets/scss/variables.scss';
 
 .filter-section {
-  background-color: $primary;
+  background-color: $primary-light;
   color: $white;
+  top: 1rem;
   max-width: 380px;
-  padding: 10px 40px;
-  border-radius: 30px;
+  padding: 10px 30px;
   margin: 0 20px;
   height: fit-content;
+  border-radius: 20px;
+  @include apply-shadow;
 
   &__heading {
     font-family: 'Pacifico', cursive;
@@ -69,10 +71,12 @@ function copyLink() {
     margin: 0;
     margin-bottom: 10px;
     user-select: none;
+    text-shadow: 0px 2px 2px #000;
+    @include logo-style;
   }
 
   &__filter-option {
-    margin: 10px 0; 
+    margin: 10px 0;
   }
 
   &__btn {

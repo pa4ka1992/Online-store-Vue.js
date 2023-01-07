@@ -29,8 +29,8 @@ function click() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 35px;
-  background-color: $primary-dark;
+  padding: 5px 35px;
+  background-color: $primary;
   color: $white;
 
   @include apply-shadow;
@@ -40,8 +40,8 @@ function click() {
   user-select: none;
   font-size: 2rem;
   font-family: 'Pacifico', cursive;
-
   transition: scale 0.5s;
+  @include logo-style;
 
   &:hover {
     scale: 1.2;

@@ -17,9 +17,11 @@ const { page, limit } = storeToRefs(usePaginationStore());
       <i class="icon-cart"></i>
     </RouterLink>
     <span v-if="cart.length !== 0" class="cart-info__count">
-      {{ cart.length }}
+      <MyNumber :fixed="0" :input="cart.length" />
     </span>
-    <span v-if="cart.length !== 0" class="cart-info__total"> ${{ totalPrice.toFixed(2) }} </span>
+    <span class="cart-info__total" v-if="cart.length !== 0">
+      $<MyNumber :fixed="2" :input="totalPrice" />
+    </span>
   </div>
 </template>
 

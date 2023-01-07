@@ -1,19 +1,11 @@
 <template>
   <div class="product__price">
-    <div
-      class="product__price--full"
-      :class="{ crossed: product['discountPercentage'] }">
-      <my-number :input="product.countPrice" :fixed="2"/> $
+    <div class="product__price--full" :class="{ crossed: product['discountPercentage'] }">
+      <MyNumber :input="product.countPrice" :fixed="2" /> $
     </div>
-    <span
-      v-if="discountPercentage"
-      class="product__price--discount">
-      Sale: {{ discountPercentage }}%
-    </span>
-    <div
-      v-if="discountPercentage"
-      class="product__price--final">
-      <my-number :input="product.fixPrice" :fixed="2"/> $
+    <span v-if="discountPercentage" class="product__price--discount"> Sale: {{ discountPercentage }}% </span>
+    <div v-if="discountPercentage" class="product__price--final">
+      <MyNumber :input="product.fixPrice" :fixed="2" /> $
     </div>
   </div>
 </template>
@@ -42,7 +34,6 @@ const { discountPercentage } = toRefs(product);
   &--full {
     font-weight: 600;
     font-size: 1.2rem;
-
   }
 
   &--discount {

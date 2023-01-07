@@ -8,7 +8,7 @@
     </h3>
     <div class="select-group">
       <h4 class="select-group__header">Product per page:</h4>
-      <my-select class="select-group__select" :limit="limit" :maxLimit="maxLimit" @update="updateLimit"></my-select>
+      <MySelect class="select-group__select" :limit="limit" :maxLimit="maxLimit" @update="updateLimit"></MySelect>
     </div>
     <my-paginate
       v-model="page"
@@ -47,10 +47,10 @@ const MyPaginate = Paginate;
   padding: 0.5rem 0;
   width: 100%;
   position: sticky;
-  top: 0;
+  top: 80px;
   border-bottom: 1px solid $secondary;
   background-color: $white;
-  z-index: 10;
+  z-index: 5;
 
   &__header {
     margin: 0;

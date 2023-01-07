@@ -16,7 +16,7 @@
 
 <script lang="ts" setup>
 import { ref, type Ref, watch, onBeforeMount } from 'vue';
-import { useProductsStore } from '@/store';
+import { useProducts } from '@/store';
 import { ProductHeader, ProductImages, ProductInfo, ProductPrice } from '@/components/product/index';
 import PageCrumbs from '@/components/PageCrumbs.vue';
 import { IProduct } from '@/services';
@@ -30,8 +30,8 @@ const props = defineProps({
   },
 });
 
-const { isLoaded } = storeToRefs(useProductsStore());
-const { getProductById } = useProductsStore();
+const { isLoaded } = storeToRefs(useProducts());
+const { getProductById } = useProducts();
 const product = ref({} as IProduct);
 const crumbs: Ref<ICrumbs[]> = ref([]);
 

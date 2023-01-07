@@ -46,15 +46,11 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     const limitLS: unknown = _LS.getProperty(LSKey.limit);
     const pageLS: unknown = _LS.getProperty(LSKey.page);
 
-    if (typeof limitLS === 'number') {
+    if (typeof limitLS === 'number' && limitLS !== limit.value) {
       limit.value = limitLS;
-    } else {
-      limit.value = CartDefaultVal.limit;
     }
-    if (typeof pageLS === 'number') {
+    if (typeof pageLS === 'number' && pageLS !== page.value) {
       page.value = pageLS;
-    } else {
-      page.value = CartDefaultVal.page;
     }
   });
 
@@ -63,7 +59,6 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     page,
     totalPage,
     limit,
-    // maxLimit,
     startIndex,
     updateLimit,
   };

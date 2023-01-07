@@ -60,11 +60,11 @@ const updateArrows = (e: Event) => {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $primary;
+  background-color: $primary-light;
   border-radius: 10px;
 
   &:hover {
-    background-color: $primary;
+    background-color: $primary-dark;
   }
 }
 

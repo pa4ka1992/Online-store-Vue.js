@@ -9,10 +9,10 @@
           <h2 class="buy__form--header">Ordering</h2>
           <section class="buy__form--info">
             <div class="personal-info">
-              <my-input :field="'fullName'" />
-              <my-input :field="'phone'" />
-              <my-input :field="'adress'" />
-              <my-input :field="'email'" />
+              <MyInput :field="'fullName'" />
+              <MyInput :field="'phone'" />
+              <MyInput :field="'adress'" />
+              <MyInput :field="'email'" />
             </div>
             <modal-payment />
           </section>

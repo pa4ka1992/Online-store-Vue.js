@@ -2,6 +2,7 @@
 import { IProduct } from '@/services';
 import { useProductInfo } from '@/composables';
 import { computed } from 'vue';
+import { RouteNames } from '@/router';
 
 const props = defineProps<{
   product: IProduct;
@@ -26,7 +27,7 @@ function cartBtnClick(e: Event) {
       <img class="product__image" :src="product.thumbnail" loading="lazy" />
     </div>
     <div class="product-list-item__info">
-      <RouterLink :to="{ name: 'product', params: { id: `${product.id}` } }" class="a product__heading product-list-item__heading" target="_blank">
+      <RouterLink :to="{ name: RouteNames.product, params: { id: `${product.id}` } }" class="a product__heading product-list-item__heading" target="_blank">
         {{ product.title }}
       </RouterLink>
 

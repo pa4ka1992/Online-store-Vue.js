@@ -41,7 +41,7 @@ function enterPress(e: KeyboardEvent) {
 <template>
   <div class="search">
     <input
-      placeholder="what are you looking for?"
+      placeholder="What are you looking for?"
       class="search__bar"
       ref="inputBar"
       type="text"
@@ -66,7 +66,7 @@ $border-radius: 10px;
 
   &__bar {
     padding: 10px 60px 10px $side-padding;
-    font-size: 1rem;
+    font-size: 0.9rem;
     border: none;
     min-width: 480px;
     border-radius: $border-radius;

@@ -14,14 +14,14 @@
       <img src="@/assets/img/chipLogo.png" alt="card-chip" class="card__chip--img" />
     </div>
     <div class="card__number">
-      <my-input :field="'card'" />
+      <MyInput :field="'card'" />
     </div>
     <div class="wrapper">
       <div class="card__info">
         <span class="card__info--owner">John Doe</span>
         <div class="card__info--inputs">
-          <my-input class="date" :field="'date'" />
-          <my-input class="cvv" :field="'CVV'" />
+          <MyInput class="date" :field="'date'" />
+          <MyInput class="cvv" :field="'CVV'" />
         </div>
       </div>
     </div>
@@ -30,7 +30,6 @@
 
 <script lang="ts" setup>
 import { useModalStore } from '@/store';
-import MyInput from '@/components/UI/MyInput.vue';
 import { storeToRefs } from 'pinia';
 
 const { cardServiceImg } = storeToRefs(useModalStore());

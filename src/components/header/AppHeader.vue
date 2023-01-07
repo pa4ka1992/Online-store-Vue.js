@@ -29,7 +29,7 @@ function click() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 35px;
+  padding: 5px 35px;
   background-color: $primary;
   color: $white;
 

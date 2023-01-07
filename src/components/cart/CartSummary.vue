@@ -5,7 +5,7 @@
       <promo-list />
       <additional-info />
       <promo-input />
-      <my-button @click="modalIsShow = true" class="summary__buy">Buy now</my-button>
+      <MyButton @click="modalIsShow = true" class="summary__buy">Buy now</MyButton>
     </div>
   </form>
 </template>
@@ -28,7 +28,7 @@ const { modalIsShow } = storeToRefs(useModalStore());
     align-items: center;
     gap: 0.5rem;
     position: sticky;
-    top: 1rem;
+    top: 100px;
     padding: 1rem;
     background-color: $white;
     border-radius: 12px;

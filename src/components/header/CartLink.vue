@@ -31,9 +31,10 @@ $total-color: #fb4a9b;
 
 .cart-info {
   position: relative;
-  width: 60px;
-  height: 60px;
-  font-size: 1rem;
+  margin-top: 5px;
+  width: 50px;
+  height: 50px;
+  font-size: 0.9rem;
 
   &__link {
     color: $gray-500;
@@ -59,7 +60,7 @@ $total-color: #fb4a9b;
     background-color: $danger-light;
     padding: 0 10px;
     border-radius: 100px;
-    translate: 25% -25%;
+    translate: 44% -33%;
     right: 0;
     top: 0;
     position: absolute;

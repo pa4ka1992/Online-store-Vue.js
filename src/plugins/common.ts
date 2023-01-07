@@ -1,5 +1,5 @@
 import { App } from 'vue';
-import components from '@/components/UI'
+import components from '@/components/common'
 
 export const commonPlugin = {
   install: (app: App) => {

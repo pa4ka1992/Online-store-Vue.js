@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { type Ref, ref, computed, watch } from 'vue';
+import { type Ref, ref, computed, watch, onMounted } from 'vue';
 // Props
 // ===============
 const props = defineProps({
@@ -31,7 +31,6 @@ const emits = defineEmits<{
   (e: 'release'): void,
 }>();
 
-// Slider and thumb logic
 
 // Slider bar
 // =========================
@@ -51,6 +50,9 @@ const stepLength = computed(() => {
   return (sliderbarWidth.value * props.step / (props.max - props.min));
 })
 
+// Position
+// ==========================
+
 function truncValue(value: number) {
   return value >= 0 ? (value <= sliderbarWidth.value ? value : sliderbarWidth.value) : 0;
 }
@@ -66,21 +68,17 @@ function calcPos(value: number) {
 const _leftPos = ref(calcPos(props.left)); 
 const _rightPos = ref(calcPos(props.right));
 
-watch(props, () => {
-  if (!active.value) { 
+const active: Ref<keyof PosMap | null> = ref(null);
+
+function syncPos() {
+  if (!active.value) {
     _leftPos.value = calcPos(props.left);
     _rightPos.value = calcPos(props.right); 
   }
-})
+}
 
-// Thumbs
-// =========================
-
-const thumbLeftElement: Ref<HTMLElement | null> = ref(null);
-
-const thumbRightElement: Ref<HTMLElement | null> = ref(null);
-
-const active: Ref<keyof PosMap | null> = ref(null);
+watch(props, () => syncPos());
+onMounted(() => syncPos());
 
 const leftPos = computed({
   get() {
@@ -126,15 +124,21 @@ const map: PosMap = {
   }
 }
 
+// Thumbs
+// =========================
+
+const thumbLeftElement: Ref<HTMLElement | null> = ref(null);
+
+const thumbRightElement: Ref<HTMLElement | null> = ref(null);
+
 function windowRelease() {
+  syncPos();
   active.value = null;
   document.body.style.cursor = 'auto';
   if (wrap.value) wrap.value.style.cursor = 'grab';
   
   window.removeEventListener('mousemove', windowMove);
   window.removeEventListener('mouseup', windowRelease);
-  _leftPos.value = calcPos(props.left);
-  _rightPos.value = calcPos(props.right);
   emits('release');
 }
 

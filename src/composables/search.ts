@@ -9,7 +9,7 @@ import {
   IFilter,
 } from '@/services';
 import { useQueryParam } from './query-param';
-import { useProductsStore } from '@/store';
+import { useProductsRepo } from '@/store';
 import { isString, isNumber, isNumberArray, isStringArray } from '@/utils';
 import { storeToRefs } from 'pinia';
 import { watch, ref } from 'vue';
@@ -22,7 +22,7 @@ export function useSearch(keys: TProductKeys[]) {
   const { push, currentRoute } = useRouter();
   const { param } = useQueryParam(searchParamKey);
 
-  const productStore = useProductsStore();
+  const productStore = useProductsRepo();
 
   const { filters } = storeToRefs(productStore);
 
@@ -40,7 +40,8 @@ export function useSearch(keys: TProductKeys[]) {
     if ((isStringArray(value) || isNumberArray(value)) && value[0]) {
       const filterArray = keys.reduce((acc: IFilter[], key: TProductKeys) => {
         const mockValue = getMockValueByKey(key);
-        if (isString(mockValue) && value[0])
+        // We already checked for this, but ts still thinks its not
+        if (isString(mockValue) && value[0]) 
           acc.push(useStringSearchFilter(key as keyof TStringFields, value[0].toString()));
         else if (isNumber(mockValue) && isNumber(value[0]))
           acc.push(useNumberSearchFilter(key as keyof TNumberFields, value[0]));
@@ -63,6 +64,8 @@ export function useSearch(keys: TProductKeys[]) {
 
   watch(param, () => {
     syncWithQuery();
+  }, {
+    immediate: true,
   });
 
   return { searchField, startSearch }

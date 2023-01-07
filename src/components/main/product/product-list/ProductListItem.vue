@@ -4,7 +4,7 @@ import { useProductInfo } from '@/composables';
 import { computed } from 'vue';
 
 const props = defineProps<{
-  product: IProduct
+  product: IProduct;
 }>();
 
 const { fixedPrice, inCart, toggleProduct } = useProductInfo(props.product);
@@ -17,19 +17,18 @@ const cartBtnClass = computed(() => {
 function cartBtnClick(e: Event) {
   e.preventDefault();
   toggleProduct();
-} 
-
+}
 </script>
 
 <template>
-  <RouterLink class="a product product-list-item" :to="`/product/${product.id}`">
+  <div class="a product product-list-item">
     <div class="product-list-item__image-wrap">
-      <img class="product__image" :src="product.thumbnail"/>
+      <img class="product__image" :src="product.thumbnail" loading="lazy" />
     </div>
     <div class="product-list-item__info">
-      <div class="product__heading product-list-item__heading">
-        {{ product.title }} 
-      </div>
+      <RouterLink :to="`/product/${product.id}`" class="a product__heading product-list-item__heading" target="_blank">
+        {{ product.title }}
+      </RouterLink>
 
       <div class="rating">
         <span class="rating__title">Rating:</span>
@@ -48,36 +47,33 @@ function cartBtnClick(e: Event) {
       </div>
 
       <div class="product-char">
-        <span class="product-char__name">Description</span> 
+        <span class="product-char__name">Description</span>
         <span class="product-char__value">{{ product.description }}</span>
       </div>
-
     </div>
     <div class="product-list-item__actions">
-      <div class="price product-list-item__price"> 
-        <span v-if="product.discountPercentage === 0"> 
-          ${{ product.price.toFixed(2) }}
-        </span>
+      <div class="price product-list-item__price">
+        <span v-if="product.discountPercentage === 0"> ${{ product.price.toFixed(2) }} </span>
         <span v-else>
           <span class="price__actual product-list-item__price-value">${{ product.price.toFixed(2) }}</span>
           <span class="price__fixed product-list-item__price-value">${{ fixedPrice.toFixed(2) }}</span>
         </span>
       </div>
-      <button class="btn cart-btn" :class="cartBtnClass" @click="cartBtnClick"> 
+      <button class="btn cart-btn" :class="cartBtnClass" @click="cartBtnClick">
         <i v-if="!inCart" class="icon-cart-plus"></i>
         <i v-else class="icon-cart-ok"></i>
-        <span class="cart-btn__text">{{ !inCart ? 'Add to cart' : 'Added!'}}</span>
+        <span class="cart-btn__text">{{ !inCart ? 'Add to cart' : 'Added!' }}</span>
       </button>
     </div>
-  </RouterLink>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-
 @import './common.scss';
 .product-list-item {
   display: flex;
   width: 100%;
+  justify-content: space-between;
 
   &__image-wrap {
     padding: 20px;
@@ -102,7 +98,6 @@ function cartBtnClick(e: Event) {
   }
 
   &__actions {
-    width: 100%;
     padding: 20px;
     display: flex;
     flex-direction: column;

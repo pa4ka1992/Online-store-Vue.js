@@ -53,7 +53,7 @@ const mainStyles = computed(() => {
   padding: 0;
   margin: 0;
   width: 100%;
-  position: absolute;
+  position: fixed;
   z-index: 100;
   top: 0;
   left: 0;

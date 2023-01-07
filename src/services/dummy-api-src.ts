@@ -1,5 +1,5 @@
 import { IProduct } from './model/product';
-import { IProductSource } from './product-source';
+import { IProductSource } from './model/product-src';
 
 const apiUrl = 'https://dummyjson.com/products?limit=100';
 

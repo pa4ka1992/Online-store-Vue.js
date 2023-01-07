@@ -21,14 +21,15 @@ function cartBtnClick(e: Event) {
 </script>
 
 <template>
-  <RouterLink class="a product product-list-item" :to="{ name: 'product', params: { id: `${product.id}` } }">
+  <div class="a product product-list-item">
     <div class="product-list-item__image-wrap">
-      <img class="product__image" :src="product.thumbnail" />
+      <img class="product__image" :src="product.thumbnail" loading="lazy" />
     </div>
     <div class="product-list-item__info">
-      <div class="product__heading product-list-item__heading">
+      <RouterLink :to="{ name: 'product', params: { id: `${product.id}` } }" class="a product__heading product-list-item__heading" target="_blank">
         {{ product.title }}
-      </div>
+      </RouterLink>
+
       <div class="rating">
         <span class="rating__title">Rating:</span>
         <i class="icon-star rating__icon"></i>
@@ -64,7 +65,7 @@ function cartBtnClick(e: Event) {
         <span class="cart-btn__text">{{ !inCart ? 'Add to cart' : 'Added!' }}</span>
       </button>
     </div>
-  </RouterLink>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -72,6 +73,7 @@ function cartBtnClick(e: Event) {
 .product-list-item {
   display: flex;
   width: 100%;
+  justify-content: space-between;
 
   &__image-wrap {
     padding: 20px;
@@ -96,7 +98,6 @@ function cartBtnClick(e: Event) {
   }
 
   &__actions {
-    width: 100%;
     padding: 20px;
     display: flex;
     flex-direction: column;

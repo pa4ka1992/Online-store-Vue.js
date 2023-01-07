@@ -1,5 +1,5 @@
 import { watchEffect } from 'vue';
-import { useProductsStore } from '@/store';
+import { useProductsRepo } from '@/store';
 import { storeToRefs } from 'pinia';
 import {
   type TProductKeys,
@@ -11,7 +11,7 @@ export const sortQueryKey = 'sortBy';
 
 export function useSortOptionList(keys: TProductKeys[]) {
   const { param } = useQueryParam(sortQueryKey);
-  const { sortType } = storeToRefs(useProductsStore());
+  const { sortType } = storeToRefs(useProductsRepo());
 
   watchEffect(() => {
     if (!isStringArray(keys)) throw new TypeError('Product keys cannot be the type other than string!');

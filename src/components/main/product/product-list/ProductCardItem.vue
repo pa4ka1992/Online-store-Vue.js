@@ -21,10 +21,10 @@ function cartBtnClick(e: Event) {
 </script>
 
 <template>
-  <RouterLink class="a product product-card" :to="{ name: 'product', params: { id: `${product.id}` } }">
+  <div class="product product-card">
     <div class="product-card__head">
-      <img class="product__image" :src="product.thumbnail" />
-      <span class="product__heading">{{ product.title }}</span>
+      <img class="product__image" :src="product.thumbnail" loading="lazy"/>
+      <RouterLink class="a product__heading" :to="{ name: 'product', params: { id: `${product.id}` } }" target="_blank">{{ product.title }}</RouterLink>
     </div>
     <div class="product-card__body">
       <div class="product-card__info">
@@ -45,7 +45,7 @@ function cartBtnClick(e: Event) {
         <i v-else class="icon-cart-ok"></i>
       </button>
     </div>
-  </RouterLink>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -55,7 +55,7 @@ function cartBtnClick(e: Event) {
   width: 250px;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: fit-content;
   align-items: center;
   justify-content: space-between;
 

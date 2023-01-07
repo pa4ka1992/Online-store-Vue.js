@@ -1,13 +1,13 @@
 import { computed, watch, ref, type Ref } from 'vue';
-import { useProductsStore } from '@/store';
+import { useProductsRepo } from '@/store';
 import { storeToRefs } from 'pinia';
 import { type TNumberFields, type IProduct, useRangeFilter, TRangeBounds } from '@/services';
 import { useQueryParam } from './query-param';
 import { isNumberArray } from '@/utils';
 
 export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
-  const productStore = useProductsStore();
-  const { products, productsRaw, isLoaded } = storeToRefs(productStore);
+  const productStore = useProductsRepo();
+  const { products, filters } = storeToRefs(productStore);
   const { param } = useQueryParam(key);
 
   function findMin(array: IProduct[]) {
@@ -19,27 +19,27 @@ export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
   }
 
   const maxTotal = computed(() => {
-    return findMax(productsRaw.value);
+    return findMax(products.value);
   });
 
   const minTotal = computed(() => {
-    return findMin(productsRaw.value);
+    return findMin(products.value);
   });
 
   const bounds: Ref<TRangeBounds> = ref({});
 
-  const loaderWatch = watch(isLoaded, () => {
-    if (isLoaded.value) {
-      bounds.value = !isNumberArray(param.value) ? {
-        upper: findMax(products.value),
-        lower: findMin(products.value),
-      }: {
-        upper: param.value[1],
-        lower: param.value[0]
-      };
-      loaderWatch();
-    }
-  })
+  watch(products, () => {
+    if (products.value.length !== 0)
+      bounds.value = !isNumberArray(param.value)
+        ? {
+            upper: maxTotal.value,
+            lower: minTotal.value,
+          }
+        : {
+            upper: param.value[1],
+            lower: param.value[0],
+          };
+  });
 
   function setBounds(bounds: TRangeBounds) {
     if (!bounds.upper && !bounds.lower) {
@@ -58,13 +58,13 @@ export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
 
   function syncWithQuery() {
     if (!isNumberArray(param.value)) {
-      productStore.filters.set(key, () => true);
+      filters.value.set(key, () => true);
       bounds.value = {
-        upper: findMax(products.value),
-        lower: findMin(products.value),
+        upper: maxTotal.value,
+        lower: minTotal.value,
       };
     } else {
-      productStore.filters.set(key, useRangeFilter(key, { lower: param.value[0], upper: param.value[1] }));
+      filters.value.set(key, useRangeFilter(key, { lower: param.value[0], upper: param.value[1] }));
       bounds.value = {
         upper: param.value[1],
         lower: param.value[0],
@@ -72,10 +72,10 @@ export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
     }
   }
 
-  syncWithQuery();
-
   watch(param, () => {
     syncWithQuery();
+  }, {
+    immediate: true
   });
 
   return { maxTotal, minTotal, bounds, applyBounds };

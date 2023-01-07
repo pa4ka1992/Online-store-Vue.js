@@ -9,7 +9,7 @@ const year = ref((new Date()).getFullYear());
 </script>
 
 <template> 
-  <footer class="page-footer">
+  <footer v-once class="page-footer">
     <a class="a course-link" href="https://rs.school/js">
       <img class="course-link__logo" src="https://rs.school/images/rs_school_js.svg"/>
     </a>

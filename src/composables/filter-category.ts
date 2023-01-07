@@ -1,5 +1,5 @@
 import { ref, watch, computed, type Ref } from 'vue';
-import { useProductsStore } from '@/store';
+import { useProductsRepo } from '@/store';
 import { storeToRefs } from 'pinia';
 import {
   type TStringFields,
@@ -14,11 +14,11 @@ type TFilterCount = TValuesCount & { checked?: boolean };
 type TNamedFilterCount = TFilterCount & { name: string };
 
 export function useFilterByCategory<Key extends keyof TStringFields>(key: Key) {
-  const productStore = useProductsStore();
-  const { products, productsRaw } = storeToRefs(productStore);
+  const productRepo = useProductsRepo();
+  const { productsFiltered, products } = storeToRefs(productRepo);
   const { param } = useQueryParam(key);
 
-  const map: Ref<Map<IProduct[Key], TFilterCount>> = ref(productStore.getValuesCountMap(key));
+  const map: Ref<Map<IProduct[Key], TFilterCount>> = ref(new Map());
 
   const categories = computed(() => {
     const result: TNamedFilterCount[] = [];
@@ -37,18 +37,30 @@ export function useFilterByCategory<Key extends keyof TStringFields>(key: Key) {
     } else setFilters([]);
   }
 
-  watch(products, () => {
-    map.value = productStore.countValues(key, map.value);
-  });
+  watch(
+    products,
+    () => {
+      map.value = productRepo.createValuesCountMap(key);
+      updateFilters();
+    },
+    {
+      immediate: true,
+    },
+  );
 
-  watch(productsRaw, () => {
-    map.value = productStore.getValuesCountMap(key);
-    updateFilters();
-  });
+  watch(
+    productsFiltered,
+    () => {
+      map.value = productRepo.countValues(key, map.value);
+    },
+  );
 
-  watch(param, () => {
-    updateFilters();
-  });
+  watch(
+    param,
+    () => {
+      updateFilters();
+    },
+  );
 
   function setFilters(categories: string[]) {
     for (const pair of map.value)
@@ -59,9 +71,8 @@ export function useFilterByCategory<Key extends keyof TStringFields>(key: Key) {
         return useEqualFilter(key, category);
     });
 
-    productStore.filters.set(
-      key,
-      (product: IProduct) => filters.length !== 0 ? filters.reduce((acc, value) => acc || value(product), false) : true,
+    productRepo.filters.set(key, (product: IProduct) =>
+      filters.length !== 0 ? filters.reduce((acc, value) => acc || value(product), false) : true,
     );
   }
 

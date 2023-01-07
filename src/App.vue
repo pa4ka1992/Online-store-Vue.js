@@ -3,6 +3,7 @@
 import AppLayout from '@/components/AppLayout.vue';
 import AppHeader from '@/components/header';
 import AppFooter from '@/components/footer';
+import ViewTemplate from './views/ViewTemplate.vue';
 
 </script>
 
@@ -12,7 +13,7 @@ import AppFooter from '@/components/footer';
       <AppHeader/> 
     </template>
     <template #main> 
-      <RouterView/>
+      <ViewTemplate/>
     </template>
     <template #footer> 
       <AppFooter/> 

@@ -6,4 +6,5 @@ export * from './sort-option';
 export * from './sort-option-list';
 export * from './product-info';
 export * from './search';
-export * from './reset-filter';
+export * from './reset-query';
+export * from './chunk-loader';

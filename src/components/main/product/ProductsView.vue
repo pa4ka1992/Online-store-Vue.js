@@ -1,37 +1,39 @@
 <script lang="ts" setup>
-import { useProductsStore } from '@/store';
+
+import { useProductsRepo } from '@/store';
 import { useProductView, ViewType } from '@/composables';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 
 import SortOptionList from './SortOptionList.vue';
-import { ProductCardItem, ProductListItem } from './product-item';
+import { ProductListView } from './product-list';
 
-const { products } = storeToRefs(useProductsStore());
+const { productsFiltered, isLoading } = storeToRefs(useProductsRepo());
 const { type } = useProductView();
-
-const gridClass = computed(() => {
-  return type.value === ViewType.Grid ? 'view-options__btn_active' : '';
-});
 
 function toggleGrid() {
   type.value = ViewType.Grid;
+}
+
+function toggleList() {
+  type.value = ViewType.List;
 }
 
 const listClass = computed(() => {
   return type.value === ViewType.List ? 'view-options__btn_active' : '';
 });
 
-function toggleList() {
-  type.value = ViewType.List;
-}
+const gridClass = computed(() => {
+  return type.value === ViewType.Grid ? 'view-options__btn_active' : '';
+});
+
 </script>
 
 <template>
   <section class="product-section">
     <h1 class="product-section__heading">
       Products
-      <span class="product-count">found {{ products.length }} products</span>
+      <span class="product-count">found {{ !isLoading ? productsFiltered.length : '--' }} products</span>
     </h1>
     <div class="product-section__options">
       <SortOptionList :sort-keys="['title', 'rating', 'price', 'stock']" />
@@ -44,17 +46,7 @@ function toggleList() {
         </button>
       </div>
     </div>
-    <div v-if="products.length === 0" class="product-list product-list_not-found">No products found</div>
-    <div v-else-if="type === ViewType.List" class="product-list">
-      <div class="product-list__item product-list__item_type_list" v-for="product in products" :key="product.id">
-        <ProductListItem :product="product" />
-      </div>
-    </div>
-    <div v-else class="product-list">
-      <div class="product-list__item" v-for="product in products" :key="product.id">
-        <ProductCardItem :product="product" />
-      </div>
-    </div>
+    <ProductListView :viewType="type"/>
   </section>
 </template>
 
@@ -105,26 +97,4 @@ function toggleList() {
   }
 }
 
-.product-list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 100%;
-
-  &__item {
-    padding: 20px;
-  }
-
-  &__item_type_list {
-    width: 100%;
-  }
-
-  &_not-found {
-    min-height: 60%;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-}
 </style>

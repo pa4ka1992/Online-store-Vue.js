@@ -85,7 +85,7 @@ const MyPaginate = Paginate;
     justify-self: end;
     display: flex;
     justify-content: flex-end;
-    gap: 0.1rem;
+    gap: 0.3rem;
     list-style: none;
     min-width: 375px;
 
@@ -93,12 +93,13 @@ const MyPaginate = Paginate;
       padding: 0.3rem 0.2rem;
       min-width: 2rem;
       background-color: $white;
-      border: 1px solid $secondary {
+      border: {
         radius: 10px;
       }
       cursor: pointer;
       transition: all 0.2s;
       user-select: none;
+      @include block-style;
 
       &:hover {
         color: $light;

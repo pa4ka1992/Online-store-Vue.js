@@ -2,13 +2,8 @@
   <div class="summary__promo">
     <h4 class="summary__promo--header">Enter your promocode:</h4>
     <div class="promo__group">
-      <input
-        type="text"
-        placeholder="promocode"
-        class="promo__group--input"
-        v-model="promo"
-      />
-      <span class="promo__group--tooltip"> Promocodes: <b>"gachi", "300bucks", "storeRS", "RS-school"</b></span>
+      <input type="text" placeholder="promocode" class="promo__group--input" v-model="promo" />
+      <span class="promo__group--tooltip"> Promocodes: "gachi", "300bucks", "storeRS", "RS-school"</span>
       <my-button :class="{ disabled: !isMatch || isAlreadyApplied }" class="promo__group--apply" @click="applyPromo"
         >Apply</my-button
       >
@@ -72,9 +67,9 @@ const { applyPromo } = usePromoStore();
       top: -190%;
       background-color: $primary2-light;
       border-radius: 10px;
-      box-shadow: 0px 0px 8px $dark;
       opacity: 0;
       transition: all 0.2s;
+      @include block-style;
 
       &::before {
         content: '';

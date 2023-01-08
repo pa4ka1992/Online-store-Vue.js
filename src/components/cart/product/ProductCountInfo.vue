@@ -85,22 +85,24 @@ const updateInput = (e: Event): void => {
 
     &--control {
       background-color: $white;
-      border: 1px solid $secondary {
-        radius: 5px;
-      }
+      // border: 1px solid $secondary {
+      //   radius: 5px;
+      // }
+      @include block-style;
 
       .increment,
       .decrement {
         padding: 0.5rem;
         background-color: transparent;
         border: none {
-          radius: 4px;
+          radius: 10px;
         }
         transition: all 0.2s;
         cursor: pointer;
 
         &:hover {
-          background-color: $secondary;
+          color: $light;
+          background-color: $primary-dark;
         }
         &:hover:disabled {
           background-color: transparent;

@@ -2,10 +2,10 @@
   <div class="summary__total-price">
     <span class="summary__total-price--header">Total</span>
     <span class="summary__total-price--total" :class="{ crossed: isDiscounted }">
-      <my-number :input="totalPrice" :fixed="2" /> $
+      <AppNumber :input="totalPrice" :fixed="2" /> $
     </span>
     <span v-if="isDiscounted" class="summary__total-price--fixed">
-      <my-number :input="getPromoPrice" :fixed="2" /> $
+      <AppNumber :input="getPromoPrice" :fixed="2" /> $
     </span>
   </div>
 </template>

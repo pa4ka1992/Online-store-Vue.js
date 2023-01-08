@@ -30,10 +30,6 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     return cart.value.slice(limit.value * (page.value - 1), limit.value * page.value);
   });
 
-  const updateLimit = (value: number): void => {
-    limit.value = value;
-  };
-
   watch([page, limit, totalPage], ([newPage, newLimit, newTotalPage]) => {
     if (page.value > newTotalPage) page.value = newTotalPage;
 
@@ -60,6 +56,5 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     totalPage,
     limit,
     startIndex,
-    updateLimit,
   };
 });

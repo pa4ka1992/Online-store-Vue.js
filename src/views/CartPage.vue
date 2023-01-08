@@ -21,7 +21,7 @@
     <section class="empty" v-else>
       <h3 class="empty__header">Cart is empty</h3>
       <p class="empty__info">Look at the main page to select products or find what you need in the search</p>
-      <my-button class="empty__go-main" @click="router.push({ name: 'overview' })">Main</my-button>
+      <AppButton class="empty__go-main" @click="router.push({ name: 'overview' })">Main</AppButton>
     </section>
     <modal-window />
   </section>

@@ -5,7 +5,7 @@
       <span class="promo__title">{{ promoCode.title }}</span>
       <span class="promo__value">
         Discount:
-        <my-number :input="promoCode.value * 100" :fixed="0" />%
+        <AppNumber :input="promoCode.value * 100" :fixed="0" />%
       </span>
       <span class="promo__delete">
         <font-awesome-icon icon="fa-solid fa-xmark" @click="removePromo(promoCode.id)" />

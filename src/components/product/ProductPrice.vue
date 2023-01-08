@@ -3,19 +3,19 @@
     <section class="product__price-info">
       <div class="product__prices">
         <span v-if="discountPercentage" class="product__price--fix">
-          <my-number :input="getFixPrice" :fixed="2" /> $
+          <AppNumber :input="getFixPrice" :fixed="2" /> $
         </span>
         <span :class="{ crossed: discountPercentage }" class="product__price--full">
-          <my-number :input="price" :fixed="2" /> $
+          <AppNumber :input="price" :fixed="2" /> $
         </span>
       </div>
       <div class="product__stock">Left in stock: {{ stock }}pc.</div>
       <div class="product__buttons">
-        <my-button class="button__cart" @click="updateCart">
+        <AppButton class="button__cart" @click="updateCart">
           <i class="button__cart--icon" :class="buttonStatus.icon" />
           {{ buttonStatus.name }}
-        </my-button>
-        <my-button class="button__fast-buy" @click.passive="fastBuy">Buy</my-button>
+        </AppButton>
+        <AppButton class="button__fast-buy" @click.passive="fastBuy">Buy</AppButton>
       </div>
     </section>
   </div>

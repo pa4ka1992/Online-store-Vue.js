@@ -1,6 +1,6 @@
 <template>
   <Teleport to="body">
-    <transition-group name="modal-anime">
+    <transition name="modal-anime">
       <div class="buy" v-if="modalIsShow" @mousedown="closeModal">
         <section v-show="!orderIsCompleted" @mousedown.stop @submit.prevent class="buy__form">
           <span class="buy__form--close" @click="closeModal">
@@ -9,17 +9,17 @@
           <h2 class="buy__form--header">Ordering</h2>
           <section class="buy__form--info">
             <div class="personal-info">
-              <MyInput :field="'fullName'" />
-              <MyInput :field="'phone'" />
-              <MyInput :field="'adress'" />
-              <MyInput :field="'email'" />
+              <AppInput :field="'fullName'" />
+              <AppInput :field="'phone'" />
+              <AppInput :field="'adress'" />
+              <AppInput :field="'email'" />
             </div>
             <modal-payment />
           </section>
         </section>
         <span v-show="orderIsCompleted" class="buy__success">Order successfully completed!</span>
       </div>
-    </transition-group>
+    </transition>
   </Teleport>
 </template>
 
@@ -73,7 +73,7 @@ watch(modalIsShow, (newModalIsShow) => {
     position: relative;
     padding: 1.5rem 3rem;
     background-color: $light;
-    @include block-style;
+    border-radius: 20px;
 
     &--close {
       position: absolute;

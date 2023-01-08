@@ -5,7 +5,7 @@
       <promo-list />
       <additional-info />
       <promo-input />
-      <MyButton @click="modalIsShow = true" class="summary__buy">Buy now</MyButton>
+      <AppButton @click="modalIsShow = true" class="summary__buy">Buy now</AppButton>
     </div>
   </form>
 </template>

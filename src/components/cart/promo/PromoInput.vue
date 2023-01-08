@@ -4,8 +4,8 @@
     <div class="promo__group">
       <input type="text" placeholder="promocode" class="promo__group--input" v-model="promo" />
       <span class="promo__group--tooltip"> Promocodes: "gachi", "300bucks", "storeRS", "RS-school"</span>
-      <my-button :class="{ disabled: !isMatch || isAlreadyApplied }" class="promo__group--apply" @click="applyPromo"
-        >Apply</my-button
+      <AppButton :class="{ disabled: !isMatch || isAlreadyApplied }" class="promo__group--apply" @click="applyPromo"
+        >Apply</AppButton
       >
     </div>
   </div>

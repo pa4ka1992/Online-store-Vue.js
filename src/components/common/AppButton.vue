@@ -1,19 +1,19 @@
 <template>
-  <button class="my-button">
+  <button class="app-button">
     <slot></slot>
   </button>
 </template>
 
 <script lang="ts">
 export default {
-  name: 'MyButton',
+  name: 'AppButton',
 };
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/scss/variables.scss';
 
-.my-button {
+.app-button {
   flex-grow: 0;
   display: inline-block;
   padding: 0.5rem 1rem;

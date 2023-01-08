@@ -14,14 +14,14 @@
       <img src="@/assets/img/chipLogo.png" alt="card-chip" class="card__chip--img" />
     </div>
     <div class="card__number">
-      <MyInput :field="'card'" />
+      <AppInput :field="'card'" />
     </div>
     <div class="wrapper">
       <div class="card__info">
         <span class="card__info--owner">John Doe</span>
         <div class="card__info--inputs">
-          <MyInput class="date" :field="'date'" />
-          <MyInput class="cvv" :field="'CVV'" />
+          <AppInput class="date" :field="'date'" />
+          <AppInput class="cvv" :field="'CVV'" />
         </div>
       </div>
     </div>
@@ -106,7 +106,7 @@ const { cardServiceImg } = storeToRefs(useModalStore());
         flex-basis: 50%;
       }
 
-      :deep(.my-input .form) {
+      :deep(.app-input .form) {
         display: flex;
         align-items: center;
         justify-content: center;

@@ -84,10 +84,9 @@ const updateInput = (e: Event): void => {
     gap: 0.5rem;
 
     &--control {
+      padding: 0.3rem;
       background-color: $white;
-      // border: 1px solid $secondary {
-      //   radius: 5px;
-      // }
+      border-radius: 12px;
       @include block-style;
 
       .increment,

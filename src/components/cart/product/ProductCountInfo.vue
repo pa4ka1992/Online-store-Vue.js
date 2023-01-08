@@ -14,7 +14,7 @@
           <font-awesome-icon icon="fa-solid fa-plus" />
         </button>
       </div>
-      <span class="count-info__wrapper--single-price">{{ price }}$/pc.</span>
+      <span class="count-info__wrapper--single-price">${{ price }}/pc.</span>
     </div>
   </div>
 </template>

@@ -4,7 +4,7 @@
     <div class="payment__buy-group">
       <div class="payment__sum">
         <span class="payment__sum--header">Total price: </span>
-        <span class="payment__sum--total"> <AppNumber :input="getPromoPrice" :fixed="2" /> $ </span>
+        <span class="payment__sum--total"> $<AppNumber :input="getPromoPrice" :fixed="2" /> </span>
       </div>
       <AppButton class="payment__buy-group--button" @click="buy">Confirm</AppButton>
       <span class="payment__buy-group--alert" :class="{ visible: buyAttemt }">

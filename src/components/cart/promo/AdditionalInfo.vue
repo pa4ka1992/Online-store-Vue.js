@@ -4,13 +4,13 @@
       Products, {{ totalProducts }}pc.
     </span>
     <span class="summary__total-products--price">
-      <AppNumber :input="totalPrice" :fixed="2" /> $
+      $<AppNumber :input="totalPrice" :fixed="2" />
     </span>
   </div>
   <div class="summary__discount" v-show="isDiscounted">
     <span class="summary__discount--header">Discount</span>
     <span class="summary__discount--value">
-      <AppNumber :input="-(totalPrice - getPromoPrice)" :fixed="2" /> $
+      <AppNumber :input="-(totalPrice - getPromoPrice)" :fixed="2" />$
     </span>
   </div>
 </template>

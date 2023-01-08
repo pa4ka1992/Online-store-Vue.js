@@ -3,10 +3,10 @@
     <section class="product__price-info">
       <div class="product__prices">
         <span v-if="discountPercentage" class="product__price--fix">
-          <AppNumber :input="getFixPrice" :fixed="2" /> $
+          $<AppNumber :input="getFixPrice" :fixed="2" />
         </span>
         <span :class="{ crossed: discountPercentage }" class="product__price--full">
-          <AppNumber :input="price" :fixed="2" /> $
+          $<AppNumber :input="price" :fixed="2" />
         </span>
       </div>
       <div class="product__stock">Left in stock: {{ stock }}pc.</div>
@@ -135,7 +135,7 @@ const fastBuy = (): void => {
 
           .icon-cart-plus {
             color: $dark;
-            background-color: $gray-200;
+            background-color: $gray-100;
           }
         }
       }

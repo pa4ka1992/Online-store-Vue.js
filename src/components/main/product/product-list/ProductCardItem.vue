@@ -42,8 +42,8 @@ function cartBtnClick(e: Event) {
         </div>
       </div>
       <button class="btn cart-btn product-card__cart-btn" :class="cartBtnClass" @click="cartBtnClick">
-        <i v-if="!inCart" class="icon-cart-plus"></i>
-        <i v-else class="icon-cart-ok"></i>
+        <i v-if="!inCart" class="icon-cart-plus cart-btn__icon"></i>
+        <i v-else class="icon-cart-ok cart-btn__icon"></i>
       </button>
     </div>
   </div>

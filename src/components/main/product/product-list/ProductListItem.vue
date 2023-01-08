@@ -61,8 +61,8 @@ function cartBtnClick(e: Event) {
         </span>
       </div>
       <button class="btn cart-btn" :class="cartBtnClass" @click="cartBtnClick">
-        <i v-if="!inCart" class="icon-cart-plus"></i>
-        <i v-else class="icon-cart-ok"></i>
+        <i v-if="!inCart" class="icon-cart-plus cart-btn__icon"></i>
+        <i v-else class="icon-cart-ok cart-btn__icon"></i>
         <span class="cart-btn__text">{{ !inCart ? 'Add to cart' : 'Added!' }}</span>
       </button>
     </div>

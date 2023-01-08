@@ -36,7 +36,8 @@ const { removePromo } = usePromoStore();
   }
 
   &--code {
-    display: flex;
+    display: grid;
+    grid-template-columns: 2.5fr 2fr 0.3fr;
     align-items: center;
     justify-content: space-between;
     padding: 0.3rem 0;
@@ -46,6 +47,7 @@ const { removePromo } = usePromoStore();
       color: $success;
     }
     .promo__delete {
+      justify-self: end;
       padding: 0.1rem 0.5rem;
       transition: all 0.2s;
 

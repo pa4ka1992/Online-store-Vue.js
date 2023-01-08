@@ -6,10 +6,10 @@
     <div class="count-info__wrapper">
       <span class="count-info__wrapper--stock">Stock: {{ stock }}pc.</span>
       <div class="count-info__wrapper--control">
-        <button :disabled="count === 1" class="decrement" @click="decrementCount(product)">
+        <button class="decrement" @click="decrementCount(product)">
           <font-awesome-icon icon="fa-solid fa-minus" />
         </button>
-        <input type="number" class="count" :value="count" @input="updateInput" />
+        <input type="number" class="count" :value="count" @change="updateInput" />
         <button :disabled="count === stock" class="increment" @click="incrementCount(product)">
           <font-awesome-icon icon="fa-solid fa-plus" />
         </button>
@@ -33,12 +33,11 @@ const { price, stock, count } = toRefs(props.product);
 const { decrementCount, incrementCount, dropProduct, updateCount } = useCartStore();
 
 const updateInput = (e: Event): void => {
-  console.log(true);
   const target = e.target as HTMLOptionElement;
   const valNumber = Number(target.value);
 
   if (valNumber === 0) {
-    target.value = '';
+    dropProduct(props.product);
   } else if (valNumber > props.product['stock']) {
     target.value = String(props.product['stock']);
   }

@@ -68,10 +68,6 @@ export const useCartStore = defineStore('cartStore', () => {
         currProduct.count = currProduct.stock;
         return;
       }
-      if (valNumber === 0) {
-        currProduct.count = CartDefaultVal.ProductCount;
-        return;
-      }
       currProduct.count = valNumber;
     }
   };

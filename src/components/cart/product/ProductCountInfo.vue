@@ -1,45 +1,49 @@
 <template>
   <div class="product__count-info">
-    <button @click="cartStore.deleteProduct(product)" class="delete">
+    <button :class="{ active: props.isHovered }" @click="dropProduct(product)" class="delete">
       <font-awesome-icon icon="fa-solid fa-trash" />
     </button>
     <div class="count-info__wrapper">
-      <div class="count-info__wrapper--stock">Stock: {{ stock }}pc.</div>
+      <span class="count-info__wrapper--stock">Stock: {{ stock }}pc.</span>
       <div class="count-info__wrapper--control">
-        <button :disabled="count === 1" class="decrement" @click="cartStore.decrementCount(product)">
+        <button :disabled="count === 1" class="decrement" @click="decrementCount(product)">
           <font-awesome-icon icon="fa-solid fa-minus" />
         </button>
-        <input type="number" class="count" :value="count" @input="updateCount" />
-        <button :disabled="count === stock" class="increment" @click="cartStore.incrementCount(product)">
+        <input type="number" class="count" :value="count" @input="updateInput" />
+        <button :disabled="count === stock" class="increment" @click="incrementCount(product)">
           <font-awesome-icon icon="fa-solid fa-plus" />
         </button>
       </div>
-      <div class="count-info__wrapper--single-price">{{ price }}$/pc.</div>
+      <span class="count-info__wrapper--single-price">{{ price }}$/pc.</span>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, toRefs } from 'vue';
+import { toRefs } from 'vue';
 import { useCartStore } from '@/store';
-import { ICartProduct } from '@/services/model/types/cart';
+import { ICartProduct } from '@/store/cart/types';
 
 const props = defineProps<{
   product: Required<ICartProduct>;
+  isHovered: boolean;
 }>();
 
 const { price, stock, count } = toRefs(props.product);
-const cartStore = useCartStore();
+const { decrementCount, incrementCount, dropProduct, updateCount } = useCartStore();
 
-const updateCount = (e: Event): void => {
+const updateInput = (e: Event): void => {
+  console.log(true);
   const target = e.target as HTMLOptionElement;
   const valNumber = Number(target.value);
+
   if (valNumber === 0) {
-    target.value = '1';
+    target.value = '';
   } else if (valNumber > props.product['stock']) {
     target.value = String(props.product['stock']);
   }
-  cartStore.updateCount(target.value, props.product as ICartProduct);
+
+  updateCount(target.value, props.product as ICartProduct);
 };
 </script>
 
@@ -47,8 +51,8 @@ const updateCount = (e: Event): void => {
 @import '@/assets/scss/variables.scss';
 
 .product__count-info {
+  justify-self: start;
   display: flex;
-  gap: 1rem;
   align-items: center;
 
   .delete {
@@ -57,7 +61,8 @@ const updateCount = (e: Event): void => {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    transition: all .2s;
+    opacity: 0;
+    transition: all 0.3s;
 
     &:hover {
       color: $danger;
@@ -65,9 +70,13 @@ const updateCount = (e: Event): void => {
     }
     .fa-trash {
       font-size: 1rem;
-      // color: $danger;
     }
   }
+
+  .active {
+    opacity: 1;
+  }
+
   .count-info__wrapper {
     flex-shrink: 0;
     display: flex;
@@ -76,6 +85,7 @@ const updateCount = (e: Event): void => {
     gap: 0.5rem;
 
     &--control {
+      background-color: $white;
       border: 1px solid $secondary {
         radius: 5px;
       }
@@ -100,6 +110,7 @@ const updateCount = (e: Event): void => {
       .count {
         font-size: 1rem;
         max-width: 3rem;
+        background-color: transparent;
         border: none;
         text-align: center;
         -webkit-appearance: none;

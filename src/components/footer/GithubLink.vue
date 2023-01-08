@@ -38,8 +38,8 @@ fetch(`https://api.github.com/users/${props.name}`)
   margin-left: 10px;
 
   &__avatar {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     @include apply-shadow;
     margin-right: 10px;
@@ -50,7 +50,7 @@ fetch(`https://api.github.com/users/${props.name}`)
     .github-link__avatar {
       scale: 1.2;
     }
-  } 
+  }
 
   &__name {
     font-size: 1rem;

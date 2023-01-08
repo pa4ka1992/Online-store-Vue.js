@@ -17,15 +17,15 @@ export const useProductsRepo = defineStore('products-repo', () => {
   // Store def
   // ==========================
 
-  const { products, loaded } = storeToRefs(useProducts());
+  const { products, isLoaded } = storeToRefs(useProducts());
 
   // Common
   // ==========================
 
-  const isLoading = ref(!loaded.value);
+  const isLoading = ref(!isLoaded.value);
 
-  const loaderWatch = watch(loaded, () => {
-    if (loaded.value) {
+  const loaderWatch = watch(isLoaded, () => {
+    if (isLoaded.value) {
       updateAll();
       // Updates only once, so we dont need it
       loaderWatch();
@@ -33,10 +33,10 @@ export const useProductsRepo = defineStore('products-repo', () => {
   });
 
   async function updateAll() {
-    if (loaded.value) {
+    if (isLoaded.value) {
       isLoading.value = true;
       productsFiltered.value = await sort(await filter(products.value));
-      isLoading.value = false; 
+      isLoading.value = false;
     }
   }
 
@@ -52,7 +52,7 @@ export const useProductsRepo = defineStore('products-repo', () => {
   });
 
   watch(sortType, async () => {
-    if (loaded.value) {
+    if (isLoaded.value) {
       isLoading.value = true;
       productsFiltered.value = await sort(productsFiltered.value);
       isLoading.value = false;

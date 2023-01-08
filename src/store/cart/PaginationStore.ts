@@ -1,22 +1,25 @@
 import { defineStore, storeToRefs } from 'pinia';
 import { useCartStore } from './CartStore';
-import { ref, computed, watch, onBeforeMount } from 'vue';
-import { ICartProduct } from '@/services/model/types/cart';
+import { ref, Ref, computed, watch, onBeforeMount } from 'vue';
+import { ICartProduct } from './types';
+import { LocalStorageApi } from '@/services/local-storage';
+import { CartDefaultVal, LSKey } from './constants';
+import { useQueryCart } from '@/composables/query-cart';
 
 export const usePaginationStore = defineStore('paginationStore', () => {
   const { cart } = storeToRefs(useCartStore());
-  const page = ref(1);
-  const limit = ref(10);
-  const maxLimit = 10;
+  const _LS = LocalStorageApi.getInstance();
+  const page: Ref<number> = ref(CartDefaultVal.page);
+  const limit: Ref<number> = ref(CartDefaultVal.limit);
 
   const totalPage = computed((): number => {
-    if (!limit.value) return 1;
+    if (!limit.value) return CartDefaultVal.page;
     const cartLength: number = cart.value.length;
     if (!cart.value || Number.isNaN(cartLength) || Number.isNaN(limit.value) || limit.value <= 0) {
-      return 1;
+      return CartDefaultVal.page;
     }
     const pages: number = Math.ceil(cartLength / limit.value);
-    return pages > 1 ? pages : 1;
+    return pages > CartDefaultVal.page ? pages : CartDefaultVal.page;
   });
 
   const startIndex = computed((): number => {
@@ -27,20 +30,28 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     return cart.value.slice(limit.value * (page.value - 1), limit.value * page.value);
   });
 
-  // watch(totalPage, () => {
-  //   page.value = 1;
-  // });
+  const updateLimit = (value: number): void => {
+    limit.value = value;
+  };
 
-  watch([page, limit], ([newPage, newLimit]) => {
-    localStorage.setItem('RSOnlineStore-cart-page', `${newPage}`);
-    localStorage.setItem('RSOnlineStore-cart-limit', `${newLimit}`);
+  watch([page, limit, totalPage], ([newPage, newLimit, newTotalPage]) => {
+    if (page.value > newTotalPage) page.value = newTotalPage;
+
+    _LS.setProperty(LSKey.page, newPage);
+    _LS.setProperty(LSKey.limit, newLimit);
+    useQueryCart(limit.value, page.value);
   });
 
   onBeforeMount(() => {
-    const pageLocalStorage: string | null = localStorage.getItem('RSOnlineStore-cart-page');
-    const limitLocalStorage: string | null = localStorage.getItem('RSOnlineStore-cart-limit');
-    if (pageLocalStorage) page.value = Number(pageLocalStorage);
-    if (limitLocalStorage) limit.value = Number(limitLocalStorage);
+    const limitLS: unknown = _LS.getProperty(LSKey.limit);
+    const pageLS: unknown = _LS.getProperty(LSKey.page);
+
+    if (typeof limitLS === 'number' && limitLS !== limit.value) {
+      limit.value = limitLS;
+    }
+    if (typeof pageLS === 'number' && pageLS !== page.value) {
+      page.value = pageLS;
+    }
   });
 
   return {
@@ -48,7 +59,7 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     page,
     totalPage,
     limit,
-    maxLimit,
     startIndex,
+    updateLimit,
   };
 });

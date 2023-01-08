@@ -8,13 +8,32 @@ import {
   faXmark,
   faArrowRight,
   faArrowLeft,
+  faCircleCheck,
+  faCircleXmark,
+  faArrowsRotate,
+  faArrowsLeftRight,
+  faAnglesUp,
+  faAnglesDown,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { App } from 'vue';
 
-export const fontAwesomePlugin = {
-  install: (app: App) => {
-    library.add(faStar, faMinus, faPlus, faTrash, faSpinner, faXmark, faArrowRight, faArrowLeft);
-    app.component('FontAwesomeIcon', FontAwesomeIcon);
-  },
+export const fontAwesomePlugin = (app: App): void => {
+  library.add(
+    faStar,
+    faMinus,
+    faPlus,
+    faTrash,
+    faSpinner,
+    faXmark,
+    faArrowRight,
+    faArrowLeft,
+    faCircleCheck,
+    faCircleXmark,
+    faArrowsRotate,
+    faArrowsLeftRight,
+    faAnglesUp,
+    faAnglesDown,
+  );
+  app.component('FontAwesomeIcon', FontAwesomeIcon);
 };

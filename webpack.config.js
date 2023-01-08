@@ -30,14 +30,6 @@ const baseConfig = {
                 loader: 'vue-loader',
             },
             {
-                test: /\.ts$/,
-                loader: 'ts-loader',
-                options: {
-                    appendTsSuffixTo: [/\.vue$/],
-                },
-                exclude: /node_modules/,
-            },
-            {
                 test: /\.(png|jpe?g|gif|svg|webp|ico)$/i,
                 type: 'asset',
                 generator: {

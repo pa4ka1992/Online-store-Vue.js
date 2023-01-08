@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import { ref, type Ref, computed } from 'vue';
-
 import {
   type IProduct,
   ProductSourceApi,
@@ -10,12 +9,12 @@ export const useProducts = defineStore('products', () => {
   const _products: Ref<IProduct[]> = ref([]);
   const repo = ProductSourceApi.getInstance();
   const _productMap: Ref<{ [key: string]: IProduct }> = ref({});
-  const loaded = ref(false);
+  const isLoaded = ref(false);
 
   async function fetchData() {
     _products.value = await repo.fetchProducts();
     _products.value.forEach((item) => (_productMap.value[item.id] = item));
-    loaded.value = true;
+    isLoaded.value = true;
   }
 
   fetchData();
@@ -30,7 +29,7 @@ export const useProducts = defineStore('products', () => {
 
   return {
     products,
-    loaded,
+    isLoaded,
     fetchData,
     getProductById,
   };

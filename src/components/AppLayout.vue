@@ -26,14 +26,14 @@ const mainStyles = computed(() => {
 </script>
 
 <template>
-  <div class="app-body"> 
-    <div class="app-body__header" ref="header"> 
+  <div class="app-body">
+    <div class="app-body__header" ref="header">
       <slot name="header"></slot>
     </div>
     <main class="app-main" :style="mainStyles">
       <slot name="main"></slot>
     </main>
-    <div class="app-body__footer" ref="footer"> 
+    <div class="app-body__footer" ref="footer">
       <slot name="footer"></slot>
     </div>
   </div>
@@ -54,7 +54,7 @@ const mainStyles = computed(() => {
   margin: 0;
   width: 100%;
   position: fixed;
-  z-index: 100;
+  z-index: 10;
   top: 0;
   left: 0;
 }
@@ -71,7 +71,6 @@ const mainStyles = computed(() => {
 .app-main {
   min-height: 100vh;
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
   position: relative;

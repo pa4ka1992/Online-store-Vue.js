@@ -8,7 +8,7 @@ const year = ref((new Date()).getFullYear());
 
 </script>
 
-<template> 
+<template>
   <footer v-once class="page-footer">
     <a class="a course-link" href="https://rs.school/js">
       <img class="course-link__logo" src="https://rs.school/images/rs_school_js.svg"/>
@@ -30,23 +30,25 @@ const year = ref((new Date()).getFullYear());
 @import '@/assets/scss/variables.scss';
 
 .page-footer {
-  background-color: $primary2;
-  color: $black;
+  background-color: $primary-dark;
+  color: $white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 10px 30px;
+  box-shadow: 0px -3px 4px rgba(0, 0, 0, 0.25);
 }
 
 .course-link {
+  display: block;
   &__logo {
-    width: 160px;
-    height: 80px;
+    display: block;
+    width: 90px;
   }
 }
 
 .year {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin: 0;
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
@@ -56,8 +58,7 @@ const year = ref((new Date()).getFullYear());
 
 .authors-section {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 
   &__heading {
     font-size: 1.5rem;

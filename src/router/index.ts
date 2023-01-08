@@ -3,6 +3,7 @@ import { RouteNames } from './names';
 import NotFoundPage from '@/views/NotFoundPage.vue';
 import ProductSearchPage from '@/views/ProductSearchPage.vue';
 import CartPage from '@/views/CartPage.vue';
+import ProductPage from '@/views/ProductPage.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -16,6 +17,12 @@ const router = createRouter({
       path: '/product',
       name: RouteNames.productSearch,
       component: ProductSearchPage,
+    },
+    {
+      path: '/product-details/:id',
+      name: RouteNames.product,
+      component: ProductPage,
+      props: (route) => ({ id: route.params['id'] }),
     },
     {
       path: '/cart',
@@ -33,6 +40,4 @@ const router = createRouter({
 
 export default router;
 
-export { 
-  RouteNames 
-};
+export { RouteNames };

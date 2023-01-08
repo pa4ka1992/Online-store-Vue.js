@@ -11,7 +11,10 @@
       </div>
       <div class="product__stock">Left in stock: {{ stock }}pc.</div>
       <div class="product__buttons">
-        <my-button class="button__cart" @click="updateCart">{{ buttonStatus }}</my-button>
+        <my-button class="button__cart" @click="updateCart">
+          <i class="button__cart--icon" :class="buttonStatus.icon" />
+          {{ buttonStatus.name }}
+        </my-button>
         <my-button class="button__fast-buy" @click.passive="fastBuy">Buy</my-button>
       </div>
     </section>
@@ -38,11 +41,11 @@ const getFixPrice = computed((): number => {
   return price.value * (1 - discountPercentage.value / 100);
 });
 
-const buttonStatus = computed((): string => {
+const buttonStatus = computed((): { name: string; icon: string } => {
   if (findProduct(id.value)) {
-    return 'Drop from cart';
+    return { name: 'Drop from cart', icon: 'icon-cart-ok' };
   } else {
-    return 'Add to cart';
+    return { name: 'Add to cart', icon: 'icon-cart-plus' };
   }
 });
 
@@ -111,7 +114,29 @@ const fastBuy = (): void => {
         gap: 1rem;
 
         .button__cart {
-          min-width: 10.1em;
+          display: flex;
+          align-items: center;
+          gap: 1em;
+          min-width: 12.5em;
+
+          &--icon {
+            padding: 0.4em 0.5em 0.4em 0.3em;
+            background-color: $white;
+            border-radius: 50%;
+
+            &::before {
+              transform: scale(1.3);
+            }
+          }
+
+          .icon-cart-ok {
+            background-color: $success-light;
+          }
+
+          .icon-cart-plus {
+            color: $dark;
+            background-color: $gray-200;
+          }
         }
       }
     }

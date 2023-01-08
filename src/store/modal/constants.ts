@@ -86,7 +86,7 @@ export const validationInfo = {
     val: '',
     isValid: false,
     isAlert: false,
-    regex: '^[a-zа-я]{5,}\\s+[a-zа-я]{5,}+[a-zа-я]{5,}',
+    regex: '^[a-zа-я]{5,}\\s+[a-zа-я]{5,}\\s+[a-zа-я]{5,}',
     header: 'Delivery adress',
     placeholder: 'Enter your address',
     alert: 'Adress is incorrect. Should be composed no less than three words, at least five letters length each',

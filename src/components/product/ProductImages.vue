@@ -9,7 +9,7 @@
         </Slide>
       </Carousel>
 
-      <Carousel id="thumbnails" :items-to-show="4" :wrap-around="true" v-model="currentSlide" ref="carousel">
+      <Carousel id="thumbnails" :items-to-show="4" :wrap-around="false" v-model="currentSlide" ref="carousel">
         <Slide class="slide" v-for="img in indexedImages" :key="img.id">
           <div class="carousel__item" @click="slideTo(img.id)">
             <img class="slider__img" :src="img.imgLink" alt="product" />

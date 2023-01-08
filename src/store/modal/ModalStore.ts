@@ -47,8 +47,7 @@ export const useModalStore = defineStore('ModalStore', () => {
       return;
     }
 
-    const regex = new RegExp(validation[key].regex, 'i');
-    const isValid: boolean = regex.test(validation[key].val);
+    const isValid: boolean = validation[key].regex.test(validation[key].val);
 
     if (isValid) {
       setValidState(true, false);

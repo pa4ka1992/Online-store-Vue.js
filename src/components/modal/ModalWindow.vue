@@ -114,8 +114,9 @@ watch(modalIsShow, (newModalIsShow) => {
     padding: 1rem;
     font-size: 1.5rem;
     color: $primary;
+    background-color: $white;
     border: 1px solid $secondary;
-    @include block-style;
+    border-radius: 20px;
   }
 }
 

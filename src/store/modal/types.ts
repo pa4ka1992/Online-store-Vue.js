@@ -12,7 +12,7 @@ export type TValidationField = {
   val: string;
   isValid: boolean;
   isAlert: boolean;
-  readonly regex: string;
+  readonly regex: RegExp;
   readonly placeholder: string;
   readonly header: string;
   readonly alert: string;

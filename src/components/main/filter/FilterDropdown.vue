@@ -10,13 +10,14 @@ const isOnTop = ref(false);
 const isOnBottom = ref(false);
 const scrollHide = props.title === 'Price' || props.title === 'Stock' ? false : true;
 
-const updateArrows = (e: Event) => {
-  const scrollEl = <HTMLDivElement>e.target;
-  const top: number = scrollEl.scrollTop;
-  const bottom = scrollEl.scrollHeight - scrollEl.clientHeight - top;
+const updateArrows = ({ target }: Event) => {
+  if (target instanceof HTMLDivElement) {
+    const top: number = target.scrollTop;
+    const bottom = target.scrollHeight - target.clientHeight - top;
 
-  isOnTop.value = top === 0 ? true : false;
-  isOnBottom.value = bottom === 0 ? true : false;
+    isOnTop.value = top === 0 ? true : false;
+    isOnBottom.value = bottom === 0 ? true : false;
+  }
 };
 </script>
 
@@ -73,8 +74,13 @@ const updateArrows = (e: Event) => {
   border-radius: 20px;
   width: 270px;
   padding: 5px;
-
   font-size: 0.9rem;
+  transition: all 0.3s;
+  filter: brightness(100%);
+
+  &:hover {
+    filter: brightness(95%);
+  }
 
   &__head {
     position: relative;

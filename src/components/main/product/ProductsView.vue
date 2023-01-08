@@ -78,6 +78,7 @@ const gridClass = computed(() => {
 .product-section {
   width: 100%;
   padding: 10px 40px;
+  padding-right: 0;
   display: flex;
   flex-direction: column;
 

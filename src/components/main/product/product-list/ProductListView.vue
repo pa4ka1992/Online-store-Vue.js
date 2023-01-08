@@ -23,7 +23,7 @@ function loadCb(done: () => void) {
   load();
   nextTick(() => {
     done();
-  }); 
+  });
 }
 
 </script>
@@ -43,12 +43,12 @@ function loadCb(done: () => void) {
         :product="product"
       />
     </div>
-    
+
     <template #loading>
       <AppSpinner class="loading"/>
     </template>
   </AppInfiniteScroll>
-  <AppInfiniteScroll 
+  <AppInfiniteScroll
     v-else
     @load="loadCb"
     :disable="isEnd && !isLoading">
@@ -68,14 +68,13 @@ function loadCb(done: () => void) {
 
 <style scoped lang="scss">
 .product-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  row-gap: 1.5rem;
+  column-gap: 1rem;
+  place-items: center center;
   width: 100%;
-
-  &__item {
-    margin: 20px;
-  }
+  margin-top: 1rem;
 
   &_not-found {
     min-height: 60%;

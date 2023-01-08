@@ -47,7 +47,7 @@ const MyPaginate = Paginate;
   padding: 0.5rem 0;
   width: 100%;
   position: sticky;
-  top: 80px;
+  top: 66px;
   border-bottom: 1px solid $secondary;
   background-color: $white;
   z-index: 5;

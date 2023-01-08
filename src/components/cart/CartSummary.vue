@@ -28,7 +28,7 @@ const { modalIsShow } = storeToRefs(useModalStore());
     align-items: center;
     gap: 0.5rem;
     position: sticky;
-    top: 100px;
+    top: 80px;
     padding: 1rem;
     background-color: $white;
     border-radius: 12px;

@@ -118,7 +118,7 @@ const contentStyle = computed(() => {
   filter: brightness(100%);
 
   &:hover {
-    filter: brightness(95%);
+    filter: brightness(105%);
   }
 
   &__head {

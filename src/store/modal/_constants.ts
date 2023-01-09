@@ -21,6 +21,7 @@ export const cardImages = {
 };
 
 const modifyName: TModifyFunc = function (this) {
+  this.val = this.val.replace(/[0-9]/g, '');
   this.val = this.val.replace(/\s{2,}/g, ' ');
 };
 
@@ -65,7 +66,7 @@ export const validationInfo = {
     val: '',
     isValid: false,
     isAlert: false,
-    regex: /^[a-zа-я0-9]{3,}\s+[a-zа-я0-9]{3,}/i,
+    regex: /^[a-zа-я]{3,}\s+[a-zа-я]{3,}/i,
     header: 'Full name',
     placeholder: 'Firstname Lastname',
     alert: 'Full name is incorrect. Should be composed no less than two words, at least three letters length each',

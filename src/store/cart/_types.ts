@@ -7,7 +7,7 @@ export interface ICartProduct extends IProduct {
 }
 
 export type TFindFunc<T> = (id: string) => T | undefined;
-export type TProductFunc = (product: ICartProduct) => void;
+export type TProductFunc = (id: string) => void;
 export type TCurrProd = ReturnType<TFindFunc<ICartProduct>>;
 
 export type TPromo = {

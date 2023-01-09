@@ -35,7 +35,7 @@ export default {
 import { useModalStore } from '@/store';
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
-import { IValidation, TValidationField } from '@/store/modal/types';
+import { IValidation, TValidationField } from '@/store/modal/_types';
 
 const props = defineProps<{
   field: keyof IValidation<TValidationField>;

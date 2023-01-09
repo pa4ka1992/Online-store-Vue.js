@@ -1,9 +1,9 @@
 import { defineStore, storeToRefs } from 'pinia';
 import { useCartStore } from './CartStore';
 import { ref, Ref, computed, watch, onBeforeMount } from 'vue';
-import { ICartProduct } from './types';
+import { ICartProduct } from './_types';
 import { LocalStorageApi } from '@/services/local-storage';
-import { CartDefaultVal, LSKey } from './constants';
+import { CartDefaultVal, LSKey } from './_constants';
 import { useQueryCart } from '@/composables/query-cart';
 
 export const usePaginationStore = defineStore('paginationStore', () => {

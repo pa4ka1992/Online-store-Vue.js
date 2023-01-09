@@ -1,9 +1,9 @@
 <template>
   <form @submit.prevent class="summary-form">
     <div class="summary">
-      <total-prices />
+      <promo-total-prices />
       <promo-list />
-      <additional-info />
+      <promo-common-info />
       <promo-input />
       <AppButton @click="modalIsShow = true" class="summary__buy">Buy now</AppButton>
     </div>
@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
 import { useModalStore } from '@/store';
-import { PromoList, PromoInput, TotalPrices, AdditionalInfo } from '@/components/cart/promo/index';
+import { PromoList, PromoInput, PromoTotalPrices, PromoCommonInfo } from '@/components/cart/promo/_index';
 
 const { modalIsShow } = storeToRefs(useModalStore());
 </script>

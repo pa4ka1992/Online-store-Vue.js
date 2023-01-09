@@ -1,16 +1,16 @@
 <template>
   <div class="product__count-info">
-    <button :class="{ active: props.isHovered }" @click="dropProduct(product)" class="delete">
+    <button :class="{ active: props.isHovered }" @click="dropProduct(id)" class="delete">
       <font-awesome-icon icon="fa-solid fa-trash" />
     </button>
     <div class="count-info__wrapper">
       <span class="count-info__wrapper--stock">Stock: {{ stock }}pc.</span>
       <div class="count-info__wrapper--control">
-        <button class="decrement" @click="decrementCount(product)">
+        <button class="decrement" @click="decrementCount(id)">
           <font-awesome-icon icon="fa-solid fa-minus" />
         </button>
         <input type="number" class="count" :value="count" @change="updateInput" />
-        <button :disabled="count === stock" class="increment" @click="incrementCount(product)">
+        <button :disabled="count === stock" class="increment" @click="incrementCount(id)">
           <font-awesome-icon icon="fa-solid fa-plus" />
         </button>
       </div>
@@ -22,14 +22,14 @@
 <script lang="ts" setup>
 import { toRefs } from 'vue';
 import { useCartStore } from '@/store';
-import { ICartProduct } from '@/store/cart/types';
+import { ICartProduct } from '@/store/cart/_types';
 
 const props = defineProps<{
   product: Required<ICartProduct>;
   isHovered: boolean;
 }>();
 
-const { price, stock, count } = toRefs(props.product);
+const { id, price, stock, count } = toRefs(props.product);
 const { decrementCount, incrementCount, dropProduct, updateCount } = useCartStore();
 
 const updateInput = (e: Event): void => {
@@ -37,12 +37,12 @@ const updateInput = (e: Event): void => {
   const valNumber = Number(target.value);
 
   if (valNumber === 0) {
-    dropProduct(props.product);
+    dropProduct(id.value);
   } else if (valNumber > props.product['stock']) {
     target.value = String(props.product['stock']);
   }
 
-  updateCount(target.value, props.product as ICartProduct);
+  updateCount(target.value, id.value);
 };
 </script>
 

@@ -51,7 +51,7 @@ const buttonStatus = computed((): { name: string; icon: string } => {
 
 const updateCart = (): void => {
   if (findProduct(id.value)) {
-    dropProduct(product);
+    dropProduct(id.value);
   } else {
     addProduct(product);
   }

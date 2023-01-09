@@ -19,7 +19,7 @@ import { LocalStorageApi } from '@/services/local-storage';
 import ModalPayCard from '@/components/modal/ModalPayCard.vue';
 import { useCartStore, useModalStore, usePaginationStore, usePromoStore } from '@/store';
 import { storeToRefs } from 'pinia';
-import { LSKey } from '@/store/cart/constants';
+import { LSKey } from '@/store/cart/_constants';
 import { RouteNames } from '@/router/names';
 
 import router from '@/router';

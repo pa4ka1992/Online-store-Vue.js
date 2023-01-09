@@ -15,7 +15,7 @@
 <script lang="ts" setup>
 import { toRefs } from 'vue';
 import { RouteNames } from '@/router/names';
-import { ICartProduct } from '@/store/cart/types';
+import { ICartProduct } from '@/store/cart/_types';
 
 const props = defineProps<{
   product: Required<ICartProduct>;

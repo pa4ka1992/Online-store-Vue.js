@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
 import { ref, computed, watch, onBeforeMount } from 'vue';
 import { IProduct } from '@/services//model/product';
-import { ICartProduct, TProductFunc, TFindFunc, TCurrProd } from './types';
+import { ICartProduct, TProductFunc, TFindFunc, TCurrProd } from './_types';
 import { LocalStorageApi } from '@/services/local-storage';
-import { CartProduct } from './types';
-import { CartDefaultVal, LSKey } from './constants';
+import { CartProduct } from './_types';
+import { CartDefaultVal, LSKey } from './_constants';
 
 export const useCartStore = defineStore('cartStore', () => {
   const _cart = ref<ICartProduct[]>([]);
@@ -35,32 +35,32 @@ export const useCartStore = defineStore('cartStore', () => {
     }
   };
 
-  const dropProduct = (incomeProduct: IProduct): void => {
-    if (findProduct(incomeProduct.id)) {
-      _cart.value = _cart.value.filter((prod) => incomeProduct.id !== prod.id);
+  const dropProduct = (id: string): void => {
+    if (findProduct(id)) {
+      _cart.value = _cart.value.filter((prod) => id !== prod.id);
     }
   };
 
-  const incrementCount: TProductFunc = (incomeProduct) => {
-    const currProduct: TCurrProd = findProduct(incomeProduct.id);
+  const incrementCount: TProductFunc = (id: string) => {
+    const currProduct: TCurrProd = findProduct(id);
 
     if (currProduct) currProduct.count += 1;
   };
 
-  const decrementCount: TProductFunc = (incomeProduct) => {
-    const currProduct: TCurrProd = findProduct(incomeProduct.id);
+  const decrementCount: TProductFunc = (id: string) => {
+    const currProduct: TCurrProd = findProduct(id);
 
     if (currProduct) {
       if (currProduct.count < CartDefaultVal.decrementLimit) {
-        _cart.value = _cart.value.filter((prod) => incomeProduct.id !== prod.id);
+        _cart.value = _cart.value.filter((prod) => id !== prod.id);
       } else {
         currProduct.count -= 1;
       }
     }
   };
 
-  const updateCount = (val: string, incomeProduct: ICartProduct) => {
-    const currProduct: TCurrProd = findProduct(incomeProduct.id);
+  const updateCount = (val: string, id: string) => {
+    const currProduct: TCurrProd = findProduct(id);
     const valNumber = Number(val);
 
     if (currProduct) {

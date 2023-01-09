@@ -31,7 +31,7 @@
 import { storeToRefs } from 'pinia';
 import router from '@/router';
 import { useCartStore, usePaginationStore } from '@/store';
-import { CartPagination, CartProduct, CartSummary } from '@/components/cart/index';
+import { CartPagination, CartProduct, CartSummary } from '@/components/cart/_index';
 import PageCrumbs from '@/components/PageCrumbs.vue';
 import ModalWindow from '@/components/modal/ModalWindow.vue';
 

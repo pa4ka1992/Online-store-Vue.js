@@ -25,7 +25,7 @@ import { IProduct } from '@/services';
 import { toRefs, reactive, ref, computed } from 'vue';
 import 'vue3-carousel/dist/carousel.css';
 import { Carousel, Slide } from 'vue3-carousel';
-import { TIndexedImages } from './types';
+import { TIndexedImages } from './_types';
 
 const props = defineProps<{
   product: IProduct;
@@ -33,7 +33,7 @@ const props = defineProps<{
 
 const { product } = reactive(props);
 const { images } = toRefs(product);
-const currentSlide = ref(0);
+const currentSlide = ref(Math.floor(images.value.length / 2));
 
 const indexedImages = computed((): TIndexedImages[] => {
   return images.value.map((image, ind) => {

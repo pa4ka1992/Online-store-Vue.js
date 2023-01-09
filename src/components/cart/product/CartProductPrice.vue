@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
 import { toRefs, reactive } from 'vue';
-import { ICartProduct } from '@/store/cart/types';
+import { ICartProduct } from '@/store/cart/_types';
 
 const props = defineProps<{
   product: Required<ICartProduct>;

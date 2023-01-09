@@ -1,4 +1,4 @@
-import { TModifyFunc } from './types';
+import { TModifyFunc } from './_types';
 import visa from '@/assets/img/visa.png';
 import mastercard from '@/assets/img/mastercard.png';
 import americanExpress from '@/assets/img/americanExpress.png';

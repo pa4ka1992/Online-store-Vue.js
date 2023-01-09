@@ -44,7 +44,7 @@ import { usePaginationStore } from '@/store';
 import { useCartStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import Paginate from 'vuejs-paginate-next';
-import { maxLimit } from '@/store/cart/constants';
+import { maxLimit } from '@/store/cart/_constants';
 import { ref } from 'vue';
 
 const { totalProducts } = storeToRefs(useCartStore());

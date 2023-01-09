@@ -69,7 +69,7 @@ const gridClass = computed(() => {
     }
 
     &:hover {
-      color: $primary-dark;
+      color: $primary;
       transform: scale(1.05);
     }
   }

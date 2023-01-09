@@ -30,8 +30,7 @@ const year = ref((new Date()).getFullYear());
 @import '@/assets/scss/variables.scss';
 
 .page-footer {
-  background-color: $primary-dark;
-  color: $white;
+  background-color: $primary2;
   display: flex;
   justify-content: space-between;
   align-items: center;

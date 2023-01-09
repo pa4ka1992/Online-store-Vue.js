@@ -71,8 +71,6 @@ function copyLink() {
     margin: 0;
     margin-bottom: 10px;
     user-select: none;
-    text-shadow: 0px 2px 2px #000;
-    @include logo-style;
   }
 
   &__filter-option {

@@ -62,7 +62,7 @@ const gridClass = computed(() => {
 .view-options {
   &__btn {
     font-size: 2.5rem;
-    transition: color 0.25s, transform 0.2s;
+    transition: color 0.25s;
 
     &_active {
       color: $primary;
@@ -78,6 +78,7 @@ const gridClass = computed(() => {
 .product-section {
   width: 100%;
   padding: 10px 40px;
+  padding-right: 0;
   display: flex;
   flex-direction: column;
 

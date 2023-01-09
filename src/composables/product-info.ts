@@ -1,9 +1,13 @@
 import { type IProduct } from '@/services'
 import { computed } from 'vue';
-import { useCartStore } from '@/store';
+import { useCart } from '@/store';
 
 export function useProductInfo(product: IProduct) {
-  const cartStore = useCartStore();
+  const fixedPrice = computed(() => {
+    return fixPrice(product);
+  });
+
+  const cartStore = useCart();
 
   const inCart = computed(() => {
     return cartStore.findProduct(product.id);
@@ -11,7 +15,7 @@ export function useProductInfo(product: IProduct) {
 
   function toggleProduct() {
     if (!inCart.value) cartStore.addProduct(product);
-    else cartStore.dropProduct(product);
+    else cartStore.dropProduct(product.id);
   };
 
   return {

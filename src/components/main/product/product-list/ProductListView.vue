@@ -23,7 +23,7 @@ function loadCb(done: () => void) {
   load();
   nextTick(() => {
     done();
-  }); 
+  });
 }
 
 </script>
@@ -43,12 +43,12 @@ function loadCb(done: () => void) {
         :product="product"
       />
     </div>
-    
+
     <template #loading>
       <AppSpinner class="loading"/>
     </template>
   </AppInfiniteScroll>
-  <AppInfiniteScroll 
+  <AppInfiniteScroll
     v-else
     @load="loadCb"
     :disable="isEnd && !isLoading">

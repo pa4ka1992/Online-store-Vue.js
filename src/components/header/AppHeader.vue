@@ -41,6 +41,7 @@ function click() {
   font-size: 2rem;
   font-family: 'Pacifico', cursive;
   transition: scale 0.5s;
+  @include logo-style;
 
   &:hover {
     scale: 1.2;

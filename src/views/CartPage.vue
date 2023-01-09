@@ -21,7 +21,7 @@
     <section class="empty" v-else>
       <h3 class="empty__header">Cart is empty</h3>
       <p class="empty__info">Look at the main page to select products or find what you need in the search</p>
-      <my-button class="empty__go-main" @click="router.push({ name: 'overview' })">Main</my-button>
+      <AppButton class="empty__go-main" @click="router.push({ name: 'overview' })">Main</AppButton>
     </section>
     <modal-window />
   </section>
@@ -30,13 +30,13 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
 import router from '@/router';
-import { useCartStore, usePaginationStore } from '@/store';
-import { CartPagination, CartProduct, CartSummary } from '@/components/cart/index';
+import { useCart, usePagination } from '@/store';
+import { CartPagination, CartProduct, CartSummary } from '@/components/cart/_index';
 import PageCrumbs from '@/components/PageCrumbs.vue';
 import ModalWindow from '@/components/modal/ModalWindow.vue';
 
-const { pageProducts, startIndex } = storeToRefs(usePaginationStore());
-const { cart } = storeToRefs(useCartStore());
+const { pageProducts, startIndex } = storeToRefs(usePagination());
+const { cart } = storeToRefs(useCart());
 const crumbs = [{ id: 1, way: 'Cart' }];
 
 </script>

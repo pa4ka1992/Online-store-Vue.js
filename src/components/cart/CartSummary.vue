@@ -1,21 +1,21 @@
 <template>
   <form @submit.prevent class="summary-form">
     <div class="summary">
-      <total-prices />
+      <promo-total-prices />
       <promo-list />
-      <additional-info />
+      <promo-common-info />
       <promo-input />
-      <MyButton @click="modalIsShow = true" class="summary__buy">Buy now</MyButton>
+      <AppButton @click="modalIsShow = true" class="summary__buy">Buy now</AppButton>
     </div>
   </form>
 </template>
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
-import { useModalStore } from '@/store';
-import { PromoList, PromoInput, TotalPrices, AdditionalInfo } from '@/components/cart/promo/index';
+import { useModal } from '@/store';
+import { PromoList, PromoInput, PromoTotalPrices, PromoCommonInfo } from '@/components/cart/promo/_index';
 
-const { modalIsShow } = storeToRefs(useModalStore());
+const { modalIsShow } = storeToRefs(useModal());
 </script>
 
 <style lang="scss" scoped>
@@ -28,7 +28,7 @@ const { modalIsShow } = storeToRefs(useModalStore());
     align-items: center;
     gap: 0.5rem;
     position: sticky;
-    top: 100px;
+    top: 80px;
     padding: 1rem;
     background-color: $white;
     border-radius: 12px;

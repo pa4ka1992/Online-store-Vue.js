@@ -58,7 +58,7 @@ function enterPress(e: KeyboardEvent) {
 @import '@/assets/scss/variables.scss';
 
 $side-padding: 25px;
-$border-radius: 100px;
+$border-radius: 10px;
 
 .search {
   margin: 10px;

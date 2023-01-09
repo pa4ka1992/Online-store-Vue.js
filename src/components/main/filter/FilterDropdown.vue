@@ -113,8 +113,13 @@ const contentStyle = computed(() => {
   border-radius: 20px;
   width: 270px;
   padding: 5px;
-
   font-size: 0.9rem;
+  transition: all 0.3s;
+  filter: brightness(100%);
+
+  &:hover {
+    filter: brightness(95%);
+  }
 
   &__head {
     position: relative;

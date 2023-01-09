@@ -4,9 +4,9 @@
     <div class="payment__buy-group">
       <div class="payment__sum">
         <span class="payment__sum--header">Total price: </span>
-        <span class="payment__sum--total"> <my-number :input="getPromoPrice" :fixed="2" /> $ </span>
+        <span class="payment__sum--total"> $<AppNumber :input="getPromoPrice" :fixed="2" /> </span>
       </div>
-      <my-button class="payment__buy-group--button" @click="buy">Confirm</my-button>
+      <AppButton class="payment__buy-group--button" @click="buy">Confirm</AppButton>
       <span class="payment__buy-group--alert" :class="{ visible: buyAttemt }">
         Please make sure all fields are filled in correctly
       </span>
@@ -17,18 +17,18 @@
 <script lang="ts" setup>
 import { LocalStorageApi } from '@/services/local-storage';
 import ModalPayCard from '@/components/modal/ModalPayCard.vue';
-import { useCartStore, useModalStore, usePaginationStore, usePromoStore } from '@/store';
+import { useCart, useModal, usePagination, usePromo } from '@/store';
 import { storeToRefs } from 'pinia';
-import { LSKey } from '@/store/cart/constants';
+import { LSKey } from '@/store/cart/_constants';
 import { RouteNames } from '@/router/names';
 
 import router from '@/router';
 
 const _LS = LocalStorageApi.getInstance();
-const modalStore = useModalStore();
-const paginationStore = usePaginationStore();
-const promoStore = usePromoStore();
-const cartStore = useCartStore();
+const modalStore = useModal();
+const paginationStore = usePagination();
+const promoStore = usePromo();
+const cartStore = useCart();
 const { getPromoPrice } = storeToRefs(promoStore);
 const { modalIsShow, isAllValid, orderIsCompleted, buyAttemt } = storeToRefs(modalStore);
 

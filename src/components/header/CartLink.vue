@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { RouteNames } from '@/router';
-import { useCartStore, usePromoStore, usePaginationStore } from '@/store';
+import { useCart, usePromo, usePagination } from '@/store';
 import { storeToRefs } from 'pinia';
 import { watch, ref, onUpdated } from 'vue';
 
-const { cart } = storeToRefs(useCartStore());
-const { totalPrice } = storeToRefs(usePromoStore());
-const { page, limit } = storeToRefs(usePaginationStore());
+const { cart } = storeToRefs(useCart());
+const { totalPrice } = storeToRefs(usePromo());
+const { page, limit } = storeToRefs(usePagination());
 
 const iconAnimClass = ref('');
 const countAnimClass = ref('');
@@ -91,7 +91,7 @@ $total-color: $success-light;
 
   &__count {
     color: $black;
-    background-color: $count-color;
+    background-color: $danger-light;
     padding: 0 10px;
     border-radius: 100px;
     translate: 44% -33%;

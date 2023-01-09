@@ -20,7 +20,7 @@ import { useProducts } from '@/store';
 import { ProductHeader, ProductImages, ProductInfo, ProductPrice } from '@/components/product/index';
 import PageCrumbs from '@/components/PageCrumbs.vue';
 import { IProduct } from '@/services';
-import { ICrumbs } from '@/components/types';
+import { ICrumbs } from '@/components/_types';
 import { storeToRefs } from 'pinia';
 
 const props = defineProps<{

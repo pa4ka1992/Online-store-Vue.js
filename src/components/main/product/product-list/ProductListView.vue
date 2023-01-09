@@ -35,7 +35,7 @@ function loadCb(done: () => void) {
     v-else-if="viewType === ViewType.List"
     @load="loadCb"
     :disable="isEnd && !isLoading">
-    <div class="product-list">
+    <div class="product-list product-list_type_list">
       <ProductListItem
         class="product-list__item"
         v-for="product in chunkedArray"
@@ -52,7 +52,7 @@ function loadCb(done: () => void) {
     v-else
     @load="loadCb"
     :disable="isEnd && !isLoading">
-    <div class="product-list">
+    <div class="product-list product-list_type_grid">
       <ProductCardItem
         class="product-list__item"
         v-for="product in chunkedArray"
@@ -68,14 +68,7 @@ function loadCb(done: () => void) {
 
 <style scoped lang="scss">
 .product-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
   width: 100%;
-
-  &__item {
-    margin: 20px;
-  }
 
   &_not-found {
     min-height: 60%;
@@ -83,6 +76,23 @@ function loadCb(done: () => void) {
     align-items: center;
     font-size: 1.5rem;
     font-weight: 700;
+  }
+
+  &_type_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    row-gap: 1.5rem;
+    column-gap: 1rem;
+    place-items: center center;
+  }
+
+  &_type_list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    margin-top: 20px;
   }
 }
 

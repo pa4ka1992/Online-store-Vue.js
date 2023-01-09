@@ -1,15 +1,4 @@
-declare module '*.vue' {
-    import { defineComponent } from 'vue';
-    const component: ReturnType<typeof defineComponent>;
-    export default component;
-}
-
-declare module 'vue/types/vue' {
-    import VueRouter from 'vue-router';
-    interface Vue {
-        $router: VueRouter;
-    }
-}
+declare module 'vitest-fetch-mock';
 
 declare module 'vuejs-paginate-next';
 
@@ -18,6 +7,19 @@ declare module 'lodash.clonedeep';
 declare module 'vue3-carousel';
 
 declare module '*.scss';
+
+declare module '*.vue' {
+  import { defineComponent } from 'vue';
+  const component: ReturnType<typeof defineComponent>;
+  export default component;
+}
+
+declare module 'vue/types/vue' {
+  import VueRouter from 'vue-router';
+  interface Vue {
+    $router: VueRouter;
+  }
+}
 
 declare module '*.svg' {
   const content: string;

@@ -3,16 +3,19 @@
     <section class="product__price-info">
       <div class="product__prices">
         <span v-if="discountPercentage" class="product__price--fix">
-          <my-number :input="getFixPrice" :fixed="2" /> $
+          $<AppNumber :input="price" :fixed="2" />
         </span>
         <span :class="{ crossed: discountPercentage }" class="product__price--full">
-          <my-number :input="price" :fixed="2" /> $
+          $<AppNumber :input="actualPrice" :fixed="2" />
         </span>
       </div>
       <div class="product__stock">Left in stock: {{ stock }}pc.</div>
       <div class="product__buttons">
-        <my-button class="button__cart" @click="updateCart">{{ buttonStatus }}</my-button>
-        <my-button class="button__fast-buy" @click.passive="fastBuy">Buy</my-button>
+        <AppButton class="button__cart" @click="updateCart">
+          <i class="button__cart--icon" :class="buttonStatus.icon"></i>
+          {{ buttonStatus.name }}
+        </AppButton>
+        <AppButton class="button__fast-buy" @click.passive="fastBuy">Buy</AppButton>
       </div>
     </section>
   </div>
@@ -21,7 +24,7 @@
 <script lang="ts" setup>
 import { IProduct } from '@/services';
 import { toRefs, reactive, computed } from 'vue';
-import { useCartStore, useModalStore } from '@/store';
+import { useCart, useModal } from '@/store';
 import router from '@/router';
 import { storeToRefs } from 'pinia';
 
@@ -30,25 +33,21 @@ const props = defineProps<{
 }>();
 
 const { product } = reactive(props);
-const { id, price, discountPercentage, stock } = toRefs(product);
-const { addProduct, dropProduct, findProduct } = useCartStore();
-const { modalIsShow } = storeToRefs(useModalStore());
+const { id, price, actualPrice, discountPercentage, stock } = toRefs(product);
+const { addProduct, dropProduct, findProduct } = useCart();
+const { modalIsShow } = storeToRefs(useModal());
 
-const getFixPrice = computed((): number => {
-  return price.value * (1 - discountPercentage.value / 100);
-});
-
-const buttonStatus = computed((): string => {
+const buttonStatus = computed((): { name: string; icon: string } => {
   if (findProduct(id.value)) {
-    return 'Drop from cart';
+    return { name: 'Drop from cart', icon: 'icon-cart-ok' };
   } else {
-    return 'Add to cart';
+    return { name: 'Add to cart', icon: 'icon-cart-plus' };
   }
 });
 
 const updateCart = (): void => {
   if (findProduct(id.value)) {
-    dropProduct(product);
+    dropProduct(id.value);
   } else {
     addProduct(product);
   }
@@ -111,7 +110,29 @@ const fastBuy = (): void => {
         gap: 1rem;
 
         .button__cart {
-          min-width: 10.1em;
+          display: flex;
+          align-items: center;
+          gap: 1em;
+          min-width: 12.5em;
+
+          &--icon {
+            padding: 0.4em 0.5em 0.4em 0.3em;
+            background-color: $white;
+            border-radius: 50%;
+
+            &::before {
+              transform: scale(1.3);
+            }
+          }
+
+          .icon-cart-ok {
+            background-color: $success-light;
+          }
+
+          .icon-cart-plus {
+            color: $dark;
+            background-color: $gray-100;
+          }
         }
       }
     }

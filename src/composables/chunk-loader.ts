@@ -21,7 +21,6 @@ export function useChunkLoader<Type>(chunkSize: number) {
   });
 
   function load() {
-    console.log('Call!');
     if (!isEnd.value) {
       chunkIndex.value += 1;
       chunkedArray.value.push(...getPart());

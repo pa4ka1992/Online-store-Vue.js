@@ -245,7 +245,7 @@ $fill-bar-width: 6px;
     position: absolute;
     top: calc($inner-padding + $bar-width / 2 -  $thumb-width / 2);
     background-color: $white;
-    border: $primary-dark 3px solid;
+    border: $primary 3px solid;
     border-radius: 50%;
     translate: -50% 0;
   }

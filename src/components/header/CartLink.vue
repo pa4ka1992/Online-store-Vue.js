@@ -1,11 +1,36 @@
 <script lang="ts" setup>
 import { RouteNames } from '@/router';
-import { useCartStore, usePromoStore, usePaginationStore } from '@/store';
+import { useCart, usePromo, usePagination } from '@/store';
 import { storeToRefs } from 'pinia';
+import { watch, ref, onUpdated } from 'vue';
 
-const { cart } = storeToRefs(useCartStore());
-const { totalPrice } = storeToRefs(usePromoStore());
-const { page, limit } = storeToRefs(usePaginationStore());
+const { cart } = storeToRefs(useCart());
+const { totalPrice } = storeToRefs(usePromo());
+const { page, limit } = storeToRefs(usePagination());
+
+const iconAnimClass = ref('');
+const countAnimClass = ref('');
+
+watch(cart, (val, old) => {
+  if (val.length > old.length) {
+    iconAnimClass.value = 'play-cart-anim';
+  }
+  countAnimClass.value = 'cart-info__count_ping'
+}, {
+  deep: true,
+});
+
+onUpdated(() => {
+  if (iconAnimClass.value.length !== 0)
+    setTimeout(() => {
+      iconAnimClass.value = '';
+    }, 300);
+  if (countAnimClass.value.length !== 0)
+    setTimeout(() => {
+      countAnimClass.value = '';
+    }, 300);
+})
+
 </script>
 
 <template>
@@ -14,10 +39,10 @@ const { page, limit } = storeToRefs(usePaginationStore());
       class="a cart-info__link"
       :to="{ name: RouteNames.cart, query: { limit: `${limit}`, page: `${page}` } }"
     >
-      <i class="icon-cart"></i>
+      <i :class="iconAnimClass" class="icon-cart cart-info__icon"></i>
     </RouterLink>
-    <span v-if="cart.length !== 0" class="cart-info__count">
-      {{ cart.length }}
+    <span v-if="cart.length !== 0" class="cart-info__count" :class="countAnimClass">
+      {{ cart.reduce((acc, val) => val.count + acc, 0) }}
     </span>
     <span v-if="cart.length !== 0" class="cart-info__total"> ${{ totalPrice.toFixed(2) }} </span>
   </div>
@@ -26,19 +51,34 @@ const { page, limit } = storeToRefs(usePaginationStore());
 <style lang="scss" scoped>
 @import '@/assets/scss/variables.scss';
 
-$count-color: #ff8a8a;
-$total-color: #fb4a9b;
+$count-color: $warning;
+$total-color: $success-light;
+
+@keyframes ping {
+  0% {
+    translate: 44% -33%;
+  }
+
+  50% {
+    translate: 44% -60%;
+  }
+
+  100% {
+    translate: 44% -33%;
+  }
+}
 
 .cart-info {
   position: relative;
   margin-top: 5px;
-  width: 50px;
-  height: 50px;
-  font-size: 0.9rem;
+  width: 55px;
+  height: 55px;
+  color: $black;
+  font-size: 1rem;
 
   &__link {
-    color: $gray-500;
-    background-color: $white;
+    transition: background-color 0.5s;
+    background-color: $primary2;
     border-radius: 50%;
     @include apply-shadow;
     display: flex;
@@ -46,18 +86,14 @@ $total-color: #fb4a9b;
     align-items: center;
     width: 100%;
     height: 100%;
-    transition: all 0.3s;
-
-    font-size: 1.7rem;
-
-    &:visited {
-      color: $dark;
-    }
+    font-size: 1.6rem;
+    scale: 1;
+    transition: scale 0.2s, background-color 0.2s;
   }
 
   &__count {
     color: $black;
-    background-color: $danger-light;
+    background-color: $count-color;
     padding: 0 10px;
     border-radius: 100px;
     translate: 44% -33%;
@@ -65,11 +101,15 @@ $total-color: #fb4a9b;
     top: 0;
     position: absolute;
     transition: translate 0.5s;
+
+    &_ping {
+      animation: ping 0.3s cubic-bezier(0.46,-0.42, 0.63, 1.57);
+    }
   }
 
   &__total {
-    color: $dark;
-    background-color: $primary2-light;
+    color: $white;
+    background-color: $total-color;
     padding: 0 10px;
     border-radius: 100px;
     translate: -50% 30%;
@@ -83,7 +123,7 @@ $total-color: #fb4a9b;
 
   &:hover {
     .cart-info__link {
-      color: $primary-light;
+      background-color: $primary2-light;
     }
 
     .cart-info__total {
@@ -94,7 +134,7 @@ $total-color: #fb4a9b;
 
   &:active {
     .cart-info__link {
-      transform: scale(0.95);
+      scale: 0.9;
     }
   }
 }

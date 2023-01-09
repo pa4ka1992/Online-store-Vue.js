@@ -8,7 +8,7 @@ const props = defineProps<{
   product: IProduct;
 }>();
 
-const { fixedPrice, inCart, toggleProduct } = useProductInfo(props.product);
+const { inCart, toggleProduct } = useProductInfo(props.product);
 
 const cartBtnClass = computed(() => {
   if (inCart.value) return 'cart-btn_in-cart';
@@ -27,7 +27,7 @@ function cartBtnClick(e: Event) {
       <img class="product__image" :src="product.thumbnail" loading="lazy" />
     </div>
     <div class="product-list-item__info">
-      <RouterLink :to="{ name: RouteNames.product, params: { id: `${product.id}` } }" class="a product__heading product-list-item__heading" target="_blank">
+      <RouterLink :to="{ name: RouteNames.product, params: { id: `${product.id}` } }" class="a product__heading product-list-item__heading">
         {{ product.title }}
       </RouterLink>
 
@@ -54,15 +54,15 @@ function cartBtnClick(e: Event) {
     </div>
     <div class="product-list-item__actions">
       <div class="price product-list-item__price">
-        <span v-if="product.discountPercentage === 0"> ${{ product.price.toFixed(2) }} </span>
+        <span v-if="product.discountPercentage === 0"> ${{ product.actualPrice.toFixed(2) }} </span>
         <span v-else>
-          <span class="price__actual product-list-item__price-value">${{ product.price.toFixed(2) }}</span>
-          <span class="price__fixed product-list-item__price-value">${{ fixedPrice.toFixed(2) }}</span>
+          <span class="price__actual product-list-item__price-value">${{ product.actualPrice.toFixed(2) }}</span>
+          <span class="price__fixed product-list-item__price-value">${{ product.price.toFixed(2) }}</span>
         </span>
       </div>
       <button class="btn cart-btn" :class="cartBtnClass" @click="cartBtnClick">
-        <i v-if="!inCart" class="icon-cart-plus"></i>
-        <i v-else class="icon-cart-ok"></i>
+        <i v-if="!inCart" class="icon-cart-plus cart-btn__icon"></i>
+        <i v-else class="icon-cart-ok cart-btn__icon"></i>
         <span class="cart-btn__text">{{ !inCart ? 'Add to cart' : 'Added!' }}</span>
       </button>
     </div>
@@ -73,7 +73,6 @@ function cartBtnClick(e: Event) {
 @import './common.scss';
 .product-list-item {
   display: flex;
-  width: 100%;
   justify-content: space-between;
 
   &__image-wrap {
@@ -90,6 +89,7 @@ function cartBtnClick(e: Event) {
   &__info {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     padding: 20px;
     width: 100%;
   }
@@ -107,11 +107,11 @@ function cartBtnClick(e: Event) {
   }
 
   &__price {
-    font-size: 1.9rem;
+    font-size: 1.9rem !important;
   }
 
   &__price-value {
-    margin: 0;
+    margin: 0 !important;
     display: block;
   }
 }

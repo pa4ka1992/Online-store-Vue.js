@@ -8,7 +8,22 @@
     </h3>
     <div class="select-group">
       <h4 class="select-group__header">Product per page:</h4>
-      <MySelect class="select-group__select" :limit="limit" :maxLimit="maxLimit" @update="updateLimit"></MySelect>
+      <div class="select-group__select" tabindex="0" @blur="isCollapsed = true">
+        <div @click="updateSelect" class="select-group__select--limit" :class="{ 'select-opened': !isCollapsed }">
+          {{ limit }}
+          <i class="icon-next" :class="{ 'next-opened': !isCollapsed }" />
+        </div>
+        <ul v-if="!isCollapsed" class="select-group__select--list">
+          <li
+            class="select-group__select--option"
+            @click="changeOption(option)"
+            v-for="option in maxLimit"
+            :key="option"
+          >
+            {{ option }}
+          </li>
+        </ul>
+      </div>
     </div>
     <my-paginate
       v-model="page"
@@ -25,16 +40,26 @@
 </template>
 
 <script lang="ts" setup>
-import { usePaginationStore } from '@/store';
-import { useCartStore } from '@/store';
+import { usePagination } from '@/store';
+import { useCart } from '@/store';
 import { storeToRefs } from 'pinia';
 import Paginate from 'vuejs-paginate-next';
-import { maxLimit } from '@/store/cart/constants';
+import { maxLimit } from '@/store/cart/_constants';
+import { ref } from 'vue';
 
-const { totalProducts } = storeToRefs(useCartStore());
-const { limit, page, totalPage } = storeToRefs(usePaginationStore());
-const { updateLimit } = usePaginationStore();
+const { totalProducts } = storeToRefs(useCart());
+const { limit, page, totalPage } = storeToRefs(usePagination());
+const isCollapsed = ref(true);
 const MyPaginate = Paginate;
+
+const changeOption = (option: number): void => {
+  limit.value = option;
+  isCollapsed.value = true;
+};
+
+const updateSelect = (): void => {
+  isCollapsed.value = isCollapsed.value ? false : true;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -47,7 +72,7 @@ const MyPaginate = Paginate;
   padding: 0.5rem 0;
   width: 100%;
   position: sticky;
-  top: 80px;
+  top: 66px;
   border-bottom: 1px solid $secondary;
   background-color: $white;
   z-index: 5;
@@ -71,7 +96,74 @@ const MyPaginate = Paginate;
     }
 
     &__select {
-      max-width: 5rem;
+      position: relative;
+
+      .icon-next {
+        transform-origin: center;
+        transform: rotate(90deg);
+        transition: all 0.2s;
+
+        &::before {
+          font-size: 1.3em;
+          color: $white;
+        }
+      }
+
+      .next-opened {
+        transform: rotate(-90deg);
+      }
+
+      &--limit {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.3em;
+        padding: 0.3em;
+        padding-left: 1.1em;
+        min-width: 5.1rem;
+        font-size: 1rem;
+        color: $white;
+        background-color: $primary;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 0 6px rgb(0 0 0 / 30%);
+        cursor: pointer;
+      }
+
+      .select-opened {
+        border-bottom: {
+          left-radius: 0;
+          right-radius: 0;
+        }
+      }
+
+      &--list {
+        position: absolute;
+        margin: 0;
+        padding: 0.3em;
+        min-width: 5.1rem;
+        list-style: none;
+        color: $white;
+        background-color: $primary;
+        border: {
+          top: 1px solid $white;
+          bottom: {
+            left-radius: 10px;
+            right-radius: 10px;
+          }
+        }
+        cursor: pointer;
+      }
+
+      &--option {
+        padding: 0.1em;
+        padding-left: 0.8em;
+        border-radius: 10px;
+
+        &:hover {
+          background-color: $primary-dark;
+        }
+      }
     }
   }
 
@@ -85,7 +177,7 @@ const MyPaginate = Paginate;
     justify-self: end;
     display: flex;
     justify-content: flex-end;
-    gap: 0.1rem;
+    gap: 0.3rem;
     list-style: none;
     min-width: 375px;
 
@@ -93,12 +185,13 @@ const MyPaginate = Paginate;
       padding: 0.3rem 0.2rem;
       min-width: 2rem;
       background-color: $white;
-      border: 1px solid $secondary {
+      border: {
         radius: 10px;
       }
       cursor: pointer;
       transition: all 0.2s;
       user-select: none;
+      @include block-style;
 
       &:hover {
         color: $light;

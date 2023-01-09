@@ -1,17 +1,17 @@
 import { defineStore, storeToRefs } from 'pinia';
-import { useCartStore } from './CartStore';
+import { useCart } from './cart.store';
 import { ref, computed } from 'vue';
-import { Promos } from './constants';
-import { TPromo } from './types';
+import { Promos } from './_constants';
+import { TPromo } from './_types';
 
-export const usePromoStore = defineStore('promoStore', () => {
-  const { cart } = storeToRefs(useCartStore());
+export const usePromo = defineStore('promo', () => {
+  const { cart } = storeToRefs(useCart());
   const promo = ref('');
   const appliedPromos = ref<TPromo[]>([]);
 
   const totalPrice = computed((): number => {
-    return cart.value.reduce((totalSum, product) => {
-      return totalSum + product.price * product.count * (1 - product.discountPercentage / 100);
+    return cart.value.reduce((totalSum, item) => {
+      return totalSum + item.fixPrice;
     }, 0);
   });
 

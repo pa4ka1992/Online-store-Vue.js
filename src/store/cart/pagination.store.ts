@@ -1,13 +1,13 @@
 import { defineStore, storeToRefs } from 'pinia';
-import { useCartStore } from './CartStore';
-import { ref, Ref, computed, watch, onBeforeMount } from 'vue';
-import { ICartProduct } from './types';
+import { useCart } from './cart.store';
+import { ref, Ref, computed, watch } from 'vue';
+import { ICartItem } from './_types';
 import { LocalStorageApi } from '@/services/local-storage';
-import { CartDefaultVal, LSKey } from './constants';
+import { CartDefaultVal, LSKey } from './_constants';
 import { useQueryCart } from '@/composables/query-cart';
 
-export const usePaginationStore = defineStore('paginationStore', () => {
-  const { cart } = storeToRefs(useCartStore());
+export const usePagination = defineStore('pagination', () => {
+  const { cart } = storeToRefs(useCart());
   const _LS = LocalStorageApi.getInstance();
   const page: Ref<number> = ref(CartDefaultVal.page);
   const limit: Ref<number> = ref(CartDefaultVal.limit);
@@ -26,13 +26,9 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     return limit.value * (page.value - 1) + 1;
   });
 
-  const pageProducts = computed((): ICartProduct[] => {
+  const pageProducts = computed((): ICartItem[] => {
     return cart.value.slice(limit.value * (page.value - 1), limit.value * page.value);
   });
-
-  const updateLimit = (value: number): void => {
-    limit.value = value;
-  };
 
   watch([page, limit, totalPage], ([newPage, newLimit, newTotalPage]) => {
     if (page.value > newTotalPage) page.value = newTotalPage;
@@ -42,7 +38,7 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     useQueryCart(limit.value, page.value);
   });
 
-  onBeforeMount(() => {
+  (function initStore() {
     const limitLS: unknown = _LS.getProperty(LSKey.limit);
     const pageLS: unknown = _LS.getProperty(LSKey.page);
 
@@ -52,7 +48,7 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     if (typeof pageLS === 'number' && pageLS !== page.value) {
       page.value = pageLS;
     }
-  });
+  })();
 
   return {
     pageProducts,
@@ -60,6 +56,5 @@ export const usePaginationStore = defineStore('paginationStore', () => {
     totalPage,
     limit,
     startIndex,
-    updateLimit,
   };
 });

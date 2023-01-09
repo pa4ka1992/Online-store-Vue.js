@@ -7,7 +7,7 @@ export default {
 <script lang="ts" setup>
 
 import { vIntersection } from '@/directives';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 
 const props = defineProps({
   disable: {
@@ -47,6 +47,10 @@ function done(stop?: boolean) {
   loadDebounce();
 }
 
+watch(props, () => {
+  disabled.value = props.disable;
+})
+
 onMounted(() => {
   loadDebounce();
 })
@@ -57,7 +61,7 @@ onMounted(() => {
   <div>
     <slot></slot>
     <div 
-      v-if="!(disable || disabled)" 
+      v-if="!disabled" 
       v-intersection="intersection" 
       :class="loading ? 'invisible' : ''">
         <slot name="loading"></slot>

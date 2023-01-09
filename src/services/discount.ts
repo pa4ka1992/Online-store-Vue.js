@@ -5,5 +5,13 @@ export function applyDiscount(value: number, discountPercentage: number) {
 }
 
 export function fixPrice(product: IProduct) {
-  return applyDiscount(product.price, product.discountPercentage);
+  return applyDiscount(product.actualPrice, product.discountPercentage);
+}
+
+export function getDiscountedProduct(product: IProduct): IProduct {
+  product.actualPrice = product.price;
+  return {
+    ...product,
+    price: fixPrice(product) 
+  }
 }

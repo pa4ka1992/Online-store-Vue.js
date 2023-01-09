@@ -7,15 +7,15 @@ import { isNumberArray } from '@/utils';
 
 export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
   const productStore = useProductsRepo();
-  const { products, filters } = storeToRefs(productStore);
+  const { products, productsFiltered, filters } = storeToRefs(productStore);
   const { param } = useQueryParam(key);
 
   function findMin(array: IProduct[]) {
-    return array.reduce((acc, value) => (acc > value[key] ? value[key] : acc), Number.POSITIVE_INFINITY);
+    return Math.floor(array.reduce((acc, value) => (acc > value[key] ? value[key] : acc), Number.POSITIVE_INFINITY));
   }
 
   function findMax(array: IProduct[]) {
-    return array.reduce((acc, value) => (acc < value[key] ? value[key] : acc), Number.NEGATIVE_INFINITY);
+    return Math.ceil(array.reduce((acc, value) => (acc < value[key] ? value[key] : acc), Number.NEGATIVE_INFINITY));
   }
 
   const maxTotal = computed(() => {
@@ -28,17 +28,17 @@ export function useFilterByRange<Key extends keyof TNumberFields>(key: Key) {
 
   const bounds: Ref<TRangeBounds> = ref({});
 
-  watch(products, () => {
+  watch(productsFiltered, () => {
+    const max = findMax(productsFiltered.value);
+    const min = findMin(productsFiltered.value);
+
     if (products.value.length !== 0)
-      bounds.value = !isNumberArray(param.value)
-        ? {
-            upper: maxTotal.value,
-            lower: minTotal.value,
-          }
-        : {
-            upper: param.value[1],
-            lower: param.value[0],
-          };
+      bounds.value = {
+        upper: max,
+        lower: min,
+      }
+  }, {
+    deep: true
   });
 
   function setBounds(bounds: TRangeBounds) {

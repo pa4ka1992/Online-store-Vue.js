@@ -11,7 +11,7 @@
 <script lang="ts" setup>
 import { reactive } from 'vue';
 import router from '@/router';
-import { ICrumbs } from '@/components/types';
+import { ICrumbs } from '@/components/_types';
 import { RouteNames } from '@/router/names';
 
 const props = defineProps<{

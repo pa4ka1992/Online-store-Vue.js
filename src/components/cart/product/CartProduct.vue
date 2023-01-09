@@ -1,34 +1,33 @@
 <template>
-  <li @mouseover="isHovered = true" @mouseout="isHovered = false" class="product">
+  <li @mouseenter="isHovered = true" @mouseleave="isHovered = false" class="product" :class="{ active: isHovered }">
     <slot></slot>
 
     <RouterLink :to="{ name: RouteNames.product, params: { id: `${id}` } }">
       <img class="product__image" :src="thumbnail" alt="product" />
     </RouterLink>
-    <product-info :product="product" />
-    <product-count-info :product="product" :isHovered="isHovered" />
-    <product-price :product="product" />
+    <cart-product-info :item="item" />
+    <cart-product-count-info :item="item" :isHovered="isHovered" />
+    <cart-product-price :item="item" />
   </li>
 </template>
 
 <script lang="ts" setup>
 import { toRefs, ref } from 'vue';
 import { RouteNames } from '@/router/names';
-import { ICartProduct } from '@/store/cart/types';
-import ProductInfo from '@/components/cart/product/ProductInfo.vue';
-import ProductCountInfo from '@/components/cart/product/ProductCountInfo.vue';
-import ProductPrice from '@/components/cart/product/ProductPrice.vue';
+import { ICartItem } from '@/store/cart/_types';
+
+import { CartProductInfo, CartProductCountInfo, CartProductPrice } from '@/components/cart/product/_index';
 
 const props = defineProps<{
-  product: ICartProduct;
+  item: ICartItem;
 }>();
 
-const { id, thumbnail } = toRefs(props.product);
+const { id, thumbnail } = toRefs(props.item.product);
 const isHovered = ref(false);
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import '@/assets/scss/variables.scss';
 
 .product {
   display: grid;
@@ -37,6 +36,7 @@ const isHovered = ref(false);
   gap: 0.5rem;
   padding: 1rem 0;
   font-family: 'Nunito', sans-serif;
+  transition: all 0.2s;
 
   &__image {
     display: block;
@@ -51,5 +51,9 @@ const isHovered = ref(false);
       filter: brightness(60%);
     }
   }
+}
+
+.active {
+  background-color: $gray-100;
 }
 </style>

@@ -13,7 +13,11 @@ const props = defineProps<{
 const { maxTotal, bounds, minTotal, applyBounds } = useFilterByRange(props.keyOfProduct);
 
 function validateBounds(value: number | undefined) {
-  return isNumber(value) && value !== Number.POSITIVE_INFINITY && value !== Number.NEGATIVE_INFINITY ? value : '--';
+  return isNumber(value) && 
+         value !== Number.POSITIVE_INFINITY && 
+         value !== Number.NEGATIVE_INFINITY ? 
+         Math.round(value * 100) / 100 : 
+         '--';
 }
 
 </script>

@@ -6,7 +6,7 @@ const urlSeparator = ';';
 
 export type TQueryParameter = number[] | string[] | null;
 
-export function useQueryParam(key: string) {
+export function useQueryParam(key: string, disableNumber = false) {
   const router = useRouter();
 
   const param = computed({
@@ -14,7 +14,7 @@ export function useQueryParam(key: string) {
       const queryParam = router.currentRoute.value.query[key];
       if (isString(queryParam)) { 
         const array = queryParam.split(urlSeparator);
-        if (isNumberArray(array)) return array.map((value) => Number(value));
+        if (isNumberArray(array) && !disableNumber) return array.map((value) => Number(value));
         else return array;
       }
       else return null;

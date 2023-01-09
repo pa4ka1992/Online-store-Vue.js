@@ -8,7 +8,7 @@ const props = defineProps<{
   product: IProduct;
 }>();
 
-const { fixedPrice, inCart, toggleProduct } = useProductInfo(props.product);
+const { inCart, toggleProduct } = useProductInfo(props.product);
 
 const cartBtnClass = computed(() => {
   if (inCart.value) return 'cart-btn_in-cart';
@@ -23,10 +23,10 @@ function cartBtnClick(e: Event) {
 
 <template>
   <div class="product product-card">
-    <div class="product-card__head">
+    <RouterLink :to="{ name: RouteNames.product, params: { id: `${product.id}` } }" class="a product-card__head">
       <img class="product__image" :src="product.thumbnail" loading="lazy"/>
-      <RouterLink class="a product__heading" :to="{ name: RouteNames.product, params: { id: `${product.id}` } }" target="_blank">{{ product.title }}</RouterLink>
-    </div>
+      <span class="product__heading">{{ product.title }}</span>
+    </RouterLink>
     <div class="product-card__body">
       <div class="product-card__info">
         <div class="rating">
@@ -34,16 +34,16 @@ function cartBtnClick(e: Event) {
           <span class="rating__value">{{ product.rating }}</span>
         </div>
         <div class="price">
-          <span v-if="product.discountPercentage === 0"> ${{ product.price.toFixed(2) }} </span>
+          <span v-if="product.discountPercentage === 0"> ${{ product.actualPrice.toFixed(2) }} </span>
           <span v-else>
-            <span class="price__actual">${{ product.price.toFixed(2) }}</span>
-            <span class="price__fixed">${{ fixedPrice.toFixed(2) }}</span>
+            <span class="price__actual">${{ product.actualPrice.toFixed(2) }}</span>
+            <span class="price__fixed">${{ product.price.toFixed(2) }}</span>
           </span>
         </div>
       </div>
       <button class="btn cart-btn product-card__cart-btn" :class="cartBtnClass" @click="cartBtnClick">
-        <i v-if="!inCart" class="icon-cart-plus"></i>
-        <i v-else class="icon-cart-ok"></i>
+        <i v-if="!inCart" class="icon-cart-plus cart-btn__icon"></i>
+        <i v-else class="icon-cart-ok cart-btn__icon"></i>
       </button>
     </div>
   </div>
@@ -66,6 +66,17 @@ function cartBtnClick(e: Event) {
     flex-direction: column;
     margin-bottom: 20px;
     max-width: 100%;
+
+    &:hover {
+      & > .product__image {
+        filter: brightness(60%);
+      }
+
+      & > .product__heading {
+        color: $primary;
+        border-bottom: 1px solid $primary;
+      }
+    }
   }
 
   &__body {

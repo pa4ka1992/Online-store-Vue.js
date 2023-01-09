@@ -20,15 +20,12 @@ import { useProducts } from '@/store';
 import { ProductHeader, ProductImages, ProductInfo, ProductPrice } from '@/components/product/index';
 import PageCrumbs from '@/components/PageCrumbs.vue';
 import { IProduct } from '@/services';
-import { ICrumbs } from '@/components/types';
+import { ICrumbs } from '@/components/_types';
 import { storeToRefs } from 'pinia';
 
-const props = defineProps({
-  id: {
-    type: String,
-    required: true,
-  },
-});
+const props = defineProps<{
+  id: IProduct['id']
+}>()
 
 const { isLoaded } = storeToRefs(useProducts());
 const { getProductById } = useProducts();
@@ -63,6 +60,7 @@ onBeforeMount(() => {
 
 .container {
   margin: 0 auto;
+  flex-grow: 1;
   padding: 0 40px;
   font-family: 'Poppins', sans-serif;
 }

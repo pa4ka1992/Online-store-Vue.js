@@ -1,4 +1,4 @@
-import { TModifyFunc } from './types';
+import { TModifyFunc } from './_types';
 import visa from '@/assets/img/visa.png';
 import mastercard from '@/assets/img/mastercard.png';
 import americanExpress from '@/assets/img/americanExpress.png';
@@ -21,8 +21,8 @@ export const cardImages = {
 };
 
 const modifyName: TModifyFunc = function (this) {
+  this.val = this.val.replace(/[0-9]/g, '');
   this.val = this.val.replace(/\s{2,}/g, ' ');
-  this.val = this.val.replace(/\d/g, '');
 };
 
 const modifyAdress: TModifyFunc = function (this) {
@@ -66,7 +66,7 @@ export const validationInfo = {
     val: '',
     isValid: false,
     isAlert: false,
-    regex: '^[a-zа-я]{3,}\\s+[a-zа-я]{3,}',
+    regex: /^[a-zа-я]{3,}\s+[a-zа-я]{3,}/i,
     header: 'Full name',
     placeholder: 'Firstname Lastname',
     alert: 'Full name is incorrect. Should be composed no less than two words, at least three letters length each',
@@ -76,7 +76,7 @@ export const validationInfo = {
     val: '',
     isValid: false,
     isAlert: false,
-    regex: '^\\+[0-9]([\\s\\-(]?[0-9][\\s)]?){8,}$',
+    regex: /^\+[0-9]([\s\-(]?[0-9][\s)]?){8,}$/,
     header: 'Phone number',
     placeholder: '+XXX XX XXX-XX-XX',
     alert: 'Phone number is incorrect. Should start with +, length isn`t shorter than 9, only numbers',
@@ -86,7 +86,7 @@ export const validationInfo = {
     val: '',
     isValid: false,
     isAlert: false,
-    regex: '^[a-zа-я]{5,}\\s+[a-zа-я]{5,}+[a-zа-я]{5,}',
+    regex: /^[a-zа-я0-9]{5,}\s+[a-zа-я0-9]{5,}\s+[a-zа-я0-9]{5,}/i,
     header: 'Delivery adress',
     placeholder: 'Enter your address',
     alert: 'Adress is incorrect. Should be composed no less than three words, at least five letters length each',
@@ -97,7 +97,7 @@ export const validationInfo = {
     isValid: false,
     isAlert: false,
     regex:
-      '^(([^<>()[\\]\\.,;:\\s@\\"]+(\\.[^<>()[\\]\\.,;:\\s@\\"]+)*)|(\\".+\\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$',
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i,
     header: 'E-mail',
     placeholder: 'example@gmail.com',
     alert: 'Email is incorrect. Follow example: myNickName@myService.domain',
@@ -107,7 +107,7 @@ export const validationInfo = {
     val: '',
     isValid: false,
     isAlert: false,
-    regex: '^(\\s?[0-9]{4}\\s?){4}$',
+    regex: /^(\s?[0-9]{4}\s?){4}$/,
     header: 'Card number',
     placeholder: 'XXXX XXXX XXXX XXXX',
     alert: 'Card number is incorrect. Number of digits must be 16',
@@ -118,7 +118,7 @@ export const validationInfo = {
     val: '',
     isValid: false,
     isAlert: false,
-    regex: '^(0[1-9]|1[0-2])/?2([3-9])$',
+    regex: /^(0[1-9]|1[0-2])\/?2([3-9])$/,
     header: 'VALID THRU',
     placeholder: 'ММ/YY',
     alert: 'Сard has expired',
@@ -129,7 +129,7 @@ export const validationInfo = {
     val: '',
     isValid: false,
     isAlert: false,
-    regex: '^[0-9]{3}$',
+    regex: /^[0-9]{3}$/,
     header: 'CVV',
     placeholder: 'XXX',
     alert: 'Card number is incorrect. Number of digits must be 3',

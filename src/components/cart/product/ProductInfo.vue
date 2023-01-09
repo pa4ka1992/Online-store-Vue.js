@@ -2,26 +2,26 @@
   <div class="product__info">
     <div class="product__info--header">
       <font-awesome-icon icon="fa-solid fa-star" />
-      <span class="header__rating">{{ rating }}</span>
-      <router-link :to="{ name: RouteNames.product, params: { id: `${id}` } }">
-        <span class="header__title">{{ title }}</span>
+      <span class="header__rating">{{ product.rating }}</span>
+      <router-link :to="{ name: RouteNames.product, params: { id: `${product.id}` } }">
+        <span class="header__title">{{ product.title }}</span>
       </router-link>
     </div>
-    <span class="product__info--brand">Brand: {{ brand }}</span>
-    <span class="product__info--description">{{ description }}</span>
+    <span class="product__info--brand">Brand: {{ product.brand }}</span>
+    <span class="product__info--description">{{ product.description }}</span>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { toRefs } from 'vue';
 import { RouteNames } from '@/router/names';
-import { ICartProduct } from '@/store/cart/types';
+import { ICartItem } from '@/store/cart/types';
 
 const props = defineProps<{
-  product: Required<ICartProduct>;
+  item: ICartItem;
 }>();
 
-const { id, title, brand, description, rating } = toRefs(props.product);
+const { product } = toRefs(props.item);
 </script>
 
 <style lang="scss" scoped>

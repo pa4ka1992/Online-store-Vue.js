@@ -52,21 +52,23 @@ const emits = defineEmits<{
     border-right: 2px solid #fff;
     border-bottom: 2px solid #fff;
     position: absolute;
-    rotate: 45deg;
     width: 4px;
     height: 10px;
     top: 5px;
     left: 10px;
-    display: none;
+    scale: 0;
+    rotate: 180deg;
+    transition: scale 0.3s, rotate 0.3s;
   }
 
   &__checked {
     &::before {
-      background-color: $primary;
+      background-color: $primary-light;
     }
 
     &::after {
-      display: inline-block;
+      scale: 1;
+      rotate: 45deg;
     }
   }
 }

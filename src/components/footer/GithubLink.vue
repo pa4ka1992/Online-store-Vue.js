@@ -21,8 +21,7 @@ fetch(`https://api.github.com/users/${props.name}`)
 
 <template>
 <a class="a github-link" :href="githubInfo.html_url">
-  <img class="github-link__avatar" :src="githubInfo.avatar_url"/>
-  <span class="github-link__name">{{name}}</span>
+  <img class="github-link__avatar" :src="`${githubInfo.avatar_url}&size=48`"/>
 </a>
 </template>
 
@@ -42,7 +41,6 @@ fetch(`https://api.github.com/users/${props.name}`)
     height: 40px;
     border-radius: 50%;
     @include apply-shadow;
-    margin-right: 10px;
     transition: scale 0.5s;
   }
 
@@ -50,15 +48,6 @@ fetch(`https://api.github.com/users/${props.name}`)
     .github-link__avatar {
       scale: 1.2;
     }
-  }
-
-  &__name {
-    font-size: 1rem;
-    font-family: 'Poppins', sans-serif;
-  }
-
-  &:nth-of-type(2) {
-    margin-left: 30px;
   }
 }
 

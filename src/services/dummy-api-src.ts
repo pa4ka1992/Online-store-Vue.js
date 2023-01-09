@@ -1,4 +1,5 @@
 import { IProduct } from './model';
+import { getDiscountedProduct } from './discount';
 import { IProductSource } from './model/product-src';
 
 const apiUrl = 'https://dummyjson.com/products?limit=100';
@@ -11,6 +12,7 @@ export class DummyApi implements IProductSource {
       .then((data) => data.json())
       .then((item) => {
         return item.products.filter((product: IProduct) => !ignoreIds.includes(product.id))
+                            .map((product: IProduct) => getDiscountedProduct(product));
       });
   }
 }

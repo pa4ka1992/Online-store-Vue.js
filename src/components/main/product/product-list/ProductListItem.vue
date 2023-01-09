@@ -8,7 +8,7 @@ const props = defineProps<{
   product: IProduct;
 }>();
 
-const { fixedPrice, inCart, toggleProduct } = useProductInfo(props.product);
+const { inCart, toggleProduct } = useProductInfo(props.product);
 
 const cartBtnClass = computed(() => {
   if (inCart.value) return 'cart-btn_in-cart';
@@ -54,10 +54,10 @@ function cartBtnClick(e: Event) {
     </div>
     <div class="product-list-item__actions">
       <div class="price product-list-item__price">
-        <span v-if="product.discountPercentage === 0"> ${{ product.price.toFixed(2) }} </span>
+        <span v-if="product.discountPercentage === 0"> ${{ product.actualPrice.toFixed(2) }} </span>
         <span v-else>
-          <span class="price__actual product-list-item__price-value">${{ product.price.toFixed(2) }}</span>
-          <span class="price__fixed product-list-item__price-value">${{ fixedPrice.toFixed(2) }}</span>
+          <span class="price__actual product-list-item__price-value">${{ product.actualPrice.toFixed(2) }}</span>
+          <span class="price__fixed product-list-item__price-value">${{ product.price.toFixed(2) }}</span>
         </span>
       </div>
       <button class="btn cart-btn" :class="cartBtnClass" @click="cartBtnClick">

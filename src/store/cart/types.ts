@@ -6,7 +6,7 @@ export interface ICartProduct extends IProduct {
   get fixPrice(): number;
 }
 
-export type TFindFunc<T> = (id: string) => T | undefined;
+export type TFindFunc<T> = (id: IProduct['id']) => T | undefined;
 export type TProductFunc = (product: ICartProduct) => void;
 export type TCurrProd = ReturnType<TFindFunc<ICartProduct>>;
 
@@ -18,7 +18,7 @@ export type TPromo = {
 };
 
 export class CartProduct implements ICartProduct {
-  id: string;
+  id: number;
   title: string;
   category: string;
   brand: string;
@@ -30,6 +30,7 @@ export class CartProduct implements ICartProduct {
   images: string[];
   stock: number;
   count: number;
+  actualPrice: number;
 
   constructor(incomeProduct: IProduct, incomeCount: number) {
     const { id, title, category, brand, discountPercentage, description, price, thumbnail, rating, images, stock } =
@@ -45,6 +46,7 @@ export class CartProduct implements ICartProduct {
     this.rating = rating;
     this.images = images;
     this.stock = stock;
+    this.actualPrice = price;
     this.count = incomeCount;
   }
 

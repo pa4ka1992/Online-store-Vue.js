@@ -23,12 +23,9 @@ import { IProduct } from '@/services';
 import { ICrumbs } from '@/components/types';
 import { storeToRefs } from 'pinia';
 
-const props = defineProps({
-  id: {
-    type: String,
-    required: true,
-  },
-});
+const props = defineProps<{
+  id: IProduct['id']
+}>()
 
 const { isLoaded } = storeToRefs(useProducts());
 const { getProductById } = useProducts();

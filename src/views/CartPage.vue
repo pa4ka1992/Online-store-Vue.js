@@ -45,6 +45,7 @@ const crumbs = [{ id: 1, way: 'Cart' }];
 @import '@/assets/scss/variables.scss';
 
 .container {
+  flex-grow: 1;
   margin: 0 auto;
   padding: 0 40px;
   font-family: 'Poppins', sans-serif;

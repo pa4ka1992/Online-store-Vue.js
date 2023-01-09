@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-import { ref, type Ref, computed } from 'vue';
+import { ref, type Ref, computed, watchPostEffect, onUpdated } from 'vue';
 
 const mainPadding = 30;
 
@@ -8,12 +8,18 @@ const header: Ref<HTMLElement | null> = ref(null);
 
 const footer: Ref<HTMLElement | null> = ref(null);
 
-const top = computed(() => {
-  return header.value?.offsetHeight ?? 0;
+const top = ref(0);
+
+const bottom = ref(0);
+
+watchPostEffect(() => {
+  top.value = header.value?.offsetHeight ?? 0;
+  bottom.value = footer.value?.offsetHeight ?? 0;
 });
 
-const bottom = computed(() => {
-  return footer.value?.offsetHeight ?? 0;
+onUpdated(() => {
+  top.value = header.value?.offsetHeight ?? 0;
+  bottom.value = footer.value?.offsetHeight ?? 0;
 });
 
 const mainStyles = computed(() => {
@@ -71,8 +77,10 @@ const mainStyles = computed(() => {
 .app-main {
   min-height: 100vh;
   display: flex;
+  height: 100%;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   position: relative;
 }
 

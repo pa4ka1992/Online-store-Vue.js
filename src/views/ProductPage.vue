@@ -63,6 +63,7 @@ onBeforeMount(() => {
 
 .container {
   margin: 0 auto;
+  flex-grow: 1;
   padding: 0 40px;
   font-family: 'Poppins', sans-serif;
 }

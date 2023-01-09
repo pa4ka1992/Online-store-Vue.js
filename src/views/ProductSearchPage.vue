@@ -15,9 +15,9 @@ import { FilterView, ProductView } from '@/components/main';
 <style lang="scss" scoped>
 
 .product-search-page {
+  flex-grow: 1;
   display: flex;
   width: 100%;
-  min-height: 100%;
 }
 
 </style>

@@ -4,17 +4,17 @@
       <font-awesome-icon icon="fa-solid fa-trash" />
     </button>
     <div class="count-info__wrapper">
-      <span class="count-info__wrapper--stock">Stock: {{ stock }}pc.</span>
+      <span class="count-info__wrapper--stock">Stock: {{ product.stock }}pc.</span>
       <div class="count-info__wrapper--control">
-        <button :disabled="count === 1" class="decrement" @click="decrementCount(product)">
+        <button :disabled="item.count === 1" class="decrement" @click="decrementCount(item)">
           <font-awesome-icon icon="fa-solid fa-minus" />
         </button>
-        <input type="number" class="count" :value="count" @input="updateInput" />
-        <button :disabled="count === stock" class="increment" @click="incrementCount(product)">
+        <input type="number" class="count" :value="item.count" @input="updateInput" />
+        <button :disabled="item.count === product.stock" class="increment" @click="incrementCount(item)">
           <font-awesome-icon icon="fa-solid fa-plus" />
         </button>
       </div>
-      <span class="count-info__wrapper--single-price">{{ price }}$/pc.</span>
+      <span class="count-info__wrapper--single-price">{{ product.actualPrice.toFixed(2) }}$/pc.</span>
     </div>
   </div>
 </template>
@@ -22,28 +22,29 @@
 <script lang="ts" setup>
 import { toRefs } from 'vue';
 import { useCartStore } from '@/store';
-import { ICartProduct } from '@/store/cart/types';
+import { ICartItem } from '@/store/cart/types';
 
 const props = defineProps<{
-  product: Required<ICartProduct>;
+  item: ICartItem;
   isHovered: boolean;
 }>();
 
-const { price, stock, count } = toRefs(props.product);
+const { product } = toRefs(props.item);
 const { decrementCount, incrementCount, dropProduct, updateCount } = useCartStore();
 
 const updateInput = (e: Event): void => {
   console.log(true);
-  const target = e.target as HTMLOptionElement;
+  if (!(e.target instanceof HTMLInputElement)) throw new TypeError('Invalid type of the event target!');
+  const target = e.target;
   const valNumber = Number(target.value);
 
   if (valNumber === 0) {
     target.value = '';
-  } else if (valNumber > props.product['stock']) {
-    target.value = String(props.product['stock']);
+  } else if (valNumber > product.value.stock) {
+    target.value = String(product.value.stock);
   }
 
-  updateCount(target.value, props.product as ICartProduct);
+  updateCount(valNumber, props.item);
 };
 </script>
 

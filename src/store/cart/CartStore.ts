@@ -1,13 +1,12 @@
 import { defineStore } from 'pinia';
 import { ref, computed, watch, onBeforeMount } from 'vue';
 import { IProduct } from '@/services//model/product';
-import { ICartProduct, TProductFunc, TFindFunc, TCurrProd } from './types';
+import { ICartItem, CartItem, TProductFunc, TFindFunc, TCurrProd } from './types';
 import { LocalStorageApi } from '@/services/local-storage';
-import { CartProduct } from './types';
 import { CartDefaultVal, LSKey } from './constants';
 
 export const useCartStore = defineStore('cartStore', () => {
-  const _cart = ref<ICartProduct[]>([]);
+  const _cart = ref<ICartItem[]>([]);
   const _LS = LocalStorageApi.getInstance();
 
   const totalProducts = computed((): number => {
@@ -16,80 +15,69 @@ export const useCartStore = defineStore('cartStore', () => {
     }, 0);
   });
 
-  const cart = computed((): ICartProduct[] => [..._cart.value]);
+  const cart = computed(() => [..._cart.value]);
 
   const clearCart = (): void => {
     _cart.value = [];
   }
 
-  const findProduct: TFindFunc<ICartProduct> = (id) => {
-    return _cart.value.find((product) => {
-      return product.id === id;
+  const findProduct: TFindFunc<ICartItem> = (id) => {
+    return _cart.value.find((cartItem) => {
+      return cartItem.product.id === id;
     });
   };
 
-  const addProduct = (incomeProduct: IProduct, incomeCount = CartDefaultVal.ProductCount): void => {
-    if (!findProduct(incomeProduct.id)) {
-      const cartProduct: ICartProduct = new CartProduct(incomeProduct, incomeCount);
-      _cart.value.push(cartProduct);
+  const addProduct = (product: IProduct, count = CartDefaultVal.ProductCount): void => {
+    if (!findProduct(product.id)) _cart.value.push(new CartItem(product, count));
+  };
+
+  const dropProduct = (product: IProduct): void => {
+    if (findProduct(product.id)) {
+      _cart.value = _cart.value.filter((prod) => product.id !== prod.product.id);
     }
   };
 
-  const dropProduct = (incomeProduct: IProduct): void => {
-    if (findProduct(incomeProduct.id)) {
-      _cart.value = _cart.value.filter((prod) => incomeProduct.id !== prod.id);
-    }
-  };
-
-  const incrementCount: TProductFunc = (incomeProduct) => {
-    const currProduct: TCurrProd = findProduct(incomeProduct.id);
-
+  const incrementCount: TProductFunc = (cartItem) => {
+    const currProduct: TCurrProd = findProduct(cartItem.product.id);
     if (currProduct) currProduct.count += 1;
   };
 
-  const decrementCount: TProductFunc = (incomeProduct) => {
-    const currProduct: TCurrProd = findProduct(incomeProduct.id);
+  const decrementCount: TProductFunc = (cartItem) => {
+    const currProduct: TCurrProd = findProduct(cartItem.product.id);
 
     if (currProduct) {
       if (currProduct.count < CartDefaultVal.decrementLimit) {
-        _cart.value = _cart.value.filter((prod) => incomeProduct.id !== prod.id);
+        _cart.value = _cart.value.filter((item) => cartItem.product.id !== item.product.id);
       } else {
         currProduct.count -= 1;
       }
     }
   };
 
-  const updateCount = (val: string, incomeProduct: ICartProduct) => {
-    const currProduct: TCurrProd = findProduct(incomeProduct.id);
-    const valNumber = Number(val);
+  const updateCount = (val: number, cartItem: ICartItem) => {
+    const currProduct: TCurrProd = findProduct(cartItem.product.id);
 
     if (currProduct) {
-      if (valNumber > currProduct.stock) {
-        currProduct.count = currProduct.stock;
-        return;
-      }
-      if (valNumber === 0) {
+      if (val > currProduct.product.stock) {
+        currProduct.count = currProduct.product.stock;
+      } else if (val === 0) {
         currProduct.count = CartDefaultVal.ProductCount;
-        return;
-      }
-      currProduct.count = valNumber;
+      } else currProduct.count = val;
     }
   };
 
   watch(
-    () => _cart,
+    _cart,
     (newCart) => {
-      _LS.setProperty(LSKey.cart, newCart.value);
+      _LS.setProperty(LSKey.cart, newCart);
     },
     { deep: true },
   );
 
   onBeforeMount(() => {
     const cartLS: unknown = _LS.getProperty(LSKey.cart);
-    if (cartLS instanceof Array<ICartProduct>) {
-      const newCart: ICartProduct[] = cartLS;
-      _cart.value = [];
-      newCart.forEach((product) => {
+    if (cartLS instanceof Array<IProduct>) {
+      cartLS.forEach((product) => {
         addProduct(product, product.count);
       });
     }

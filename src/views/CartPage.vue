@@ -7,10 +7,10 @@
         <transition-group class="products" name="products-anime" tag="ul">
           <cart-product
             class="product-anime"
-            v-for="(product, index) in pageProducts"
-            :product="product"
+            v-for="(item, index) in pageProducts"
+            :item="item"
             :index="index"
-            :key="product.id"
+            :key="item.product.id"
           >
             <span> {{ index + startIndex }} </span>
           </cart-product>

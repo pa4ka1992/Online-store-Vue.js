@@ -1,60 +1,26 @@
-import { IProduct } from '@/services/model/product';
+import { IProduct } from '@/services';
 
-export interface ICartProduct extends IProduct {
+export interface ICartItem {
+  product: IProduct;
   count: number;
   get countPrice(): number;
-  get fixPrice(): number;
 }
 
 export type TFindFunc<T> = (id: IProduct['id']) => T | undefined;
-export type TProductFunc = (product: ICartProduct) => void;
-export type TCurrProd = ReturnType<TFindFunc<ICartProduct>>;
+export type TProductFunc = (product: ICartItem) => void;
+export type TCurrProd = ReturnType<TFindFunc<ICartItem>>;
 
 export type TPromo = {
   id: number;
-  value: number;
+  value: number; 
   name: string;
   title: string;
 };
 
-export class CartProduct implements ICartProduct {
-  id: number;
-  title: string;
-  category: string;
-  brand: string;
-  discountPercentage: number;
-  description: string;
-  price: number;
-  thumbnail: string;
-  rating: number;
-  images: string[];
-  stock: number;
-  count: number;
-  actualPrice: number;
-
-  constructor(incomeProduct: IProduct, incomeCount: number) {
-    const { id, title, category, brand, discountPercentage, description, price, thumbnail, rating, images, stock } =
-      incomeProduct;
-    this.title = title;
-    this.id = id;
-    this.category = category;
-    this.brand = brand;
-    this.discountPercentage = discountPercentage;
-    this.description = description;
-    this.price = price;
-    this.thumbnail = thumbnail;
-    this.rating = rating;
-    this.images = images;
-    this.stock = stock;
-    this.actualPrice = price;
-    this.count = incomeCount;
-  }
+export class CartItem implements ICartItem {
+  constructor(public product: IProduct, public count: number) {}
 
   get countPrice() {
-    return this.count * this.price;
-  }
-
-  get fixPrice() {
-    return this.countPrice * (1 - this.discountPercentage / 100);
+    return this.count * this.product.price;
   }
 }

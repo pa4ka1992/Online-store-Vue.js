@@ -1,25 +1,25 @@
 <template>
   <div class="product__price">
     <div class="product__price--full" :class="{ crossed: product['discountPercentage'] }">
-      <MyNumber :input="product.countPrice" :fixed="2" /> $
+      <MyNumber :input="product.actualPrice * item.count" :fixed="2" /> $
     </div>
-    <span v-if="discountPercentage" class="product__price--discount"> Sale: {{ discountPercentage }}% </span>
-    <div v-if="discountPercentage" class="product__price--final">
-      <MyNumber :input="product.fixPrice" :fixed="2" /> $
+    <span v-if="product.discountPercentage" class="product__price--discount"> Sale: {{ product.discountPercentage }}% </span>
+    <div v-if="product.discountPercentage" class="product__price--final">
+      <MyNumber :input="item.countPrice" :fixed="2" /> $
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { toRefs, reactive } from 'vue';
-import { ICartProduct } from '@/store/cart/types';
+import { ICartItem } from '@/store/cart/types';
 
 const props = defineProps<{
-  product: Required<ICartProduct>;
+  item: ICartItem;
 }>();
 
-const { product } = reactive(props);
-const { discountPercentage } = toRefs(product);
+const { item } = reactive(props);
+const { product } = toRefs(item);
 </script>
 
 <style lang="scss" scoped>

@@ -10,8 +10,8 @@ export const usePromoStore = defineStore('promoStore', () => {
   const appliedPromos = ref<TPromo[]>([]);
 
   const totalPrice = computed((): number => {
-    return cart.value.reduce((totalSum, product) => {
-      return totalSum + product.price * product.count * (1 - product.discountPercentage / 100);
+    return cart.value.reduce((totalSum, item) => {
+      return totalSum + item.countPrice;
     }, 0);
   });
 

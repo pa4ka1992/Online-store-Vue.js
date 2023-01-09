@@ -20,7 +20,7 @@ export const searchParamKey = 'search';
 
 export function useSearch(keys: TProductKeys[]) {
   const { push, currentRoute } = useRouter();
-  const { param } = useQueryParam(searchParamKey);
+  const { param } = useQueryParam(searchParamKey, true);
 
   const productStore = useProductsRepo();
 
@@ -41,10 +41,11 @@ export function useSearch(keys: TProductKeys[]) {
       const filterArray = keys.reduce((acc: IFilter[], key: TProductKeys) => {
         const mockValue = getMockValueByKey(key);
         // We already checked for this, but ts still thinks its not
-        if (isString(mockValue) && value[0]) 
-          acc.push(useStringSearchFilter(key as keyof TStringFields, value[0].toString()));
-        else if (isNumber(mockValue) && isNumber(value[0]))
+        if (isString(mockValue) && isString(value[0])) 
+          acc.push(useStringSearchFilter(key as keyof TStringFields, value[0]));
+        else if (isNumber(mockValue) && isString(value[0])) {
           acc.push(useNumberSearchFilter(key as keyof TNumberFields, value[0]));
+        }
         return acc;
       }, []);
 

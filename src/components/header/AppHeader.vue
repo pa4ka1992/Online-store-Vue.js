@@ -5,12 +5,20 @@ import CartLink from './CartLink.vue';
 import { RouteNames } from '@/router';
 import { useSearch } from '@/composables';
 
-const { searchField, startSearch } = useSearch(['title', 'description', 'brand', 'price', 'stock', 'category']);
+const { searchField, startSearch } = useSearch([
+  'title',
+  'description',
+  'brand',
+  'price',
+  'stock',
+  'category',
+  'rating',
+  'actualPrice',
+]);
 
 function click() {
   startSearch();
 }
-
 </script>
 
 <template>

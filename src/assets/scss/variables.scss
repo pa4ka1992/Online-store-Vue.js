@@ -15,12 +15,12 @@ $black:    #000 !default;
 
 // Main palette
 
-$primary-light:  #6ed4d0;
-$primary:        #00B7AF;
-$primary-dark:    #259e98;
-$primary2-light: #ffdc74;
-$primary2:       #F8CD4F;
-$primary2-dark:  #dbb543;
+$primary-light:  #A2BEEF;
+$primary:        #81a4b8;
+$primary-dark:   #54627B;
+$primary2-light: #ffc6ba;
+$primary2:       #FBB2A3;
+$primary2-dark:  #d78574;
 
 $secondary: $gray-500;
 
@@ -151,8 +151,4 @@ $grid-breakpoints: (
   &::first-letter {
     text-transform: uppercase;
   }
-}
-
-@mixin logo-style {
-  text-shadow: 0px 2px 2px #000;
 }

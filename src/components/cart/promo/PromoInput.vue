@@ -3,7 +3,7 @@
     <h4 class="summary__promo--header">Enter your promocode:</h4>
     <div class="promo__group">
       <input type="text" placeholder="promocode" class="promo__group--input" v-model="promo" />
-      <span class="promo__group--tooltip"> Promocodes: "gachi", "300bucks", "storeRS", "RS-school"</span>
+      <span class="promo__group--tooltip"> Promocodes: "{{ promoKeys }}"</span>
       <AppButton :class="{ disabled: !isMatch || isAlreadyApplied }" class="promo__group--apply" @click="applyPromo"
         >Apply</AppButton
       >
@@ -14,9 +14,12 @@
 <script lang="ts" setup>
 import { usePromo } from '@/store';
 import { storeToRefs } from 'pinia';
+import { Promos } from '@/store/cart/_constants';
 
 const { promo, isMatch, isAlreadyApplied } = storeToRefs(usePromo());
 const { applyPromo } = usePromo();
+
+const promoKeys: string = Promos.map((promo) => promo.name).join('", "');
 </script>
 
 <style lang="scss" scoped>

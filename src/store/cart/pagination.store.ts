@@ -1,7 +1,7 @@
 import { defineStore, storeToRefs } from 'pinia';
 import { useCart } from './cart.store';
-import { ref, Ref, computed, watch, onBeforeMount } from 'vue';
-import { ICartProduct } from './_types';
+import { ref, Ref, computed, watch } from 'vue';
+import { ICartItem } from './_types';
 import { LocalStorageApi } from '@/services/local-storage';
 import { CartDefaultVal, LSKey } from './_constants';
 import { useQueryCart } from '@/composables/query-cart';
@@ -26,7 +26,7 @@ export const usePagination = defineStore('pagination', () => {
     return limit.value * (page.value - 1) + 1;
   });
 
-  const pageProducts = computed((): ICartProduct[] => {
+  const pageProducts = computed((): ICartItem[] => {
     return cart.value.slice(limit.value * (page.value - 1), limit.value * page.value);
   });
 
@@ -38,7 +38,7 @@ export const usePagination = defineStore('pagination', () => {
     useQueryCart(limit.value, page.value);
   });
 
-  onBeforeMount(() => {
+  (function initStore() {
     const limitLS: unknown = _LS.getProperty(LSKey.limit);
     const pageLS: unknown = _LS.getProperty(LSKey.page);
 
@@ -48,7 +48,7 @@ export const usePagination = defineStore('pagination', () => {
     if (typeof pageLS === 'number' && pageLS !== page.value) {
       page.value = pageLS;
     }
-  });
+  })();
 
   return {
     pageProducts,

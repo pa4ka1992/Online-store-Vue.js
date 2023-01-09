@@ -15,8 +15,8 @@ const updateArrows = ({ target }: Event) => {
     const top: number = target.scrollTop;
     const bottom = target.scrollHeight - target.clientHeight - top;
 
-    isOnTop.value = top === 0 ? true : false;
-    isOnBottom.value = bottom === 0 ? true : false;
+    isOnTop.value = top ? true : false;
+    isOnBottom.value = bottom ? true : false;
   }
 };
 </script>

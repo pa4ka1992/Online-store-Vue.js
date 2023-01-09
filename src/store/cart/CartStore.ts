@@ -20,7 +20,7 @@ export const useCartStore = defineStore('cartStore', () => {
 
   const clearCart = (): void => {
     _cart.value = [];
-  }
+  };
 
   const findProduct: TFindFunc<ICartProduct> = (id) => {
     return _cart.value.find((product) => {
@@ -64,6 +64,10 @@ export const useCartStore = defineStore('cartStore', () => {
     const valNumber = Number(val);
 
     if (currProduct) {
+      if (!valNumber) {
+        dropProduct(id);
+        return
+      }
       if (valNumber > currProduct.stock) {
         currProduct.count = currProduct.stock;
         return;

@@ -10,6 +10,6 @@ export function useNumberSearchFilter<Key extends keyof TNumberFields>(key: Key,
 
 export function useStringSearchFilter<Key extends keyof TStringFields>(key: Key, searchStr: string): IFilter {
   return function (product: IProduct) {
-    return product[key].includes(searchStr);
+    return product[key].toLowerCase().includes(searchStr.toLowerCase());
   };
 }

@@ -29,10 +29,10 @@
 </template>
 
 <script lang="ts" setup>
-import { useModalStore } from '@/store';
+import { useModal } from '@/store';
 import { storeToRefs } from 'pinia';
 
-const { cardServiceImg } = storeToRefs(useModalStore());
+const { cardServiceImg } = storeToRefs(useModal());
 </script>
 
 <style lang="scss" scoped>

@@ -24,7 +24,7 @@
 <script lang="ts" setup>
 import { IProduct } from '@/services';
 import { toRefs, reactive, computed } from 'vue';
-import { useCartStore, useModalStore } from '@/store';
+import { useCart, useModal } from '@/store';
 import router from '@/router';
 import { storeToRefs } from 'pinia';
 
@@ -34,8 +34,8 @@ const props = defineProps<{
 
 const { product } = reactive(props);
 const { id, price, discountPercentage, stock } = toRefs(product);
-const { addProduct, dropProduct, findProduct } = useCartStore();
-const { modalIsShow } = storeToRefs(useModalStore());
+const { addProduct, dropProduct, findProduct } = useCart();
+const { modalIsShow } = storeToRefs(useModal());
 
 const getFixPrice = computed((): number => {
   return price.value * (1 - discountPercentage.value / 100);

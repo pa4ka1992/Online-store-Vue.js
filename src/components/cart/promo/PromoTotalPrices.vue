@@ -12,9 +12,9 @@
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
-import { usePromoStore } from '@/store';
+import { usePromo } from '@/store';
 
-const { totalPrice, isDiscounted, getPromoPrice } = storeToRefs(usePromoStore());
+const { totalPrice, isDiscounted, getPromoPrice } = storeToRefs(usePromo());
 </script>
 
 <style lang="scss" scoped>

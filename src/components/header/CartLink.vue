@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { RouteNames } from '@/router';
-import { useCartStore, usePromoStore, usePaginationStore } from '@/store';
+import { useCart, usePromo, usePagination } from '@/store';
 import { storeToRefs } from 'pinia';
 
-const { cart } = storeToRefs(useCartStore());
-const { totalPrice } = storeToRefs(usePromoStore());
-const { page, limit } = storeToRefs(usePaginationStore());
+const { cart } = storeToRefs(useCart());
+const { totalPrice } = storeToRefs(usePromo());
+const { page, limit } = storeToRefs(usePagination());
 </script>
 
 <template>

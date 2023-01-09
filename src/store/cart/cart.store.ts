@@ -6,7 +6,7 @@ import { LocalStorageApi } from '@/services/local-storage';
 import { CartProduct } from './_types';
 import { CartDefaultVal, LSKey } from './_constants';
 
-export const useCartStore = defineStore('cartStore', () => {
+export const useCart = defineStore('cart', () => {
   const _cart = ref<ICartProduct[]>([]);
   const _LS = LocalStorageApi.getInstance();
 

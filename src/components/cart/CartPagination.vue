@@ -40,15 +40,15 @@
 </template>
 
 <script lang="ts" setup>
-import { usePaginationStore } from '@/store';
-import { useCartStore } from '@/store';
+import { usePagination } from '@/store';
+import { useCart } from '@/store';
 import { storeToRefs } from 'pinia';
 import Paginate from 'vuejs-paginate-next';
 import { maxLimit } from '@/store/cart/_constants';
 import { ref } from 'vue';
 
-const { totalProducts } = storeToRefs(useCartStore());
-const { limit, page, totalPage } = storeToRefs(usePaginationStore());
+const { totalProducts } = storeToRefs(useCart());
+const { limit, page, totalPage } = storeToRefs(usePagination());
 const isCollapsed = ref(true);
 const MyPaginate = Paginate;
 

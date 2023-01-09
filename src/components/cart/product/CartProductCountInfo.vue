@@ -21,7 +21,7 @@
 
 <script lang="ts" setup>
 import { toRefs } from 'vue';
-import { useCartStore } from '@/store';
+import { useCart } from '@/store';
 import { ICartProduct } from '@/store/cart/_types';
 
 const props = defineProps<{
@@ -30,7 +30,7 @@ const props = defineProps<{
 }>();
 
 const { id, price, stock, count } = toRefs(props.product);
-const { decrementCount, incrementCount, dropProduct, updateCount } = useCartStore();
+const { decrementCount, incrementCount, dropProduct, updateCount } = useCart();
 
 const updateInput = ({ target }: Event): void => {
   if (target instanceof HTMLInputElement) {

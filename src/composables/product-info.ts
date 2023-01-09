@@ -1,13 +1,13 @@
 import { type IProduct, fixPrice } from '@/services'
 import { computed } from 'vue';
-import { useCartStore } from '@/store';
+import { useCart } from '@/store';
 
 export function useProductInfo(product: IProduct) {
   const fixedPrice = computed(() => {
     return fixPrice(product);
   });
 
-  const cartStore = useCartStore();
+  const cartStore = useCart();
 
   const inCart = computed(() => {
     return cartStore.findProduct(product.id);

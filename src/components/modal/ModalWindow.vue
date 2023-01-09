@@ -24,12 +24,12 @@
 </template>
 
 <script lang="ts" setup>
-import { useModalStore } from '@/store';
+import { useModal } from '@/store';
 import { watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import ModalPayment from '@/components/modal/ModalPayment.vue';
 
-const modalStore = useModalStore();
+const modalStore = useModal();
 const { modalIsShow, orderIsCompleted, buyAttemt } = storeToRefs(modalStore);
 
 const closeModal = (): void => {

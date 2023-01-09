@@ -12,11 +12,11 @@
 </template>
 
 <script lang="ts" setup>
-import { usePromoStore } from '@/store';
+import { usePromo } from '@/store';
 import { storeToRefs } from 'pinia';
 
-const { promo, isMatch, isAlreadyApplied } = storeToRefs(usePromoStore());
-const { applyPromo } = usePromoStore();
+const { promo, isMatch, isAlreadyApplied } = storeToRefs(usePromo());
+const { applyPromo } = usePromo();
 </script>
 
 <style lang="scss" scoped>

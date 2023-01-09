@@ -17,7 +17,7 @@
 <script lang="ts" setup>
 import { LocalStorageApi } from '@/services/local-storage';
 import ModalPayCard from '@/components/modal/ModalPayCard.vue';
-import { useCartStore, useModalStore, usePaginationStore, usePromoStore } from '@/store';
+import { useCart, useModal, usePagination, usePromo } from '@/store';
 import { storeToRefs } from 'pinia';
 import { LSKey } from '@/store/cart/_constants';
 import { RouteNames } from '@/router/names';
@@ -25,10 +25,10 @@ import { RouteNames } from '@/router/names';
 import router from '@/router';
 
 const _LS = LocalStorageApi.getInstance();
-const modalStore = useModalStore();
-const paginationStore = usePaginationStore();
-const promoStore = usePromoStore();
-const cartStore = useCartStore();
+const modalStore = useModal();
+const paginationStore = usePagination();
+const promoStore = usePromo();
+const cartStore = useCart();
 const { getPromoPrice } = storeToRefs(promoStore);
 const { modalIsShow, isAllValid, orderIsCompleted, buyAttemt } = storeToRefs(modalStore);
 

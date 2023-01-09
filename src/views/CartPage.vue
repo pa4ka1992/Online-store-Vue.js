@@ -30,13 +30,13 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
 import router from '@/router';
-import { useCartStore, usePaginationStore } from '@/store';
+import { useCart, usePagination } from '@/store';
 import { CartPagination, CartProduct, CartSummary } from '@/components/cart/_index';
 import PageCrumbs from '@/components/PageCrumbs.vue';
 import ModalWindow from '@/components/modal/ModalWindow.vue';
 
-const { pageProducts, startIndex } = storeToRefs(usePaginationStore());
-const { cart } = storeToRefs(useCartStore());
+const { pageProducts, startIndex } = storeToRefs(usePagination());
+const { cart } = storeToRefs(useCart());
 const crumbs = [{ id: 1, way: 'Cart' }];
 
 </script>

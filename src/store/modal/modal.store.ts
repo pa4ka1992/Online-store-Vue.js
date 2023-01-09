@@ -3,7 +3,7 @@ import { ref, computed, reactive } from 'vue';
 import { IValidation, TValidationField } from './_types';
 import { validationInfo, CardService, cardImages } from './_constants';
 
-export const useModalStore = defineStore('ModalStore', () => {
+export const useModal = defineStore('Modal', () => {
   const modalIsShow = ref(false);
   const buyAttemt = ref(false);
   const orderIsCompleted = ref(false);

@@ -1,13 +1,13 @@
 import { defineStore, storeToRefs } from 'pinia';
-import { useCartStore } from './CartStore';
+import { useCart } from './cart.store';
 import { ref, Ref, computed, watch, onBeforeMount } from 'vue';
 import { ICartProduct } from './_types';
 import { LocalStorageApi } from '@/services/local-storage';
 import { CartDefaultVal, LSKey } from './_constants';
 import { useQueryCart } from '@/composables/query-cart';
 
-export const usePaginationStore = defineStore('paginationStore', () => {
-  const { cart } = storeToRefs(useCartStore());
+export const usePagination = defineStore('pagination', () => {
+  const { cart } = storeToRefs(useCart());
   const _LS = LocalStorageApi.getInstance();
   const page: Ref<number> = ref(CartDefaultVal.page);
   const limit: Ref<number> = ref(CartDefaultVal.limit);

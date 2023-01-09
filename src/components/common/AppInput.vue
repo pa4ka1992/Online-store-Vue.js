@@ -32,7 +32,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { useModalStore } from '@/store';
+import { useModal } from '@/store';
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { IValidation, TValidationField } from '@/store/modal/_types';
@@ -41,7 +41,7 @@ const props = defineProps<{
   field: keyof IValidation<TValidationField>;
 }>();
 
-const modalStore = useModalStore();
+const modalStore = useModal();
 const { validation } = storeToRefs(modalStore);
 const fieldObj = ref(validation.value[props.field]);
 const { validate } = modalStore;

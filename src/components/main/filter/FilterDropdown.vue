@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, type Ref, computed } from 'vue';
+import { ref, type Ref, computed, onUpdated } from 'vue';
 
 const props = defineProps<{
   title: string;
@@ -26,8 +26,10 @@ function onScroll() {
 
 const height = 400;
 
-const scrollHide = computed(() => {
-  return scrollHeight.value > height;
+const scrollHide = ref(true);
+
+onUpdated(() => {
+  scrollHide.value = scrollHeight.value > height;
 });
 
 const contentStyle = computed(() => {

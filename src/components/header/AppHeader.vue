@@ -2,6 +2,7 @@
 import SearchBar from './SearchBar.vue';
 import CartLink from './CartLink.vue';
 
+import { RouteNames } from '@/router';
 import { useSearch } from '@/composables';
 
 const { searchField, startSearch } = useSearch(['title', 'description', 'brand', 'price', 'stock', 'category']);
@@ -14,7 +15,7 @@ function click() {
 
 <template>
   <header class="page-header">
-    <RouterLink class="a" to="/">
+    <RouterLink class="a" :to="{ name: RouteNames.productSearch }">
       <div class="logo">Online Store</div>
     </RouterLink>
     <SearchBar @search="click" v-model="searchField" />

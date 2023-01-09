@@ -13,18 +13,21 @@ const isOnBottom = ref(false);
 
 const contentElement: Ref<HTMLElement | null> = ref(null);
 
+const scrollHeight = computed(() => {
+  return contentElement.value?.scrollHeight ?? 0;
+})
+
 function onScroll() {
   const top = contentElement.value?.scrollTop ?? 0;
-  const scrollHeight = contentElement.value?.scrollHeight ?? 0;
   const clientHeight = contentElement.value?.clientHeight ?? 0;
   isOnTop.value = top === 0;
-  isOnBottom.value = scrollHeight - clientHeight - top === 0;
+  isOnBottom.value = scrollHeight.value - clientHeight - top === 0;
 }
 
 const height = 400;
 
 const scrollHide = computed(() => {
-  return (contentElement.value?.scrollHeight ?? 0) > height;
+  return scrollHeight.value > height;
 });
 
 const contentStyle = computed(() => {

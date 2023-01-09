@@ -76,10 +76,8 @@ export const useCartStore = defineStore('cartStore', () => {
 
   onBeforeMount(() => {
     const cartLS: unknown = _LS.getProperty(LSKey.cart);
-    if (cartLS instanceof Array<IProduct>) {
-      cartLS.forEach((product) => {
-        addProduct(product, product.count);
-      });
+    if (cartLS instanceof Array<ICartItem>) {
+      cartLS.forEach((item) => addProduct(item.product, item.count));
     }
   });
 

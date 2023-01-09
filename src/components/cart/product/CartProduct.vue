@@ -5,24 +5,24 @@
     <RouterLink :to="{ name: RouteNames.product, params: { id: `${id}` } }">
       <img class="product__image" :src="thumbnail" alt="product" />
     </RouterLink>
-    <cart-product-info :product="product" />
-    <cart-product-count-info :product="product" :isHovered="isHovered" />
-    <cart-product-price :product="product" />
+    <cart-product-info :item="item" />
+    <cart-product-count-info :item="item" :isHovered="isHovered" />
+    <cart-product-price :item="item" />
   </li>
 </template>
 
 <script lang="ts" setup>
 import { toRefs, ref } from 'vue';
 import { RouteNames } from '@/router/names';
-import { ICartProduct } from '@/store/cart/_types';
+import { ICartItem } from '@/store/cart/_types';
 
 import { CartProductInfo, CartProductCountInfo, CartProductPrice } from '@/components/cart/product/_index';
 
 const props = defineProps<{
-  product: ICartProduct;
+  item: ICartItem;
 }>();
 
-const { id, thumbnail } = toRefs(props.product);
+const { id, thumbnail } = toRefs(props.item.product);
 const isHovered = ref(false);
 </script>
 

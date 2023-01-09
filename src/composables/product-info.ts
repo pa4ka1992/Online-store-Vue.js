@@ -3,10 +3,6 @@ import { computed } from 'vue';
 import { useCart } from '@/store';
 
 export function useProductInfo(product: IProduct) {
-  const fixedPrice = computed(() => {
-    return fixPrice(product);
-  });
-
   const cartStore = useCart();
 
   const inCart = computed(() => {

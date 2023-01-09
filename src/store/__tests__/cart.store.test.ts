@@ -1,23 +1,23 @@
 import { createPinia, setActivePinia, storeToRefs } from 'pinia';
 import { describe, beforeEach, test, expect } from 'vitest';
 import { useCart } from '@/store';
-import { mock } from './_mock';
-
-const { product1, product2, product3 } = mock;
+import { mock, product1, product2, product3 } from './_mock';
 
 describe('cart', () => {
   beforeEach(() => {
     setActivePinia(createPinia());
+    useCart().clearCart();
   });
 
   test('addProduct adds product to the cart, doesn`t add product with identical id', () => {
     const { cart } = storeToRefs(useCart());
     const { addProduct } = useCart();
 
+    mock.forEach((product) => {
+      addProduct(product);
+    });
+
     addProduct(product1);
-    addProduct(product1);
-    addProduct(product2);
-    addProduct(product3);
 
     expect(cart.value).toHaveLength(3);
   });
@@ -41,22 +41,22 @@ describe('cart', () => {
     addProduct(product2);
     addProduct(product3);
     dropProduct(product3.id);
-    const currProduct = findProduct(product1.id);
+    const currItem = findProduct(product1.id);
     let countPrice;
     let fixPrice;
 
-    if (currProduct) {
-      countPrice = currProduct.price * currProduct.count;
-      fixPrice = currProduct.countPrice * (1 - currProduct.discountPercentage / 100);
+    if (currItem) {
+      countPrice = currItem.product.actualPrice * currItem.count;
+      fixPrice = currItem.product.actualPrice * (1 - currItem.product.discountPercentage / 100);
     }
 
-    expect(currProduct).toBeTruthy();
-    expect(currProduct).toHaveProperty('count', 1);
-    expect(currProduct).toHaveProperty('countPrice', countPrice);
-    expect(currProduct).toHaveProperty('fixPrice', fixPrice);
+    expect(currItem).toBeTruthy();
+    expect(currItem).toHaveProperty('count', 1);
+    expect(currItem).toHaveProperty('countPrice', countPrice);
+    expect(currItem).toHaveProperty('fixPrice', fixPrice);
   });
 
-  test('increment-frcrementCount works correctly, totalProducts works correctly', () => {
+  test('increment-decrementCount works correctly, totalProducts works correctly', () => {
     const { totalProducts } = storeToRefs(useCart());
     const { addProduct, dropProduct, incrementCount, decrementCount } = useCart();
 
@@ -116,11 +116,12 @@ describe('cart', () => {
 
   test('clearCart works correctly', () => {
     const { cart } = storeToRefs(useCart());
-    const { clearCart, addProduct } = useCart();
+    const { addProduct, clearCart } = useCart();
 
     addProduct(product1);
     addProduct(product2);
     addProduct(product3);
+
     clearCart();
 
     expect(cart.value).toHaveLength(0);

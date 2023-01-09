@@ -1,18 +1,18 @@
 <template>
   <div class="product__price">
     <div class="product__price--full" :class="{ crossed: product['discountPercentage'] }">
-      <AppNumber :input="product.actualPrice * item.count" :fixed="2" /> $
+      <AppNumber :input="item.countPrice" :fixed="2" /> $
     </div>
     <span v-if="product.discountPercentage" class="product__price--discount"> Sale: {{ product.discountPercentage }}% </span>
     <div v-if="product.discountPercentage" class="product__price--final">
-      <AppNumber :input="item.countPrice" :fixed="2" /> $
+      <AppNumber :input="item.fixPrice" :fixed="2" /> $
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { toRefs, reactive } from 'vue';
-import { ICartItem } from '@/store/cart/types';
+import { ICartItem } from '@/store/cart/_types';
 
 const props = defineProps<{
   item: ICartItem;

@@ -86,12 +86,12 @@ $total-color: $success-light;
     height: 100%;
     font-size: 1.6rem;
     scale: 1;
-    transition: scale 0.2s;
+    transition: scale 0.2s, background-color 0.2s;
   }
 
   &__count {
     color: $black;
-    background-color: $danger-light;
+    background-color: $count-color;
     padding: 0 10px;
     border-radius: 100px;
     translate: 44% -33%;

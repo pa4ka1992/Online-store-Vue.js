@@ -1,9 +1,7 @@
 import { createPinia, setActivePinia, storeToRefs } from 'pinia';
 import { describe, beforeEach, test, expect } from 'vitest';
 import { useCart, usePagination } from '@/store';
-import { mock } from './_mock';
-
-const { product1, product2, product3 } = mock;
+import { product1, product2, product3 } from './_mock';
 
 describe('products', () => {
   beforeEach(() => {
@@ -35,7 +33,7 @@ describe('products', () => {
 
     expect(Array.isArray(pageProducts.value)).toBeTruthy();
     expect(pageProducts.value).toHaveLength(1);
-    expect(pageProducts.value.filter((product) => product.id === '2')).toBeTruthy();
+    expect(pageProducts.value.filter((item) => item.product.id === 2)).toBeTruthy();
   });
 
   test('pageProducts returns array with correct count of products on page', () => {
@@ -51,7 +49,7 @@ describe('products', () => {
 
     expect(Array.isArray(pageProducts.value)).toBeTruthy();
     expect(pageProducts.value).toHaveLength(1);
-    expect(pageProducts.value.filter((product) => product.id === '2')).toBeTruthy();
+    expect(pageProducts.value.filter((item) => item.product.id === 2)).toBeTruthy();
   });
 
   test('startIndex returns correct order index', () => {

@@ -1,9 +1,7 @@
 import { createPinia, setActivePinia, storeToRefs } from 'pinia';
 import { describe, beforeEach, test, expect } from 'vitest';
 import { useCart, usePromo } from '@/store';
-import { mock } from './_mock';
-
-const { product1, product2, product3 } = mock;
+import { product1, product2, product3 } from './_mock';
 
 describe('products', () => {
   beforeEach(() => {

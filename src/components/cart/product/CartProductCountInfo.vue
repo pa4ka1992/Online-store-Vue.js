@@ -1,16 +1,16 @@
 <template>
   <div class="product__count-info">
-    <button :class="{ active: props.isHovered }" @click="dropProduct(product)" class="delete">
+    <button :class="{ active: props.isHovered }" @click="dropProduct(product.id)" class="delete">
       <font-awesome-icon icon="fa-solid fa-trash" />
     </button>
     <div class="count-info__wrapper">
       <span class="count-info__wrapper--stock">Stock: {{ product.stock }}pc.</span>
       <div class="count-info__wrapper--control">
-        <button :disabled="item.count === 1" class="decrement" @click="decrementCount(item)">
+        <button :disabled="item.count === 1" class="decrement" @click="decrementCount(item.product.id)">
           <font-awesome-icon icon="fa-solid fa-minus" />
         </button>
         <input type="number" class="count" :value="item.count" @input="updateInput" />
-        <button :disabled="item.count === product.stock" class="increment" @click="incrementCount(item)">
+        <button :disabled="item.count === product.stock" class="increment" @click="incrementCount(item.product.id)">
           <font-awesome-icon icon="fa-solid fa-plus" />
         </button>
       </div>
@@ -21,8 +21,8 @@
 
 <script lang="ts" setup>
 import { toRefs } from 'vue';
-import { useCartStore } from '@/store';
-import { ICartItem } from '@/store/cart/types';
+import { useCart } from '@/store';
+import { ICartItem } from '@/store/cart/_types';
 
 const props = defineProps<{
   item: ICartItem;
@@ -30,7 +30,7 @@ const props = defineProps<{
 }>();
 
 const { product } = toRefs(props.item);
-const { decrementCount, incrementCount, dropProduct, updateCount } = useCartStore();
+const { decrementCount, incrementCount, dropProduct, updateCount } = useCart();
 
 const updateInput = (e: Event): void => {
   console.log(true);
@@ -44,7 +44,7 @@ const updateInput = (e: Event): void => {
     target.value = String(product.value.stock);
   }
 
-  updateCount(valNumber, props.item);
+  updateCount(target.value, props.item.product.id);
 };
 </script>
 

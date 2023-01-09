@@ -15,13 +15,13 @@
 <script lang="ts" setup>
 import { toRefs } from 'vue';
 import { RouteNames } from '@/router/names';
-import { ICartProduct } from '@/store/cart/_types';
+import { ICartItem } from '@/store/cart/_types';
 
 const props = defineProps<{
-  product: Required<ICartProduct>;
+  item: ICartItem;
 }>();
 
-const { id, title, brand, description, rating } = toRefs(props.product);
+const { id, title, brand, description, rating } = toRefs(props.item.product);
 </script>
 
 <style lang="scss" scoped>

@@ -73,7 +73,6 @@ function cartBtnClick(e: Event) {
 @import './common.scss';
 .product-list-item {
   display: flex;
-  width: 100%;
   justify-content: space-between;
 
   &__image-wrap {
@@ -90,6 +89,7 @@ function cartBtnClick(e: Event) {
   &__info {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     padding: 20px;
     width: 100%;
   }
@@ -107,11 +107,11 @@ function cartBtnClick(e: Event) {
   }
 
   &__price {
-    font-size: 1.9rem;
+    font-size: 1.9rem !important;
   }
 
   &__price-value {
-    margin: 0;
+    margin: 0 !important;
     display: block;
   }
 }

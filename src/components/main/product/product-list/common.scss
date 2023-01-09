@@ -32,9 +32,15 @@
     white-space: nowrap;
     overflow: hidden;
     max-width: 100%;
+    width: fit-content;
     text-overflow: ellipsis;
     border-bottom: 1px solid transparent;
     transition: all 0.2s;
+
+    &:hover {
+      color: $primary;
+      border-bottom: 1px solid $primary;
+    }
   }
 
   .price {

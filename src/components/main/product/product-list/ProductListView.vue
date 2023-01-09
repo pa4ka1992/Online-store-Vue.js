@@ -37,7 +37,7 @@ function loadCb(done: () => void) {
     :disable="isEnd && !isLoading">
     <div class="product-list product-list_type_list">
       <ProductListItem
-        class="product-list__item"
+        class="product-list__item product-list__item_type_list"
         v-for="product in chunkedArray"
         :key="product.id"
         :product="product"
@@ -93,7 +93,11 @@ function loadCb(done: () => void) {
   }
 
   &__item {
-    margin-top: 20px;
+    margin-top: 15px;
+
+    &_type_list {
+      margin: 20px;
+    }
   }
 }
 

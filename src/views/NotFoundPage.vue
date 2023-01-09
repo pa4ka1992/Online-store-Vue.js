@@ -9,7 +9,7 @@ const randomQuotes = [
   'This is not the page you looking for',
   'Life sometimes is a huge dissapointment',
   "There's nothing here, why are you still reading this?",
-  'IM GROOT! IM GROOT',
+  'IM GROOT! IM GROOT!',
 ];
 
 const quote = computed(() => {

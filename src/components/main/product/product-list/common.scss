@@ -13,19 +13,6 @@
     scale: 1.04;
   }
 
-  &-card__head {
-    &:hover {
-      & > .product__image {
-        filter: brightness(60%);
-      }
-
-      & > .product__heading {
-        color: $primary;
-        border-bottom: 1px solid $primary;
-      }
-    }
-  }
-
   &__image {
     width: 200px;
     height: 200px;

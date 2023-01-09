@@ -66,6 +66,17 @@ function cartBtnClick(e: Event) {
     flex-direction: column;
     margin-bottom: 20px;
     max-width: 100%;
+
+    &:hover {
+      & > .product__image {
+        filter: brightness(60%);
+      }
+
+      & > .product__heading {
+        color: $primary;
+        border-bottom: 1px solid $primary;
+      }
+    }
   }
 
   &__body {

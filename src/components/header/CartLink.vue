@@ -16,6 +16,8 @@ watch(cart, (val, old) => {
     iconAnimClass.value = 'play-cart-anim';
   }
   countAnimClass.value = 'cart-info__count_ping'
+}, {
+  deep: true,
 });
 
 onUpdated(() => {
@@ -40,7 +42,7 @@ onUpdated(() => {
       <i :class="iconAnimClass" class="icon-cart cart-info__icon"></i>
     </RouterLink>
     <span v-if="cart.length !== 0" class="cart-info__count" :class="countAnimClass">
-      {{ cart.length }}
+      {{ cart.reduce((acc, val) => val.count + acc, 0) }}
     </span>
     <span v-if="cart.length !== 0" class="cart-info__total"> ${{ totalPrice.toFixed(2) }} </span>
   </div>

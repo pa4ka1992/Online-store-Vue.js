@@ -1,24 +1,42 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, type Ref, computed } from 'vue';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps<{
   title: string;
 }>();
 
-const collapsed = ref(false);
-const isOnTop = ref(false);
+const collapsed = ref(true);
+
+const isOnTop = ref(true);
+
 const isOnBottom = ref(false);
-const scrollHide = props.title === 'Price' || props.title === 'Stock' ? false : true;
 
-const updateArrows = (e: Event) => {
-  const scrollEl = <HTMLDivElement>e.target;
-  const top: number = scrollEl.scrollTop;
-  const bottom = scrollEl.scrollHeight - scrollEl.clientHeight - top;
+const contentElement: Ref<HTMLElement | null> = ref(null);
 
-  isOnTop.value = top === 0 ? true : false;
-  isOnBottom.value = bottom === 0 ? true : false;
-};
+function onScroll() {
+  const top = contentElement.value?.scrollTop ?? 0;
+  const scrollHeight = contentElement.value?.scrollHeight ?? 0;
+  const clientHeight = contentElement.value?.clientHeight ?? 0;
+  isOnTop.value = top === 0;
+  isOnBottom.value = scrollHeight - clientHeight - top === 0;
+}
+
+const height = 400;
+
+const scrollHide = computed(() => {
+  return (contentElement.value?.scrollHeight ?? 0) > height;
+});
+
+const contentStyle = computed(() => {
+  const obj = collapsed.value ? {
+    maxHeight: `0px`,
+    marginTop: `0`,
+  } : {};
+  return {
+    maxHeight: `${height}px`,
+    ...obj
+  }
+});
 </script>
 
 <template>
@@ -26,23 +44,25 @@ const updateArrows = (e: Event) => {
     <div class="filter-dropdown__head" @click="collapsed = !collapsed">
       <h4 class="filter-dropdown__title">{{ title }}</h4>
       <button class="btn filter-dropdown__button" :class="!collapsed ? 'filter-dropdown__button_active' : ''">
-        <i class="icon-next"></i>
+        <i class="icon-next btn__icon"></i>
       </button>
     </div>
 
-    <section :class="!collapsed ? 'filter-dropdown__content_collapsed' : ''" class="filter-dropdown__content">
+    <section 
+      class="filter-dropdown__content"
+      :style="contentStyle">
       <span class="filter-dropdown__divider"></span>
       <font-awesome-icon
-        v-show="scrollHide"
+        v-if="scrollHide"
         class="icon-next icon-next__top"
         :class="{ active: !isOnTop }"
         icon="fa-solid fa-angles-up"
       />
-      <div class="filter-dropdown__content-wrap" @scroll="updateArrows">
+      <div class="filter-dropdown__content-wrap" ref="contentElement" @scroll="onScroll">
         <slot></slot>
       </div>
       <font-awesome-icon
-        v-show="scrollHide"
+        v-if="scrollHide"
         class="icon-next icon-next__bottom"
         :class="{ active: !isOnBottom }"
         icon="fa-solid fa-angles-down"
@@ -65,6 +85,20 @@ const updateArrows = (e: Event) => {
 
   &:hover {
     background-color: $primary-dark;
+  }
+}
+
+.btn__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1.5em;
+
+  &::before {
+    transition: rotate 0.2s ease;
+    rotate: 90deg; 
   }
 }
 
@@ -95,19 +129,17 @@ const updateArrows = (e: Event) => {
 
   &__button {
     color: $white;
-    rotate: -90deg;
     position: absolute;
     right: 0;
     width: 30px;
     height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5em;
-    transition: rotate 0.2s ease;
 
     &_active {
-      rotate: 90deg;
+      .btn__icon {
+        &::before {
+          rotate: -90deg;
+        }
+      }
     }
   }
 
@@ -117,7 +149,6 @@ const updateArrows = (e: Event) => {
     align-items: stretch;
     flex-direction: column;
     overflow: hidden;
-    max-height: 400px;
     transition: max-height 0.2s, margin-top 0.2s;
 
     &_collapsed {
@@ -140,11 +171,9 @@ const updateArrows = (e: Event) => {
 
   &__content-wrap {
     max-height: inherit;
-    border-width: 0 20px;
-    border-color: $primary;
+    padding: 0 20px;
     border-radius: 20px;
     overflow: hidden scroll;
-    border-style: solid;
   }
 
   &__divider {

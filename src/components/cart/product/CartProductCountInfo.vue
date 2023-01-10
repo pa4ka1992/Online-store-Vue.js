@@ -6,10 +6,10 @@
     <div class="count-info__wrapper">
       <span class="count-info__wrapper--stock">Stock: {{ product.stock }}pc.</span>
       <div class="count-info__wrapper--control">
-        <button :disabled="item.count === 1" class="decrement" @click="decrementCount(item.product.id)">
+        <button class="decrement" @click="decrementCount(product.id)">
           <font-awesome-icon icon="fa-solid fa-minus" />
         </button>
-        <input type="number" class="count" :value="item.count" @input="updateInput" />
+        <input @input="limitStock" type="number" class="count" :value="item.count" @change="updateInput" />
         <button :disabled="item.count === product.stock" class="increment" @click="incrementCount(item.product.id)">
           <font-awesome-icon icon="fa-solid fa-plus" />
         </button>
@@ -32,19 +32,20 @@ const props = defineProps<{
 const { product } = toRefs(props.item);
 const { decrementCount, incrementCount, dropProduct, updateCount } = useCart();
 
-const updateInput = (e: Event): void => {
-  console.log(true);
-  if (!(e.target instanceof HTMLInputElement)) throw new TypeError('Invalid type of the event target!');
-  const target = e.target;
-  const valNumber = Number(target.value);
-
-  if (valNumber === 0) {
-    target.value = '';
-  } else if (valNumber > product.value.stock) {
-    target.value = String(product.value.stock);
+const updateInput = ({ target }: Event): void => {
+  if (target instanceof HTMLInputElement) {
+    updateCount(target.value, product.value['id']);
   }
+};
 
-  updateCount(target.value, props.item.product.id);
+const limitStock = ({ target }: Event): void => {
+  if (target instanceof HTMLInputElement) {
+    const valNumber = Number(target.value);
+
+    if (valNumber > product.value['stock']) {
+      target.value = String(product.value['stock']);
+    }
+  }
 };
 </script>
 

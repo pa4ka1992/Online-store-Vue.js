@@ -1,6 +1,6 @@
 <template>
   <section class="product__wrapper">
-    <section v-if="isLoaded" class="product container">
+    <section v-if="isLoaded && product !== undefined" class="product container">
       <page-crumbs :crumbs="crumbs" />
       <product-header :product="product" />
       <section class="product__content">
@@ -11,7 +11,11 @@
         <product-price :product="product" />
       </section>
     </section>
+    <section v-else class="product__wrapper product__wrapper--loading">
+      <AppSpinner />
+    </section>
   </section>
+  
 </template>
 
 <script lang="ts" setup>
@@ -21,6 +25,8 @@ import { ProductHeader, ProductImages, ProductInfo, ProductPrice } from '@/compo
 import PageCrumbs from '@/components/PageCrumbs.vue';
 import { IProduct } from '@/services';
 import { ICrumbs } from '@/components/_types';
+import { useRouter } from 'vue-router';
+import { RouteNames } from '@/router';
 import { storeToRefs } from 'pinia';
 
 const props = defineProps<{
@@ -29,17 +35,21 @@ const props = defineProps<{
 
 const { isLoaded } = storeToRefs(useProducts());
 const { getProductById } = useProducts();
-const product = ref({} as IProduct);
+const product = ref<IProduct>();
 const crumbs: Ref<ICrumbs[]> = ref([]);
+
+const router = useRouter();
 
 const getProduct = () => {
   const currProduct = getProductById(props.id);
-  if (currProduct) product.value = currProduct;
-  crumbs.value = [
-    { id: 1, way: product.value.category },
-    { id: 2, way: product.value.brand },
-    { id: 3, way: product.value.title },
-  ];
+  if (currProduct) { 
+    product.value = currProduct; 
+    crumbs.value = [
+      { id: 1, way: product.value.category },
+      { id: 2, way: product.value.brand },
+      { id: 3, way: product.value.title },
+    ];
+  } else router.replace({ name: RouteNames.notFound });
 };
 
 watch(isLoaded, (newIsLoaded) => {
@@ -49,7 +59,7 @@ watch(isLoaded, (newIsLoaded) => {
 });
 
 onBeforeMount(() => {
-  if (isLoaded) {
+  if (isLoaded.value) {
     getProduct();
   }
 });

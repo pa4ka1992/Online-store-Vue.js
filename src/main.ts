@@ -8,8 +8,8 @@ import { usePinia } from './store';
 
 export const app = createApp(App);
 
-app.use(router)
-   .use(usePinia())
+app.use(usePinia())
+   .use(router)
    .use(commonPlugin)
    .use(fontAwesomePlugin)
    .mount('#app');

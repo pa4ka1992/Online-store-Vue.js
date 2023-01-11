@@ -16,8 +16,9 @@ const { categories, toggleCategory } = useFilterByCategory(props.keyOfProduct);
   <FilterDropdown :title="parseCamelCase(keyOfProduct)">
     <section class="filter-categories-list">
       <div v-for="category in categories" class="filter-categories-list__item" :key="category.name">
-        <FilterCheckbox :model-value="category.checked" @update:model-value="toggleCategory(category.name)">
-          <span class="category-name">{{category.name}} </span> ({{category.count}})
+        <FilterCheckbox class="category" :model-value="category.checked" @update:model-value="toggleCategory(category.name)">
+          <span class="category__name">{{category.name.trim()}} </span> 
+          <span class="category__count">({{category.count}}/{{category.total}})</span>
         </FilterCheckbox>
       </div>
     </section>
@@ -36,11 +37,22 @@ const { categories, toggleCategory } = useFilterByCategory(props.keyOfProduct);
   }
 }
 
-.category-name {
-  width: 70%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.category {
+  display: flex;
+  justify-content: space-between;
+
+  &__name {
+    flex-grow: 1;
+    max-width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__count {
+    width: 40px;
+    text-align: right;
+  }
 }
 
 </style>

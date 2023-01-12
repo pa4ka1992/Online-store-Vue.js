@@ -16,7 +16,7 @@ const props = defineProps({
   },
   debounce: {
     type: Number,
-    default: 200,
+    default: 300,
   },
 });
 
@@ -24,7 +24,8 @@ const emits = defineEmits<{
   (e: 'load', done: (stop?: boolean) => void): void
 }>();
 
-const loading = ref(true);
+const loading = ref(false);
+const mounted = ref(false);
 
 // Property for internal stop
 const disabled = ref(props.disable);
@@ -49,10 +50,10 @@ function done(stop?: boolean) {
 
 watch(props, () => {
   disabled.value = props.disable;
-})
+});
 
 onMounted(() => {
-  loadDebounce();
+  setTimeout(() => mounted.value = true, props.debounce);
 })
 
 </script>

@@ -39,11 +39,7 @@ const closeModal = (): void => {
 };
 
 watch(modalIsShow, (newModalIsShow) => {
-  if (newModalIsShow) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = 'auto';
-  }
+  document.body.style.overflow = newModalIsShow ? 'hidden' : 'auto';
 });
 </script>
 

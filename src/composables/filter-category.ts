@@ -27,9 +27,7 @@ export function useFilterByCategory<Key extends keyof TStringFields>(key: Key) {
   });
 
   function updateFilters() {
-    if (isStringArray(param.value)) {
-      setFilters(param.value);
-    } else setFilters([]);
+    isStringArray(param.value) ? setFilters(param.value) : setFilters([]);
   }
 
   watch(

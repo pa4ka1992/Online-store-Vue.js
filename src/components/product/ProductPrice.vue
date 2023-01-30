@@ -2,9 +2,7 @@
   <div class="price__wrapper">
     <section class="product__price-info">
       <div class="product__prices">
-        <span v-if="discountPercentage" class="product__price--fix">
-          $<AppNumber :input="price" :fixed="2" />
-        </span>
+        <span v-if="discountPercentage" class="product__price--fix"> $<AppNumber :input="price" :fixed="2" /> </span>
         <span :class="{ crossed: discountPercentage }" class="product__price--full">
           $<AppNumber :input="actualPrice" :fixed="2" />
         </span>
@@ -38,19 +36,13 @@ const { addProduct, dropProduct, findProduct } = useCart();
 const { modalIsShow } = storeToRefs(useModal());
 
 const buttonStatus = computed((): { name: string; icon: string } => {
-  if (findProduct(id.value)) {
-    return { name: 'Drop from cart', icon: 'icon-cart-ok' };
-  } else {
-    return { name: 'Add to cart', icon: 'icon-cart-plus' };
-  }
+  return findProduct(id.value)
+    ? { name: 'Drop from cart', icon: 'icon-cart-ok' }
+    : { name: 'Add to cart', icon: 'icon-cart-plus' };
 });
 
 const updateCart = (): void => {
-  if (findProduct(id.value)) {
-    dropProduct(id.value);
-  } else {
-    addProduct(product);
-  }
+  findProduct(id.value) ? dropProduct(id.value) : addProduct(product);
 };
 
 const fastBuy = (): void => {

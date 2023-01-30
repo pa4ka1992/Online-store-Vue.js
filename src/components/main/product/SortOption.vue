@@ -12,11 +12,7 @@ const props = defineProps<{
 const { sortUsage } = useSortOption(props.productKey, props.queryKey);
 
 const iconClass = computed(() => {
-  if (sortUsage.value) {
-    return `sort-option__icon_type_${sortUsage.value}`;
-  } else {
-    return '';
-  }
+  return sortUsage.value ? `sort-option__icon_type_${sortUsage.value}` : '';
 });
 
 function toggleSort() {

@@ -1,4 +1,4 @@
-export const Promos = [
+export const PROMOS = [
   { id: 1, value: 0.05, title: 'RS-school', name: 'RS-school' },
   { id: 2, value: 0.15, title: 'Gachi', name: 'gachi' },
   { id: 3, value: 0.3, title: 'Slave', name: '300bucks' },

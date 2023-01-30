@@ -14,12 +14,12 @@
 <script lang="ts" setup>
 import { usePromo } from '@/store';
 import { storeToRefs } from 'pinia';
-import { Promos } from '@/store/cart/_constants';
+import { PROMOS } from '@/store/cart/_constants';
 
 const { promo, isMatch, isAlreadyApplied } = storeToRefs(usePromo());
 const { applyPromo } = usePromo();
 
-const promoKeys: string = Promos.map((promo) => promo.name).join('", "');
+const promoKeys: string = PROMOS.map((promo) => promo.name).join('", "');
 </script>
 
 <style lang="scss" scoped>

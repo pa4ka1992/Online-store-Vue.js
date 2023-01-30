@@ -1,7 +1,7 @@
 import { defineStore, storeToRefs } from 'pinia';
 import { useCart } from './cart.store';
 import { ref, computed } from 'vue';
-import { Promos } from './_constants';
+import { PROMOS } from './_constants';
 import { TPromo } from './_types';
 
 export const usePromo = defineStore('promo', () => {
@@ -31,7 +31,7 @@ export const usePromo = defineStore('promo', () => {
   });
 
   const isMatch = computed((): boolean => {
-    return !!Promos.find((code) => code.name === promo.value);
+    return !!PROMOS.find((code) => code.name === promo.value);
   });
 
   const isAlreadyApplied = computed((): boolean => {
@@ -39,7 +39,7 @@ export const usePromo = defineStore('promo', () => {
   });
 
   const applyPromo = (): void => {
-    Promos.forEach((promoCode) => {
+    PROMOS.forEach((promoCode) => {
       if (promoCode.name === promo.value && !isAlreadyApplied.value) {
         appliedPromos.value.push(promoCode);
       }

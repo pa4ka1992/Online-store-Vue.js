@@ -23,11 +23,13 @@ export function useSortOption(key: TProductKeys, queryParam: string) {
   function syncWithQuery() {
     if (isStringArray(param.value) && param.value[0] === key && isSortType(param.value[1])) {
       const value = getMockValueByKey(key);
-      if (isString(value))
+      if (isString(value)) {
         sortType.value = useStringSort(key as keyof TStringFields, param.value[1] === SortType.descending);
-      else if (isNumber(value))
+      } else if (isNumber(value)) {
         sortType.value = useNumberSort(key as keyof TNumberFields, param.value[1] === SortType.descending);
-      else sortType.value = null;
+      } else {
+        sortType.value = null;
+      }
     }
   }
 
@@ -38,26 +40,37 @@ export function useSortOption(key: TProductKeys, queryParam: string) {
       _sortUsage.value = key === productStore.defaultSort.key ? productStore.defaultSort.sortType : null;
     }
   }
-  
-  watch(param, () => {
-    syncWithQuery();
-  }, {
-    immediate: true
-  });
 
-  watch(sortType, () => {
-    syncLocal();
-  }, {
-    immediate: true
-  });
+  watch(
+    param,
+    () => {
+      syncWithQuery();
+    },
+    {
+      immediate: true,
+    },
+  );
+
+  watch(
+    sortType,
+    () => {
+      syncLocal();
+    },
+    {
+      immediate: true,
+    },
+  );
 
   const sortUsage = computed({
     get() {
       return _sortUsage.value;
     },
     set(value: SortType | null) {
-      if (value) param.value = [key, value];
-      else param.value = null;
+      if (value) {
+        param.value = [key, value];
+      } else {
+        param.value = null;
+      }
     },
   });
 

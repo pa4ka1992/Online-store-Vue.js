@@ -1,12 +1,7 @@
 import { ref, watch, computed, type Ref } from 'vue';
 import { useProductsRepo } from '@/store';
 import { storeToRefs } from 'pinia';
-import {
-  type TStringFields,
-  useEqualFilter,
-  type TValuesCount,
-  type IProduct,
-} from '@/services';
+import { type TStringFields, useEqualFilter, type TValuesCount, type IProduct } from '@/services';
 import { isStringArray } from '@/utils';
 import { useQueryParam } from './query-param';
 
@@ -48,27 +43,20 @@ export function useFilterByCategory<Key extends keyof TStringFields>(key: Key) {
     },
   );
 
-  watch(
-    productsFiltered,
-    () => {
-      map.value = productRepo.countValues(key, map.value);
-    },
-  );
+  watch(productsFiltered, () => {
+    map.value = productRepo.countValues(key, map.value);
+  });
 
-  watch(
-    param,
-    () => {
-      updateFilters();
-    },
-  );
+  watch(param, () => {
+    updateFilters();
+  });
 
   function setFilters(categories: string[]) {
-    for (const pair of map.value)
-      pair[1].checked = false;
+    for (const pair of map.value) pair[1].checked = false;
     const filters = categories.map((category) => {
-        const obj = map.value.get(category);
-        if (obj) obj.checked = true;
-        return useEqualFilter(key, category);
+      const obj = map.value.get(category);
+      if (obj) obj.checked = true;
+      return useEqualFilter(key, category);
     });
 
     productRepo.filters.set(key, (product: IProduct) =>
@@ -81,12 +69,12 @@ export function useFilterByCategory<Key extends keyof TStringFields>(key: Key) {
     if (!mapValue) throw new Error('Category not found in map!');
     mapValue.checked = !mapValue.checked ?? true;
     const arr = isStringArray(param.value) ? param.value : [];
-    if (mapValue.checked)
+    if (mapValue.checked) {
       param.value = [...arr, category];
-    else {
+    } else {
       const index = arr.indexOf(category);
       if (index !== -1) arr.splice(index, 1);
-      param.value = arr.length !== 0 ?  [...arr] : null;
+      param.value = arr.length !== 0 ? [...arr] : null;
     }
   }
 

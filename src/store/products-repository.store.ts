@@ -107,8 +107,11 @@ export const useProductsRepo = defineStore('products-repo', () => {
     const result = new Map<IProduct[Key], TValuesCount>();
     for (const product of products.value) {
       const value = result.get(product[key]);
-      if (!value) result.set(product[key], { count: 0, total: 1 });
-      else value.total++;
+      if (!value) {
+        result.set(product[key], { count: 0, total: 1 });
+      } else {
+        value.total++;
+      }
     }
 
     countValues(key, result);

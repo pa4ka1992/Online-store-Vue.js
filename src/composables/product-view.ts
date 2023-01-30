@@ -4,7 +4,7 @@ import { isStringArray, isString } from '@/utils';
 
 export enum ViewType {
   Grid = 'grid',
-  List = 'list'
+  List = 'list',
 }
 
 export const viewQueryKey = 'view';
@@ -19,11 +19,12 @@ export function useProductView() {
   const _type = ref(ViewType.Grid);
 
   watchEffect(() => {
-    if (isStringArray(param.value) && isViewType(param.value[0]))
+    if (isStringArray(param.value) && isViewType(param.value[0])) {
       _type.value = param.value[0] as ViewType;
-    else 
+    } else {
       _type.value = ViewType.Grid;
-  })
+    }
+  });
 
   const type = computed({
     get() {
@@ -31,7 +32,7 @@ export function useProductView() {
     },
     set(value: ViewType) {
       param.value = [value];
-    }
+    },
   });
 
   return {

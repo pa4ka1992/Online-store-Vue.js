@@ -5,15 +5,15 @@ function strCmp(first: string, second: string) {
 }
 
 export function useStringSort<Key extends keyof TStringFields>(key: Key, descending = false): ISort {
-  if (descending)
+  if (descending) {
     return {
       key: key,
       sortType: SortType.descending,
       cmpFunc: function (first: IProduct, second: IProduct) {
         return strCmp(second[key], first[key]);
       },
-    }
-  else
+    };
+  } else {
     return {
       key: key,
       sortType: SortType.ascending,
@@ -21,4 +21,5 @@ export function useStringSort<Key extends keyof TStringFields>(key: Key, descend
         return strCmp(first[key], second[key]);
       },
     };
+  }
 }

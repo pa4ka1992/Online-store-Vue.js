@@ -11,26 +11,32 @@ const { page, limit } = storeToRefs(usePagination());
 const iconAnimClass = ref('');
 const countAnimClass = ref('');
 
-watch(cart, (val, old) => {
-  if (val.length > old.length) {
-    iconAnimClass.value = 'play-cart-anim';
-  }
-  countAnimClass.value = 'cart-info__count_ping'
-}, {
-  deep: true,
-});
+watch(
+  cart,
+  (val, old) => {
+    if (val.length > old.length) {
+      iconAnimClass.value = 'play-cart-anim';
+    }
+    countAnimClass.value = 'cart-info__count_ping';
+  },
+  {
+    deep: true,
+  },
+);
 
 onUpdated(() => {
-  if (iconAnimClass.value.length !== 0)
+  if (iconAnimClass.value.length !== 0) {
     setTimeout(() => {
       iconAnimClass.value = '';
     }, 300);
-  if (countAnimClass.value.length !== 0)
+  }
+
+  if (countAnimClass.value.length !== 0) {
     setTimeout(() => {
       countAnimClass.value = '';
     }, 300);
-})
-
+  }
+});
 </script>
 
 <template>
@@ -103,7 +109,7 @@ $total-color: $success-light;
     transition: translate 0.5s;
 
     &_ping {
-      animation: ping 0.3s cubic-bezier(0.46,-0.42, 0.63, 1.57);
+      animation: ping 0.3s cubic-bezier(0.46, -0.42, 0.63, 1.57);
     }
   }
 

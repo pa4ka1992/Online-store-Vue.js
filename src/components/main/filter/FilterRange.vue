@@ -22,15 +22,14 @@ const props = defineProps({
   right: {
     type: Number,
     default: 100,
-  }
+  },
 });
 
 const emits = defineEmits<{
-  (e: 'update:left', value: number): void,
-  (e: 'update:right', value: number): void,
-  (e: 'release'): void,
+  (e: 'update:left', value: number): void;
+  (e: 'update:right', value: number): void;
+  (e: 'release'): void;
 }>();
-
 
 // Slider bar
 // =========================
@@ -47,8 +46,8 @@ const sliderbarWidth = computed(() => {
 // ==========================
 
 const stepLength = computed(() => {
-  return (sliderbarWidth.value * props.step / (props.max - props.min));
-})
+  return (sliderbarWidth.value * props.step) / (props.max - props.min);
+});
 
 // Position
 // ==========================
@@ -58,14 +57,14 @@ function truncValue(value: number) {
 }
 
 function calcValue(value: number) {
-  return Math.floor((truncValue(value)) / stepLength.value) * props.step + props.min;
+  return Math.floor(truncValue(value) / stepLength.value) * props.step + props.min;
 }
 
 function calcPos(value: number) {
-  return value / props.step * stepLength.value;
+  return (value / props.step) * stepLength.value;
 }
 
-const _leftPos = ref(calcPos(props.left)); 
+const _leftPos = ref(calcPos(props.left));
 const _rightPos = ref(calcPos(props.right));
 
 const active: Ref<keyof PosMap | null> = ref(null);
@@ -73,7 +72,7 @@ const active: Ref<keyof PosMap | null> = ref(null);
 function syncPos() {
   if (!active.value) {
     _leftPos.value = calcPos(props.left);
-    _rightPos.value = calcPos(props.right); 
+    _rightPos.value = calcPos(props.right);
   }
 }
 
@@ -88,7 +87,7 @@ const leftPos = computed({
   set(value) {
     _leftPos.value = value;
     emits('update:left', calcValue(value));
-  }
+  },
 });
 
 const rightPos = computed({
@@ -99,19 +98,19 @@ const rightPos = computed({
   set(value) {
     _rightPos.value = value;
     emits('update:right', calcValue(value));
-  }
+  },
 });
 
 type PosMap = {
   left: {
-    raw: Ref<number>,
-    prop: Ref<number>,
-  },
+    raw: Ref<number>;
+    prop: Ref<number>;
+  };
   right: {
-    raw: Ref<number>,
-    prop: Ref<number>,
-  }
-}
+    raw: Ref<number>;
+    prop: Ref<number>;
+  };
+};
 
 const map: PosMap = {
   left: {
@@ -121,8 +120,8 @@ const map: PosMap = {
   right: {
     raw: _rightPos,
     prop: rightPos,
-  }
-}
+  },
+};
 
 // Thumbs
 // =========================
@@ -136,7 +135,7 @@ function windowRelease() {
   active.value = null;
   document.body.style.cursor = 'auto';
   if (wrap.value) wrap.value.style.cursor = 'grab';
-  
+
   window.removeEventListener('mousemove', windowMove);
   window.removeEventListener('mouseup', windowRelease);
   emits('release');
@@ -153,8 +152,11 @@ function windowMove(e: MouseEvent) {
     rightPos.value = leftPos.value;
     leftPos.value = oldVal;
 
-    if (active.value === 'left') active.value = 'right'; 
-    else active.value = 'left';
+    if (active.value === 'left') {
+      active.value = 'right';
+    } else {
+      active.value = 'left';
+    }
   }
 }
 
@@ -164,12 +166,12 @@ function thumbHold(e: MouseEvent) {
   const pos = e.offsetX;
   const leftLength = Math.abs(pos - leftPos.value);
   const rightLength = Math.abs(pos - rightPos.value);
-  
+
   // Set closest as active slider
-  if (leftLength < rightLength) { 
-    active.value = 'left'; 
+  if (leftLength < rightLength) {
+    active.value = 'left';
   } else {
-    active.value = 'right'; 
+    active.value = 'right';
   }
 
   map[active.value].prop.value = pos;
@@ -185,8 +187,8 @@ function thumbHold(e: MouseEvent) {
 
 const fillBarStyle = computed(() => {
   return {
-    left: `${leftPos.value}px`, 
-    width: `${fillBarWidth.value}px` 
+    left: `${leftPos.value}px`,
+    width: `${fillBarWidth.value}px`,
   };
 });
 
@@ -195,32 +197,40 @@ const fillBarWidth = computed(() => {
 });
 
 function preventDrag(e: Event) {
-  e.preventDefault()
+  e.preventDefault();
 }
-
 </script>
 
 <template>
-<div class="double-slider" @mousedown="thumbHold" ref="wrap"> 
-  <div class="double-slider__bar" @mousedown="preventDrag"  ref="sliderBarElement"></div>
-  <div class="double-slider__fill-bar" @mousedown="preventDrag" :style="fillBarStyle"></div>
-  <div class="double-slider__thumb" @mousedown="preventDrag" :style="{ left: `${leftPos}px` }" ref="thumbLeftElement"></div>
-  <div class="double-slider__thumb" @mousedown="preventDrag" :style="{ left: `${rightPos}px` }" ref="thumbRightElement"></div>
-</div>
+  <div class="double-slider" @mousedown="thumbHold" ref="wrap">
+    <div class="double-slider__bar" @mousedown="preventDrag" ref="sliderBarElement"></div>
+    <div class="double-slider__fill-bar" @mousedown="preventDrag" :style="fillBarStyle"></div>
+    <div
+      class="double-slider__thumb"
+      @mousedown="preventDrag"
+      :style="{ left: `${leftPos}px` }"
+      ref="thumbLeftElement"
+    ></div>
+    <div
+      class="double-slider__thumb"
+      @mousedown="preventDrag"
+      :style="{ left: `${rightPos}px` }"
+      ref="thumbRightElement"
+    ></div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-
 $inner-padding: 10px;
 $thumb-width: 20px;
 $bar-width: 4px;
 $fill-bar-width: 6px;
 
-@import "@/assets/scss/variables.scss";
+@import '@/assets/scss/variables.scss';
 
 .double-slider {
   margin: 10px calc(10px + $inner-padding);
-  padding: $inner-padding 0; 
+  padding: $inner-padding 0;
   position: relative;
   cursor: grab;
 
@@ -232,7 +242,7 @@ $fill-bar-width: 6px;
 
   &__fill-bar {
     pointer-events: none;
-    top: calc($inner-padding + $bar-width / 2 -  $fill-bar-width / 2);
+    top: calc($inner-padding + $bar-width / 2 - $fill-bar-width / 2);
     position: absolute;
     border-radius: 2px;
     border: $white calc($fill-bar-width / 2) solid;
@@ -243,12 +253,11 @@ $fill-bar-width: 6px;
     width: $thumb-width;
     height: $thumb-width;
     position: absolute;
-    top: calc($inner-padding + $bar-width / 2 -  $thumb-width / 2);
+    top: calc($inner-padding + $bar-width / 2 - $thumb-width / 2);
     background-color: $white;
     border: $primary 3px solid;
     border-radius: 50%;
     translate: -50% 0;
   }
 }
-
 </style>

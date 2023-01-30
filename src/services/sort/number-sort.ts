@@ -5,7 +5,7 @@ function numCmp(first: number, second: number) {
 }
 
 export function useNumberSort<Key extends keyof TNumberFields>(key: Key, descending = false): ISort {
-  if (descending)
+  if (descending) {
     return {
       key: key,
       sortType: SortType.descending,
@@ -13,7 +13,7 @@ export function useNumberSort<Key extends keyof TNumberFields>(key: Key, descend
         return numCmp(second[key], first[key]);
       },
     };
-  else
+  } else {
     return {
       key: key,
       sortType: SortType.ascending,
@@ -21,4 +21,5 @@ export function useNumberSort<Key extends keyof TNumberFields>(key: Key, descend
         return numCmp(first[key], second[key]);
       },
     };
+  }
 }

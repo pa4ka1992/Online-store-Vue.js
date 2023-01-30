@@ -1,39 +1,37 @@
 <script setup lang="ts">
-
 import { SortType, TProductKeys } from '@/services';
 import { useSortOption } from '@/composables';
 import { parseCamelCase } from '@/utils';
 import { computed } from 'vue';
 
 const props = defineProps<{
-  productKey: TProductKeys,
-  queryKey: string,
+  productKey: TProductKeys;
+  queryKey: string;
 }>();
 
 const { sortUsage } = useSortOption(props.productKey, props.queryKey);
 
 const iconClass = computed(() => {
-  if (sortUsage.value)
+  if (sortUsage.value) {
     return `sort-option__icon_type_${sortUsage.value}`;
-  else 
+  } else {
     return '';
+  }
 });
 
 function toggleSort() {
   sortUsage.value = sortUsage.value === SortType.ascending ? SortType.descending : SortType.ascending;
 }
-
 </script>
 
 <template>
-<button class="btn sort-option" @click="toggleSort">
-  <i class="icon-sort sort-option__icon" :class="iconClass"></i>
-  <h5 class="sort-option__name">{{ parseCamelCase(productKey) }}</h5>
-</button>
+  <button class="btn sort-option" @click="toggleSort">
+    <i class="icon-sort sort-option__icon" :class="iconClass"></i>
+    <h5 class="sort-option__name">{{ parseCamelCase(productKey) }}</h5>
+  </button>
 </template>
 
 <style lang="scss" scoped>
-
 @import '@/assets/scss/variables.scss';
 
 .sort-option {
@@ -56,14 +54,14 @@ function toggleSort() {
   &__icon {
     font-size: 1rem;
     margin-right: 5px;
-  
+
     &::before {
       overflow: hidden;
       width: auto;
       max-width: 0;
       transition: max-width 0.25s, rotate 0.25s;
       margin: 0;
-      
+
       rotate: 180deg;
     }
 
@@ -79,7 +77,7 @@ function toggleSort() {
       &::before {
         display: block;
         max-width: 35px;
-      }      
+      }
     }
   }
 
@@ -89,5 +87,4 @@ function toggleSort() {
     font-weight: 400;
   }
 }
-
 </style>

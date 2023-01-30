@@ -29,10 +29,14 @@ export function useSearch(keys: TProductKeys[]) {
   const searchField = ref('');
 
   async function startSearch() {
-    if (currentRoute.value.name !== RouteNames.productSearch) 
+    if (currentRoute.value.name !== RouteNames.productSearch) {
       await push({ name: RouteNames.productSearch });
-    if (searchField.value === '') param.value = null;
-    else param.value = [searchField.value];
+    }
+    if (searchField.value === '') {
+      param.value = null;
+    } else {
+      param.value = [searchField.value];
+    }
   }
 
   function syncWithQuery() {
@@ -41,20 +45,23 @@ export function useSearch(keys: TProductKeys[]) {
       const filterArray = keys.reduce((acc: IFilter[], key: TProductKeys) => {
         const mockValue = getMockValueByKey(key);
         // We already checked for this, but ts still thinks its not
-        if (isString(mockValue) && isString(value[0])) 
+        if (isString(mockValue) && isString(value[0])) {
           acc.push(useStringSearchFilter(key as keyof TStringFields, value[0]));
-        else if (isNumber(mockValue) && isString(value[0])) {
+        } else if (isNumber(mockValue) && isString(value[0])) {
           acc.push(useNumberSearchFilter(key as keyof TNumberFields, value[0]));
         }
         return acc;
       }, []);
 
-      if (isNumber(value[0])) searchField.value = value[0].toString();
-      else searchField.value = value[0];
+      if (isNumber(value[0])) {
+        searchField.value = value[0].toString();
+      } else {
+        searchField.value = value[0];
+      }
 
       filters.value.set(searchParamKey, (product: IProduct) =>
         filterArray.reduce((acc, filter) => acc || filter(product), false),
-      );      
+      );
     } else {
       filters.value.set(searchParamKey, () => true);
       searchField.value = '';
@@ -63,11 +70,15 @@ export function useSearch(keys: TProductKeys[]) {
 
   syncWithQuery();
 
-  watch(param, () => {
-    syncWithQuery();
-  }, {
-    immediate: true,
-  });
+  watch(
+    param,
+    () => {
+      syncWithQuery();
+    },
+    {
+      immediate: true,
+    },
+  );
 
-  return { searchField, startSearch }
+  return { searchField, startSearch };
 }

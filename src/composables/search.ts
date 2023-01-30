@@ -32,11 +32,8 @@ export function useSearch(keys: TProductKeys[]) {
     if (currentRoute.value.name !== RouteNames.productSearch) {
       await push({ name: RouteNames.productSearch });
     }
-    if (searchField.value === '') {
-      param.value = null;
-    } else {
-      param.value = [searchField.value];
-    }
+
+    param.value = searchField.value === '' ? null : [searchField.value];
   }
 
   function syncWithQuery() {
@@ -53,11 +50,7 @@ export function useSearch(keys: TProductKeys[]) {
         return acc;
       }, []);
 
-      if (isNumber(value[0])) {
-        searchField.value = value[0].toString();
-      } else {
-        searchField.value = value[0];
-      }
+      searchField.value = isNumber(value[0]) ? value[0].toString() : value[0];
 
       filters.value.set(searchParamKey, (product: IProduct) =>
         filterArray.reduce((acc, filter) => acc || filter(product), false),

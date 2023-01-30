@@ -159,11 +159,7 @@ function windowMove(e: MouseEvent) {
     rightPos.value = leftPos.value;
     leftPos.value = oldVal;
 
-    if (active.value === 'left') {
-      active.value = 'right';
-    } else {
-      active.value = 'left';
-    }
+    active.value = active.value === 'left' ? 'right' : 'left';
   }
 }
 

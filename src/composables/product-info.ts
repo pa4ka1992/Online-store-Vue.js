@@ -10,11 +10,7 @@ export function useProductInfo(product: IProduct) {
   });
 
   function toggleProduct() {
-    if (!inCart.value) {
-      cartStore.addProduct(product);
-    } else {
-      cartStore.dropProduct(product.id);
-    }
+    !inCart.value ? cartStore.addProduct(product) : cartStore.dropProduct(product.id);
   }
 
   return {

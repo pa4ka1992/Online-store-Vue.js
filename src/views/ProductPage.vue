@@ -21,7 +21,7 @@
 <script lang="ts" setup>
 import { ref, type Ref, watch, onBeforeMount } from 'vue';
 import { useProducts } from '@/store';
-import { ProductHeader, ProductImages, ProductInfo, ProductPrice } from '@/components/product/index';
+import { ProductHeader, ProductImages, ProductInfo, ProductPrice } from '@/components/product/_index';
 import PageCrumbs from '@/components/PageCrumbs.vue';
 import { IProduct } from '@/services';
 import { ICrumbs } from '@/components/_types';

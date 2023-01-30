@@ -36,9 +36,7 @@ export function useFilterByCategory<Key extends keyof TStringFields>(key: Key) {
       map.value = productRepo.createValuesCountMap(key);
       updateFilters();
     },
-    {
-      immediate: true,
-    },
+    { immediate: true },
   );
 
   watch(productsFiltered, () => {
@@ -65,7 +63,7 @@ export function useFilterByCategory<Key extends keyof TStringFields>(key: Key) {
   function toggleCategory(category: string) {
     const mapValue = map.value.get(category);
     if (!mapValue) throw new Error('Category not found in map!');
-    mapValue.checked = !mapValue.checked ?? true;
+    mapValue.checked = !mapValue.checked;
     const arr = isStringArray(param.value) ? param.value : [];
     if (mapValue.checked) {
       param.value = [...arr, category];

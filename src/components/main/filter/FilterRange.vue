@@ -53,7 +53,14 @@ const stepLength = computed(() => {
 // ==========================
 
 function truncValue(value: number) {
-  return value >= 0 ? (value <= sliderbarWidth.value ? value : sliderbarWidth.value) : 0;
+  if (value >= 0) {
+    const width = sliderbarWidth.value;
+    const truncValue = value <= width ? value : width;
+
+    return truncValue;
+  }
+
+  return 0;
 }
 
 function calcValue(value: number) {
@@ -168,11 +175,7 @@ function thumbHold(e: MouseEvent) {
   const rightLength = Math.abs(pos - rightPos.value);
 
   // Set closest as active slider
-  if (leftLength < rightLength) {
-    active.value = 'left';
-  } else {
-    active.value = 'right';
-  }
+  active.value = leftLength < rightLength ? 'left' : 'right';
 
   map[active.value].prop.value = pos;
 

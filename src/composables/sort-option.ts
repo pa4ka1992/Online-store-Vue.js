@@ -41,24 +41,14 @@ export function useSortOption(key: TProductKeys, queryParam: string) {
     }
   }
 
-  watch(
-    param,
-    () => {
+  watch(param, () => {
       syncWithQuery();
-    },
-    {
-      immediate: true,
-    },
+    }, { immediate: true },
   );
 
-  watch(
-    sortType,
-    () => {
+  watch(sortType, () => {
       syncLocal();
-    },
-    {
-      immediate: true,
-    },
+    }, { immediate: true },
   );
 
   const sortUsage = computed({

@@ -75,12 +75,9 @@ export const useCart = defineStore('cart', () => {
     }
   };
 
-  watch(
-    _cart,
-    (newCart) => {
+  watch(_cart, (newCart) => {
       _LS.setProperty(LSKey.cart, newCart);
-    },
-    { deep: true },
+    }, { deep: true },
   );
 
   (function initStore() {

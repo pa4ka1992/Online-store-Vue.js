@@ -11,17 +11,12 @@ const { page, limit } = storeToRefs(usePagination());
 const iconAnimClass = ref('');
 const countAnimClass = ref('');
 
-watch(
-  cart,
-  (val, old) => {
+watch(cart, (val, old) => {
     if (val.length > old.length) {
       iconAnimClass.value = 'play-cart-anim';
     }
     countAnimClass.value = 'cart-info__count_ping';
-  },
-  {
-    deep: true,
-  },
+  }, { deep: true },
 );
 
 onUpdated(() => {

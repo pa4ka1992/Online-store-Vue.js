@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-
 import { ref, type Ref, computed, watchPostEffect, onUpdated } from 'vue';
 
 const mainPadding = 30;
@@ -12,23 +11,25 @@ const top = ref(0);
 
 const bottom = ref(0);
 
-watchPostEffect(() => {
+const updateOffests = (): void => {
   top.value = header.value?.offsetHeight ?? 0;
   bottom.value = footer.value?.offsetHeight ?? 0;
+};
+
+watchPostEffect(() => {
+  updateOffests();
 });
 
 onUpdated(() => {
-  top.value = header.value?.offsetHeight ?? 0;
-  bottom.value = footer.value?.offsetHeight ?? 0;
+  updateOffests();
 });
 
 const mainStyles = computed(() => {
   return {
-    paddingTop: `${ top.value + mainPadding }px`,
-    paddingBottom: `${ bottom.value + mainPadding }px`,
-  }
-})
-
+    paddingTop: `${top.value + mainPadding}px`,
+    paddingBottom: `${bottom.value + mainPadding}px`,
+  };
+});
 </script>
 
 <template>
@@ -46,7 +47,6 @@ const mainStyles = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-
 @import '@/assets/scss/variables.scss';
 
 .app-body {
@@ -83,5 +83,4 @@ const mainStyles = computed(() => {
   justify-content: center;
   position: relative;
 }
-
 </style>

@@ -58,7 +58,7 @@ const changeOption = (option: number): void => {
 };
 
 const updateSelect = (): void => {
-  isCollapsed.value = !!isCollapsed.value;
+  isCollapsed.value = !isCollapsed.value;
 };
 </script>
 

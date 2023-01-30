@@ -30,13 +30,10 @@ export function useFilterByCategory<Key extends keyof TStringFields>(key: Key) {
     isStringArray(param.value) ? setFilters(param.value) : setFilters([]);
   }
 
-  watch(
-    products,
-    () => {
+  watch(products, () => {
       map.value = productRepo.createValuesCountMap(key);
       updateFilters();
-    },
-    { immediate: true },
+    }, { immediate: true }
   );
 
   watch(productsFiltered, () => {

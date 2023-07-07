@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('@/assets/fonts/Nunito-Medium.ttf');
+  font-weight: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.btn {
+  text-decoration: none;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.a {
+  text-decoration: none;
+  color: inherit;
+
+  &:visited {
+    color: inherit;
+  }
+
+  &:hover {
+    color: inherit;
+  }
+}
+
+@keyframes cart-anim {
+  0% {
+    rotate: 10deg;
+    translate: 0;
+  }
+  50% {
+    rotate: 0;
+    translate: 0 -20%;
+  }
+  100% {
+    rotate: -10deg;
+    translate: 0;
+  }
+}
+
+.play-cart-anim {
+  &::before {
+    animation: cart-anim 0.2s cubic-bezier(0.46,-0.42, 0.63, 1.57);
+  }
+}

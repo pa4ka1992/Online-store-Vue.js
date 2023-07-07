@@ -1,0 +1,35 @@
+{
+    "env": {
+        "es2021": true,
+        "browser": true
+    },
+    "extends": [
+        "plugin:vue/vue3-strongly-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "@vue/eslint-config-typescript",
+        "prettier"
+    ],
+    "parser": "vue-eslint-parser",
+    "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "modules": true,
+            "experimentalObjectRestSpread": true
+          }
+    },
+    "plugins": ["prettier", "@typescript-eslint"],
+
+    "rules": {
+        "no-debugger": "off",
+        "no-console": 0,
+        "class-methods-use-this": "off",
+        "global-require": "off",
+        "import/prefer-default-export": 0,
+        "import/no-extraneous-dependencies": "off",
+        "@typescript-eslint/no-explicit-any": "error",
+        "vue/require-default-props": 0,
+        "vue/attribute-hyphenation": "off"
+    }
+}
